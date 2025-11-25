@@ -9,25 +9,32 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #020617;
-      --panel: rgba(15, 23, 42, 0.95);
+      /* Palette sunset chill (option A) */
+      --bg: #050816;
+      --shell-bg: rgba(7, 13, 28, 0.92);
+      --panel: rgba(15, 23, 42, 0.98);
+      --panel-soft: rgba(15, 23, 42, 0.94);
       --border: #1f2937;
-      --accent: #38bdf8;
+      --accent: #ff8b5c;      /* orange coucher de soleil */
+      --accent-soft: #ffb07c; /* pêche douce */
       --muted: #9ca3af;
       --text: #e5e7eb;
-      --shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+      --shadow: 0 20px 45px rgba(3, 7, 18, 0.9);
     }
 
-    /* Thème clair */
+    /* Thème clair version sunset */
     body[data-theme="light"] {
       color-scheme: light;
-      --bg: #f3f4f6;
+      --bg: #f5ede5;
+      --shell-bg: rgba(255, 255, 255, 0.96);
       --panel: #ffffff;
+      --panel-soft: #fef6ef;
       --border: #e5e7eb;
-      --accent: #0ea5e9;
+      --accent: #ff8b5c;
+      --accent-soft: #ffb07c;
       --muted: #6b7280;
       --text: #111827;
-      --shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+      --shadow: 0 14px 32px rgba(15, 23, 42, 0.18);
     }
 
     * {
@@ -38,14 +45,21 @@
         Roboto, sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background:
-        radial-gradient(circle at 20% 0%, rgba(56,189,248,0.12), transparent 55%),
-        radial-gradient(circle at 80% 100%, rgba(129,140,248,0.15), transparent 55%),
+        radial-gradient(circle at 0% 0%, rgba(255,176,124,0.23), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(247,127,189,0.22), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(99,87,255,0.35), transparent 65%),
         var(--bg);
       color: var(--text);
       min-height: 100vh;
       line-height: 1.5;
+      position: relative;
+      overflow-x: hidden;
     }
 
     a {
@@ -53,12 +67,22 @@
       text-decoration: none;
     }
 
+    /* Canvas des nuages bleus */
+    #sky {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto; /* pour cliquer sur les nuages */
+    }
+
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(2,6,23,0.88);
-      backdrop-filter: blur(14px);
+      z-index: 10;
+      background: var(--shell-bg);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -106,7 +130,7 @@
       padding: 0.2rem 0.7rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(15,23,42,0.95);
+      background: var(--panel-soft);
       color: var(--muted);
       font-size: 0.75rem;
       display: inline-flex;
@@ -121,7 +145,7 @@
       padding: 0.5rem 1rem;
       cursor: pointer;
       border: 1px solid var(--border);
-      background: rgba(15,23,42,0.95);
+      background: var(--panel-soft);
       color: var(--muted);
       display: inline-flex;
       align-items: center;
@@ -135,11 +159,11 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #0ea5e9);
-      color: #020617;
+      background: linear-gradient(135deg, var(--accent), #fb9f5d);
+      color: #111827;
       border-color: var(--accent);
       font-weight: 600;
-      box-shadow: 0 10px 28px rgba(56,189,248,0.35);
+      box-shadow: 0 12px 30px rgba(255,139,92,0.45);
     }
 
     .btn-primary:hover {
@@ -194,7 +218,7 @@
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 0.8rem;
-      background: rgba(15,23,42,0.9);
+      background: var(--panel-soft);
     }
 
     .hero-meta {
@@ -212,7 +236,7 @@
     }
 
     .hero-title span {
-      color: var(--accent);
+      color: var(--accent-soft);
     }
 
     .hero-subtitle {
@@ -234,7 +258,7 @@
       padding: 0.25rem 0.7rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(15,23,42,0.95);
+      background: var(--panel-soft);
       color: var(--muted);
     }
 
@@ -255,7 +279,10 @@
     .hero-card {
       border-radius: 1.3rem;
       border: 1px solid var(--border);
-      background: var(--panel);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(59,130,246,0.25), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(255,139,92,0.28), transparent 55%),
+        var(--panel);
       padding: 1.6rem 1.4rem;
       box-shadow: var(--shadow);
     }
@@ -282,7 +309,7 @@
 
     .hero-card li::before {
       content: "• ";
-      color: var(--accent);
+      color: var(--accent-soft);
     }
 
     .mini-grid {
@@ -295,7 +322,7 @@
     .kpi-card {
       border-radius: 0.9rem;
       border: 1px dashed var(--border);
-      background: rgba(15,23,42,0.9);
+      background: var(--panel-soft);
       padding: 0.7rem 0.8rem;
       font-size: 0.82rem;
       color: var(--muted);
@@ -326,7 +353,7 @@
       height: 8px;
       border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(56,189,248,0.18);
+      box-shadow: 0 0 0 6px rgba(255,139,92,0.3);
     }
 
     .grid-2 {
@@ -341,7 +368,7 @@
       background: var(--panel);
       padding: 1rem 1rem;
       font-size: 0.9rem;
-      box-shadow: 0 10px 30px rgba(15,23,42,0.7);
+      box-shadow: 0 10px 30px rgba(3,7,18,0.8);
     }
 
     .card h3 {
@@ -364,7 +391,7 @@
 
     ul.list li::before {
       content: "› ";
-      color: var(--accent);
+      color: var(--accent-soft);
     }
 
     .pill-row {
@@ -380,13 +407,13 @@
       border: 1px solid var(--border);
       font-size: 0.78rem;
       color: var(--muted);
-      background: rgba(15,23,42,0.95);
+      background: var(--panel-soft);
     }
 
     .highlight-box {
       border-radius: 1rem;
-      border: 1px solid rgba(56,189,248,0.35);
-      background: linear-gradient(135deg, rgba(56,189,248,0.12), rgba(15,23,42,0.9));
+      border: 1px solid rgba(255,139,92,0.45);
+      background: linear-gradient(135deg, rgba(255,139,92,0.18), var(--panel));
       padding: 1rem 1rem;
       font-size: 0.9rem;
       box-shadow: var(--shadow);
@@ -414,8 +441,8 @@
       width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(56,189,248,0.18);
+      background: var(--accent-soft);
+      box-shadow: 0 0 0 4px rgba(255,176,124,0.26);
     }
 
     .timeline-title {
@@ -440,7 +467,7 @@
     .quote-card {
       border-radius: 1rem;
       border: 1px dashed var(--border);
-      background: rgba(15,23,42,0.95);
+      background: var(--panel-soft);
       padding: 0.9rem 1rem;
       font-size: 0.9rem;
       display: grid;
@@ -470,7 +497,7 @@
     .contact-box {
       border-radius: 1rem;
       border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(56,189,248,0.14), rgba(15,23,42,0.95));
+      background: linear-gradient(135deg, rgba(255,139,92,0.18), var(--panel));
       padding: 1.2rem 1.1rem;
       box-shadow: var(--shadow);
       display: grid;
@@ -498,13 +525,13 @@
       padding: 0.35rem 0.75rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(15,23,42,0.95);
+      background: var(--panel-soft);
       font-size: 0.85rem;
     }
 
     footer {
       border-top: 1px solid var(--border);
-      background: #020617;
+      background: var(--shell-bg);
       padding: 1.2rem;
       text-align: center;
       font-size: 0.8rem;
@@ -537,6 +564,8 @@
 </head>
 
 <body data-theme="dark">
+  <canvas id="sky" aria-hidden="true"></canvas>
+
   <header>
     <div class="nav-container">
       <div class="logo">SABIR IAZZA</div>
@@ -590,7 +619,7 @@
         </div>
 
         <div class="hero-contact">
-          <span>📍 Saint-Maximin (Var)</span>
+          <span>📍 Saint-Maximin (83)</span>
           <span>📧 <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></span>
           <span>📱 07 62 97 26 26</span>
         </div>
@@ -668,7 +697,6 @@
         </div>
       </div>
     </section>
-
     <!-- PROJETS -->
     <section id="projets" class="reveal">
       <h2 class="section-title"><span></span>Projets & expériences</h2>
@@ -700,17 +728,17 @@
           <p>
             Diagnostic, changement d’écrans et de batteries, tests après
             intervention, contact avec la clientèle. Travail précis, minutieux,
-            avec un vrai impact pour les gens.
+            avec un vrai impact pour les utilisateurs.
           </p>
         </div>
 
         <div class="card">
-          <h3>Fibre optique & électricité</h3>
-          <p class="muted">Stages – 2023 / 2024</p>
+          <h3>Stage technicien fibre optique (2023)</h3>
+          <p class="muted">2023 – Télécom</p>
           <p>
-            Découverte du raccordement fibre, sécurité sur chantier,
-            petites installations électriques. Ces expériences m’ont appris
-            la rigueur, les bons gestes et le travail sur le terrain.
+            Accompagnement sur des interventions fibre : préparation du matériel,
+            aide au raccordement, respect des règles de sécurité, tests de
+            connexion. Une première vraie immersion dans le monde des réseaux.
           </p>
         </div>
       </div>
@@ -718,7 +746,7 @@
 
     <!-- CITATIONS + MINDSET -->
     <section id="citations" class="reveal">
-      <h2 class="section-title"><span></span>Mindset, rappels & citations</h2>
+      <h2 class="section-title"><span></span>Mindset & citations</h2>
 
       <div class="quote-grid">
         <div class="quote-card">
@@ -737,16 +765,16 @@
 
         <div class="quote-card">
           <div class="quote-text">
-            « Certes, avec la difficulté vient aussi la facilité. »
+            « Stay hungry, stay foolish. »
           </div>
-          <div class="quote-author">– Coran, sourate Ash-Sharh</div>
+          <div class="quote-author">– Steve Jobs</div>
         </div>
 
         <div class="quote-card">
           <div class="quote-text">
-            « Allah aime ceux qui persévèrent avec patience et sincérité dans leurs efforts. »
+            « It always seems impossible until it’s done. »
           </div>
-          <div class="quote-author">– Rappel spirituel</div>
+          <div class="quote-author">– Nelson Mandela</div>
         </div>
       </div>
 
@@ -778,9 +806,14 @@
           <p>Spécialité Cybersécurité, Informatique, Réseaux & Électronique.</p>
         </div>
         <div class="timeline-item">
+          <div class="timeline-title">Stage technicien fibre optique</div>
+          <div class="timeline-meta">2023 – Entreprise télécom</div>
+          <p>Interventions fibre, raccordement, sécurité terrain, tests de connexion.</p>
+        </div>
+        <div class="timeline-item">
           <div class="timeline-title">Stages techniques variés</div>
           <div class="timeline-meta">2023 → 2025</div>
-          <p>Développement web, réparation téléphones, fibre optique, électricité bâtiment, support informatique.</p>
+          <p>Développement web, réparation téléphones, électricité bâtiment, support informatique.</p>
         </div>
         <div class="timeline-item">
           <div class="timeline-title">Objectif : BTS SIO</div>
@@ -875,6 +908,105 @@
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('load', handleScroll);
+
+    // Nuages bleus animés sur le canvas
+    const canvas = document.getElementById('sky');
+    const ctx = canvas.getContext('2d');
+    const clouds = [];
+    let dpr = window.devicePixelRatio || 1;
+
+    function resizeCanvas() {
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+    }
+
+    function createCloud(x, y, radius) {
+      return {
+        x,
+        y,
+        r: radius,
+        alpha: 0.25 + Math.random() * 0.35,
+        dx: (Math.random() - 0.5) * 0.25,
+        dy: (Math.random() - 0.5) * 0.25
+      };
+    }
+
+    function initClouds() {
+      clouds.length = 0;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      for (let i = 0; i < 18; i++) {
+        clouds.push(createCloud(
+          Math.random() * w,
+          Math.random() * h,
+          60 + Math.random() * 120
+        ));
+      }
+    }
+
+    function drawCloud(c) {
+      const gradient = ctx.createRadialGradient(
+        c.x, c.y, 0,
+        c.x, c.y, c.r
+      );
+      gradient.addColorStop(0, `rgba(56,189,248,${c.alpha})`);
+      gradient.addColorStop(1, 'rgba(15,23,42,0)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function animate() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      ctx.clearRect(0, 0, w, h);
+
+      clouds.forEach(c => {
+        c.x += c.dx;
+        c.y += c.dy;
+
+        // léger wrap autour de l'écran
+        if (c.x < -c.r) c.x = w + c.r;
+        if (c.x > w + c.r) c.x = -c.r;
+        if (c.y < -c.r) c.y = h + c.r;
+        if (c.y > h + c.r) c.y = -c.r;
+
+        drawCloud(c);
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    // Clic = explosion de nuages bleus
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      for (let i = 0; i < 8; i++) {
+        const c = createCloud(
+          x + (Math.random() - 0.5) * 80,
+          y + (Math.random() - 0.5) * 60,
+          40 + Math.random() * 80
+        );
+        c.dx *= 2;
+        c.dy *= 2;
+        clouds.push(c);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initClouds();
+    });
+
+    // Init
+    resizeCanvas();
+    initClouds();
+    animate();
   </script>
 </body>
 </html>
