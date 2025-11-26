@@ -9,20 +9,20 @@
   <style>
     :root {
       color-scheme: dark;
-      /* Palette sunset chill (option A) */
+      /* Palette coucher de soleil chill */
       --bg: #050816;
       --shell-bg: rgba(7, 13, 28, 0.92);
       --panel: rgba(15, 23, 42, 0.98);
       --panel-soft: rgba(15, 23, 42, 0.94);
       --border: #1f2937;
-      --accent: #ff8b5c;      /* orange coucher de soleil */
+      --accent: #ff8b5c;      /* orange sunset */
       --accent-soft: #ffb07c; /* pêche douce */
       --muted: #9ca3af;
       --text: #e5e7eb;
       --shadow: 0 20px 45px rgba(3, 7, 18, 0.9);
     }
 
-    /* Thème clair version sunset */
+    /* Thème clair */
     body[data-theme="light"] {
       color-scheme: light;
       --bg: #f5ede5;
@@ -74,7 +74,7 @@
       z-index: -1;
       width: 100%;
       height: 100%;
-      pointer-events: auto; /* pour cliquer sur les nuages */
+      pointer-events: auto;
     }
 
     header {
@@ -150,7 +150,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      transition: background .2s ease, transform .1s ease, box-shadow .2s ease, color .2s ease, border-color .2s ease;
+      transition: background .2s ease, transform .1s ease,
+        box-shadow .2s ease, color .2s ease, border-color .2s ease;
     }
 
     .btn-ghost:hover {
@@ -455,7 +456,6 @@
       color: var(--muted);
       margin-bottom: 0.2rem;
     }
-
     /* Citations & vlog */
 
     .quote-grid {
@@ -538,6 +538,137 @@
       color: var(--muted);
     }
 
+    /* ===== SHOWCASE 3D ===== */
+
+    .showcase-section {
+      margin-bottom: 2.2rem;
+      border-radius: 1.6rem;
+      padding: 1.8rem 1.6rem 2.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(135deg, rgba(196,181,253,0.5), rgba(244,202,228,0.5));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      color: var(--text);
+    }
+
+    body[data-theme="light"] .showcase-section {
+      border-color: rgba(15, 23, 42, 0.08);
+      background: linear-gradient(135deg, #fbe7ff, #ffe6f0);
+    }
+
+    .showcase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .showcase-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .showcase-header h2 {
+      font-size: 1.15rem;
+    }
+
+    .showcase-header p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      max-width: 360px;
+    }
+
+    .slider-viewport {
+      margin-top: 1.4rem;
+      overflow: hidden;
+    }
+
+    .slider-track {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: slider-scroll 26s linear infinite;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .slider-viewport:hover .slider-track {
+      animation-play-state: paused;
+    }
+
+    .slide-card {
+      flex: 0 0 260px;
+      border-radius: 1.4rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(3,7,18,0.82);
+      overflow: hidden;
+      position: relative;
+      transform: perspective(1200px) rotateY(-14deg) translateY(0);
+      transition: transform .35s ease, box-shadow .35s ease, filter .35s ease;
+    }
+
+    body[data-theme="light"] .slide-card {
+      box-shadow: 0 12px 30px rgba(15,23,42,0.18);
+    }
+
+    .slide-card:hover {
+      transform: perspective(1200px) rotateY(-4deg) translateY(-8px) scale(1.03);
+      box-shadow: 0 24px 55px rgba(3,7,18,0.95);
+      filter: brightness(1.05);
+    }
+
+    .slide-thumb {
+      height: 140px;
+      background:
+        linear-gradient(135deg, rgba(15,23,42,0.1), rgba(15,23,42,0.6)),
+        radial-gradient(circle at 0% 0%, #f97316, transparent 55%),
+        radial-gradient(circle at 100% 100%, #f97316, transparent 55%);
+      background-size: cover;
+    }
+
+    .slide-content {
+      padding: 0.9rem 1rem 1rem;
+      font-size: 0.87rem;
+    }
+
+    .slide-title {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .slide-tagline {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .slide-chip {
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel-soft);
+      font-size: 0.75rem;
+    }
+
+    @keyframes slider-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     /* Responsive */
 
     @media (max-width: 900px) {
@@ -572,6 +703,7 @@
       <nav aria-label="Navigation principale">
         <ul>
           <li><a href="#profil">Profil</a></li>
+          <li><a href="#showcase">Showcase</a></li>
           <li><a href="#competences">Compétences</a></li>
           <li><a href="#projets">Projets</a></li>
           <li><a href="#citations">Mindset</a></li>
@@ -605,7 +737,7 @@
         </h1>
 
         <p class="hero-subtitle">
-          Actuellement en Terminale Bac Pro CIEL (Cybersécurité, Informatique & Réseaux, Électronique),
+          Actuellement en Terminale Bac Pro CIEL (cybersécurité, informatique, réseaux et électronique),
           je construis mon avenir entre sécurité, développement et projets concrets.
           Mon objectif : intégrer un <strong>BTS SIO</strong> pour aller plus loin dans l’IT.
         </p>
@@ -633,7 +765,7 @@
           de la théorie à la pratique.
         </p>
         <ul>
-          <li>Configuration réseau & notions de sécurité</li>
+          <li>Configuration réseau et premières notions de sécurité</li>
           <li>Découverte du pentest et des bonnes pratiques</li>
           <li>Montage, diagnostic & réparation de matériel</li>
           <li>Premiers projets web & outils numériques</li>
@@ -656,6 +788,122 @@
       </aside>
     </section>
 
+    <!-- SHOWCASE 3D -->
+    <section class="showcase-section reveal" id="showcase">
+      <div class="showcase-header">
+        <div>
+          <div class="showcase-label">Showcase animé</div>
+          <h2>Aperçu de mon univers, en mode chill</h2>
+        </div>
+        <p>
+          Une bande de cartes qui défilent en douceur : cybersécurité, projets,
+          fibre optique, développement web… tout ce qui représente mon parcours.
+        </p>
+      </div>
+
+      <div class="slider-viewport">
+        <div class="slider-track">
+
+          <article class="slide-card">
+            <div class="slide-thumb"></div>
+            <div class="slide-content">
+              <div class="slide-title">Dashboard cybersécurité</div>
+              <div class="slide-tagline">Monitoring, alertes et gestion des risques.</div>
+              <div class="slide-footer">
+                <span class="slide-chip">Cybersécurité</span>
+                <span>En cours</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide-card">
+            <div class="slide-thumb"></div>
+            <div class="slide-content">
+              <div class="slide-title">Portfolio Sabir v2</div>
+              <div class="slide-tagline">Animations, nuages interactifs, mode clair / sombre.</div>
+              <div class="slide-footer">
+                <span class="slide-chip">Front-end</span>
+                <span>2025</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide-card">
+            <div class="slide-thumb"></div>
+            <div class="slide-content">
+              <div class="slide-title">Lab fibre optique</div>
+              <div class="slide-tagline">Raccordement, tests et sécurité terrain (stage 2023).</div>
+              <div class="slide-footer">
+                <span class="slide-chip">Réseaux</span>
+                <span>Stage</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide-card">
+            <div class="slide-thumb"></div>
+            <div class="slide-content">
+              <div class="slide-title">Veille & projets perso</div>
+              <div class="slide-tagline">Scripts, idées, mini-CTF et vidéos techniques.</div>
+              <div class="slide-footer">
+                <span class="slide-chip">Projets perso</span>
+                <span>En cours</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Duplication pour défilement infini -->
+          <article class="slide-card">
+            <div class="slide-thumb"></div>
+            <div class="slide-content">
+              <div class="slide-title">Dashboard cybersécurité</div>
+              <div class="slide-tagline">Monitoring, alertes et gestion des risques.</div>
+              <div class="slide-footer">
+                <span class="slide-chip">Cybersécurité</span>
+                <span>En cours</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide-card">
+            <div class="slide-thumb"></div>
+            <div class="slide-content">
+              <div class="slide-title">Portfolio Sabir v2</div>
+              <div class="slide-tagline">Interface animée fluide.</div>
+              <div class="slide-footer">
+                <span class="slide-chip">Front-end</span>
+                <span>2025</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide-card">
+            <div class="slide-thumb"></div>
+            <div class="slide-content">
+              <div class="slide-title">Lab fibre optique</div>
+              <div class="slide-tagline">Expérience terrain en 2023.</div>
+              <div class="slide-footer">
+                <span class="slide-chip">Réseaux</span>
+                <span>Stage</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="slide-card">
+            <div class="slide-thumb"></div>
+            <div class="slide-content">
+              <div class="slide-title">Projets perso</div>
+              <div class="slide-tagline">Notes, scripts et idées à tester.</div>
+              <div class="slide-footer">
+                <span class="slide-chip">Projets perso</span>
+                <span>En cours</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
     <!-- COMPETENCES -->
     <section id="competences" class="reveal">
       <h2 class="section-title"><span></span>Compétences</h2>
@@ -668,7 +916,7 @@
             <li>Notions de cybersécurité (risques, mots de passe, sauvegardes, mises à jour)</li>
             <li>Adressage IP, petits réseaux locaux, diagnostic simple</li>
             <li>Montage / démontage de PC, remplacement de composants</li>
-            <li>Découverte de l’électronique & mesures (multimètre…)</li>
+            <li>Découverte de l’électronique et mesures (multimètre…)</li>
             <li>Bases en HTML / CSS et logique de programmation</li>
           </ul>
           <div class="pill-row">
@@ -697,6 +945,7 @@
         </div>
       </div>
     </section>
+
     <!-- PROJETS -->
     <section id="projets" class="reveal">
       <h2 class="section-title"><span></span>Projets & expériences</h2>
@@ -717,8 +966,8 @@
           <p class="muted">2025 – Entreprise</p>
           <p>
             Découverte du développement web en conditions réelles :
-            participation à de petites tâches, observation de projets en cours,
-            compréhension du workflow d’un développeur.
+            participation à de petites tâches, observation de projets en cours
+            et compréhension du workflow d’un développeur.
           </p>
         </div>
 
@@ -727,7 +976,7 @@
           <p class="muted">Stage – 2024</p>
           <p>
             Diagnostic, changement d’écrans et de batteries, tests après
-            intervention, contact avec la clientèle. Travail précis, minutieux,
+            intervention, contact avec la clientèle. Travail précis et minutieux,
             avec un vrai impact pour les utilisateurs.
           </p>
         </div>
@@ -737,7 +986,7 @@
           <p class="muted">2023 – Télécom</p>
           <p>
             Accompagnement sur des interventions fibre : préparation du matériel,
-            aide au raccordement, respect des règles de sécurité, tests de
+            aide au raccordement, respect des règles de sécurité et tests de
             connexion. Une première vraie immersion dans le monde des réseaux.
           </p>
         </div>
@@ -784,13 +1033,13 @@
         <p>
           Aujourd’hui, je suis en Bac Pro CIEL, entre cybersécurité, réseaux, informatique et électronique.
           Je teste, je me trompe, je corrige, j’apprends. Mon but, ce n’est pas juste d’avoir un diplôme :
-          c’est de construire une vraie compétence utile, qui peut servir dans une équipe, une entreprise,
-          ou même mes propres projets.
+          c’est de construire des compétences utiles, qui peuvent servir dans une équipe, une entreprise,
+          ou dans mes propres projets.
         </p>
         <p>
-          Demain, je me vois en <strong>BTS SIO</strong>, à aller plus loin dans le dev et l’admin systèmes / réseaux,
-          tout en gardant un œil sur la cybersécurité. Je veux avancer étape par étape, mais sans jamais perdre
-          ce mindset : <strong>rien n’est figé, tout peut évoluer si je travaille sérieusement</strong>.
+          Demain, je me vois en <strong>BTS SIO</strong>, à aller plus loin dans le développement et
+          l’administration systèmes / réseaux, tout en gardant un œil sur la cybersécurité. Je veux avancer
+          étape par étape, sans perdre ce mindset : <strong>rien n’est figé, tout peut évoluer si je travaille sérieusement</strong>.
         </p>
       </div>
     </section>
@@ -803,12 +1052,12 @@
         <div class="timeline-item">
           <div class="timeline-title">Terminale Bac Pro CIEL</div>
           <div class="timeline-meta">Lycée à Toulon – 2024 / 2025</div>
-          <p>Spécialité Cybersécurité, Informatique, Réseaux & Électronique.</p>
+          <p>Spécialité cybersécurité, informatique, réseaux et électronique.</p>
         </div>
         <div class="timeline-item">
           <div class="timeline-title">Stage technicien fibre optique</div>
           <div class="timeline-meta">2023 – Entreprise télécom</div>
-          <p>Interventions fibre, raccordement, sécurité terrain, tests de connexion.</p>
+          <p>Interventions fibre, raccordement, sécurité terrain et tests de connexion.</p>
         </div>
         <div class="timeline-item">
           <div class="timeline-title">Stages techniques variés</div>
@@ -818,7 +1067,7 @@
         <div class="timeline-item">
           <div class="timeline-title">Objectif : BTS SIO</div>
           <div class="timeline-meta">Après le Bac</div>
-          <p>Poursuivre en informatique, renforcer le dev, les réseaux et la cybersécurité.</p>
+          <p>Poursuivre en informatique, renforcer le développement, les réseaux et la cybersécurité.</p>
         </div>
       </div>
     </section>
@@ -919,7 +1168,7 @@
       dpr = window.devicePixelRatio || 1;
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function createCloud(x, y, radius) {
@@ -968,7 +1217,6 @@
         c.x += c.dx;
         c.y += c.dy;
 
-        // léger wrap autour de l'écran
         if (c.x < -c.r) c.x = w + c.r;
         if (c.x > w + c.r) c.x = -c.r;
         if (c.y < -c.r) c.y = h + c.r;
@@ -980,7 +1228,6 @@
       requestAnimationFrame(animate);
     }
 
-    // Clic = explosion de nuages bleus
     canvas.addEventListener('click', (e) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
