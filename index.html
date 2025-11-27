@@ -5,693 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio – Sabir IAZZA</title>
   <meta name="description" content="Portfolio de Sabir IAZZA, élève en Terminale Bac Pro CIEL, passionné par l'informatique, la cybersécurité, les réseaux et l'électronique.">
-
-  <style>
-    :root {
-      color-scheme: dark;
-      /* Palette coucher de soleil chill */
-      --bg: #050816;
-      --shell-bg: rgba(7, 13, 28, 0.92);
-      --panel: rgba(15, 23, 42, 0.98);
-      --panel-soft: rgba(15, 23, 42, 0.94);
-      --border: #1f2937;
-      --accent: #ff8b5c;      /* orange sunset */
-      --accent-soft: #ffb07c; /* pêche douce */
-      --muted: #9ca3af;
-      --text: #e5e7eb;
-      --shadow: 0 20px 45px rgba(3, 7, 18, 0.9);
-    }
-
-    /* Thème clair */
-    body[data-theme="light"] {
-      color-scheme: light;
-      --bg: #f5ede5;
-      --shell-bg: rgba(255, 255, 255, 0.96);
-      --panel: #ffffff;
-      --panel-soft: #fef6ef;
-      --border: #e5e7eb;
-      --accent: #ff8b5c;
-      --accent-soft: #ffb07c;
-      --muted: #6b7280;
-      --text: #111827;
-      --shadow: 0 14px 32px rgba(15, 23, 42, 0.18);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255,176,124,0.23), transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(247,127,189,0.22), transparent 55%),
-        radial-gradient(circle at 50% 100%, rgba(99,87,255,0.35), transparent 65%),
-        var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.5;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Canvas des nuages bleus */
-    #sky {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      pointer-events: auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: var(--shell-bg);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .logo {
-      font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.1rem;
-      font-size: 0.9rem;
-    }
-
-    nav a {
-      opacity: .8;
-      transition: opacity .2s ease, color .2s ease;
-    }
-
-    nav a:hover {
-      opacity: 1;
-      color: var(--accent);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .pill-indicator {
-      padding: 0.2rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--panel-soft);
-      color: var(--muted);
-      font-size: 0.75rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .btn-ghost,
-    .btn-primary {
-      border-radius: 999px;
-      font-size: 0.85rem;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: var(--panel-soft);
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      transition: background .2s ease, transform .1s ease,
-        box-shadow .2s ease, color .2s ease, border-color .2s ease;
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--accent);
-      color: var(--text);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #fb9f5d);
-      color: #111827;
-      border-color: var(--accent);
-      font-weight: 600;
-      box-shadow: 0 12px 30px rgba(255,139,92,0.45);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 2.5rem;
-    }
-
-    /* Animation apparition */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-    }
-
-    /* HERO */
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 1.8rem;
-      align-items: center;
-      padding-block: 2rem;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 0.75rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.8rem;
-      background: var(--panel-soft);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero-title {
-      font-size: clamp(2.1rem, 3vw, 2.7rem);
-      font-weight: 800;
-      margin-bottom: 0.7rem;
-      line-height: 1.2;
-    }
-
-    .hero-title span {
-      color: var(--accent-soft);
-    }
-
-    .hero-subtitle {
-      color: var(--muted);
-      font-size: 0.98rem;
-      max-width: 34rem;
-      margin-bottom: 1.3rem;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.2rem;
-      font-size: 0.8rem;
-    }
-
-    .tag {
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--panel-soft);
-      color: var(--muted);
-    }
-
-    .hero-contact {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .hero-contact span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .hero-card {
-      border-radius: 1.3rem;
-      border: 1px solid var(--border);
-      background:
-        radial-gradient(circle at 0% 0%, rgba(59,130,246,0.25), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(255,139,92,0.28), transparent 55%),
-        var(--panel);
-      padding: 1.6rem 1.4rem;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card h2 {
-      font-size: 1.05rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 0.9rem;
-    }
-
-    .hero-card ul {
-      list-style: none;
-      font-size: 0.9rem;
-      color: var(--text);
-      display: grid;
-      gap: 0.4rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .hero-card li::before {
-      content: "• ";
-      color: var(--accent-soft);
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 0.8rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .kpi-card {
-      border-radius: 0.9rem;
-      border: 1px dashed var(--border);
-      background: var(--panel-soft);
-      padding: 0.7rem 0.8rem;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .kpi-card strong {
-      display: block;
-      font-size: 1rem;
-      color: var(--text);
-    }
-
-    /* Sections génériques */
-
-    section {
-      margin-bottom: 2rem;
-    }
-
-    .section-title {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .section-title span {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(255,139,92,0.3);
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      border-radius: 1rem;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      padding: 1rem 1rem;
-      font-size: 0.9rem;
-      box-shadow: 0 10px 30px rgba(3,7,18,0.8);
-    }
-
-    .card h3 {
-      font-size: 0.98rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .muted {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    ul.list {
-      list-style: none;
-      display: grid;
-      gap: 0.4rem;
-      font-size: 0.9rem;
-    }
-
-    ul.list li::before {
-      content: "› ";
-      color: var(--accent-soft);
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
-    }
-
-    .pill {
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 0.78rem;
-      color: var(--muted);
-      background: var(--panel-soft);
-    }
-
-    .highlight-box {
-      border-radius: 1rem;
-      border: 1px solid rgba(255,139,92,0.45);
-      background: linear-gradient(135deg, rgba(255,139,92,0.18), var(--panel));
-      padding: 1rem 1rem;
-      font-size: 0.9rem;
-      box-shadow: var(--shadow);
-    }
-
-    /* Timeline */
-
-    .timeline {
-      border-left: 1px solid var(--border);
-      padding-left: 1rem;
-      display: grid;
-      gap: 0.7rem;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 0.5rem;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -1.1rem;
-      top: 0.4rem;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      box-shadow: 0 0 0 4px rgba(255,176,124,0.26);
-    }
-
-    .timeline-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .timeline-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 0.2rem;
-    }
-    /* Citations & vlog */
-
-    .quote-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1rem;
-    }
-
-    .quote-card {
-      border-radius: 1rem;
-      border: 1px dashed var(--border);
-      background: var(--panel-soft);
-      padding: 0.9rem 1rem;
-      font-size: 0.9rem;
-      display: grid;
-      gap: 0.5rem;
-    }
-
-    .quote-text {
-      font-style: italic;
-    }
-
-    .quote-author {
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: right;
-    }
-
-    .vlog-box {
-      border-radius: 1rem;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      padding: 1rem 1rem;
-      font-size: 0.9rem;
-    }
-
-    /* Contact & réseaux */
-
-    .contact-box {
-      border-radius: 1rem;
-      border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(255,139,92,0.18), var(--panel));
-      padding: 1.2rem 1.1rem;
-      box-shadow: var(--shadow);
-      display: grid;
-      gap: 0.7rem;
-    }
-
-    .contact-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      font-size: 0.9rem;
-    }
-
-    .social-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      font-size: 0.9rem;
-    }
-
-    .social-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--panel-soft);
-      font-size: 0.85rem;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      background: var(--shell-bg);
-      padding: 1.2rem;
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* ===== SHOWCASE 3D ===== */
-
-    .showcase-section {
-      margin-bottom: 2.2rem;
-      border-radius: 1.6rem;
-      padding: 1.8rem 1.6rem 2.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: linear-gradient(135deg, rgba(196,181,253,0.5), rgba(244,202,228,0.5));
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-      color: var(--text);
-    }
-
-    body[data-theme="light"] .showcase-section {
-      border-color: rgba(15, 23, 42, 0.08);
-      background: linear-gradient(135deg, #fbe7ff, #ffe6f0);
-    }
-
-    .showcase-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .showcase-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .showcase-header h2 {
-      font-size: 1.15rem;
-    }
-
-    .showcase-header p {
-      font-size: 0.86rem;
-      color: var(--muted);
-      max-width: 360px;
-    }
-
-    .slider-viewport {
-      margin-top: 1.4rem;
-      overflow: hidden;
-    }
-
-    .slider-track {
-      display: flex;
-      gap: 1.5rem;
-      width: max-content;
-      animation: slider-scroll 26s linear infinite;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    .slider-viewport:hover .slider-track {
-      animation-play-state: paused;
-    }
-
-    .slide-card {
-      flex: 0 0 260px;
-      border-radius: 1.4rem;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      box-shadow: 0 18px 40px rgba(3,7,18,0.82);
-      overflow: hidden;
-      position: relative;
-      transform: perspective(1200px) rotateY(-14deg) translateY(0);
-      transition: transform .35s ease, box-shadow .35s ease, filter .35s ease;
-    }
-
-    body[data-theme="light"] .slide-card {
-      box-shadow: 0 12px 30px rgba(15,23,42,0.18);
-    }
-
-    .slide-card:hover {
-      transform: perspective(1200px) rotateY(-4deg) translateY(-8px) scale(1.03);
-      box-shadow: 0 24px 55px rgba(3,7,18,0.95);
-      filter: brightness(1.05);
-    }
-
-    .slide-thumb {
-      height: 140px;
-      background:
-        linear-gradient(135deg, rgba(15,23,42,0.1), rgba(15,23,42,0.6)),
-        radial-gradient(circle at 0% 0%, #f97316, transparent 55%),
-        radial-gradient(circle at 100% 100%, #f97316, transparent 55%);
-      background-size: cover;
-    }
-
-    .slide-content {
-      padding: 0.9rem 1rem 1rem;
-      font-size: 0.87rem;
-    }
-
-    .slide-title {
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .slide-tagline {
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .slide-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .slide-chip {
-      padding: 0.18rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--panel-soft);
-      font-size: 0.75rem;
-    }
-
-    @keyframes slider-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* Responsive */
-
-    @media (max-width: 900px) {
-      nav ul {
-        display: none;
-      }
-      .hero {
-        grid-template-columns: minmax(0,1fr);
-      }
-      .hero-card {
-        order: -1;
-      }
-    }
-
-    @media (max-width: 640px) {
-      main {
-        padding-inline: 1.1rem;
-      }
-      .grid-2 {
-        grid-template-columns: minmax(0,1fr);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body data-theme="dark">
@@ -707,15 +21,18 @@
           <li><a href="#competences">Compétences</a></li>
           <li><a href="#projets">Projets</a></li>
           <li><a href="#citations">Mindset</a></li>
+          <li><a href="#assistant">Assistant IA</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
       <div class="nav-actions">
-        <span class="pill-indicator">🎯 Bac Pro CIEL – Terminale</span>
         <button id="theme-toggle" class="btn-ghost" type="button">🌙 Mode sombre</button>
         <a href="https://github.com/Sabirou" class="btn-ghost" target="_blank" rel="noopener">GitHub</a>
         <a href="#contact" class="btn-primary">Me contacter</a>
       </div>
+    </div>
+    <div class="header-progress">
+      <div class="header-progress-bar" id="scroll-progress"></div>
     </div>
   </header>
 
@@ -723,23 +40,22 @@
     <!-- HERO -->
     <section class="hero reveal" id="profil">
       <div>
-        <div class="hero-badge">Sabir IAZZA – 17 ans</div>
+        <div class="hero-badge">Bac Pro CIEL – Cybersécurité, Informatique & Réseaux</div>
 
         <div class="hero-meta">
-          <span class="pill-indicator">💻 Bac Pro CIEL</span>
-          <span class="pill-indicator">🔐 Cybersécurité & réseaux</span>
+          <span class="pill-indicator">📍 Saint-Maximin & Toulon</span>
+          <span class="pill-indicator">🧠 Curieux, motivé, terrain</span>
           <span class="pill-indicator">🎓 Objectif : BTS SIO</span>
         </div>
 
         <h1 class="hero-title">
-          Salut, moi c’est <span>Sabir</span> 👋<br>
-          futur technicien & développeur.
+          Je suis <span>Sabir</span> 👋<br>
+          je construis mon univers entre câbles, code et cybersécurité.
         </h1>
 
         <p class="hero-subtitle">
-          Actuellement en Terminale Bac Pro CIEL (cybersécurité, informatique, réseaux et électronique),
-          je construis mon avenir entre sécurité, développement et projets concrets.
-          Mon objectif : intégrer un <strong>BTS SIO</strong> pour aller plus loin dans l’IT.
+          Terminale Bac Pro CIEL, passionné par les réseaux, la sécurité et le développement web.
+          Ici tu découvres mon parcours, mes stages, mes projets et ma vision de l’IT.
         </p>
 
         <div class="hero-tags">
@@ -758,14 +74,13 @@
       </div>
 
       <aside class="hero-card">
-        <h2>Ce que je fais actuellement</h2>
+        <h2>Ce que je fais en ce moment</h2>
         <p>
-          En Bac Pro CIEL, je travaille sur la cybersécurité, les réseaux, l’informatique
-          et l’électronique. Entre les cours, les TP et les stages, j’apprends à passer
-          de la théorie à la pratique.
+          En Bac Pro CIEL, j’alterne entre cybersécurité, réseaux, électronique et projets concrets.
+          Le but : être à l’aise autant sur le terrain que derrière un écran.
         </p>
         <ul>
-          <li>Configuration réseau et premières notions de sécurité</li>
+          <li>Configuration réseau & premières notions de sécurité</li>
           <li>Découverte du pentest et des bonnes pratiques</li>
           <li>Montage, diagnostic & réparation de matériel</li>
           <li>Premiers projets web & outils numériques</li>
@@ -782,22 +97,22 @@
           </div>
           <div class="kpi-card">
             <strong>BTS SIO</strong>
-            Objectif après le Bac
+            Prochaine étape
           </div>
         </div>
       </aside>
     </section>
 
-    <!-- SHOWCASE 3D -->
+    <!-- SHOWCASE 3D SLIDER -->
     <section class="showcase-section reveal" id="showcase">
       <div class="showcase-header">
         <div>
           <div class="showcase-label">Showcase animé</div>
-          <h2>Aperçu de mon univers, en mode chill</h2>
+          <h2>Mon univers numérique en défilement chill</h2>
         </div>
         <p>
-          Une bande de cartes qui défilent en douceur : cybersécurité, projets,
-          fibre optique, développement web… tout ce qui représente mon parcours.
+          Un carrousel qui survole mes projets : cybersécurité, fibre optique,
+          développement web et expérimentations perso. Passe ta souris, ça vit.
         </p>
       </div>
 
@@ -805,7 +120,7 @@
         <div class="slider-track">
 
           <article class="slide-card">
-            <div class="slide-thumb"></div>
+            <div class="slide-thumb slide-thumb-sec"></div>
             <div class="slide-content">
               <div class="slide-title">Dashboard cybersécurité</div>
               <div class="slide-tagline">Monitoring, alertes et gestion des risques.</div>
@@ -817,7 +132,7 @@
           </article>
 
           <article class="slide-card">
-            <div class="slide-thumb"></div>
+            <div class="slide-thumb slide-thumb-portfolio"></div>
             <div class="slide-content">
               <div class="slide-title">Portfolio Sabir v2</div>
               <div class="slide-tagline">Animations, nuages interactifs, mode clair / sombre.</div>
@@ -829,7 +144,7 @@
           </article>
 
           <article class="slide-card">
-            <div class="slide-thumb"></div>
+            <div class="slide-thumb slide-thumb-fibre"></div>
             <div class="slide-content">
               <div class="slide-title">Lab fibre optique</div>
               <div class="slide-tagline">Raccordement, tests et sécurité terrain (stage 2023).</div>
@@ -841,10 +156,10 @@
           </article>
 
           <article class="slide-card">
-            <div class="slide-thumb"></div>
+            <div class="slide-thumb slide-thumb-lab"></div>
             <div class="slide-content">
               <div class="slide-title">Veille & projets perso</div>
-              <div class="slide-tagline">Scripts, idées, mini-CTF et vidéos techniques.</div>
+              <div class="slide-tagline">Scripts, mini-CTF et idées à prototyper.</div>
               <div class="slide-footer">
                 <span class="slide-chip">Projets perso</span>
                 <span>En cours</span>
@@ -854,10 +169,10 @@
 
           <!-- Duplication pour défilement infini -->
           <article class="slide-card">
-            <div class="slide-thumb"></div>
+            <div class="slide-thumb slide-thumb-sec"></div>
             <div class="slide-content">
               <div class="slide-title">Dashboard cybersécurité</div>
-              <div class="slide-tagline">Monitoring, alertes et gestion des risques.</div>
+              <div class="slide-tagline">Supervision et sécurité.</div>
               <div class="slide-footer">
                 <span class="slide-chip">Cybersécurité</span>
                 <span>En cours</span>
@@ -866,10 +181,10 @@
           </article>
 
           <article class="slide-card">
-            <div class="slide-thumb"></div>
+            <div class="slide-thumb slide-thumb-portfolio"></div>
             <div class="slide-content">
               <div class="slide-title">Portfolio Sabir v2</div>
-              <div class="slide-tagline">Interface animée fluide.</div>
+              <div class="slide-tagline">Interface fluide et responsive.</div>
               <div class="slide-footer">
                 <span class="slide-chip">Front-end</span>
                 <span>2025</span>
@@ -878,10 +193,10 @@
           </article>
 
           <article class="slide-card">
-            <div class="slide-thumb"></div>
+            <div class="slide-thumb slide-thumb-fibre"></div>
             <div class="slide-content">
-              <div class="slide-title">Lab fibre optique</div>
-              <div class="slide-tagline">Expérience terrain en 2023.</div>
+              <div class="slide-title">Fibre optique</div>
+              <div class="slide-tagline">Expérience réseau sur le terrain.</div>
               <div class="slide-footer">
                 <span class="slide-chip">Réseaux</span>
                 <span>Stage</span>
@@ -890,12 +205,12 @@
           </article>
 
           <article class="slide-card">
-            <div class="slide-thumb"></div>
+            <div class="slide-thumb slide-thumb-lab"></div>
             <div class="slide-content">
               <div class="slide-title">Projets perso</div>
-              <div class="slide-tagline">Notes, scripts et idées à tester.</div>
+              <div class="slide-tagline">Notes, scripts et expérimentations.</div>
               <div class="slide-footer">
-                <span class="slide-chip">Projets perso</span>
+                <span class="slide-chip">Sandbox</span>
                 <span>En cours</span>
               </div>
             </div>
@@ -904,6 +219,7 @@
         </div>
       </div>
     </section>
+
     <!-- COMPETENCES -->
     <section id="competences" class="reveal">
       <h2 class="section-title"><span></span>Compétences</h2>
@@ -1033,7 +349,7 @@
         <p>
           Aujourd’hui, je suis en Bac Pro CIEL, entre cybersécurité, réseaux, informatique et électronique.
           Je teste, je me trompe, je corrige, j’apprends. Mon but, ce n’est pas juste d’avoir un diplôme :
-          c’est de construire des compétences utiles, qui peuvent servir dans une équipe, une entreprise,
+          c’est de construire des compétences utiles, qui peuvent servir dans une équipe, une entreprise
           ou dans mes propres projets.
         </p>
         <p>
@@ -1071,6 +387,55 @@
         </div>
       </div>
     </section>
+
+    <!-- ASSISTANT IA -->
+    <section id="assistant" class="reveal assistant-section">
+      <h2 class="section-title"><span></span>Assistant IA – SabirBot</h2>
+      <p class="assistant-intro">
+        Un mini-assistant IA intégré à mon site. Il ne remplace pas ChatGPT,
+        mais il est entraîné sur mon profil : Bac Pro CIEL, BTS SIO, stages, etc.
+        Pose-lui une question sur mon parcours ou des conseils d’orientation.
+      </p>
+
+      <div class="assistant-grid">
+        <div class="assistant-info card">
+          <h3>Ce que SabirBot sait faire</h3>
+          <ul class="list">
+            <li>Répondre à des questions sur mon parcours et mes objectifs.</li>
+            <li>Donner des infos de base sur Bac Pro CIEL / BTS SIO.</li>
+            <li>Proposer quelques conseils simples sur les stages.</li>
+          </ul>
+          <p class="muted">
+            Pour un vrai assistant IA avancé (comme ChatGPT), il faudra connecter ce site
+            à une API plus tard. Pour l’instant, tout tourne en JavaScript côté navigateur.
+          </p>
+        </div>
+
+        <div class="assistant-chat card">
+          <div class="chat-window" id="chat-window">
+            <div class="chat-message bot">
+              <div class="chat-bubble">
+                Salut, moi c’est <strong>SabirBot</strong> 🤖.<br>
+                Je représente Sabir sur ce site. Pose-moi une question sur son parcours,
+                ses stages ou son projet de BTS, et je te réponds.
+              </div>
+            </div>
+          </div>
+
+          <form id="chat-form" class="chat-form" autocomplete="off">
+            <input
+              type="text"
+              id="chat-input"
+              class="chat-input"
+              placeholder="Ex : Quels stages a fait Sabir ?"
+              required
+            />
+            <button type="submit" class="btn-primary chat-submit">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <!-- CONTACT & RÉSEAUX -->
     <section id="contact" class="reveal">
       <h2 class="section-title"><span></span>Contact & réseaux sociaux</h2>
@@ -1119,141 +484,6 @@
     © <span id="year"></span> – Portfolio de Sabir IAZZA
   </footer>
 
-  <script>
-    // Année dynamique
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Thème clair / sombre
-    const body = document.body;
-    const toggleBtn = document.getElementById("theme-toggle");
-
-    function applyTheme(theme) {
-      body.setAttribute("data-theme", theme);
-      toggleBtn.textContent = theme === "dark" ? "🌙 Mode sombre" : "☀️ Mode clair";
-    }
-
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    applyTheme(savedTheme);
-
-    toggleBtn.addEventListener("click", () => {
-      const current = body.getAttribute("data-theme");
-      const next = current === "dark" ? "light" : "dark";
-      applyTheme(next);
-      localStorage.setItem("theme", next);
-    });
-
-    // Animation au scroll
-    const revealElements = document.querySelectorAll('.reveal');
-
-    function handleScroll() {
-      const triggerBottom = window.innerHeight * 0.85;
-      revealElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < triggerBottom) {
-          el.classList.add('visible');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('load', handleScroll);
-
-    // Nuages bleus animés sur le canvas
-    const canvas = document.getElementById('sky');
-    const ctx = canvas.getContext('2d');
-    const clouds = [];
-    let dpr = window.devicePixelRatio || 1;
-
-    function resizeCanvas() {
-      dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    function createCloud(x, y, radius) {
-      return {
-        x,
-        y,
-        r: radius,
-        alpha: 0.25 + Math.random() * 0.35,
-        dx: (Math.random() - 0.5) * 0.25,
-        dy: (Math.random() - 0.5) * 0.25
-      };
-    }
-
-    function initClouds() {
-      clouds.length = 0;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      for (let i = 0; i < 18; i++) {
-        clouds.push(createCloud(
-          Math.random() * w,
-          Math.random() * h,
-          60 + Math.random() * 120
-        ));
-      }
-    }
-
-    function drawCloud(c) {
-      const gradient = ctx.createRadialGradient(
-        c.x, c.y, 0,
-        c.x, c.y, c.r
-      );
-      gradient.addColorStop(0, `rgba(56,189,248,${c.alpha})`);
-      gradient.addColorStop(1, 'rgba(15,23,42,0)');
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function animate() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      ctx.clearRect(0, 0, w, h);
-
-      clouds.forEach(c => {
-        c.x += c.dx;
-        c.y += c.dy;
-
-        if (c.x < -c.r) c.x = w + c.r;
-        if (c.x > w + c.r) c.x = -c.r;
-        if (c.y < -c.r) c.y = h + c.r;
-        if (c.y > h + c.r) c.y = -c.r;
-
-        drawCloud(c);
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    canvas.addEventListener('click', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      for (let i = 0; i < 8; i++) {
-        const c = createCloud(
-          x + (Math.random() - 0.5) * 80,
-          y + (Math.random() - 0.5) * 60,
-          40 + Math.random() * 80
-        );
-        c.dx *= 2;
-        c.dy *= 2;
-        clouds.push(c);
-      }
-    });
-
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      initClouds();
-    });
-
-    // Init
-    resizeCanvas();
-    initClouds();
-    animate();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
