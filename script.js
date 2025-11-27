@@ -1,10 +1,10 @@
-// Année dynamique dans le footer
-const yearEl = document.getElementById("year");
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
+// ===== Année dynamique dans le footer =====
+const yearSpan = document.getElementById("year");
+if (yearSpan) {
+  yearSpan.textContent = new Date().getFullYear();
 }
 
-// Thème clair / sombre
+// ===== Thème clair / sombre =====
 const body = document.body;
 const toggleBtn = document.getElementById("theme-toggle");
 
@@ -27,132 +27,103 @@ if (toggleBtn) {
   });
 }
 
-// Animation au scroll
-const revealElements = document.querySelectorAll('.reveal');
+// ===== Animation au scroll (reveal) =====
+const revealElements = document.querySelectorAll(".reveal");
 
-function handleScrollReveal() {
+function handleScroll() {
   const triggerBottom = window.innerHeight * 0.85;
-  revealElements.forEach(el => {
+  revealElements.forEach((el) => {
     const rect = el.getBoundingClientRect();
     if (rect.top < triggerBottom) {
-      el.classList.add('visible');
+      el.classList.add("visible");
     }
   });
 }
 
-window.addEventListener('scroll', handleScrollReveal);
-window.addEventListener('load', handleScrollReveal);
+window.addEventListener("scroll", handleScroll);
+window.addEventListener("load", handleScroll);
 
-// Barre de progression de scroll
-const progressBar = document.getElementById('scroll-progress');
-function handleScrollProgress() {
-  if (!progressBar) return;
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const ratio = docHeight > 0 ? scrollTop / docHeight : 0;
-  progressBar.style.width = `${ratio * 100}%`;
-}
-
-window.addEventListener('scroll', handleScrollProgress);
-window.addEventListener('load', handleScrollProgress);
-
-// Animation de focus quand on clique sur un lien de nav
-const navLinks = document.querySelectorAll('header nav a[href^="#"]');
-
-navLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href').slice(1);
-    const target = document.getElementById(targetId);
-    if (!target) return;
-
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    target.classList.add('section-focus');
-    setTimeout(() => target.classList.remove('section-focus'), 800);
-  });
-});
-
-// Nuages bleus animés sur le canvas
-const canvas = document.getElementById('sky');
-let ctx = null;
-if (canvas) {
-  ctx = canvas.getContext('2d');
-}
-const clouds = [];
-let dpr = window.devicePixelRatio || 1;
-
-function resizeCanvas() {
-  if (!canvas || !ctx) return;
-  dpr = window.devicePixelRatio || 1;
-  canvas.width = window.innerWidth * dpr;
-  canvas.height = window.innerHeight * dpr;
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-}
-
-function createCloud(x, y, radius) {
-  return {
-    x,
-    y,
-    r: radius,
-    alpha: 0.25 + Math.random() * 0.35,
-    dx: (Math.random() - 0.5) * 0.25,
-    dy: (Math.random() - 0.5) * 0.25
-  };
-}
-
-function initClouds() {
-  if (!canvas) return;
-  clouds.length = 0;
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  for (let i = 0; i < 18; i++) {
-    clouds.push(createCloud(
-      Math.random() * w,
-      Math.random() * h,
-      60 + Math.random() * 120
-    ));
-  }
-}
-
-function drawCloud(c) {
-  if (!ctx) return;
-  const gradient = ctx.createRadialGradient(
-    c.x, c.y, 0,
-    c.x, c.y, c.r
+// ===== Effet 3D au clic sur liens & boutons =====
+function initClick3DEffect() {
+  const clickable = document.querySelectorAll(
+    ".nav-link, .btn-3d, .social-pill, .suggestion-pill"
   );
-  gradient.addColorStop(0, `rgba(56,189,248,${c.alpha})`);
-  gradient.addColorStop(1, 'rgba(15,23,42,0)');
-  ctx.fillStyle = gradient;
-  ctx.beginPath();
-  ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
-  ctx.fill();
-}
-
-function animate() {
-  if (!canvas || !ctx) return;
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  ctx.clearRect(0, 0, w, h);
-
-  clouds.forEach(c => {
-    c.x += c.dx;
-    c.y += c.dy;
-
-    if (c.x < -c.r) c.x = w + c.r;
-    if (c.x > w + c.r) c.x = -c.r;
-    if (c.y < -c.r) c.y = h + c.r;
-    if (c.y > h + c.r) c.y = -c.r;
-
-    drawCloud(c);
+  clickable.forEach((el) => {
+    el.addEventListener("click", () => {
+      el.classList.add("clicked-3d");
+      setTimeout(() => {
+        el.classList.remove("clicked-3d");
+      }, 220);
+    });
   });
-
-  requestAnimationFrame(animate);
 }
+window.addEventListener("load", initClick3DEffect);
 
-// Clic = explosion de nuages bleus
+// ===== Nuages bleus animés sur le canvas =====
+const canvas = document.getElementById("sky");
 if (canvas) {
-  canvas.addEventListener('click', (e) => {
+  const ctx = canvas.getContext("2d");
+  const clouds = [];
+  let dpr = window.devicePixelRatio || 1;
+
+  function resizeCanvas() {
+    dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function createCloud(x, y, radius) {
+    return {
+      x,
+      y,
+      r: radius,
+      alpha: 0.25 + Math.random() * 0.35,
+      dx: (Math.random() - 0.5) * 0.25,
+      dy: (Math.random() - 0.5) * 0.25,
+    };
+  }
+
+  function initClouds() {
+    clouds.length = 0;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    for (let i = 0; i < 18; i++) {
+      clouds.push(
+        createCloud(Math.random() * w, Math.random() * h, 60 + Math.random() * 120)
+      );
+    }
+  }
+
+  function drawCloud(c) {
+    const gradient = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
+    gradient.addColorStop(0, `rgba(56,189,248,${c.alpha})`);
+    gradient.addColorStop(1, "rgba(15,23,42,0)");
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function animateClouds() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    clouds.forEach((c) => {
+      c.x += c.dx;
+      c.y += c.dy;
+      if (c.x < -c.r) c.x = w + c.r;
+      if (c.x > w + c.r) c.x = -c.r;
+      if (c.y < -c.r) c.y = h + c.r;
+      if (c.y > h + c.r) c.y = -c.r;
+      drawCloud(c);
+    });
+
+    requestAnimationFrame(animateClouds);
+  }
+
+  canvas.addEventListener("click", (e) => {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -169,135 +140,344 @@ if (canvas) {
     }
   });
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     resizeCanvas();
     initClouds();
   });
 
-  // Init clouds
   resizeCanvas();
   initClouds();
-  animate();
+  animateClouds();
 }
 
-// ===== Assistant IA – SabirBot (front uniquement) =====
-const chatWindow = document.getElementById('chat-window');
-const chatForm = document.getElementById('chat-form');
-const chatInput = document.getElementById('chat-input');
+// ===== Assistant IA – SabirGPT (multi-modes + mémoire simple) =====
+const chatWindow = document.getElementById("chat-window");
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+const modeButtons = document.querySelectorAll(".mode-btn");
+const typingIndicator = document.getElementById("typing-indicator");
+const suggestionButtons = document.querySelectorAll(".suggestion-pill");
 
-function addMessage(text, sender = 'bot') {
+let currentMode = "chill";
+const chatHistory = []; // { sender: 'user'|'bot', text: '...' }
+
+// changement de mode
+modeButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    modeButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentMode = btn.getAttribute("data-mode") || "chill";
+
+    addMessage(
+      `Mode <strong>${modeLabel(currentMode)}</strong> activé. Pose ta question 😉`,
+      "bot"
+    );
+  });
+});
+
+// clic sur une suggestion pré-définie
+suggestionButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const question = btn.getAttribute("data-question") || btn.textContent.trim();
+    if (!question || !chatForm || !chatInput) return;
+    chatInput.value = question;
+    chatForm.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+  });
+});
+
+function modeLabel(mode) {
+  switch (mode) {
+    case "pro":
+      return "Professionnel";
+    case "cyber":
+      return "Cybersécurité";
+    case "orient":
+      return "Orientation";
+    default:
+      return "Chill";
+  }
+}
+
+function addMessage(text, sender = "bot") {
   if (!chatWindow) return;
-  const wrapper = document.createElement('div');
+  const wrapper = document.createElement("div");
   wrapper.className = `chat-message ${sender}`;
-  const bubble = document.createElement('div');
-  bubble.className = 'chat-bubble';
+  const bubble = document.createElement("div");
+  bubble.className = "chat-bubble";
   bubble.innerHTML = text;
   wrapper.appendChild(bubble);
   chatWindow.appendChild(wrapper);
   chatWindow.scrollTop = chatWindow.scrollHeight;
+  chatHistory.push({ sender, text });
+}
+
+function normalizeMessage(message) {
+  return message
+    .toLowerCase()
+    .replace(/[?!.,;:]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isFollowUp(message) {
+  const m = normalizeMessage(message);
+  return (
+    m === "et apres" ||
+    m === "et après" ||
+    m === "et sinon" ||
+    m === "continue" ||
+    m === "dis moi plus" ||
+    m === "explique plus"
+  );
+}
+
+function getLastTopic() {
+  for (let i = chatHistory.length - 1; i >= 0; i--) {
+    const item = chatHistory[i];
+    if (item.sender === "bot") {
+      const txt = item.text.toLowerCase();
+      if (txt.includes("fibre optique")) return "fibre";
+      if (txt.includes("téléphones") || txt.includes("téléphone")) return "telephones";
+      if (txt.includes("bac pro ciel")) return "ciel";
+      if (txt.includes("bts sio")) return "bts";
+      if (txt.includes("stages")) return "stages";
+    }
+  }
+  return null;
+}
+
+function wrapByMode(coreText, mode) {
+  if (mode === "pro") {
+    return `
+      <strong>[Mode professionnel]</strong><br>
+      ${coreText}
+    `;
+  }
+  if (mode === "cyber") {
+    return `
+      <strong>[Mode cybersécurité]</strong><br>
+      ${coreText}<br><br>
+      Côté cyber, l’idée est toujours la même : comprendre les risques, protéger les systèmes
+      (sauvegardes, mises à jour, mots de passe), et garder une bonne hygiène numérique.
+    `;
+  }
+  if (mode === "orient") {
+    return `
+      <strong>[Mode orientation]</strong><br>
+      ${coreText}<br><br>
+      Si tu hésites sur ton futur, note ce que tu aimes vraiment dans ce que fait Sabir :
+      le terrain ? le dev ? les réseaux ? Ça peut t’aider à choisir la bonne filière.
+    `;
+  }
+  return coreText; // chill
 }
 
 function generateSabirBotReply(message) {
-  const msg = message.toLowerCase();
+  const raw = message;
+  const msg = normalizeMessage(message);
+  const mode = currentMode;
 
-  // Quelques réponses simples basées sur des mots-clés
-  if (msg.includes('stage') && msg.includes('fibre')) {
-    return `
-      Sabir a réalisé un <strong>stage en fibre optique en 2023</strong> 🧵.<br>
-      Il a participé à des interventions terrain : préparation du matériel,
-      raccordement, respect des règles de sécurité et tests de connexion.
+  // âge
+  if (
+    (msg.includes("age") || msg.includes("ans")) &&
+    (msg.includes("sabir") || msg.includes("il"))
+  ) {
+    const core = `
+      Sabir a <strong>17 ans</strong> 🎂.<br>
+      Il est né le <strong>19 janvier 2008</strong> et vit à <strong>Saint-Maximin (83)</strong>.
     `;
+    return wrapByMode(core, mode);
   }
 
-  if (msg.includes('stage') && msg.includes('téléphone')) {
-    return `
-      Sabir a aussi fait un <strong>stage en réparation de téléphones</strong> 📱.<br>
-      Il s’occupait du diagnostic, du changement d’écrans / batteries
-      et des tests après intervention, avec contact client.
-    `;
+  // follow up
+  if (isFollowUp(raw)) {
+    const lastTopic = getLastTopic();
+    let core;
+    if (lastTopic === "fibre") {
+      core = `
+        Pour compléter sur la <strong>fibre optique</strong> 🧵 :<br>
+        pendant ce stage, Sabir a découvert la réalité du terrain : déplacements,
+        météo, contraintes clients, sécurité, organisation du matériel.<br>
+        Ça lui a montré que les réseaux, ce n’est pas que des schémas, c’est aussi des
+        gens derrière chaque connexion.
+      `;
+    } else if (lastTopic === "telephones") {
+      core = `
+        Pour la <strong>réparation de téléphones</strong> 📱 :<br>
+        en plus du côté technique (diagnostic, démontage, pièces), il y a le contact client :
+        expliquer le problème, rassurer, être clair sur les délais.<br>
+        C’est un bon mélange entre technique et relationnel.
+      `;
+    } else if (lastTopic === "ciel") {
+      core = `
+        Pour aller plus loin sur le <strong>Bac Pro CIEL</strong> 🧑‍💻 :<br>
+        c’est une bonne base pour toucher aux réseaux, à la cybersécurité, à l’électronique
+        et aux systèmes. Les TP et les stages sont vraiment la clé pour progresser.
+      `;
+    } else if (lastTopic === "bts") {
+      core = `
+        Concernant le <strong>BTS SIO</strong> 🎓 :<br>
+        l’idée, c’est de passer à un niveau plus pro : projets plus longs, travail en équipe,
+        alternance possible, rythme d’IT réel. Tu peux viser SISR (réseaux / infra) ou SLAM (dev).
+      `;
+    } else if (lastTopic === "stages") {
+      core = `
+        Pour les <strong>stages</strong> en général :<br>
+        Sabir les a utilisés pour tester plusieurs environnements : terrain, atelier,
+        support, web. C’est comme ça qu’il a clarifié ce qu’il aime vraiment dans l’IT.
+      `;
+    } else {
+      core = `
+        Je peux développer sur les <strong>stages</strong>, le <strong>Bac Pro CIEL</strong>,
+        ou le <strong>BTS SIO</strong> si tu veux. Dis-moi juste sur quoi tu veux que je détaille 😉
+      `;
+    }
+    return wrapByMode(core, mode);
   }
 
-  if (msg.includes('stages') || msg.includes('stage')) {
-    return `
+  // stages
+  if (msg.includes("stages") || msg.includes("stage")) {
+    const core = `
       Sabir a réalisé <strong>plusieurs stages entre 2023 et 2025</strong> :<br>
-      • Fibre optique (2023, télécom)<br>
-      • Réparation de téléphones (atelier)<br>
-      • Développement web<br>
-      • Électricité bâtiment<br>
-      • Support informatique<br><br>
-      Demande-moi un détail sur un stage précis si tu veux 😉
+      • <strong>Fibre optique</strong> (2023, télécom)<br>
+      • <strong>Réparation de téléphones</strong> (atelier)<br>
+      • <strong>Développement web</strong><br>
+      • <strong>Électricité bâtiment</strong><br>
+      • <strong>Support informatique</strong><br><br>
+      L’objectif : voir différents environnements pour mieux choisir la suite
+      (BTS, spécialité, orientation).
     `;
+    return wrapByMode(core, mode);
   }
 
-  if (msg.includes('bac pro') || msg.includes('ciel')) {
-    return `
+  // Bac Pro CIEL
+  if (msg.includes("bac pro") || msg.includes("ciel")) {
+    const core = `
       Sabir est en <strong>Terminale Bac Pro CIEL</strong> 🧑‍💻.<br>
       CIEL = Cybersécurité, Informatique et Réseaux, Électronique.<br>
-      Il y voit : réseaux, cybersécurité (bases), électronique, TP,
-      projets et préparation à un BTS dans l’IT.
+      Il y voit : réseaux, bases de cybersécurité, électronique, systèmes,
+      TP et projets techniques.<br>
+      C’est une bonne voie si tu veux toucher autant au matériel qu’au logiciel.
     `;
+    return wrapByMode(core, mode);
   }
 
-  if (msg.includes('bts sio') || msg.includes('après le bac') || msg.includes('apres le bac')) {
-    return `
-      L’objectif de Sabir est de poursuivre en <strong>BTS SIO</strong> 🎓.<br>
-      Ça lui permettrait de renforcer le développement, l’admin systèmes / réseaux,
-      tout en gardant un pied dans la cybersécurité.<br>
-      Option probable : <strong>SISR</strong> (réseaux) ou <strong>SLAM</strong> (développement).
+  // BTS SIO / orientation
+  if (
+    msg.includes("bts sio") ||
+    msg.includes("apres le bac") ||
+    msg.includes("après le bac") ||
+    msg.includes("orientation") ||
+    msg.includes("futur")
+  ) {
+    const core = `
+      Après son Bac Pro CIEL, Sabir veut poursuivre en <strong>BTS SIO</strong> 🎓.<br>
+      Ce BTS permet de se spécialiser :<br>
+      • <strong>SISR</strong> → réseaux, systèmes, infra<br>
+      • <strong>SLAM</strong> → développement d’applications<br><br>
+      L’idée, c’est de renforcer ses bases en IT tout en gardant un lien avec la cybersécurité.
     `;
+    return wrapByMode(core, mode);
   }
 
-  if (msg.includes('orientation') || msg.includes('conseil') || msg.includes('conseils')) {
-    return `
-      En mode conseil rapide :<br>
-      • Si tu aimes le <strong>terrain + réseaux</strong> → Bac Pro / BTS orienté CIEL / SIO SISR<br>
-      • Si tu préfères le <strong>code</strong> → BTS SIO SLAM ou écoles de dev<br>
-      • Le plus important : <strong>faire des stages</strong> et tester en vrai ce que tu aimes.
+  // CV / portfolio
+  if (
+    msg.includes("cv") ||
+    msg.includes("portfolio") ||
+    msg.includes("port folio")
+  ) {
+    const core = `
+      Ce site fait office de <strong>portfolio</strong> pour Sabir 📂.<br>
+      Il présente son parcours, ses compétences et ses expériences.<br>
+      Pour un CV plus détaillé (PDF, version pro), il peut l’envoyer par mail :
+      <strong>amiamisabir@gmail.com</strong>.
     `;
+    return wrapByMode(core, mode);
   }
 
-  if (msg.includes('cv') || msg.includes('portfolio')) {
-    return `
-      Ce site fait office de <strong>portfolio en ligne</strong> 📂.<br>
-      Sabir peut aussi envoyer un CV plus détaillé sur demande.<br>
-      Tu peux le contacter directement par mail : <strong>amiamisabir@gmail.com</strong>.
+  // salut / présentation
+  if (
+    msg.includes("salut") ||
+    msg.includes("bonjour") ||
+    msg.includes("hey") ||
+    msg.includes("yo")
+  ) {
+    const core = `
+      Hey 👋, moi c’est <strong>SabirGPT</strong>.<br>
+      Je connais le parcours de Sabir (Bac Pro CIEL, stages, objectif BTS SIO)
+      et je peux te répondre sur tout ça.<br>
+      Tu peux aussi me poser des questions d’orientation ou sur les domaines qu’il vise.
     `;
+    return wrapByMode(core, mode);
   }
 
-  if (msg.includes('salut') || msg.includes('bonjour') || msg.includes('hey')) {
-    return `
-      Hey 👋, moi c’est <strong>SabirBot</strong>.<br>
-      Pose-moi une question sur le parcours de Sabir, ses stages, son Bac Pro CIEL
-      ou son projet de BTS SIO et je t’aide.
+  // qui es-tu ?
+  if (
+    msg.includes("qui es tu") ||
+    msg.includes("t es qui") ||
+    msg.includes("c est qui") ||
+    msg.includes("qui es-tu")
+  ) {
+    const core = `
+      Je suis <strong>SabirGPT</strong> 🤖.<br>
+      Je ne suis pas une IA aussi lourde qu’un vrai GPT, mais je suis entraîné (en JavaScript)
+      pour parler du parcours de Sabir, de son Bac Pro CIEL, de ses stages,
+      de son objectif BTS SIO et de son mindset.
     `;
+    return wrapByMode(core, mode);
   }
 
-  // Réponse par défaut
-  return `
+  // mode cyber : mot de passe
+  if (mode === "cyber" && (msg.includes("mot de passe") || msg.includes("mdp"))) {
+    const core = `
+      Côté cybersécurité 🔐 :<br>
+      • Utiliser des mots de passe longs (12+ caractères)<br>
+      • Mélanger minuscules, majuscules, chiffres et symboles<br>
+      • Éviter de réutiliser le même mot de passe partout<br>
+      • Activer la double authentification quand c’est possible<br><br>
+      C’est basique, mais beaucoup de gens ne le font pas encore.
+    `;
+    return wrapByMode(core, mode);
+  }
+
+  // défaut
+  const coreDefault = `
     Bonne question 👀.<br>
-    Je ne suis qu’un petit assistant en JavaScript pour l’instant,
-    donc je n’ai pas toutes les infos comme ChatGPT.<br>
-    Essaie de me demander par exemple :<br>
-    • <em>Quels stages a fait Sabir ?</em><br>
-    • <em>C’est quoi son objectif après le Bac ?</em><br>
-    • <em>Il fait quoi en Bac Pro CIEL ?</em>
+    Je peux t’aider sur :<br>
+    • le <strong>Bac Pro CIEL</strong> de Sabir<br>
+    • ses <strong>stages</strong> (fibre, téléphones, web, etc.)<br>
+    • son <strong>objectif BTS SIO</strong> et l’orientation<br>
+    • quelques bases en <strong>cybersécurité</strong> et réseaux<br><br>
+    Essaie par exemple :<br>
+    <em>« Sabir a quel âge ? »</em>, <em>« C’est quoi le Bac Pro CIEL ? »</em> ou
+    <em>« Quels stages il a faits ? »</em>
   `;
+  return wrapByMode(coreDefault, mode);
 }
 
+// Gestion du formulaire de chat
 if (chatForm && chatInput) {
-  chatForm.addEventListener('submit', (e) => {
+  chatForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const text = chatInput.value.trim();
     if (!text) return;
 
-    addMessage(text, 'user');
+    addMessage(text, "user");
 
-    // petite attente pour l'effet "IA"
+    if (typingIndicator) {
+      typingIndicator.style.display = "flex";
+    }
+
     setTimeout(() => {
       const reply = generateSabirBotReply(text);
-      addMessage(reply, 'bot');
-    }, 350);
 
-    chatInput.value = '';
+      if (typingIndicator) {
+        typingIndicator.style.display = "none";
+      }
+
+      addMessage(reply, "bot");
+    }, 500);
+
+    chatInput.value = "";
   });
 }
