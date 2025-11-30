@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,10 +10,52 @@
 </head>
 
 <body data-theme="dark">
-  <!-- Canvas fond animé (nuages bleus / vibes 3D) -->
+  <!-- ÉCRAN D'ACCUEIL STYLE APPLE + LION -->
+  <div id="intro-screen">
+    <div class="intro-bg"></div>
+
+    <div class="intro-content">
+      <div class="intro-dots">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="intro-card">
+        <div class="intro-lion-wrap">
+          <!-- mets ton image ici -->
+          <img
+            src="lion-mascot.png"
+            alt="Mascotte lion de Sabir"
+            class="intro-lion"
+            id="intro-lion"
+          />
+        </div>
+
+        <h1 class="intro-name">SABIR IAZZA</h1>
+        <p class="intro-tagline">Cybersécurité · Réseaux · Web</p>
+        <p class="intro-sub">Bac Pro CIEL · Objectif BTS SIO</p>
+
+        <div class="intro-socials">
+          <a href="https://github.com/Sabirou" target="_blank" rel="noopener" class="intro-social">
+            <span>🐙</span><span>GitHub</span>
+          </a>
+          <a href="https://www.instagram.com/clh.iz" target="_blank" rel="noopener" class="intro-social">
+            <span>📸</span><span>Instagram</span>
+          </a>
+        </div>
+
+        <p class="intro-hint">
+          Cliquez sur le lion pour entrer dans le portfolio
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Canvas fond animé -->
   <canvas id="sky" aria-hidden="true"></canvas>
 
-  <!-- HEADER / NAV -->
+  <!-- HEADER -->
   <header>
     <div class="nav-container">
       <div class="logo">SABIR IAZZA</div>
@@ -34,6 +77,7 @@
     </div>
   </header>
 
+  <!-- MAIN -->
   <main id="main-shell">
     <!-- HERO / PROFIL -->
     <section class="section hero section-visible" id="profil">
@@ -69,7 +113,11 @@
         <div class="hero-contact">
           <span>📍 Saint-Maximin (83)</span>
           <span>📧 <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></span>
-          <span>📱 07 62 97 26 26</span>
+          <span>📱
+            <a href="tel:+33762972626" class="phone-link">
+              07 62 97 26 26
+            </a>
+          </span>
         </div>
       </div>
 
@@ -194,7 +242,7 @@
       </div>
     </section>
 
-    <!-- SABIRGPT – IA PERSONNALISÉE -->
+    <!-- SABIRGPT -->
     <section id="ia" class="section">
       <h2 class="section-title"><span></span>SabirGPT – mon IA perso</h2>
 
@@ -204,23 +252,23 @@
           <p class="muted">
             Pose-lui des questions sur mon parcours, mes stages, mon Bac Pro CIEL,
             ce que je veux faire après, mes projets, etc. L’IA utilise une base
-            de connaissances sur moi et adapte le ton selon le mode.
+            de connaissances sur moi.
           </p>
           <ul class="list">
             <li>Comprend les questions sur mon âge, mes études, mon Bac Pro, mon futur BTS</li>
             <li>Peut détailler mes stages (fibre, web, réparation téléphone, bâtiment…)</li>
             <li>Peut expliquer mes objectifs et mon mindset</li>
-            <li>Peut répondre de façon chill, pro, cybersécurité ou orientation</li>
+            <li>Répond avec un ton pro mais accessible</li>
           </ul>
 
           <div class="pill-row">
-            <span class="pill">Chill</span>
-            <span class="pill">Pro</span>
-            <span class="pill">Cyber</span>
-            <span class="pill">Orientation</span>
+            <span class="pill">Profil</span>
+            <span class="pill">Parcours</span>
+            <span class="pill">Stages</span>
+            <span class="pill">Objectifs</span>
           </div>
 
-          <p class="muted" style="margin-top: .6rem;">
+          <p class="muted" style="margin-top:.6rem;">
             Exemple de questions :<br>
             – « Sabir a quel âge ? »<br>
             – « Il a fait quels stages ? »<br>
@@ -230,7 +278,6 @@
         </div>
 
         <div class="card ai-chat">
-          <!-- orbites / particules autour de l’IA -->
           <div class="ai-orbits">
             <span class="orb orb-1"></span>
             <span class="orb orb-2"></span>
@@ -243,20 +290,9 @@
               <div class="ai-title">SabirGPT</div>
               <div class="ai-subtitle">IA entraînée sur le profil de Sabir</div>
             </div>
-            <div class="ai-mode-select">
-              <label for="ai-mode">Mode :</label>
-              <select id="ai-mode">
-                <option value="chill">Chill</option>
-                <option value="pro">Pro</option>
-                <option value="cyber">Cyber</option>
-                <option value="orientation">Orientation</option>
-              </select>
-            </div>
           </div>
 
-          <div id="chat-messages" class="chat-messages">
-            <!-- messages générés par JS -->
-          </div>
+          <div id="chat-messages" class="chat-messages"></div>
 
           <form id="chat-form" class="chat-form">
             <textarea
@@ -272,7 +308,7 @@
       </div>
     </section>
 
-    <!-- PARCOURS / TIMELINE -->
+    <!-- PARCOURS -->
     <section id="experience" class="section">
       <h2 class="section-title"><span></span>Parcours & timeline</h2>
 
@@ -346,7 +382,12 @@
           <h3>Me joindre</h3>
           <ul class="list">
             <li>📧 <strong>Email :</strong> <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></li>
-            <li>📱 <strong>Téléphone :</strong> 07 62 97 26 26</li>
+            <li>
+              📱 <strong>Téléphone :</strong>
+              <a href="tel:+33762972626" class="phone-link">
+                07 62 97 26 26
+              </a>
+            </li>
             <li>📍 <strong>Localisation :</strong> Saint-Maximin (Var)</li>
           </ul>
           <p class="muted" style="margin-top:0.4rem;">

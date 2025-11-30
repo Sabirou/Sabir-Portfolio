@@ -1,4 +1,6 @@
-// --------- UTILITAIRE ---------
+// script.js
+
+// ---------- UTIL ----------
 function $(selector, scope = document) {
   return scope.querySelector(selector);
 }
@@ -6,7 +8,7 @@ function $all(selector, scope = document) {
   return Array.from(scope.querySelectorAll(selector));
 }
 
-// --------- ANNÉE ---------
+// ---------- ANNÉE DANS LE FOOTER ----------
 document.addEventListener("DOMContentLoaded", () => {
   const yearSpan = $("#year");
   if (yearSpan) {
@@ -14,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// --------- THÈME CLAIR / SOMBRE ---------
+// ---------- THÈME ----------
 const body = document.body;
 const themeToggle = $("#theme-toggle");
 
@@ -38,7 +40,7 @@ if (themeToggle) {
   });
 }
 
-// --------- RÉVÉLATION DES SECTIONS + NAV ACTIVE + ANIM 3D ---------
+// ---------- RÉVÉLATION SECTIONS + NAV ----------
 const sections = $all(".section");
 const navLinks = $all(".nav-link");
 const mainShell = $("#main-shell");
@@ -65,14 +67,10 @@ if ("IntersectionObserver" in window) {
         }
       });
     },
-    {
-      threshold: 0.2,
-    }
+    { threshold: 0.2 }
   );
-
   sections.forEach((section) => observer.observe(section));
 } else {
-  // fallback
   sections.forEach((s) => s.classList.add("section-visible"));
 }
 
@@ -84,7 +82,6 @@ navLinks.forEach((link) => {
     const target = document.querySelector(href);
     if (!target) return;
 
-    // anim 3D sur le "contenu"
     if (mainShell) {
       mainShell.classList.add("nav-anim");
       setTimeout(() => mainShell.classList.remove("nav-anim"), 350);
@@ -94,7 +91,7 @@ navLinks.forEach((link) => {
   });
 });
 
-// --------- HERO CARD 3D TILT ---------
+// ---------- HERO CARD 3D ----------
 const heroTiltContainer = $(".hero-tilt");
 const heroCard = $(".hero-card");
 
@@ -106,8 +103,8 @@ if (heroTiltContainer && heroCard) {
     const midX = rect.width / 2;
     const midY = rect.height / 2;
 
-    const rotateY = ((x - midX) / midX) * 10; // -10 à 10
-    const rotateX = ((midY - y) / midY) * 10; // -10 à 10
+    const rotateY = ((x - midX) / midX) * 10;
+    const rotateX = ((midY - y) / midY) * 10;
 
     heroCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px)`;
     heroCard.style.boxShadow =
@@ -120,7 +117,7 @@ if (heroTiltContainer && heroCard) {
   });
 }
 
-// --------- CANVAS NUAGES BLEUS ANIMÉS ---------
+// ---------- CANVAS NUAGES ----------
 const canvas = $("#sky");
 if (canvas) {
   const ctx = canvas.getContext("2d");
@@ -190,11 +187,10 @@ if (canvas) {
     requestAnimationFrame(animateClouds);
   }
 
-  // Clic = explosion de nuages près du clic
   canvas.addEventListener("click", (e) => {
     const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX - rect.left);
-    const y = (e.clientY - rect.top);
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
     for (let i = 0; i < 8; i++) {
       const c = createCloud(
@@ -218,23 +214,21 @@ if (canvas) {
   animateClouds();
 }
 
-// --------- TIMELINE INTERACTIVE (CLICK MOBILE) ---------
+// ---------- TIMELINE CLIQUABLE MOBILE ----------
 const timelineItems = $all(".timeline-item");
 timelineItems.forEach((item) => {
   item.addEventListener("click", () => {
-    // Sur mobile, on toggle; sur desktop le :hover marche déjà
     if (window.innerWidth <= 900) {
       item.classList.toggle("open");
     }
   });
 });
 
-// --------- SABIRGPT – IA PERSONNALISÉE ---------
+// ---------- SABIRGPT ----------
 
 const chatMessages = $("#chat-messages");
 const chatForm = $("#chat-form");
 const chatInput = $("#chat-input");
-const modeSelect = $("#ai-mode");
 
 const sabirFacts = {
   age: "Sabir est né le 19 janvier 2008. En 2025, il a 17 ans.",
@@ -243,9 +237,9 @@ const sabirFacts = {
   goal:
     "Après le Bac Pro CIEL, son objectif est d’intégrer un BTS SIO pour aller plus loin en informatique (développement, systèmes, réseaux).",
   stagesShort:
-    "Sabir a déjà fait plusieurs stages : développement web, réparation de téléphones, technicien fibre optique, électricité bâtiment, et support informatique.",
+    "Sabir a déjà fait plusieurs stages : développement web, réparation de téléphones, technicien fibre optique, électricité bâtiment et support informatique.",
   stagesDetail:
-    "En résumé : \n- Stage en développement web (découverte du workflow, petites tâches de dev).\n- Stage en réparation de téléphones (diagnostic, changement d’écrans et batteries, tests, contact client).\n- Stage en fibre optique (raccordement, sécurité, tests de connexion).\n- Expériences en électricité bâtiment et support informatique.",
+    "En résumé : \n- Stage en développement web (workflow, intégration, petites tâches de dev).\n- Stage en réparation de téléphones (diagnostic, changement d’écrans et batteries, tests, contact client).\n- Stage en fibre optique (raccordement, sécurité, tests de connexion).\n- Expériences en électricité bâtiment et support informatique.",
   bacPro:
     "Le Bac Pro CIEL de Sabir couvre la cybersécurité, l’informatique, les réseaux et l’électronique, avec beaucoup de TP et de projets concrets.",
   hobbies:
@@ -256,7 +250,6 @@ const sabirFacts = {
 
 let lastTopic = null;
 
-// petites variations de réponses
 function randomChoice(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -278,12 +271,12 @@ function detectTopic(message) {
   return "generic";
 }
 
-function baseAnswer(topic, message) {
+function baseAnswer(topic) {
   switch (topic) {
     case "age":
       return randomChoice([
         sabirFacts.age,
-        `${sabirFacts.age} C’est encore jeune, mais déjà avec pas mal de projets.`,
+        `${sabirFacts.age} Il est donc encore jeune mais déjà bien orienté dans l’IT.`,
       ]);
     case "studies":
       return randomChoice([
@@ -293,13 +286,10 @@ function baseAnswer(topic, message) {
     case "goal":
       return randomChoice([
         sabirFacts.goal,
-        `${sabirFacts.goal} L’idée, c’est de construire une vraie base solide en IT.`,
+        `${sabirFacts.goal} L’idée est de construire une base solide en informatique.`,
       ]);
     case "stages":
-      return randomChoice([
-        sabirFacts.stagesShort,
-        sabirFacts.stagesDetail,
-      ]);
+      return randomChoice([sabirFacts.stagesShort, sabirFacts.stagesDetail]);
     case "profil":
       return (
         sabirFacts.studies +
@@ -310,54 +300,17 @@ function baseAnswer(topic, message) {
     case "hobbies":
       return randomChoice([
         sabirFacts.hobbies,
-        `Niveau loisirs, ${sabirFacts.hobbies} Il aime mélanger technique et vie réelle.`,
+        `Côté loisirs, ${sabirFacts.hobbies}`,
       ]);
     case "portfolio":
       return sabirFacts.portfolio;
     case "generic":
     default:
-      // réponse générique mais reliée à son profil
       return randomChoice([
-        "Je suis SabirGPT. Pose-moi des questions sur le parcours de Sabir, ses stages, son Bac Pro CIEL ou ses objectifs, et je te répondrai avec ce que je sais sur lui.",
-        "Je peux te parler de son âge, de ses études, de ses stages (fibre, web, téléphones, etc.) et de ce qu’il veut faire après le Bac.",
+        "Je suis SabirGPT. Pose-moi des questions sur le parcours de Sabir, ses stages, son Bac Pro CIEL ou ses objectifs.",
+        "Je peux te parler de son âge, de ses études, de ses stages (fibre, web, téléphones…) et de ce qu’il veut faire après le Bac.",
       ]);
   }
-}
-
-function wrapByMode(text, mode, topic) {
-  if (mode === "chill") {
-    return randomChoice([
-      text + " 😄",
-      "En mode chill : " + text,
-      text + " Si tu veux, je peux détailler encore un peu.",
-    ]);
-  }
-  if (mode === "pro") {
-    return (
-      "Version expliquée de façon pro : " +
-      text.replace("😄", "").replace("😅", "")
-    );
-  }
-  if (mode === "cyber") {
-    let extra = "";
-    if (topic === "studies" || topic === "bacPro") {
-      extra =
-        " Côté cybersécurité, l’idée c’est de comprendre les risques et de mettre en place des bonnes pratiques dès maintenant.";
-    } else if (topic === "goal") {
-      extra =
-        " Le BTS SIO pourra renforcer la partie systèmes, réseaux et sécurité, ce qui est cohérent avec une orientation cyber.";
-    }
-    return text + extra;
-  }
-  if (mode === "orientation") {
-    let extra = "";
-    if (topic === "goal" || topic === "studies") {
-      extra =
-        " Globalement, son parcours est logique pour quelqu’un qui veut évoluer dans l’informatique : Bac Pro CIEL → BTS SIO → éventuelle spécialisation après.";
-    }
-    return text + extra;
-  }
-  return text;
 }
 
 function addMessage(role, text) {
@@ -384,33 +337,62 @@ if (chatForm && chatInput) {
     e.preventDefault();
     const value = chatInput.value.trim();
     if (!value) return;
-    const mode = modeSelect ? modeSelect.value : "chill";
 
     addMessage("user", value);
     chatInput.value = "";
 
     const topic = detectTopic(value);
-    let answer = baseAnswer(topic, value);
+    let answer = baseAnswer(topic);
 
-    // petit follow-up si même sujet
     if (lastTopic && lastTopic === topic && topic !== "generic") {
-      answer += " On reste sur le même sujet, tu peux me demander plus de détail si tu veux.";
+      answer += " On reste sur le même sujet, tu peux demander plus de détails si tu veux.";
     }
 
     lastTopic = topic;
 
-    const wrapped = wrapByMode(answer, mode, topic);
-
     setTimeout(() => {
-      addMessage("bot", wrapped);
+      addMessage("bot", answer);
     }, 250);
   });
 
-  // Envoi avec Ctrl+Enter = nouvelle ligne, Enter = envoyer
   chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       chatForm.dispatchEvent(new Event("submit"));
     }
+  });
+}
+
+// ---------- INTRO LION – INTERACTION ----------
+const introScreen = $("#intro-screen");
+const introLion = $("#intro-lion");
+
+if (introScreen && introLion) {
+  const maxOffset = 10; // mouvement léger
+
+  function moveLion(e) {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const nx = (e.clientX / vw) * 2 - 1;
+    const ny = (e.clientY / vh) * 2 - 1;
+
+    const offsetX = -nx * maxOffset;
+    const offsetY = -ny * maxOffset;
+
+    introLion.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+  }
+
+  window.addEventListener("pointermove", moveLion);
+
+  introLion.addEventListener("click", () => {
+    introScreen.classList.add("intro-exit");
+
+    setTimeout(() => {
+      introScreen.style.display = "none";
+      const profil = document.querySelector("#profil");
+      if (profil) {
+        profil.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 500);
   });
 }
