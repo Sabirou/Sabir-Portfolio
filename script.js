@@ -1,9 +1,11 @@
 // =======================
-// Utilitaires simples
+// Utilitaire
 // =======================
 function $(selector, scope = document) {
   return scope.querySelector(selector);
 }
+
+const PORTFOLIO_URL = "https://sabirou.github.io/Sabir-Portfolio/";
 
 // =======================
 // Année dynamique footer
@@ -16,19 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // =======================
-// Lion 3D interactif
+// Lion 3D interactif + redirection
 // =======================
 
 document.addEventListener("DOMContentLoaded", () => {
   const lionWrap = $("#lion-wrap");
-  const lionImg = $("#intro-lion");
   const cta = $("#enter-portfolio");
 
-  if (!lionWrap || !lionImg) return;
+  if (!lionWrap) return;
 
   const maxTilt = 16; // degrés max
-  const damp = 0.08; // amortissement pour animation douce
-
+  const damp = 0.08; // amortissement
   let currentRX = 0;
   let currentRY = 0;
   let targetRX = 0;
@@ -50,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   lionWrap.addEventListener("mousemove", (e) => {
     const rect = lionWrap.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 → 0.5
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    targetRY = x * maxTilt; // gauche/droite
-    targetRX = -y * maxTilt; // haut/bas (inverse)
+    targetRY = x * maxTilt;
+    targetRX = -y * maxTilt;
 
     if (!hovering) {
       hovering = true;
@@ -64,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   lionWrap.addEventListener("mouseleave", () => {
-    // retour à 0
     targetRX = 0;
     targetRY = 0;
 
@@ -76,19 +75,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200);
   });
 
-  // clic sur le lion = clic sur le bouton "Entrer dans mon portfolio"
+  // clic sur le lion => redirection directe
   lionWrap.addEventListener("click", () => {
-    if (cta) {
-      cta.click();
-    }
+    window.location.href = PORTFOLIO_URL;
   });
 
-  // accessibilité clavier : Entrée/Espace quand focus
+  // accessibilité clavier
   lionWrap.setAttribute("tabindex", "0");
   lionWrap.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      if (cta) cta.click();
+      window.location.href = PORTFOLIO_URL;
     }
   });
+
+  // sécurité : le bouton a aussi la bonne URL
+  if (cta) {
+    cta.setAttribute("href", PORTFOLIO_URL);
+  }
 });
