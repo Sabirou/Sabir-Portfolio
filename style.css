@@ -68,7 +68,9 @@ a {
   pointer-events: auto;
 }
 
-/* INTRO LION - APPLE STYLE */
+/* ========================= */
+/* INTRO LION - APPLE STYLE  */
+/* ========================= */
 
 .intro-screen {
   position: relative;
@@ -226,7 +228,15 @@ a {
   margin-top: 1.6rem;
 }
 
-/* HEADER */
+.intro-hint {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ============ */
+/*   HEADER     */
+/* ============ */
 
 header {
   position: sticky;
@@ -344,7 +354,9 @@ nav ul {
   transform: translateY(-1px);
 }
 
-/* MAIN */
+/* ============ */
+/*    MAIN      */
+/* ============ */
 
 #main-shell {
   max-width: 1100px;
