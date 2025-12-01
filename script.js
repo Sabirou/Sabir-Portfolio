@@ -1,15 +1,11 @@
-// =======================
-// Utilitaire
-// =======================
 function $(selector, scope = document) {
   return scope.querySelector(selector);
 }
 
-const PORTFOLIO_URL = "https://sabirou.github.io/Sabir-Portfolio/";
+// 👉 La page cible de ton vrai portfolio
+const PORTFOLIO_URL = "portfolio.html";
 
-// =======================
-// Année dynamique footer
-// =======================
+// année footer
 document.addEventListener("DOMContentLoaded", () => {
   const yearSpan = $("#year");
   if (yearSpan) {
@@ -17,25 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// =======================
-// Lion 3D interactif + redirection
-// =======================
-
+// Lion 3D + redirection
 document.addEventListener("DOMContentLoaded", () => {
   const lionWrap = $("#lion-wrap");
   const cta = $("#enter-portfolio");
 
   if (!lionWrap) return;
 
-  const maxTilt = 16; // degrés max
-  const damp = 0.08; // amortissement
+  const maxTilt = 16;
+  const damp = 0.08;
   let currentRX = 0;
   let currentRY = 0;
   let targetRX = 0;
   let targetRY = 0;
   let hovering = false;
 
-  // boucle animation lissée
   function animate() {
     currentRX += (targetRX - currentRX) * damp;
     currentRY += (targetRY - currentRY) * damp;
@@ -75,12 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200);
   });
 
-  // clic sur le lion => redirection directe
   lionWrap.addEventListener("click", () => {
     window.location.href = PORTFOLIO_URL;
   });
 
-  // accessibilité clavier
   lionWrap.setAttribute("tabindex", "0");
   lionWrap.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -89,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // sécurité : le bouton a aussi la bonne URL
   if (cta) {
     cta.setAttribute("href", PORTFOLIO_URL);
   }
