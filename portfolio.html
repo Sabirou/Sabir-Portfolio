@@ -4,375 +4,315 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio – Sabir IAZZA</title>
-  <meta
-    name="description"
-    content="Portfolio de Sabir IAZZA, élève en Terminale Bac Pro CIEL, passionné par l'informatique, la cybersécurité, les réseaux et l'électronique."
-  />
+  <meta name="description" content="Portfolio de Sabir IAZZA – cybersécurité, réseaux, web & électronique, Bac Pro CIEL à Toulon.">
   <link rel="stylesheet" href="style-portfolio.css" />
 </head>
-
 <body data-theme="dark">
-  <canvas id="sky" aria-hidden="true"></canvas>
+  <!-- Curseur custom -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Bulle IA draggable -->
+  <div class="ia-bubble" id="ia-bubble">
+    <div class="ia-bubble-header">
+      <span class="ia-bubble-title">SabirGPT</span>
+      <button class="ia-bubble-minimize" id="ia-toggle">–</button>
+    </div>
+    <div class="ia-bubble-body" id="ia-body">
+      <p class="ia-bubble-text">
+        Salut 👋 Je suis SabirGPT. Pose-moi des questions sur Sabir, son Bac Pro CIEL,
+        ses stages, ses projets ou son futur BTS.
+      </p>
+    </div>
+  </div>
 
   <!-- HEADER -->
-  <header>
-    <div class="nav-container">
-      <div class="logo">SABIR IAZZA</div>
-      <nav aria-label="Navigation principale">
-        <ul>
-          <li><a href="#profil" class="nav-link active">Profil</a></li>
-          <li><a href="#competences" class="nav-link">Compétences</a></li>
-          <li><a href="#projets" class="nav-link">Projets</a></li>
-          <li><a href="#ia" class="nav-link">SabirGPT</a></li>
-          <li><a href="#experience" class="nav-link">Parcours</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">SABIR IAZZA</a>
+
+      <nav class="nav-main" aria-label="Navigation principale">
+        <a href="#profil" class="nav-link active">Profil</a>
+        <a href="#competences" class="nav-link">Compétences</a>
+        <a href="#projets" class="nav-link">Projets</a>
+        <a href="#ia" class="nav-link">SabirGPT</a>
+        <a href="#parcours" class="nav-link">Parcours</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
+
       <div class="nav-actions">
-        <button id="theme-toggle" class="btn-ghost" type="button">
-          🌙 Mode sombre
+        <button class="theme-toggle" id="theme-toggle" aria-label="Changer de thème">
+          <span class="theme-icon">🌙</span>
+          <span class="theme-label">Sombre</span>
         </button>
-        <a href="https://github.com/Sabirou" class="btn-ghost" target="_blank" rel="noopener">GitHub</a>
-        <a href="#contact" class="btn-primary">Me contacter</a>
+        <a href="https://github.com/Sabirou/Sabir-Portfolio" class="nav-pill" target="_blank">GitHub</a>
+        <a href="#contact" class="nav-pill nav-pill-main">Me contacter</a>
       </div>
+
+      <button class="nav-burger" id="nav-burger" aria-label="Ouvrir le menu">
+        <span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <main id="main-shell">
-    <!-- PROFIL / HERO -->
-    <section class="section hero section-visible" id="profil">
-      <div class="hero-left">
-        <div class="hero-badge">Portfolio 2025 – Univers chill & 3D</div>
+  <!-- ARRIÈRE PLAN -->
+  <canvas id="bg-orbit" aria-hidden="true"></canvas>
 
-        <div class="hero-meta">
-          <span class="pill-indicator">💻 Bac Pro CIEL (Terminale)</span>
-          <span class="pill-indicator">🔐 Cybersécurité & réseaux</span>
-          <span class="pill-indicator">🎓 Objectif : BTS SIO</span>
-        </div>
+  <main>
+    <!-- SECTION HERO / PROFIL -->
+    <section id="profil" class="section hero">
+      <div class="hero-layout">
+        <div class="hero-text reveal fade-up">
+          <div class="hero-labels">
+            <span class="hero-chip">Portfolio 2025 – Univers chill & 3D</span>
+            <span class="hero-chip hero-chip-outline">Bac Pro CIEL – Toulon</span>
+          </div>
 
-        <h1 class="hero-title">
-          Je suis <span>Sabir</span>, je construis un profil entre
-          cybersécurité, réseaux, développement web
-          et électronique.
-        </h1>
+          <h1 class="hero-title">
+            Je suis <span class="hero-highlight">Sabir</span>,<br />
+            je construis mon avenir entre cybersécurité, réseaux, web et projets concrets.
+          </h1>
 
-        <p class="hero-subtitle">
-          Étudiant en Bac Pro CIEL à Toulon, j’apprends à sécuriser,
-          connecter et dépanner des systèmes. Je transforme ce que je vois en cours
-          en projets réels, en stages et en expériences pour préparer la suite :
-          BTS SIO puis des études encore plus poussées dans l’IT.
-        </p>
-
-        <div class="hero-tags">
-          <div class="tag">Cybersécurité</div>
-          <div class="tag">Systèmes & réseaux</div>
-          <div class="tag">Développement web</div>
-          <div class="tag">Électronique</div>
-          <div class="tag">Foot & projets perso</div>
-        </div>
-
-        <div class="hero-contact">
-          <span>📍 Saint-Maximin (83)</span>
-          <span>📧 <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></span>
-          <span>📱 <a href="tel:+33762972626">07 62 97 26 26</a></span>
-        </div>
-      </div>
-
-      <!-- Carte résumé 3D -->
-      <div class="hero-tilt">
-        <aside class="hero-card">
-          <h2>Vue d’ensemble</h2>
-          <p>
-            Terminale Bac Pro CIEL à Toulon : cybersécurité, informatique,
-            réseaux et électronique. Je découvre le terrain via des projets concrets,
-            des TP et plusieurs stages variés et je prépare la suite en BTS SIO.
+          <p class="hero-sub">
+            Étudiant en Bac Pro CIEL (cybersécurité, informatique, réseaux & électronique),
+            je transforme ce que j’apprends en projets, en expériences et en stages :
+            aujourd’hui Bac Pro, demain <strong>BTS SIO</strong>, puis encore plus loin dans l’IT.
           </p>
-          <ul>
+
+          <div class="hero-tags">
+            <span class="pill">Cybersécurité</span>
+            <span class="pill">Systèmes & réseaux</span>
+            <span class="pill">Développement web</span>
+            <span class="pill">Électronique</span>
+            <span class="pill pill-soft">Foot & projets perso</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projets" class="btn btn-main">Voir mes projets</a>
+            <a href="#contact" class="btn btn-outline">Parler d’un stage / alternance</a>
+          </div>
+
+          <div class="hero-meta">
+            <span>📍 Saint-Maximin (83)</span>
+            <a href="mailto:amiamisabir@gmail.com">📧 amiamisabir@gmail.com</a>
+            <a href="tel:+33762972626">📱 07 62 97 26 26</a>
+          </div>
+        </div>
+
+        <!-- Vue d’ensemble -->
+        <aside class="hero-panel reveal blur-up">
+          <h2 class="panel-title">Vue d’ensemble</h2>
+          <p class="panel-text">
+            Terminale Bac Pro CIEL à Toulon : cybersécurité, réseaux, informatique et électronique.
+            Je découvre le terrain via des stages variés et je prépare la suite en BTS SIO.
+          </p>
+
+          <ul class="panel-list">
             <li>Configuration réseau & notions de sécurité</li>
             <li>Réparation téléphone & matériel informatique</li>
             <li>Découverte du pentest & bonnes pratiques</li>
             <li>Envie de progresser chaque année</li>
           </ul>
 
-          <div class="mini-grid">
-            <div class="kpi-card">
-              <span class="kpi-label">Stages réalisés</span>
-              <strong>6 expériences</strong>
+          <div class="panel-stats">
+            <div class="panel-stat">
+              <span class="stat-label">Stages réalisés</span>
+              <span class="stat-value">6 expériences</span>
             </div>
-            <div class="kpi-card">
-              <span class="kpi-label">Période</span>
-              <strong>2023 → 2025</strong>
-            </div>
-            <div class="kpi-card">
-              <span class="kpi-label">Suite logique</span>
-              <strong>BTS SIO</strong>
+            <div class="panel-stat">
+              <span class="stat-label">Période</span>
+              <span class="stat-value">2023 → 2025</span>
             </div>
           </div>
 
-          <span class="badge-pill">Univers chill – mais sérieux sur les projets</span>
+          <div class="panel-footer">
+            <span class="stat-label">Suite logique</span>
+            <span class="stat-value">BTS SIO</span>
+          </div>
         </aside>
       </div>
     </section>
 
     <!-- COMPÉTENCES -->
     <section id="competences" class="section">
-      <h2 class="section-title"><span></span>Compétences</h2>
+      <header class="section-header reveal mask-x">
+        <h2>Compétences principales</h2>
+        <p>Un mix entre cybersécurité, réseaux, développement web et électronique.</p>
+      </header>
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>Techniques</h3>
-          <p class="muted">Informatique, cybersécurité, réseaux & électronique</p>
-          <ul class="list">
-            <li>Notions de cybersécurité : risques, mots de passe, sauvegardes, mises à jour</li>
-            <li>Adressage IP, petits réseaux locaux, diagnostic de base</li>
-            <li>Montage / démontage de PC, remplacement de composants</li>
-            <li>Découverte électronique, mesures, respect des consignes</li>
-            <li>Bases en HTML / CSS, logique de programmation</li>
-          </ul>
-          <div class="pill-row">
-            <span class="pill">Cybersécurité</span>
-            <span class="pill">Réseaux</span>
-            <span class="pill">Hardware</span>
-            <span class="pill">HTML / CSS</span>
-          </div>
-        </div>
+      <div class="grid skills-grid">
+        <article class="card reveal fade-up">
+          <h3>Cybersécurité</h3>
+          <p>Initiation au pentest, sensibilisation aux risques, bonnes pratiques d’hygiène numérique.</p>
+        </article>
 
-        <div class="card">
-          <h3>Savoir-être & mindset</h3>
-          <p class="muted">Ce que j’apporte dans une équipe</p>
-          <ul class="list">
-            <li>Sérieux, ponctuel, respect des consignes</li>
-            <li>Curieux : j’aime comprendre ce qu’il y a “sous le capot”</li>
-            <li>À l’aise pour parler avec les gens (clients, collègues)</li>
-            <li>Capacité à apprendre vite par la pratique</li>
-          </ul>
-          <div class="pill-row">
-            <span class="pill">Motivé</span>
-            <span class="pill">Curieux</span>
-            <span class="pill">Esprit d’équipe</span>
-            <span class="pill">Autonome</span>
-          </div>
-        </div>
+        <article class="card reveal fade-up-delay">
+          <h3>Réseaux & systèmes</h3>
+          <p>Adressage IP, VLAN, routage simple, configuration de switch/routeur en TP.</p>
+        </article>
+
+        <article class="card reveal fade-up">
+          <h3>Développement web</h3>
+          <p>HTML, CSS, un peu de JavaScript, création de ce portfolio et de mini projets persos.</p>
+        </article>
+
+        <article class="card reveal fade-up-delay">
+          <h3>Électronique</h3>
+          <p>Montage, diagnostic de pannes simples, compréhension du lien entre matériel et réseau.</p>
+        </article>
       </div>
     </section>
 
-    <!-- PROJETS / EXPÉRIENCES -->
+    <!-- PROJETS -->
     <section id="projets" class="section">
-      <h2 class="section-title"><span></span>Projets & expériences</h2>
+      <header class="section-header reveal mask-y">
+        <h2>Projets & stages</h2>
+        <p>Quelques expériences qui construisent mon profil.</p>
+      </header>
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>Portfolio & identité numérique</h3>
-          <p class="muted">Projet perso – 2025</p>
-          <p>
-            Création de ce site pour présenter mon profil, mon parcours et mes projets.
-            UI animée, effet 3D, et SabirGPT pour répondre aux questions sur moi.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Stage en développement web</h3>
-          <p class="muted">2025 – Entreprise</p>
-          <p>
-            Découverte des outils et de l’organisation d’un développeur web :
-            petites tâches, intégration, compréhension du workflow et des clients.
-          </p>
-        </div>
-
-        <div class="card">
+      <div class="grid projects-grid">
+        <article class="card project-card reveal blur-up">
           <h3>Réparation de téléphones</h3>
-          <p class="muted">Stage – 2024</p>
-          <p>
-            Diagnostic, changement d’écrans et de batteries, tests après intervention
-            et contact avec la clientèle. Précision et sens du service.
-          </p>
-        </div>
+          <p>Diagnostic, changement d’écrans et de batteries, tests après intervention et contact client.</p>
+          <span class="tag">Stage – 2024</span>
+        </article>
 
-        <div class="card">
+        <article class="card project-card reveal blur-up-delay">
           <h3>Stage technicien fibre optique</h3>
-          <p class="muted">2023 – Télécom</p>
-          <p>
-            Interventions fibre optique : préparation du matériel, aide au raccordement,
-            sécurité sur le terrain, tests de connexion. Première immersion dans les réseaux.
-          </p>
-        </div>
+          <p>Préparation du matériel, aide au raccordement, sécurité sur le terrain, tests de connexion.</p>
+          <span class="tag">Stage – Télécom 2023</span>
+        </article>
+
+        <article class="card project-card reveal blur-up">
+          <h3>Portfolio & SabirGPT</h3>
+          <p>Conception d’un site complet, design animé, IA perso pour répondre aux questions sur mon profil.</p>
+          <span class="tag">Projet perso</span>
+        </article>
       </div>
     </section>
 
     <!-- SABIRGPT -->
-    <section id="ia" class="section">
-      <h2 class="section-title"><span></span>SabirGPT – mon IA perso</h2>
+    <section id="ia" class="section ia-section">
+      <div class="section-header reveal fade-up">
+        <h2>SabirGPT – mon IA perso</h2>
+        <p>Une IA qui connaît mon parcours, mes stages et mes objectifs.</p>
+      </div>
 
-      <div class="ai-layout">
-        <!-- Info IA -->
-        <div class="card ai-info">
-          <h3>Comment fonctionne SabirGPT&nbsp;?</h3>
-          <p class="muted">
-            SabirGPT est une petite IA entraînée sur mon profil : mon Bac Pro CIEL,
-            mes stages, mon objectif BTS SIO et mes centres d’intérêt.
+      <div class="ia-layout">
+        <!-- Explication -->
+        <article class="card ia-info reveal fade-up">
+          <h3>Comment fonctionne SabirGPT ?</h3>
+          <p>
+            SabirGPT est une IA entraînée sur mon profil : mon âge, mon Bac Pro CIEL,
+            mes stages (fibre, web, réparation téléphone, bâtiment...), mes objectifs (BTS SIO)
+            et mes centres d’intérêt.
           </p>
-          <ul class="list">
-            <li>Répond aux questions sur mon âge, mes études et mon parcours</li>
-            <li>Peut détailler mes stages (fibre, web, réparation téléphone, bâtiment…)</li>
-            <li>Explique mon projet après le Bac et mon état d’esprit</li>
+          <ul class="ia-list">
+            <li>Comprend les questions sur mon âge, ma formation, mes projets.</li>
+            <li>Peut détailler mes stages et ce que j’y ai appris.</li>
+            <li>Explique mon objectif BTS SIO et la suite.</li>
+            <li>S’adapte au ton de la question (pro, chill, orientation…).</li>
           </ul>
+        </article>
 
-          <p class="muted" style="margin-top:0.7rem;">
-            Pose juste ta question, SabirGPT s’occupe du reste – comme un mini assistant
-            dédié à mon parcours.
-          </p>
-        </div>
+        <!-- Interface IA -->
+        <article class="card ia-ui reveal blur-up">
+          <header class="ia-ui-header">
+            <div class="ia-ui-title">
+              <span class="ia-dot"></span>
+              <span>SabirGPT</span>
+            </div>
+            <div class="ia-ui-mode">Mode : <strong>Auto</strong></div>
+          </header>
 
-        <!-- Chat IA -->
-        <div class="card ai-chat">
-          <!-- Bulle IA déplaçable -->
-          <div class="ai-bubble" id="ai-bubble">
-            <span class="ai-bubble-label">SabirGPT</span>
-          </div>
-
-          <div class="ai-header">
-            <div>
-              <div class="ai-title">SabirGPT</div>
-              <div class="ai-subtitle">
-                IA centrée uniquement sur le profil de Sabir
+          <div class="ia-ui-body">
+            <div class="ia-chat" id="ia-chat">
+              <div class="ia-message ia-message-bot">
+                Salut, je suis SabirGPT 🤝 Pose-moi des questions sur Sabir, son Bac Pro CIEL,
+                ses stages, ses objectifs ou son orientation.
               </div>
             </div>
+
+            <form class="ia-form" id="ia-form">
+              <input
+                type="text"
+                id="ia-input"
+                class="ia-input"
+                autocomplete="off"
+                placeholder="Pose une question sur Sabir (ex : « Sabir a quel âge ? »)…"
+                required
+              />
+              <button type="submit" class="btn btn-main ia-submit">Envoyer</button>
+            </form>
           </div>
-
-          <div id="chat-messages" class="chat-messages"></div>
-
-          <form id="chat-form" class="chat-form">
-            <textarea
-              id="chat-input"
-              rows="2"
-              placeholder="Pose une question sur Sabir…"
-            ></textarea>
-            <div class="chat-actions">
-              <button type="submit" id="chat-send" class="btn-primary">
-                Envoyer
-              </button>
-            </div>
-          </form>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- PARCOURS -->
-    <section id="experience" class="section">
-      <h2 class="section-title"><span></span>Parcours & timeline</h2>
+    <section id="parcours" class="section">
+      <header class="section-header reveal mask-x">
+        <h2>Parcours & timeline</h2>
+        <p>Les étapes qui construisent mon profil IT.</p>
+      </header>
 
       <div class="timeline">
-        <div class="timeline-item">
+        <div class="timeline-item reveal fade-up">
           <div class="timeline-dot"></div>
-          <div class="timeline-header">
-            <div class="timeline-title">Terminale Bac Pro CIEL</div>
-            <div class="timeline-meta">Lycée à Toulon – 2024 / 2025</div>
-          </div>
-          <div class="timeline-panel">
-            <p>
-              Spécialité cybersécurité, réseaux, informatique et électronique.
-              Travaux pratiques, TP réseaux, sécurité, et projets concrets.
-            </p>
+          <div class="timeline-content">
+            <h3>Terminale Bac Pro CIEL</h3>
+            <p>Lycée à Toulon – cybersécurité, réseaux, informatique & électronique.</p>
+            <span class="tag">2024 – 2025</span>
           </div>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal fade-up-delay">
           <div class="timeline-dot"></div>
-          <div class="timeline-header">
-            <div class="timeline-title">Stage technicien fibre optique</div>
-            <div class="timeline-meta">Entreprise télécom – 2023</div>
-          </div>
-          <div class="timeline-panel">
-            <p>
-              Raccordement fibre, utilisation du matériel, règles de sécurité, tests
-              de connexion chez les clients. Découverte du terrain réseau.
-            </p>
+          <div class="timeline-content">
+            <h3>Stages en entreprise</h3>
+            <p>Fibre optique, réparation de téléphones, découverte de l’informatique en situation réelle.</p>
+            <span class="tag">2023 – 2024</span>
           </div>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal fade-up">
           <div class="timeline-dot"></div>
-          <div class="timeline-header">
-            <div class="timeline-title">Stages techniques variés</div>
-            <div class="timeline-meta">2023 → 2025</div>
-          </div>
-          <div class="timeline-panel">
-            <p>
-              Développement web, réparation de téléphones, électricité bâtiment,
-              support informatique. Plusieurs secteurs mais toujours reliés à la
-              technique et au contact client.
-            </p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-header">
-            <div class="timeline-title">Objectif : BTS SIO</div>
-            <div class="timeline-meta">Après le Bac</div>
-          </div>
-          <div class="timeline-panel">
-            <p>
-              Poursuivre en informatique, renforcer le développement, l’admin
-              systèmes / réseaux et la cybersécurité. Construire un vrai profil
-              d’IT polyvalent.
-            </p>
+          <div class="timeline-content">
+            <h3>Objectif : BTS SIO</h3>
+            <p>Continuer en BTS SIO pour aller plus loin en développement et en systèmes / réseaux.</p>
+            <span class="tag">Suite logique</span>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section">
-      <h2 class="section-title"><span></span>Contact & réseaux</h2>
+    <section id="contact" class="section contact-section">
+      <div class="contact-card card reveal blur-up">
+        <h2>Contact</h2>
+        <p>Un projet, un stage, une alternance ou une question ? On discute.</p>
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>Me joindre</h3>
-          <ul class="list">
-            <li>📧 <strong>Email :</strong> <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></li>
-            <li>📱 <strong>Téléphone :</strong> <a href="tel:+33762972626">07 62 97 26 26</a></li>
-            <li>📍 <strong>Localisation :</strong> Saint-Maximin (Var)</li>
-          </ul>
-          <p class="muted" style="margin-top:0.4rem;">
-            Pour un stage, une alternance, un projet ou une prise de contact.
-          </p>
-        </div>
-
-        <div class="card contact-card">
-          <h3>Réseaux & GitHub</h3>
-          <p class="muted">Pour suivre mon parcours ou discuter rapidement :</p>
-
-          <div class="social-row">
-            <a class="social-pill" href="https://www.instagram.com/clh.iz" target="_blank" rel="noopener">
-              📸 Instagram <span>@clh.iz</span>
-            </a>
-            <a class="social-pill" href="https://www.snapchat.com/add/s7chl" target="_blank" rel="noopener">
-              👻 Snapchat <span>s7chl</span>
-            </a>
-            <a class="social-pill" href="https://github.com/Sabirou" target="_blank" rel="noopener">
-              🐙 GitHub <span>@Sabirou</span>
-            </a>
-            <a class="social-pill" href="mailto:amiamisabir@gmail.com">
-              ✉️ Email <span>amiamisabir@gmail.com</span>
-            </a>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p><strong>Mail :</strong> <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></p>
+            <p><strong>Téléphone :</strong> <a href="tel:+33762972626">07 62 97 26 26</a></p>
+            <p><strong>Ville :</strong> Saint-Maximin (83)</p>
           </div>
 
-          <div style="margin-top:0.8rem;">
-            <a href="mailto:amiamisabir@gmail.com" class="btn-primary">Envoyer un email</a>
-          </div>
+          <form class="contact-form">
+            <input type="text" placeholder="Nom" required />
+            <input type="email" placeholder="Email" required />
+            <textarea rows="3" placeholder="Votre message…"></textarea>
+            <button type="submit" class="btn btn-main">Envoyer</button>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    © <span id="year"></span> – Portfolio de Sabir IAZZA
+  <footer class="site-footer">
+    <p>© 2025 Sabir IAZZA – Portfolio titanium. Construit avec passion pour l’IT.</p>
   </footer>
-
-  <!-- Curseur custom -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
 
   <script src="script-portfolio.js"></script>
 </body>
