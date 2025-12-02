@@ -4,81 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sabir IAZZA – Accueil</title>
-  <meta name="description" content="Accueil du portfolio de Sabir IAZZA : étudiant en Bac Pro CIEL, cybersécurité, réseaux & projets concrets.">
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Accueil du portfolio de Sabir IAZZA : cybersécurité, réseaux, développement web et électronique.">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
-  <!-- Halo de fond -->
-  <div class="bg-orbit" aria-hidden="true"></div>
+<body data-theme="dark">
+  <!-- Canvas fond animé -->
+  <canvas id="bg-orbit" aria-hidden="true"></canvas>
 
-  <!-- Barre top façon Apple -->
-  <header class="top-bar">
-    <div class="top-left">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-      <span class="top-title">Sabir IAZZA</span>
-    </div>
-    <div class="top-right">
-      <span class="pill">Portfolio 2025</span>
-      <span class="pill pill-soft">Bac Pro CIEL</span>
+  <!-- BARRE TOP (sans les 3 points Mac) -->
+  <header class="intro-header">
+    <div class="intro-header-inner">
+      <div class="intro-logo">SABIR IAZZA</div>
+      <div class="intro-tags">
+        <span class="intro-pill">Portfolio 2025</span>
+        <span class="intro-pill pill-outline">Bac Pro CIEL</span>
+      </div>
     </div>
   </header>
 
-  <main class="intro-shell">
-    <section class="intro-card">
-      <!-- Mascotte -->
-      <button class="lion-wrapper" id="intro-lion-btn" aria-label="Entrer dans le portfolio de Sabir">
-        <div class="lion-orbit">
+  <!-- HERO MASCOTTE -->
+  <main class="intro-main">
+    <section class="intro-shell">
+      <!-- Colonne gauche : lion -->
+      <div class="intro-visual">
+        <button class="lion-orb" id="lion-orb" type="button" aria-label="Entrer dans le portfolio">
           <div class="lion-glow"></div>
-          <img
-            src="GPTimageLION.png"
-            alt="Mascotte lion de Sabir"
-            class="lion-img"
-            id="intro-lion"
-          >
-        </div>
-      </button>
+          <div class="lion-inner">
+            <img
+              src="GPTimageLION.png"
+              alt="Mascotte lion de Sabir"
+              class="lion-img"
+            />
+          </div>
+        </button>
+      </div>
 
-      <!-- Texte -->
-      <div class="intro-text">
-        <p class="intro-kicker">Étudiant en Bac Pro CIEL – cybersécurité, réseaux & projets concrets.</p>
-        <h1 class="intro-title">SABIR IAZZA</h1>
-        <p class="intro-subtitle">
-          Découvre mon univers, mes stages et mon parcours vers le
-          <strong>BTS SIO</strong>. Clique sur le lion ou sur le bouton pour
-          entrer dans mon portfolio complet.
+      <!-- Colonne droite : texte + CTA -->
+      <div class="intro-content">
+        <p class="intro-kicker">
+          Étudiant en Bac Pro CIEL – cybersécurité, réseaux & projets concrets.
         </p>
 
-        <!-- Boutons principaux -->
+        <h1 class="intro-title">
+          SABIR <span>IAZZA</span>
+        </h1>
+
+        <p class="intro-subtitle">
+          Découvre mon univers, mes stages et mon parcours vers le
+          <strong>BTS SIO</strong>. Clique sur le lion ou sur le bouton pour entrer
+          dans mon portfolio complet.
+        </p>
+
         <div class="intro-actions">
-          <a href="https://github.com/Sabirou" class="btn btn-ghost" target="_blank" rel="noopener">
-            <span class="btn-emoji">👾</span> GitHub
+          <a class="intro-chip" href="https://github.com/Sabirou" target="_blank" rel="noopener">
+            🐙 <span>GitHub</span>
           </a>
-          <a href="https://www.instagram.com/clh.iz" class="btn btn-ghost" target="_blank" rel="noopener">
-            <span class="btn-emoji">📸</span> Instagram
+          <a class="intro-chip" href="https://www.instagram.com/clh.iz" target="_blank" rel="noopener">
+            📸 <span>Instagram</span>
           </a>
-          <a href="tel:+33762972626" class="btn btn-ghost">
-            <span class="btn-emoji">📞</span> Appeler Sabir
+          <a class="intro-chip" href="tel:+33762972626">
+            📞 <span>Appeler Sabir</span>
           </a>
         </div>
 
-        <!-- Call to action -->
-        <div class="intro-cta">
-          <button class="btn btn-main" id="enter-portfolio">
+        <div class="intro-cta-row">
+          <button class="intro-primary-btn" id="enter-portfolio" type="button">
             Entrer dans mon portfolio
           </button>
-          <p class="hint">Ou clique sur le lion <span>🦁</span></p>
+          <p class="intro-hint">
+            Ou clique sur le lion 🦁
+          </p>
         </div>
+
+        <p class="intro-footer-line">
+          Saint-Maximin (83) · Cybersécurité · Réseaux · Développement web · BTS SIO en ligne de mire
+        </p>
       </div>
     </section>
-
-    <!-- Petit texte en bas -->
-    <footer class="intro-footer">
-      <p>Saint-Maximin (83) • Cybersécurité • Réseaux • Développement web • BTS SIO en ligne de mire</p>
-    </footer>
   </main>
+
+  <!-- Curseur custom -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
 
   <script src="script.js"></script>
 </body>
