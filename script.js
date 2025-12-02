@@ -1,85 +1,42 @@
-function $(selector, scope = document) {
-  return scope.querySelector(selector);
+// Sélection des éléments
+const lionBtn = document.getElementById("intro-lion-btn");
+const lionImg = document.getElementById("intro-lion");
+const enterBtn = document.getElementById("enter-portfolio");
+
+// Fonction pour aller vers le portfolio complet
+function goToPortfolio() {
+  window.location.href = "portfolio.html";
 }
 
-// 👉 La page cible de ton vrai portfolio
-const PORTFOLIO_URL = "portfolio.html";
+// Clic sur le lion ou sur le bouton -> portfolio
+if (lionBtn) {
+  lionBtn.addEventListener("click", goToPortfolio);
+}
+if (enterBtn) {
+  enterBtn.addEventListener("click", goToPortfolio);
+}
 
-// année footer
-document.addEventListener("DOMContentLoaded", () => {
-  const yearSpan = $("#year");
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
-  }
-});
+// Parallaxe légère sur le lion
+const lionOrbit = document.querySelector(".lion-orbit");
 
-// Lion 3D + redirection
-document.addEventListener("DOMContentLoaded", () => {
-  const lionWrap = $("#lion-wrap");
-  const cta = $("#enter-portfolio");
+if (lionOrbit) {
+  document.addEventListener("mousemove", (e) => {
+    const rect = lionOrbit.getBoundingClientRect();
+    const x = (e.clientX - (rect.left + rect.width / 2)) / rect.width;
+    const y = (e.clientY - (rect.top + rect.height / 2)) / rect.height;
 
-  if (!lionWrap) return;
+    const rotateX = y * 10 * -1;
+    const rotateY = x * 10;
 
-  const maxTilt = 16;
-  const damp = 0.08;
-  let currentRX = 0;
-  let currentRY = 0;
-  let targetRX = 0;
-  let targetRY = 0;
-  let hovering = false;
-
-  function animate() {
-    currentRX += (targetRX - currentRX) * damp;
-    currentRY += (targetRY - currentRY) * damp;
-
-    lionWrap.style.setProperty("--rx", `${currentRX.toFixed(2)}deg`);
-    lionWrap.style.setProperty("--ry", `${currentRY.toFixed(2)}deg`);
-
-    if (hovering) {
-      requestAnimationFrame(animate);
-    }
-  }
-
-  lionWrap.addEventListener("mousemove", (e) => {
-    const rect = lionWrap.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    targetRY = x * maxTilt;
-    targetRX = -y * maxTilt;
-
-    if (!hovering) {
-      hovering = true;
-      lionWrap.classList.add("is-active");
-      animate();
-    }
+    lionOrbit.style.transform = `
+      translateY(-2px)
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+      scale(1.02)
+    `;
   });
 
-  lionWrap.addEventListener("mouseleave", () => {
-    targetRX = 0;
-    targetRY = 0;
-
-    setTimeout(() => {
-      hovering = false;
-      lionWrap.classList.remove("is-active");
-      lionWrap.style.removeProperty("--rx");
-      lionWrap.style.removeProperty("--ry");
-    }, 200);
+  document.addEventListener("mouseleave", () => {
+    lionOrbit.style.transform = "translateY(0) rotateX(0deg) rotateY(0deg) scale(1)";
   });
-
-  lionWrap.addEventListener("click", () => {
-    window.location.href = PORTFOLIO_URL;
-  });
-
-  lionWrap.setAttribute("tabindex", "0");
-  lionWrap.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      window.location.href = PORTFOLIO_URL;
-    }
-  });
-
-  if (cta) {
-    cta.setAttribute("href", PORTFOLIO_URL);
-  }
-});
+}
