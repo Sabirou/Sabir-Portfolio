@@ -7,12 +7,12 @@
   <meta name="description" content="Portfolio de Sabir IAZZA – cybersécurité, réseaux, web & électronique, Bac Pro CIEL à Toulon.">
   <link rel="stylesheet" href="style-portfolio.css" />
 </head>
-<body data-theme="dark">
+<body>
   <!-- Curseur custom -->
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
-  <!-- Bulle IA draggable -->
+  <!-- Bulle IA -->
   <div class="ia-bubble" id="ia-bubble">
     <div class="ia-bubble-header" id="ia-bubble-header">
       <span class="ia-bubble-title">SabirGPT</span>
@@ -41,10 +41,6 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Changer de thème">
-          <span class="theme-icon">🌙</span>
-          <span class="theme-label">Sombre</span>
-        </button>
         <a href="https://github.com/Sabirou/Sabir-Portfolio" class="nav-pill" target="_blank">GitHub</a>
         <a href="#contact" class="nav-pill nav-pill-main">Me contacter</a>
       </div>
@@ -69,24 +65,18 @@
   <canvas id="bg-orbit" aria-hidden="true"></canvas>
 
   <main>
-    <!-- SECTION HERO / PROFIL -->
+    <!-- HERO -->
     <section id="profil" class="section hero">
       <div class="hero-layout">
         <div class="hero-text reveal fade-up">
-          <div class="hero-labels">
-            <span class="hero-chip">Portfolio 2025 – Univers chill & 3D</span>
-            <span class="hero-chip hero-chip-outline">Bac Pro CIEL – Toulon</span>
-          </div>
-
+          <p class="hero-kicker">Portfolio 2025 · Bac Pro CIEL</p>
           <h1 class="hero-title">
-            Je suis <span class="hero-highlight">Sabir</span>,<br />
-            je construis mon avenir entre cybersécurité, réseaux, web et projets concrets.
+            Je suis <span class="hero-highlight">Sabir</span>, étudiant en CIEL à Toulon,
+            et je construis mon profil entre cybersécurité, réseaux et web.
           </h1>
-
           <p class="hero-sub">
-            Étudiant en Bac Pro CIEL (cybersécurité, informatique, réseaux & électronique),
-            je transforme ce que j’apprends en projets, en expériences et en stages :
-            aujourd’hui Bac Pro, demain <strong>BTS SIO</strong>, puis encore plus loin dans l’IT.
+            Ce portfolio rassemble mes stages, mes projets et mes objectifs : aujourd’hui Bac Pro CIEL,
+            demain <strong>BTS SIO</strong> puis encore plus loin dans l’IT.
           </p>
 
           <div class="hero-tags">
@@ -109,7 +99,6 @@
           </div>
         </div>
 
-        <!-- Vue d’ensemble -->
         <aside class="hero-panel reveal blur-up">
           <h2 class="panel-title">Vue d’ensemble</h2>
           <p class="panel-text">
@@ -209,7 +198,6 @@
       </div>
 
       <div class="ia-layout">
-        <!-- Explication -->
         <article class="card ia-info reveal fade-up">
           <h3>Comment fonctionne SabirGPT ?</h3>
           <p>
@@ -225,7 +213,6 @@
           </ul>
         </article>
 
-        <!-- Interface IA -->
         <article class="card ia-ui reveal blur-up">
           <header class="ia-ui-header">
             <div class="ia-ui-title">
@@ -321,7 +308,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Sabir IAZZA – Portfolio titanium. Construit avec passion pour l’IT.</p>
+    <p>© 2025 Sabir IAZZA – Portfolio. Construit avec passion pour l’IT.</p>
   </footer>
 
   <script src="script-portfolio.js"></script>

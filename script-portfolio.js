@@ -26,22 +26,21 @@ if (dot2 && ring2) {
   }
   animateRing();
 
-  // agrandir sur éléments interactifs
   ["a", "button"].forEach((sel) => {
     document.querySelectorAll(sel).forEach((el) => {
       el.addEventListener("mouseenter", () => {
-        ring2.style.width = "60px";
-        ring2.style.height = "60px";
+        ring2.style.width = "56px";
+        ring2.style.height = "56px";
       });
       el.addEventListener("mouseleave", () => {
-        ring2.style.width = "40px";
-        ring2.style.height = "40px";
+        ring2.style.width = "38px";
+        ring2.style.height = "38px";
       });
     });
   });
 }
 
-// ===== Scroll animations (IntersectionObserver) =====
+// ===== Scroll animations =====
 const toReveal = document.querySelectorAll(".reveal");
 
 if ("IntersectionObserver" in window) {
@@ -54,15 +53,13 @@ if ("IntersectionObserver" in window) {
         }
       });
     },
-    {
-      threshold: 0.2,
-    }
+    { threshold: 0.2 }
   );
 
   toReveal.forEach((el) => obs.observe(el));
 }
 
-// ===== Canvas background (simple orbits) =====
+// ===== Canvas background (orbits) =====
 const canvas = document.getElementById("bg-orbit");
 if (canvas) {
   const ctx = canvas.getContext("2d");
@@ -75,12 +72,12 @@ if (canvas) {
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
-  const orbs = Array.from({ length: 26 }).map(() => ({
-    r: 40 + Math.random() * 180,
+  const orbs = Array.from({ length: 24 }).map(() => ({
+    r: 60 + Math.random() * 180,
     a: Math.random() * Math.PI * 2,
     s: 0.0006 + Math.random() * 0.0014,
-    size: 6 + Math.random() * 16,
-    hue: 200 + Math.random() * 80,
+    size: 8 + Math.random() * 14,
+    hue: 215 + Math.random() * 40,
     get ox() {
       return (window.innerWidth * dpr) / 2;
     },
@@ -97,7 +94,7 @@ if (canvas) {
       const y = o.oy + Math.sin(o.a) * o.r * dpr;
 
       const grad = ctx.createRadialGradient(x, y, 0, x, y, o.size * dpr);
-      grad.addColorStop(0, `hsla(${o.hue}, 85%, 68%, 0.85)`);
+      grad.addColorStop(0, `hsla(${o.hue}, 90%, 72%, 0.85)`);
       grad.addColorStop(1, "transparent");
 
       ctx.fillStyle = grad;
@@ -111,7 +108,7 @@ if (canvas) {
   render();
 }
 
-// ===== Navigation active (survol de section) =====
+// ===== Navigation active =====
 const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll(".nav-link");
 
@@ -131,7 +128,7 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// ===== Menu mobile (burger) =====
+// ===== Menu mobile =====
 const burger = document.getElementById("nav-burger");
 const navMobile = document.getElementById("nav-mobile");
 
@@ -161,7 +158,7 @@ if (burger && navMobile) {
   });
 }
 
-// ===== IA simple (SabirGPT) =====
+// ===== SabirGPT =====
 const iaForm = document.getElementById("ia-form");
 const iaInput = document.getElementById("ia-input");
 const iaChat = document.getElementById("ia-chat");
@@ -171,14 +168,24 @@ const sabirProfile = {
   age: 17,
   birth: "janvier 2008",
   city: "Saint-Maximin (83)",
-  formation: "Terminale Bac Pro CIEL à Toulon (cybersécurité, informatique, réseaux, électronique)",
-  objectif: "BTS SIO (développement & systèmes / réseaux) après le Bac Pro CIEL",
+  formation:
+    "Terminale Bac Pro CIEL à Toulon (cybersécurité, informatique, réseaux, électronique)",
+  objectif:
+    "BTS SIO (développement & systèmes / réseaux) après le Bac Pro CIEL",
   stages: [
     "Stage en fibre optique (raccordement, préparation matériel, sécurité, tests de connexion)",
     "Stage en réparation de téléphones (diagnostic, changement d’écrans et batteries, tests, contact client)",
     "Stages dans le bâtiment et découverte terrain",
   ],
-  interests: ["informatique", "cybersécurité", "réseaux", "développement web", "électronique", "foot", "projets persos"],
+  interests: [
+    "informatique",
+    "cybersécurité",
+    "réseaux",
+    "développement web",
+    "électronique",
+    "foot",
+    "projets persos",
+  ],
 };
 
 function addMessage(text, from = "bot") {
@@ -203,8 +210,8 @@ function addTyping() {
 
 function answerSabir(question) {
   const q = question.toLowerCase();
-
-  const court = q.includes("bref") || q.includes("rapide") || q.includes("rapidement");
+  const court =
+    q.includes("bref") || q.includes("rapide") || q.includes("rapidement");
 
   if (q.includes("âge") || q.includes("age") || q.includes("ans")) {
     return court
@@ -212,7 +219,7 @@ function answerSabir(question) {
       : `Sabir est né en ${sabirProfile.birth}, il a ${sabirProfile.age} ans.`;
   }
 
-  if (q.includes("où") && (q.includes("habite") || q.includes("vie") || q.includes("ville"))) {
+  if (q.includes("où") && (q.includes("habite") || q.includes("ville"))) {
     return `Sabir habite à ${sabirProfile.city}.`;
   }
 
@@ -223,11 +230,11 @@ function answerSabir(question) {
   }
 
   if (q.includes("stage") && q.includes("fibre")) {
-    return `En stage fibre optique, Sabir a aidé à la préparation du matériel, au raccordement des clients, à la sécurité sur le terrain et aux tests de connexion.`;
+    return sabirProfile.stages[0];
   }
 
   if (q.includes("stage") && (q.includes("téléphone") || q.includes("telephone"))) {
-    return `En réparation de téléphones, Sabir a diagnostiqué des pannes, changé des écrans et des batteries, puis testé les appareils avant de les rendre au client.`;
+    return sabirProfile.stages[1];
   }
 
   if (q.includes("stage") || q.includes("expérience") || q.includes("experience")) {
@@ -240,27 +247,37 @@ function answerSabir(question) {
     q.includes("objectif") ||
     q.includes("après") ||
     q.includes("apres") ||
-    q.includes("après le bac") ||
     q.includes("orientation")
   ) {
-    return court
-      ? "Son objectif : BTS SIO."
-      : `L’objectif de Sabir est de poursuivre en BTS SIO pour aller plus loin en développement et en systèmes / réseaux, tout en gardant un pied dans la cybersécurité.`;
+    return court ? "Son objectif : BTS SIO." : sabirProfile.objectif;
   }
 
-  if (q.includes("passion") || q.includes("intérêt") || q.includes("interet") || q.includes("aime")) {
-    return `Sabir aime l’informatique, la cybersécurité, les réseaux, le développement web, l’électronique… et aussi le foot et des projets persos.`;
+  if (
+    q.includes("passion") ||
+    q.includes("intérêt") ||
+    q.includes("interet") ||
+    q.includes("aime")
+  ) {
+    return `Sabir aime ${sabirProfile.interests.join(", ")}.`;
   }
 
-  if (q.includes("compétence") || q.includes("competence") || q.includes("sait faire")) {
+  if (
+    q.includes("compétence") ||
+    q.includes("competence") ||
+    q.includes("sait faire")
+  ) {
     return `Côté compétences, Sabir touche à :\n- Cybersécurité (bases, hygiène numérique)\n- Réseaux & systèmes (adressage IP, VLAN, routage simple)\n- Développement web (HTML / CSS / un peu de JavaScript)\n- Électronique (montage, diagnostic de pannes simples).`;
   }
 
-  if (q.includes("présente") || q.includes("presentation") || q.includes("présentation")) {
+  if (
+    q.includes("présente") ||
+    q.includes("presentation") ||
+    q.includes("présentation")
+  ) {
     return `Sabir est un étudiant en Terminale Bac Pro CIEL à Toulon. Il construit son profil entre cybersécurité, réseaux, développement web et électronique, avec comme objectif d’intégrer un BTS SIO après le Bac.`;
   }
 
-  return `Je n’ai pas cette info précise, mais en résumé : Sabir est un étudiant en Bac Pro CIEL motivé, qui construit son profil entre cybersécurité, réseaux, web et projets concrets, avec comme suite logique le BTS SIO.`;
+  return `En résumé, Sabir est un étudiant en Bac Pro CIEL motivé, qui construit son profil entre cybersécurité, réseaux, web et projets concrets, avec comme suite logique le BTS SIO.`;
 }
 
 if (iaForm && iaInput && iaChat) {
@@ -274,9 +291,7 @@ if (iaForm && iaInput && iaChat) {
     const rep = answerSabir(q);
 
     setTimeout(() => {
-      if (typingEl && typingEl.parentNode) {
-        typingEl.parentNode.removeChild(typingEl);
-      }
+      if (typingEl && typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
       addMessage(rep, "bot");
     }, 400);
 
@@ -284,41 +299,7 @@ if (iaForm && iaInput && iaChat) {
   });
 }
 
-// ===== Thème sombre / clair (avec mémorisation) =====
-const themeToggle = document.getElementById("theme-toggle");
-const themeLabel = document.querySelector(".theme-label");
-const themeIcon = document.querySelector(".theme-icon");
-
-function applyTheme(theme) {
-  document.body.setAttribute("data-theme", theme);
-  if (theme === "light") {
-    if (themeLabel) themeLabel.textContent = "Clair";
-    if (themeIcon) themeIcon.textContent = "☀️";
-  } else {
-    if (themeLabel) themeLabel.textContent = "Sombre";
-    if (themeIcon) themeIcon.textContent = "🌙";
-  }
-  localStorage.setItem("sabir-theme", theme);
-}
-
-// init thème
-const savedTheme = localStorage.getItem("sabir-theme");
-if (savedTheme === "light" || savedTheme === "dark") {
-  applyTheme(savedTheme);
-} else {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  applyTheme(prefersDark ? "dark" : "light");
-}
-
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
-    const current = document.body.getAttribute("data-theme") || "dark";
-    const next = current === "dark" ? "light" : "dark";
-    applyTheme(next);
-  });
-}
-
-// ===== Bulle IA draggable (header seulement, limites écran) =====
+// ===== Bulle IA draggable =====
 const iaBubble = document.getElementById("ia-bubble");
 const iaToggle = document.getElementById("ia-toggle");
 const iaBody = document.getElementById("ia-body");
@@ -376,7 +357,6 @@ if (iaBubble && iaHeader) {
   window.addEventListener("mouseup", endDrag);
   window.addEventListener("touchend", endDrag);
 
-  // Minimize / expand
   if (iaToggle && iaBody) {
     iaToggle.addEventListener("click", (e) => {
       e.stopPropagation();
