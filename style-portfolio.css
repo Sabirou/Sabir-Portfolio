@@ -35,7 +35,7 @@ body {
   --accent-blue: #2d7eff;
 }
 
-/* THEME CLAIR (optionnel) */
+/* THEME CLAIR */
 body[data-theme="light"] {
   --bg-main: #f3f4fb;
   --bg-surface: #ffffff;
@@ -218,6 +218,21 @@ body[data-theme="light"] {
   background: var(--text-main);
   border-radius: 999px;
   margin: 3px 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Menu mobile */
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 16px 12px;
+  background: rgba(5, 5, 9, 0.96);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.nav-mobile.open {
+  display: flex;
 }
 
 /* SECTIONS */
@@ -552,6 +567,11 @@ body[data-theme="light"] {
   color: #111827;
 }
 
+.ia-message-typing {
+  font-style: italic;
+  opacity: 0.8;
+}
+
 /* IA FORM */
 .ia-form {
   display: flex;
@@ -807,5 +827,16 @@ body[data-theme="light"] {
 
   .ia-bubble {
     display: none; /* sur téléphone on évite de gêner l’écran */
+  }
+}
+
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }

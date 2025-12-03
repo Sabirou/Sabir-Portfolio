@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-page="landing">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,10 +13,10 @@
   <div class="cursor-ring"></div>
 
   <main class="intro">
-    <!-- Halo d’arrière plan -->
+    <!-- Halo d’arrière-plan -->
     <div class="intro-bg"></div>
 
-    <!-- Top bar style iPhone titanium (sans les 3 points) -->
+    <!-- Top bar style iPhone titanium -->
     <header class="intro-header">
       <span class="intro-title">SABIR IAZZA</span>
       <div class="intro-tags">
@@ -26,10 +26,14 @@
     </header>
 
     <!-- Carte principale -->
-    <section class="intro-card">
+    <section class="intro-card" data-tilt>
       <div class="intro-grid">
         <!-- Mascotte -->
-        <button class="mascot-wrap" id="enter-by-mascot" aria-label="Entrer par la mascotte">
+        <button
+          class="mascot-wrap"
+          id="enter-by-mascot"
+          aria-label="Entrer dans le portfolio via la mascotte"
+        >
           <div class="mascot-orbit"></div>
           <img
             src="GPTimageLION.png"
@@ -37,6 +41,7 @@
             class="mascot-img"
             loading="eager"
           />
+          <div class="mascot-glow"></div>
         </button>
 
         <!-- Texte -->
