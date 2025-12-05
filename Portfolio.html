@@ -12,16 +12,16 @@
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
-  <!-- Bulle IA -->
+  <!-- Bulle IA draggable -->
   <div class="ia-bubble" id="ia-bubble">
-    <div class="ia-bubble-header" id="ia-bubble-header">
+    <div class="ia-bubble-header">
       <span class="ia-bubble-title">SabirGPT</span>
-      <button class="ia-bubble-minimize" id="ia-toggle" aria-label="Réduire la bulle IA">–</button>
+      <button class="ia-bubble-minimize" id="ia-toggle">–</button>
     </div>
     <div class="ia-bubble-body" id="ia-body">
       <p class="ia-bubble-text">
         Salut 👋 Je suis SabirGPT. Pose-moi des questions sur Sabir, son Bac Pro CIEL,
-        ses stages, ses projets ou son futur BTS.
+        ses stages, ses projets ou son futur BTS SIO.
       </p>
     </div>
   </div>
@@ -35,6 +35,7 @@
         <a href="#profil" class="nav-link active">Profil</a>
         <a href="#competences" class="nav-link">Compétences</a>
         <a href="#projets" class="nav-link">Projets</a>
+        <a href="#showcase" class="nav-link">Showcase</a>
         <a href="#ia" class="nav-link">SabirGPT</a>
         <a href="#parcours" class="nav-link">Parcours</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -55,6 +56,7 @@
       <a href="#profil" class="nav-link">Profil</a>
       <a href="#competences" class="nav-link">Compétences</a>
       <a href="#projets" class="nav-link">Projets</a>
+      <a href="#showcase" class="nav-link">Showcase</a>
       <a href="#ia" class="nav-link">SabirGPT</a>
       <a href="#parcours" class="nav-link">Parcours</a>
       <a href="#contact" class="nav-link">Contact</a>
@@ -65,18 +67,24 @@
   <canvas id="bg-orbit" aria-hidden="true"></canvas>
 
   <main>
-    <!-- HERO -->
+    <!-- HERO / PROFIL -->
     <section id="profil" class="section hero">
       <div class="hero-layout">
         <div class="hero-text reveal fade-up">
-          <p class="hero-kicker">Portfolio 2025 · Bac Pro CIEL</p>
+          <div class="hero-labels">
+            <span class="hero-chip">Portfolio 2025 – Univers nuit & 3D</span>
+            <span class="hero-chip hero-chip-outline">Bac Pro CIEL – Toulon</span>
+          </div>
+
           <h1 class="hero-title">
-            Je suis <span class="hero-highlight">Sabir</span>, étudiant en CIEL à Toulon,
-            et je construis mon profil entre cybersécurité, réseaux et web.
+            Je suis <span class="hero-highlight">Sabir</span>,<br />
+            je construis mon avenir entre cybersécurité, réseaux, web et projets concrets.
           </h1>
+
           <p class="hero-sub">
-            Ce portfolio rassemble mes stages, mes projets et mes objectifs : aujourd’hui Bac Pro CIEL,
-            demain <strong>BTS SIO</strong> puis encore plus loin dans l’IT.
+            Étudiant en Bac Pro CIEL (cybersécurité, informatique, réseaux & électronique),
+            je transforme ce que j’apprends en stages, en expériences et en projets perso.
+            Aujourd’hui Bac Pro, demain <strong>BTS SIO</strong>, puis encore plus loin dans l’IT.
           </p>
 
           <div class="hero-tags">
@@ -99,34 +107,14 @@
           </div>
         </div>
 
-        <aside class="hero-panel reveal blur-up">
-          <h2 class="panel-title">Vue d’ensemble</h2>
-          <p class="panel-text">
-            Terminale Bac Pro CIEL à Toulon : cybersécurité, réseaux, informatique et électronique.
-            Je découvre le terrain via des stages variés et je prépare la suite en BTS SIO.
-          </p>
-
-          <ul class="panel-list">
-            <li>Configuration réseau & notions de sécurité</li>
-            <li>Réparation téléphone & matériel informatique</li>
-            <li>Découverte du pentest & bonnes pratiques</li>
-            <li>Envie de progresser chaque année</li>
-          </ul>
-
-          <div class="panel-stats">
-            <div class="panel-stat">
-              <span class="stat-label">Stages réalisés</span>
-              <span class="stat-value">6 expériences</span>
-            </div>
-            <div class="panel-stat">
-              <span class="stat-label">Période</span>
-              <span class="stat-value">2023 → 2025</span>
-            </div>
-          </div>
-
-          <div class="panel-footer">
-            <span class="stat-label">Suite logique</span>
-            <span class="stat-value">BTS SIO</span>
+        <!-- Visuel hero -->
+        <aside class="hero-visual reveal blur-up">
+          <div class="hero-visual-inner">
+            <img
+              src="assets/images/hero-portrait.webp"
+              alt="Portrait stylisé de Sabir"
+              class="hero-portrait"
+            />
           </div>
         </aside>
       </div>
@@ -142,7 +130,7 @@
       <div class="grid skills-grid">
         <article class="card reveal fade-up">
           <h3>Cybersécurité</h3>
-          <p>Initiation au pentest, sensibilisation aux risques, bonnes pratiques d’hygiène numérique.</p>
+          <p>Initiation au pentest, bonnes pratiques de sécurité, sensibilisation aux risques.</p>
         </article>
 
         <article class="card reveal fade-up-delay">
@@ -157,7 +145,7 @@
 
         <article class="card reveal fade-up-delay">
           <h3>Électronique</h3>
-          <p>Montage, diagnostic de pannes simples, compréhension du lien entre matériel et réseau.</p>
+          <p>Montage, diagnostic de pannes simples, lien entre matériel, réseau et usage.</p>
         </article>
       </div>
     </section>
@@ -166,13 +154,13 @@
     <section id="projets" class="section">
       <header class="section-header reveal mask-y">
         <h2>Projets & stages</h2>
-        <p>Quelques expériences qui construisent mon profil.</p>
+        <p>Quelques expériences concrètes qui construisent mon profil.</p>
       </header>
 
       <div class="grid projects-grid">
         <article class="card project-card reveal blur-up">
           <h3>Réparation de téléphones</h3>
-          <p>Diagnostic, changement d’écrans et de batteries, tests après intervention et contact client.</p>
+          <p>Diagnostic, changement d’écrans et de batteries, tests après intervention et accueil client.</p>
           <span class="tag">Stage – 2024</span>
         </article>
 
@@ -184,8 +172,57 @@
 
         <article class="card project-card reveal blur-up">
           <h3>Portfolio & SabirGPT</h3>
-          <p>Conception d’un site complet, design animé, IA perso pour répondre aux questions sur mon profil.</p>
+          <p>Conception d’un site complet, design animé nuit & titanium, IA perso qui présente mon profil.</p>
           <span class="tag">Projet perso</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- SHOWCASE GIF / VISUELS -->
+    <section id="showcase" class="section showcase">
+      <header class="section-header reveal fade-up">
+        <h2>Showcase animé</h2>
+        <p>Aperçus visuels de mon univers : interface, data, réparation & réseau.</p>
+      </header>
+
+      <div class="showcase-grid">
+        <article class="showcase-card reveal blur-up">
+          <div class="showcase-badge">SabirGPT</div>
+          <img
+            src="assets/images/sabirgpt-ui-placeholder.gif"
+            alt="Interface SabirGPT"
+            class="showcase-img"
+          />
+          <div class="showcase-info">
+            <h3>Interface SabirGPT</h3>
+            <p>IA perso qui répond sur mon profil, mes stages et mes objectifs.</p>
+          </div>
+        </article>
+
+        <article class="showcase-card reveal blur-up-delay">
+          <div class="showcase-badge">Réseau</div>
+          <img
+            src="assets/images/network-dashboard-placeholder.gif"
+            alt="Dashboard réseau"
+            class="showcase-img"
+          />
+          <div class="showcase-info">
+            <h3>Dashboard réseau</h3>
+            <p>Visu simple d’une topologie, monitoring, ping et trafic.</p>
+          </div>
+        </article>
+
+        <article class="showcase-card reveal blur-up">
+          <div class="showcase-badge">Réparation</div>
+          <img
+            src="assets/images/phone-repair-placeholder.gif"
+            alt="Réparation téléphone"
+            class="showcase-img"
+          />
+          <div class="showcase-info">
+            <h3>Réparation smartphone</h3>
+            <p>Animation autour du changement d’écran et des tests techniques.</p>
+          </div>
         </article>
       </div>
     </section>
@@ -198,21 +235,22 @@
       </div>
 
       <div class="ia-layout">
+        <!-- Explication -->
         <article class="card ia-info reveal fade-up">
           <h3>Comment fonctionne SabirGPT ?</h3>
           <p>
-            SabirGPT est une IA entraînée sur mon profil : mon âge, mon Bac Pro CIEL,
-            mes stages (fibre, web, réparation téléphone, bâtiment...), mes objectifs (BTS SIO)
+            SabirGPT est une petite IA personnalisée qui connaît mon âge, mon Bac Pro CIEL,
+            mes stages (fibre, réparation téléphone, bâtiment...), mes objectifs (BTS SIO)
             et mes centres d’intérêt.
           </p>
           <ul class="ia-list">
-            <li>Comprend les questions sur mon âge, ma formation, mes projets.</li>
-            <li>Peut détailler mes stages et ce que j’y ai appris.</li>
-            <li>Explique mon objectif BTS SIO et la suite.</li>
-            <li>S’adapte au ton de la question (pro, chill, orientation…).</li>
+            <li>Répond aux questions sur mon âge, ma formation, mes stages.</li>
+            <li>Explique mes objectifs après le Bac Pro (BTS SIO, IT, cybersécurité).</li>
+            <li>Peut prendre un ton pro ou chill selon la question.</li>
           </ul>
         </article>
 
+        <!-- Interface IA -->
         <article class="card ia-ui reveal blur-up">
           <header class="ia-ui-header">
             <div class="ia-ui-title">
@@ -308,7 +346,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Sabir IAZZA – Portfolio. Construit avec passion pour l’IT.</p>
+    <p>© 2025 Sabir IAZZA – Portfolio nuit titanium. Construit avec passion pour l’IT.</p>
   </footer>
 
   <script src="script-portfolio.js"></script>
