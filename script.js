@@ -7,7 +7,7 @@ let mouseY = window.innerHeight / 2;
 let ringX = mouseX;
 let ringY = mouseY;
 
-function handleMouseMove(e) {
+function move(e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
   if (dot) {
@@ -16,78 +16,58 @@ function handleMouseMove(e) {
 }
 
 if (dot && ring) {
-  window.addEventListener("mousemove", handleMouseMove, { passive: true });
+  window.addEventListener("mousemove", move);
 
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.14;
-    ringY += (mouseY - ringY) * 0.14;
+    ringX += (mouseX - ringX) * 0.16;
+    ringY += (mouseY - ringY) * 0.16;
     ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
     requestAnimationFrame(animateRing);
   }
   animateRing();
 
+  // agrandir le ring sur éléments interactifs
   ["a", "button"].forEach((selector) => {
     document.querySelectorAll(selector).forEach((el) => {
       el.addEventListener("mouseenter", () => {
-        ring.style.width = "56px";
-        ring.style.height = "56px";
+        ring.style.width = "64px";
+        ring.style.height = "64px";
       });
       el.addEventListener("mouseleave", () => {
-        ring.style.width = "38px";
-        ring.style.height = "38px";
+        ring.style.width = "42px";
+        ring.style.height = "42px";
       });
     });
   });
 }
 
-// ===== Tilt 3D léger sur la carte =====
-const introCard = document.querySelector(".intro-card[data-tilt]");
+// ===== Navigation vers le portfolio =====
+const enterBtn = document.getElementById("enter-portfolio");
+const mascotBtn = document.getElementById("enter-by-mascot");
+
+function goToPortfolio() {
+  window.location.href = "portfolio.html";
+}
+
+if (enterBtn) enterBtn.addEventListener("click", goToPortfolio);
+if (mascotBtn) mascotBtn.addEventListener("click", goToPortfolio);
+
+// ===== Parallax léger sur la carte =====
+const introCard = document.querySelector(".intro-card");
+
 if (introCard && window.matchMedia("(pointer: fine)").matches) {
   introCard.addEventListener("mousemove", (e) => {
     const rect = introCard.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    const rotX = y * -5;
-    const rotY = x * 5;
-
-    introCard.style.transform = `
-      translateY(-4px)
-      perspective(1000px)
-      rotateX(${rotX}deg)
-      rotateY(${rotY}deg)
-    `;
+    introCard.style.transform = `translateY(-2px) perspective(900px) rotateX(${
+      y * -4
+    }deg) rotateY(${x * 4}deg)`;
   });
 
   introCard.addEventListener("mouseleave", () => {
     introCard.style.transform =
-      "translateY(0) perspective(1000px) rotateX(0) rotateY(0)";
+      "translateY(0) perspective(900px) rotateX(0) rotateY(0)";
   });
 }
-
-// ===== Mascotte effet press =====
-const mascotBtn = document.getElementById("enter-by-mascot");
-if (mascotBtn) {
-  mascotBtn.addEventListener("mousedown", () => {
-    mascotBtn.classList.add("is-pressed");
-  });
-  ["mouseup", "mouseleave"].forEach((ev) => {
-    mascotBtn.addEventListener(ev, () => mascotBtn.classList.remove("is-pressed"));
-  });
-}
-
-// ===== Navigation vers portfolio (transition) =====
-const enterBtn = document.getElementById("enter-portfolio");
-let isNavigating = false;
-
-function goToPortfolio() {
-  if (isNavigating) return;
-  isNavigating = true;
-  document.body.classList.add("page-exit");
-  setTimeout(() => {
-    window.location.href = "portfolio.html";
-  }, 320);
-}
-
-if (enterBtn) enterBtn.addEventListener("click", goToPortfolio);
-if (mascotBtn) mascotBtn.addEventListener("click", goToPortfolio);
