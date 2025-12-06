@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio – Sabir IAZZA</title>
+  <meta name="description" content="Portfolio de Sabir IAZZA – cybersécurité, réseaux, web & électronique, Bac Pro CIEL à Toulon.">
+  <link rel="stylesheet" href="style-portfolio.css" />
+</head>
+<body>
+  <!-- Curseur custom -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">SABIR IAZZA</a>
+
+      <nav class="nav-main" aria-label="Navigation principale">
+        <a href="#profil" class="nav-link active">Profil</a>
+        <a href="#competences" class="nav-link">Compétences</a>
+        <a href="#projets" class="nav-link">Projets</a>
+        <a href="#ia" class="nav-link">SabirGPT</a>
+        <a href="#parcours" class="nav-link">Parcours</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/Sabirou/Sabir-Portfolio" class="nav-pill" target="_blank">GitHub</a>
+        <a href="#contact" class="nav-pill nav-pill-main">Me contacter</a>
+      </div>
+
+      <button class="nav-burger" id="nav-burger" aria-label="Ouvrir le menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- FOND GLOBAL -->
+  <div class="page-bg"></div>
+  <div class="page-orb">
+    <img src="titanium-orb.webp" alt="" loading="lazy" />
+  </div>
+
+  <main>
+    <!-- HERO / PROFIL -->
+    <section id="profil" class="section hero">
+      <div class="hero-layout">
+        <div class="hero-text reveal fade-up">
+          <div class="hero-labels">
+            <span class="hero-chip">Portfolio 2025 – Univers nuit & 3D</span>
+            <span class="hero-chip hero-chip-outline">Bac Pro CIEL – Toulon</span>
+          </div>
+
+          <h1 class="hero-title">
+            Je suis <span class="hero-highlight">Sabir</span>,<br />
+            je construis mon avenir entre cybersécurité, réseaux, web et projets concrets.
+          </h1>
+
+          <p class="hero-sub">
+            Étudiant en Bac Pro CIEL (cybersécurité, informatique, réseaux & électronique),
+            je transforme ce que j’apprends en projets, en expériences et en stages :
+            aujourd’hui Bac Pro, demain <strong>BTS SIO</strong>, puis encore plus loin dans l’IT.
+          </p>
+
+          <div class="hero-tags">
+            <span class="pill">Cybersécurité</span>
+            <span class="pill">Systèmes & réseaux</span>
+            <span class="pill">Développement web</span>
+            <span class="pill">Électronique</span>
+            <span class="pill pill-soft">Foot & projets perso</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projets" class="btn btn-main">Voir mes projets</a>
+            <a href="#contact" class="btn btn-outline">Parler d’un stage / alternance</a>
+          </div>
+
+          <div class="hero-meta">
+            <span>📍 Saint-Maximin (83)</span>
+            <a href="mailto:amiamisabir@gmail.com">📧 amiamisabir@gmail.com</a>
+            <a href="tel:+33762972626">📱 07 62 97 26 26</a>
+          </div>
+        </div>
+
+        <!-- Portrait -->
+        <aside class="hero-visual reveal blur-up">
+          <div class="hero-portrait-wrap">
+            <img
+              src="hero-portrait.webp"
+              alt="Portrait stylisé de Sabir"
+              class="hero-portrait"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="hero-mini">
+            <p>Terminale Bac Pro CIEL à Toulon : cybersécurité, réseaux, informatique & électronique.</p>
+            <ul>
+              <li>Configuration réseau & notions de sécurité</li>
+              <li>Réparation téléphone & matériel informatique</li>
+              <li>Découverte du pentest & bonnes pratiques</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- COMPÉTENCES -->
+    <section id="competences" class="section">
+      <header class="section-header reveal mask-x">
+        <h2>Compétences principales</h2>
+        <p>Un mix entre cybersécurité, réseaux, développement web et électronique.</p>
+      </header>
+
+      <div class="grid skills-grid">
+        <article class="card reveal fade-up">
+          <h3>Cybersécurité</h3>
+          <p>Initiation au pentest, sensibilisation aux risques, bonnes pratiques d’hygiène numérique.</p>
+        </article>
+
+        <article class="card reveal fade-up-delay">
+          <h3>Réseaux & systèmes</h3>
+          <p>Adressage IP, VLAN, routage simple, configuration de switch/routeur en TP.</p>
+        </article>
+
+        <article class="card reveal fade-up">
+          <h3>Développement web</h3>
+          <p>HTML, CSS, un peu de JavaScript, création de ce portfolio et de mini projets persos.</p>
+        </article>
+
+        <article class="card reveal fade-up-delay">
+          <h3>Électronique</h3>
+          <p>Montage, diagnostic de pannes simples, lien entre matériel, réseau et logiciel.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJETS / SHOWCASE -->
+    <section id="projets" class="section">
+      <header class="section-header reveal mask-y">
+        <h2>Showcase animé</h2>
+        <p>Aperçus visuels de mon univers : interface, data, réparation & réseau.</p>
+      </header>
+
+      <div class="grid projects-grid">
+        <!-- SabirGPT -->
+        <article class="card project-card reveal blur-up">
+          <div class="project-image">
+            <img src="sabirgpt-ui.webp" alt="Interface SabirGPT" loading="lazy" />
+            <span class="project-tag">SABIRGPT</span>
+          </div>
+          <h3>Interface SabirGPT</h3>
+          <p>IA perso qui répond sur mon profil, mes stages et mes objectifs.</p>
+        </article>
+
+        <!-- Dashboard réseau -->
+        <article class="card project-card reveal blur-up-delay">
+          <div class="project-image">
+            <img src="dashboard-network.webp" alt="Dashboard réseau" loading="lazy" />
+            <span class="project-tag">RÉSEAU</span>
+          </div>
+          <h3>Dashboard réseau</h3>
+          <p>Visu simple d’une topologie, monitoring, ping & trafic avec un style Apple / Tesla.</p>
+        </article>
+
+        <!-- Réparation smartphone / multi devices -->
+        <article class="card project-card reveal blur-up">
+          <div class="project-image">
+            <img src="devices-showcase.webp" alt="Interfaces multi-devices" loading="lazy" />
+            <span class="project-tag">RÉPARATION</span>
+          </div>
+          <h3>Réparation smartphone</h3>
+          <p>Animation autour du changement d’écran, des tests techniques et de l’interface client.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SABIRGPT -->
+    <section id="ia" class="section ia-section">
+      <div class="section-header reveal fade-up">
+        <h2>SabirGPT – mon IA perso</h2>
+        <p>Une IA qui connaît mon parcours, mes stages et mes objectifs.</p>
+      </div>
+
+      <div class="ia-layout">
+        <!-- Explication -->
+        <article class="card ia-info reveal fade-up">
+          <h3>Comment fonctionne SabirGPT ?</h3>
+          <p>
+            SabirGPT est une IA entraînée sur mon profil : mon âge, mon Bac Pro CIEL,
+            mes stages (fibre, web, réparation téléphone, bâtiment...), mes objectifs (BTS SIO)
+            et mes centres d’intérêt.
+          </p>
+          <ul class="ia-list">
+            <li>Comprend les questions sur mon âge, ma formation, mes projets.</li>
+            <li>Peut détailler mes stages et ce que j’y ai appris.</li>
+            <li>Explique mon objectif BTS SIO et la suite.</li>
+            <li>Ton adapté : pro, chill, orientation…</li>
+          </ul>
+        </article>
+
+        <!-- Interface IA -->
+        <article class="card ia-ui reveal blur-up">
+          <header class="ia-ui-header">
+            <div class="ia-ui-title">
+              <span class="ia-dot"></span>
+              <span>SabirGPT</span>
+            </div>
+            <div class="ia-ui-mode">Mode : <strong>Auto</strong></div>
+          </header>
+
+          <div class="ia-ui-body">
+            <div class="ia-chat" id="ia-chat">
+              <div class="ia-message ia-message-bot">
+                Salut, je suis SabirGPT 🤝 Pose-moi des questions sur Sabir, son Bac Pro CIEL,
+                ses stages, ses objectifs ou son orientation.
+              </div>
+            </div>
+
+            <form class="ia-form" id="ia-form">
+              <input
+                type="text"
+                id="ia-input"
+                class="ia-input"
+                autocomplete="off"
+                placeholder="Pose une question sur Sabir (ex : « Sabir a quel âge ? »)…"
+                required
+              />
+              <button type="submit" class="btn btn-main ia-submit">Envoyer</button>
+            </form>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PARCOURS -->
+    <section id="parcours" class="section">
+      <header class="section-header reveal mask-x">
+        <h2>Parcours & timeline</h2>
+        <p>Les étapes qui construisent mon profil IT.</p>
+      </header>
+
+      <div class="timeline">
+        <div class="timeline-item reveal fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Terminale Bac Pro CIEL</h3>
+            <p>Lycée à Toulon – cybersécurité, réseaux, informatique & électronique.</p>
+            <span class="tag">2024 – 2025</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal fade-up-delay">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Stages en entreprise</h3>
+            <p>Fibre optique, réparation de téléphones, découverte de l’informatique en situation réelle.</p>
+            <span class="tag">2023 – 2024</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Objectif : BTS SIO</h3>
+            <p>Continuer en BTS SIO pour aller plus loin en développement et en systèmes / réseaux.</p>
+            <span class="tag">Suite logique</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact-section">
+      <div class="contact-card card reveal blur-up">
+        <h2>Contact</h2>
+        <p>Un projet, un stage, une alternance ou une question ? On discute.</p>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p><strong>Mail :</strong> <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></p>
+            <p><strong>Téléphone :</strong> <a href="tel:+33762972626">07 62 97 26 26</a></p>
+            <p><strong>Ville :</strong> Saint-Maximin (83)</p>
+          </div>
+
+          <form class="contact-form">
+            <input type="text" placeholder="Nom" required />
+            <input type="email" placeholder="Email" required />
+            <textarea rows="3" placeholder="Votre message…"></textarea>
+            <button type="submit" class="btn btn-main">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Sabir IAZZA – Portfolio titanium. Construit avec passion pour l’IT.</p>
+  </footer>
+
+  <script src="script-portfolio.js"></script>
+</body>
+</html>

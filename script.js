@@ -19,14 +19,13 @@ if (dot && ring) {
   window.addEventListener("mousemove", move);
 
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.16;
-    ringY += (mouseY - ringY) * 0.16;
+    ringX += (mouseX - ringX) * 0.14;
+    ringY += (mouseY - ringY) * 0.14;
     ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
     requestAnimationFrame(animateRing);
   }
   animateRing();
 
-  // agrandir le ring sur éléments interactifs
   ["a", "button"].forEach((selector) => {
     document.querySelectorAll(selector).forEach((el) => {
       el.addEventListener("mouseenter", () => {
