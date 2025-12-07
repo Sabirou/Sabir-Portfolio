@@ -1,4 +1,4 @@
-// ===== Curseur custom (même principe que landing) =====
+// ===== Curseur custom =====
 const dot2 = document.querySelector(".cursor-dot");
 const ring2 = document.querySelector(".cursor-ring");
 
@@ -26,6 +26,7 @@ if (dot2 && ring2) {
   }
   animateRing();
 
+  // agrandir sur éléments interactifs
   ["a", "button"].forEach((sel) => {
     document.querySelectorAll(sel).forEach((el) => {
       el.addEventListener("mouseenter", () => {
@@ -61,6 +62,51 @@ if ("IntersectionObserver" in window) {
   toReveal.forEach((el) => obs.observe(el));
 }
 
+// ===== Canvas background (simple orbits) =====
+const canvas = document.getElementById("bg-orbit");
+if (canvas) {
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  const orbs = Array.from({ length: 32 }).map(() => ({
+    r: 50 + Math.random() * 190,
+    a: Math.random() * Math.PI * 2,
+    s: 0.0006 + Math.random() * 0.0014,
+    size: 6 + Math.random() * 16,
+    hue: 210 + Math.random() * 70,
+    ox: (window.innerWidth * dpr) / 2,
+    oy: (window.innerHeight * dpr) / 2
+  }));
+
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    orbs.forEach((o) => {
+      o.a += o.s;
+      const x = o.ox + Math.cos(o.a) * o.r * dpr;
+      const y = o.oy + Math.sin(o.a) * o.r * dpr;
+
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, o.size * dpr);
+      grad.addColorStop(0, `hsla(${o.hue}, 85%, 68%, 0.9)`);
+      grad.addColorStop(1, "transparent");
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, o.size * dpr, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(render);
+  }
+  render();
+}
+
 // ===== Navigation active (survol de section) =====
 const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll(".nav-link");
@@ -69,7 +115,7 @@ window.addEventListener("scroll", () => {
   const scrollY = window.pageYOffset;
 
   sections.forEach((section) => {
-    const top = section.offsetTop - 140;
+    const top = section.offsetTop - 120;
     const height = section.offsetHeight;
     const id = section.getAttribute("id");
 
@@ -81,18 +127,14 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// ===== Burger menu (mobile) =====
+// ===== Menu burger (mobile) =====
 const burger = document.getElementById("nav-burger");
 const navMain = document.querySelector(".nav-main");
-const navActions = document.querySelector(".nav-actions");
 
 if (burger && navMain) {
   burger.addEventListener("click", () => {
-    const opened = navMain.style.display === "flex";
-    navMain.style.display = opened ? "none" : "flex";
-    if (navActions) {
-      navActions.style.display = opened ? "none" : "flex";
-    }
+    const visible = navMain.style.display === "flex";
+    navMain.style.display = visible ? "none" : "flex";
   });
 }
 
@@ -128,10 +170,10 @@ function answerSabir(question) {
     return "En réparation de téléphones, Sabir a diagnostiqué des pannes, changé des écrans et batteries et testé les appareils après intervention.";
   }
   if (q.includes("objectif") || q.includes("après") || q.includes("apres")) {
-    return "L’objectif de Sabir est de poursuivre en BTS SIO pour aller plus loin en développement et en systèmes / réseaux, tout en gardant un lien fort avec la cybersécurité.";
+    return "L’objectif de Sabir est de poursuivre en BTS SIO pour aller plus loin en développement et en systèmes / réseaux, tout en restant connecté à la cybersécurité.";
   }
   if (q.includes("passion") || q.includes("intérêt") || q.includes("interet")) {
-    return "Sabir aime l’informatique, la cybersécurité, les réseaux, le développement web, l’électronique… et aussi le foot et ses projets perso.";
+    return "Sabir aime l’informatique, la cybersécurité, les réseaux, le développement web, l’électronique… et aussi le foot et quelques projets perso.";
   }
 
   return "Je n’ai pas cette info précise, mais en résumé : Sabir est un étudiant en Bac Pro CIEL motivé, qui construit son profil entre cybersécurité, réseaux, web et projets concrets, avec comme suite logique le BTS SIO.";
@@ -144,7 +186,59 @@ if (iaForm && iaInput) {
     if (!q) return;
     addMessage(q, "user");
     const rep = answerSabir(q);
-    setTimeout(() => addMessage(rep, "bot"), 250);
+    setTimeout(() => addMessage(rep, "bot"), 300);
     iaInput.value = "";
   });
+}
+
+// ===== Bulle IA draggable =====
+const iaBubble = document.getElementById("ia-bubble");
+const iaToggle = document.getElementById("ia-toggle");
+const iaBody = document.getElementById("ia-body");
+
+if (iaBubble) {
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  function startDrag(e) {
+    isDragging = true;
+    iaBubble.style.cursor = "grabbing";
+    const rect = iaBubble.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+  }
+
+  function onDrag(e) {
+    if (!isDragging) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    iaBubble.style.left = `${clientX - offsetX}px`;
+    iaBubble.style.top = `${clientY - offsetY}px`;
+    iaBubble.style.transform = "none";
+  }
+
+  function endDrag() {
+    isDragging = false;
+    iaBubble.style.cursor = "grab";
+  }
+
+  iaBubble.addEventListener("mousedown", startDrag);
+  iaBubble.addEventListener("touchstart", startDrag, { passive: true });
+  window.addEventListener("mousemove", onDrag);
+  window.addEventListener("touchmove", onDrag, { passive: false });
+  window.addEventListener("mouseup", endDrag);
+  window.addEventListener("touchend", endDrag);
+
+  // Minimize / expand
+  if (iaToggle && iaBody) {
+    iaToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const hidden = iaBody.style.display === "none";
+      iaBody.style.display = hidden ? "block" : "none";
+      iaToggle.textContent = hidden ? "–" : "+";
+    });
+  }
 }
