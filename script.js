@@ -1,4 +1,4 @@
-// ===== Curseur custom =====
+// ========== Curseur custom ==========
 const dot = document.querySelector(".cursor-dot");
 const ring = document.querySelector(".cursor-ring");
 
@@ -7,7 +7,7 @@ let mouseY = window.innerHeight / 2;
 let ringX = mouseX;
 let ringY = mouseY;
 
-function move(e) {
+function moveCursor(e) {
   mouseX = e.clientX;
   mouseY = e.clientY;
   if (dot) {
@@ -15,62 +15,83 @@ function move(e) {
   }
 }
 
-window.addEventListener("mousemove", move);
+if (dot && ring) {
+  window.addEventListener("mousemove", moveCursor);
 
-// lissage du cercle
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.14;
-  ringY += (mouseY - ringY) * 0.14;
-  if (ring) {
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.16;
+    ringY += (mouseY - ringY) * 0.16;
     ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+    requestAnimationFrame(animateRing);
   }
-  requestAnimationFrame(animateRing);
-}
-animateRing();
+  animateRing();
 
-// agrandir le ring sur éléments interactifs
-["a", "button"].forEach((selector) => {
-  document.querySelectorAll(selector).forEach((el) => {
-    el.addEventListener("mouseenter", () => {
-      if (!ring) return;
-      ring.style.width = "64px";
-      ring.style.height = "64px";
-    });
-    el.addEventListener("mouseleave", () => {
-      if (!ring) return;
-      ring.style.width = "42px";
-      ring.style.height = "42px";
+  ["a", "button", "[data-go-portfolio]"].forEach((sel) => {
+    document.querySelectorAll(sel).forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        ring.style.width = "60px";
+        ring.style.height = "60px";
+      });
+      el.addEventListener("mouseleave", () => {
+        ring.style.width = "40px";
+        ring.style.height = "40px";
+      });
     });
   });
-});
+}
 
-// ===== Navigation vers le portfolio =====
-const enterBtn = document.getElementById("enter-portfolio");
-const mascotBtn = document.getElementById("enter-by-mascot");
-
+// ========== Navigation vers portfolio ==========
 function goToPortfolio() {
   window.location.href = "portfolio.html";
 }
+document.querySelectorAll("[data-go-portfolio]").forEach((el) => {
+  el.addEventListener("click", goToPortfolio);
+});
 
-if (enterBtn) enterBtn.addEventListener("click", goToPortfolio);
-if (mascotBtn) mascotBtn.addEventListener("click", goToPortfolio);
+// ========== Fond orbes ==========
+const canvas = document.getElementById("bg-orbit");
+if (canvas) {
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
 
-// ===== Parallax léger sur la carte =====
-const introCard = document.querySelector(".intro-card");
+  function resizeCanvas() {
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
 
-if (introCard && window.matchMedia("(pointer: fine)").matches) {
-  introCard.addEventListener("mousemove", (e) => {
-    const rect = introCard.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
+  const orbs = Array.from({ length: 30 }).map(() => ({
+    r: 60 + Math.random() * 220,
+    a: Math.random() * Math.PI * 2,
+    s: 0.0006 + Math.random() * 0.0016,
+    size: 6 + Math.random() * 16,
+    hue:
+      Math.random() < 0.5
+        ? 260 + Math.random() * 40 // violets
+        : 190 + Math.random() * 40, // bleus
+    ox: (window.innerWidth * dpr) / 2,
+    oy: (window.innerHeight * dpr) / 2,
+  }));
 
-    introCard.style.transform = `translateY(-2px) perspective(900px) rotateX(${
-      y * -4
-    }deg) rotateY(${x * 4}deg)`;
-  });
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    orbs.forEach((o) => {
+      o.a += o.s;
+      const x = o.ox + Math.cos(o.a) * o.r * dpr;
+      const y = o.oy + Math.sin(o.a) * o.r * dpr;
 
-  introCard.addEventListener("mouseleave", () => {
-    introCard.style.transform =
-      "translateY(0) perspective(900px) rotateX(0) rotateY(0)";
-  });
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, o.size * dpr);
+      grad.addColorStop(0, `hsla(${o.hue}, 90%, 70%, 0.85)`);
+      grad.addColorStop(1, "transparent");
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, o.size * dpr, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(render);
+  }
+  render();
 }

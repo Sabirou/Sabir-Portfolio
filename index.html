@@ -2,9 +2,12 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <title>Sabir IAZZA – Portfolio 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sabir IAZZA – Welcome</title>
-  <meta name="description" content="Universe titanium de Sabir IAZZA – cybersécurité, réseaux, web & projets.">
+  <meta
+    name="description"
+    content="Portfolio 2025 de Sabir IAZZA – univers nuit & 3D, cybersécurité, réseaux, web & électronique, Bac Pro CIEL à Toulon."
+  />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,68 +15,91 @@
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
-  <main class="intro">
-    <!-- Halo d’arrière plan -->
-    <div class="intro-bg"></div>
+  <!-- Fond orbes -->
+  <canvas id="bg-orbit" aria-hidden="true"></canvas>
 
-    <!-- Top bar style titane -->
-    <header class="intro-header">
-      <span class="intro-title">SABIR IAZZA</span>
-      <div class="intro-tags">
-        <span class="chip">Portfolio 2025</span>
-        <span class="chip chip-outline">Bac Pro CIEL – Toulon</span>
-      </div>
-    </header>
-
-    <!-- Carte principale -->
-    <section class="intro-card">
-      <div class="intro-grid">
-        <!-- Mascotte lion -->
-        <button class="mascot-wrap" id="enter-by-mascot" aria-label="Entrer par la mascotte">
-          <div class="mascot-orbit"></div>
-          <img
-            src="GPTimageLION.png"
-            alt="Mascotte lion de Sabir"
-            class="mascot-img"
-            loading="eager"
-          />
+  <!-- HEADER -->
+  <header class="top-nav">
+    <div class="top-nav-inner">
+      <div class="brand">SABIR IAZZA</div>
+      <div class="nav-right">
+        <span class="nav-pill nav-pill-soft">Portfolio 2025</span>
+        <span class="nav-pill nav-pill-soft">Bac Pro CIEL – Toulon</span>
+        <button class="nav-pill nav-pill-main" data-go-portfolio>
+          Entrer dans le portfolio
         </button>
+      </div>
+    </div>
+  </header>
 
-        <!-- Texte -->
-        <div class="intro-text">
-          <p class="intro-eyebrow">Étudiant en Bac Pro CIEL – Toulon</p>
-          <h1 class="intro-name">SABIR&nbsp;IAZZA</h1>
-          <p class="intro-subtitle">
-            Cybersécurité, réseaux, développement web & projets concrets.
-            Découvre mon univers, mes stages, mes projets et mon parcours vers le
-            <span class="highlight">BTS SIO</span>.
-          </p>
+  <!-- HERO -->
+  <main class="hero-shell">
+    <section class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-badges">
+          <span class="chip">Univers nuit & 3D</span>
+          <span class="chip chip-outline">Cybersécurité · Réseaux · Web</span>
+        </div>
 
-          <div class="intro-buttons">
-            <a href="https://github.com/Sabirou" target="_blank" class="btn btn-ghost">
-              <span class="btn-emoji">🐙</span> GitHub
-            </a>
-            <a href="https://www.instagram.com/" target="_blank" class="btn btn-ghost">
-              <span class="btn-emoji">📸</span> Instagram
-            </a>
-            <a href="tel:+33762972626" class="btn btn-ghost">
-              <span class="btn-emoji">📞</span> Appeler Sabir
-            </a>
-          </div>
+        <h1 class="hero-title">
+          Je suis <span class="hero-highlight">Sabir</span>,<br />
+          je construis mon avenir en <span class="hero-highlight">IT</span>.
+        </h1>
 
-          <button class="btn btn-main" id="enter-portfolio">
+        <p class="hero-sub">
+          Étudiant en <strong>Bac Pro CIEL</strong> à Toulon, je mélange
+          cybersécurité, réseaux, développement web et électronique.<br />
+          Aujourd’hui Bac Pro, demain <strong>BTS SIO</strong>, puis encore plus loin
+          dans l’IT.
+        </p>
+
+        <div class="hero-tags">
+          <span class="pill">Cybersécurité</span>
+          <span class="pill">Systèmes & réseaux</span>
+          <span class="pill">Développement web</span>
+          <span class="pill">Électronique</span>
+          <span class="pill pill-soft">Univers nuit titane</span>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn-main" data-go-portfolio>
             Entrer dans mon portfolio
           </button>
-          <p class="intro-hint">Ou clique sur le lion 🦁</p>
+          <a href="mailto:amiamisabir@gmail.com" class="btn-outline">
+            Me contacter
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span>📍 Saint-Maximin (83)</span>
+          <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+          <a href="tel:+33762972626">07 62 97 26 26</a>
         </div>
       </div>
 
-      <footer class="intro-footer">
-        <span>Saint-Maximin (83)</span>
-        <span>Cybersécurité · Réseaux · Web · BTS SIO en ligne de mire</span>
-      </footer>
+      <aside class="hero-orb">
+        <div class="hero-orb-frame" data-go-portfolio>
+          <div class="hero-orb-glow"></div>
+          <img
+            src="GPTimageLION.png"
+            alt="Lion stylisé – univers Sabir"
+            class="hero-orb-img"
+          />
+          <img
+            src="titanium-orb.png"
+            alt=""
+            class="hero-orb-orbit"
+            aria-hidden="true"
+          />
+        </div>
+        <p class="hero-orb-caption">Clique sur le lion ou sur le bouton pour entrer</p>
+      </aside>
     </section>
   </main>
+
+  <footer class="footer-small">
+    © 2025 Sabir IAZZA — Univers nuit titanium. Construit avec passion pour l’IT.
+  </footer>
 
   <script src="script.js"></script>
 </body>
