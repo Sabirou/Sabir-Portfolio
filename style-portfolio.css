@@ -1,3 +1,150 @@
+/* =========================================================
+   LAYOUT PORTFOLIO
+   ========================================================= */
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 18px 60px;
+}
+
+.section {
+  padding: 36px 0;
+}
+
+.section-inner {
+  padding: 22px 18px;
+  border-radius: 26px;
+  background: radial-gradient(circle at 0 0, rgba(165, 107, 255, 0.06), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(67, 180, 255, 0.06), transparent 55%),
+    rgba(6, 9, 24, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Head */
+.section-header {
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.section-header p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* HERO PORTFOLIO */
+.hero-portfolio {
+  padding-top: 34px;
+}
+
+.hero-portfolio-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.05fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.hero-portfolio-device {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.device-frame {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  border-radius: 32px;
+  padding: 18px 12px;
+  background: radial-gradient(circle at 0 0, #202638, #050814);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.95),
+    0 0 60px rgba(165, 107, 255, 0.45);
+}
+
+.device-top-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #0f172a, #020617);
+  margin: 0 auto 10px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+.device-screen-img {
+  width: 100%;
+  border-radius: 24px;
+  display: block;
+}
+
+.device-caption {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* GRIDS & CARDS */
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.card {
+  border-radius: 22px;
+  padding: 18px 18px 16px;
+  background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(165, 107, 255, 0.03)
+    );
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  transition: 0.25s ease-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(67, 180, 255, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(67, 180, 255, 0.4),
+    0 22px 65px rgba(0, 0, 0, 0.9);
+}
+
+.card h3 {
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+.card p {
+  font-size: 14px;
+  color: var(--text-soft);
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
 /* ===========================
    SHOWCASE – NEO TOKYO / GLASS
    =========================== */
@@ -278,9 +425,184 @@
   border-color: rgba(148, 163, 184, 0.45);
 }
 
-/* RESPONSIVE SHOWCASE */
+/* SABIRGPT BLOCK */
+.sabirgpt-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: 20px;
+}
 
-@media (max-width: 1024px) {
+.sabirgpt-ui {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sabirgpt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.sabirgpt-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 0 0, #bbf7d0, #22c55e);
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);
+}
+
+.sabirgpt-mode {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sabirgpt-chat {
+  border-radius: 16px;
+  padding: 10px;
+  background: radial-gradient(circle at 0 0, #111827, #020617);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.msg {
+  padding: 7px 9px;
+  border-radius: 12px;
+  max-width: 90%;
+}
+
+.msg-bot {
+  align-self: flex-start;
+  background: rgba(31, 41, 55, 0.96);
+}
+
+.msg-user {
+  align-self: flex-end;
+  background: rgba(255, 182, 115, 0.96);
+  color: #111827;
+}
+
+.sabirgpt-form {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.sabirgpt-input {
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  padding: 8px 12px;
+  font-size: 13px;
+  background: rgba(15, 23, 42, 0.96);
+  color: var(--text-main);
+}
+
+.sabirgpt-input:focus {
+  outline: none;
+  border-color: var(--accent-violet);
+}
+
+.sabirgpt-submit {
+  padding-inline: 18px;
+}
+
+/* TIMELINE */
+.timeline {
+  border-left: 1px solid rgba(148, 163, 184, 0.6);
+  margin-left: 6px;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 0 0, #ffedd5, #f97316);
+  box-shadow: 0 0 12px rgba(248, 113, 22, 0.9);
+}
+
+/* CONTACT */
+.contact-card {
+  padding: 20px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.contact-form {
+  display: grid;
+  gap: 8px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  padding: 7px 10px;
+  font-size: 13px;
+  background: rgba(15, 23, 42, 0.96);
+  color: var(--text-main);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+/* =============================
+   RESPONSIVE PORTFOLIO
+   ============================= */
+
+@media (max-width: 960px) {
+  .page {
+    padding: 20px 14px 40px;
+  }
+
+  .section-inner {
+    padding-inline: 16px;
+  }
+
+  .hero-portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .hero-portfolio-text {
+    text-align: left;
+  }
+
+  .hero-meta.hero-meta-stack {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .showcase-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -288,9 +610,35 @@
   .showcase-card-main {
     grid-row: auto;
   }
+
+  .sabirgpt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
+  .section {
+    padding: 26px 0;
+  }
+
+  .section-inner {
+    padding: 18px 14px;
+    border-radius: 20px;
+  }
+
+  .hero-portfolio-grid {
+    gap: 18px;
+  }
+
+  .device-frame {
+    width: 260px;
+    padding: 14px 10px;
+  }
+
   .showcase-grid {
     grid-template-columns: 1fr;
   }
@@ -298,5 +646,10 @@
   .showcase-card,
   .showcase-card-main {
     padding: 16px 14px 18px;
+  }
+
+  .timeline {
+    margin-left: 4px;
+    padding-left: 14px;
   }
 }

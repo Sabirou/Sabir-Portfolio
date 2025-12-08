@@ -26,7 +26,7 @@ if (dot2 && ring2) {
   }
   animateRing2();
 
-  ["a", "button", ".card"].forEach((sel) => {
+  ["a", "button", ".card", ".showcase-card"].forEach((sel) => {
     document.querySelectorAll(sel).forEach((el) => {
       el.addEventListener("mouseenter", () => {
         ring2.style.width = "60px";
