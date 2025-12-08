@@ -1,409 +1,117 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Portfolio – Sabir IAZZA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="Portfolio de Sabir IAZZA – cybersécurité, réseaux, web & électronique, Bac Pro CIEL à Toulon, objectif BTS SIO."
-  />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="style-portfolio.css" />
-</head>
-<body>
-  <!-- Curseur custom -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sabir IAZZA – Galerie visuelle</title>
+    <meta
+      name="description"
+      content="Galerie visuelle de Sabir IAZZA : interfaces, dashboards, IA SabirGPT, univers nuit titane & néon."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style-portfolio.css" />
+  </head>
+  <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <canvas id="bg-orbit"></canvas>
 
-  <!-- Fond orbes -->
-  <canvas id="bg-orbit" aria-hidden="true"></canvas>
-
-  <!-- HEADER -->
-  <header class="top-nav">
-    <div class="top-nav-inner">
-      <div class="brand brand-link" data-go-home>Sabir IAZZA</div>
-      <nav class="nav-main hide-on-mobile">
-        <a href="#profil" class="nav-link active">Profil</a>
-        <a href="#competences" class="nav-link">Compétences</a>
-        <a href="#projets" class="nav-link">Projets</a>
-        <a href="#showcase" class="nav-link">Showcase</a>
-        <a href="#sabirgpt" class="nav-link">SabirGPT</a>
-        <a href="#parcours" class="nav-link">Parcours</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      <div class="nav-right">
-        <a
-          href="https://github.com/Sabirou/Sabir-Portfolio"
-          class="nav-pill nav-pill-soft hide-on-mobile"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
-        </a>
-        <a href="#contact" class="nav-pill nav-pill-main">Me contacter</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="page">
-    <!-- PROFIL / HERO -->
-    <section class="section hero-portfolio" id="profil">
-      <div class="section-inner hero-portfolio-grid">
-        <div class="hero-portfolio-text">
-          <div class="hero-badges">
-            <span class="chip">Portfolio 2025 — Univers nuit & 3D</span>
-            <span class="chip chip-outline">Bac Pro CIEL – Toulon</span>
-          </div>
-
-          <h1 class="hero-title">
-            Je suis <span class="hero-highlight">Sabir</span>,<br />
-            je construis mon avenir entre cybersécurité, réseaux, web et projets concrets.
-          </h1>
-
-          <p class="hero-sub">
-            Étudiant en Bac Pro CIEL (cybersécurité, informatique, réseaux & électronique),
-            je transforme ce que j’apprends en projets, en expériences et en stages :
-            aujourd’hui Bac Pro, demain <strong>BTS SIO</strong>, puis encore plus loin dans l’IT.
-          </p>
-
-          <div class="hero-tags">
-            <span class="pill">Cybersécurité</span>
-            <span class="pill">Systèmes & réseaux</span>
-            <span class="pill">Développement web</span>
-            <span class="pill">Électronique</span>
-            <span class="pill pill-soft">Foot & projets perso</span>
-          </div>
-
-          <div class="hero-actions">
-            <a href="#projets" class="btn-main">Voir mes projets</a>
-            <a href="#contact" class="btn-outline">Parler d’un stage / alternance</a>
-          </div>
-
-          <div class="hero-meta hero-meta-stack">
-            <span>📍 Saint-Maximin (83)</span>
-            <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
-            <a href="tel:+33762972626">07 62 97 26 26</a>
-          </div>
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="index.html#profil" class="nav-logo">SABIR IAZZA</a>
+        <nav class="nav-main nav-main--portfolio">
+          <a href="index.html#profil" class="nav-link">Retour au profil</a>
+          <a href="index.html#showcase" class="nav-link">Showcase</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="index.html#contact" class="nav-pill nav-pill-main">Me contacter</a>
         </div>
-
-        <aside class="hero-portfolio-device">
-          <div class="device-frame">
-            <div class="device-top-dot"></div>
-            <img
-              src="hero-portrait.png"
-              alt="Portrait stylisé de Sabir"
-              class="device-screen-img"
-            />
-          </div>
-          <p class="device-caption">
-            Univers nuit titanium, inspiré des interfaces Apple / Tesla.
-          </p>
-        </aside>
+        <button class="nav-burger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-    </section>
+    </header>
 
-    <!-- COMPÉTENCES -->
-    <section class="section" id="competences">
-      <div class="section-inner">
-        <header class="section-header">
-          <h2>Compétences</h2>
-          <p>Mélange entre cybersécurité, réseaux, web et électronique.</p>
-        </header>
-
-        <div class="grid grid-4">
-          <article class="card">
-            <h3>Cybersécurité</h3>
-            <p>
-              Initiation au pentest, sensibilisation aux risques, bonnes pratiques
-              d’hygiène numérique.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Réseaux & systèmes</h3>
-            <p>
-              Adressage IP, VLAN, routage simple, configuration de switch/routeur en TP,
-              bases de monitoring.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Développement web</h3>
-            <p>
-              HTML, CSS, un peu de JavaScript, création de ce portfolio et de mini projets persos.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Électronique</h3>
-            <p>
-              Montage, diagnostic de pannes simples, lien entre matériel, réseau et usage.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJETS / STAGES -->
-    <section class="section" id="projets">
-      <div class="section-inner">
-        <header class="section-header">
-          <h2>Projets & stages</h2>
-          <p>Des expériences concrètes qui construisent mon profil IT.</p>
-        </header>
-
-        <div class="grid grid-3">
-          <article class="card">
-            <h3>Réparation de téléphones</h3>
-            <p>
-              Diagnostic, changement d’écrans et de batteries, tests après intervention
-              et contact client.
-            </p>
-            <span class="tag">Stage – 2024</span>
-          </article>
-
-          <article class="card">
-            <h3>Stage technicien fibre optique</h3>
-            <p>
-              Préparation du matériel, aide au raccordement, sécurité sur le terrain,
-              tests de connexion.
-            </p>
-            <span class="tag">Stage – Télécom 2023</span>
-          </article>
-
-          <article class="card">
-            <h3>Portfolio & SabirGPT</h3>
-            <p>
-              Conception d’un site complet, design nuit titane, IA perso qui connaît mon profil.
-            </p>
-            <span class="tag">Projet perso</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SHOWCASE VISUEL -->
-    <section id="showcase" class="section showcase">
-      <div class="section-inner">
-        <header class="section-header">
-          <h2>Showcase animé</h2>
+    <main>
+      <section class="section portfolio-hero">
+        <div class="section-header reveal fade-up">
+          <h1>Galerie visuelle</h1>
           <p>
-            Aperçus visuels de mon univers : interface, data, IA perso & réparation smartphone.
+            Une sélection d’images qui représentent mon univers : nuit néon, dashboards techniques,
+            IA perso et identité visuelle.
           </p>
-        </header>
+        </div>
+      </section>
 
-        <div class="showcase-grid">
-          <!-- Carte 1 : SabirGPT -->
-          <article class="showcase-card showcase-card-main">
-            <div class="showcase-card-header">
-              <span class="showcase-tag">IA perso</span>
-              <span class="showcase-pill">SabirGPT</span>
+      <section class="section portfolio-grid-section">
+        <div class="portfolio-grid">
+          <article class="portfolio-item reveal mask-y">
+            <div class="portfolio-media">
+              <img src="hero-portrait.png" alt="Portrait stylisé de Sabir" loading="lazy" />
             </div>
-
-            <div class="showcase-media">
-              <img
-                src="sabirgpt-ui.png"
-                alt="Interface SabirGPT, IA personnelle de Sabir"
-                class="showcase-image"
-              />
-              <div class="showcase-orbit"></div>
-            </div>
-
-            <div class="showcase-body">
-              <h3>Interface SabirGPT</h3>
-              <p>
-                IA qui répond sur mon profil, mes stages, mes objectifs & mon orientation,
-                avec une interface glassmorphism violet / néon.
-              </p>
-              <div class="showcase-tags-row">
-                <span class="chip">HTML</span>
-                <span class="chip">CSS</span>
-                <span class="chip">JavaScript</span>
-              </div>
+            <div class="portfolio-meta">
+              <h2>Hero • Nuit &amp; cercle néon</h2>
+              <p>Portrait stylisé dans un univers nuit / coucher de soleil &amp; halo bleu.</p>
             </div>
           </article>
 
-          <!-- Carte 2 : Interface technique / dashboard -->
-          <article class="showcase-card">
-            <div class="showcase-card-header">
-              <span class="showcase-tag">Tech / Data</span>
-              <span class="showcase-pill pill-outline">Interface réseau</span>
+          <article class="portfolio-item reveal mask-y">
+            <div class="portfolio-media">
+              <img src="sabirgpt-ui.png" alt="Interface SabirGPT" loading="lazy" />
             </div>
-
-            <div class="showcase-media">
-              <img
-                src="network-dashboard.png"
-                alt="Interface technique réseau / dashboard de monitoring"
-                class="showcase-image"
-              />
-              <div class="showcase-orbit small-orbit"></div>
-            </div>
-
-            <div class="showcase-body">
-              <h3>Interface technique</h3>
-              <p>
-                Dashboard inspiré des interfaces pro&nbsp;: monitoring, data, ping & glow néon.
-              </p>
-              <div class="showcase-tags-row">
-                <span class="chip chip-soft">Dashboard</span>
-                <span class="chip chip-soft">Monitoring</span>
-              </div>
+            <div class="portfolio-meta">
+              <h2>SabirGPT • Interface IA perso</h2>
+              <p>UI dédiée à mon IA, avec glassmorphism et glow orange / violet.</p>
             </div>
           </article>
 
-          <!-- Carte 3 : Réparation smartphone -->
-          <article class="showcase-card">
-            <div class="showcase-card-header">
-              <span class="showcase-tag">Réparation</span>
-              <span class="showcase-pill pill-warm">Smartphone</span>
+          <article class="portfolio-item reveal mask-y">
+            <div class="portfolio-media">
+              <img src="network-dashboard.png" alt="Dashboard réseau" loading="lazy" />
             </div>
-
-            <div class="showcase-media">
-              <img
-                src="devices-showcase.png"
-                alt="Réparation smartphone et interface technique"
-                class="showcase-image"
-              />
-              <div class="showcase-orbit warm-orbit"></div>
+            <div class="portfolio-meta">
+              <h2>Dashboard réseau • Tech / Data</h2>
+              <p>Interface inspirée des dashboards pro : ping, trafic, upload &amp; download.</p>
             </div>
+          </article>
 
-            <div class="showcase-body">
-              <h3>Réparation smartphone</h3>
-              <p>
-                Animation autour du changement d’écran, des tests techniques
-                et d’un univers néon crème / violet.
-              </p>
-              <div class="showcase-tags-row">
-                <span class="chip chip-soft">Stage</span>
-                <span class="chip chip-soft">Réparation</span>
-              </div>
+          <article class="portfolio-item reveal mask-y">
+            <div class="portfolio-media">
+              <img src="devices-showcase.png" alt="Showcase appareils" loading="lazy" />
+            </div>
+            <div class="portfolio-meta">
+              <h2>Showcase appareils &amp; réparation</h2>
+              <p>Univers smartphone / écrans, parfait pour illustrer mes stages.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-item reveal mask-y">
+            <div class="portfolio-media">
+              <img src="GPTimageLION.png" alt="Lion titane Sabir" loading="lazy" />
+            </div>
+            <div class="portfolio-meta">
+              <h2>Logo Lion • Univers nuit titane</h2>
+              <p>Référence visuelle forte : lion glowing, symbole d’énergie &amp; détermination.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-item reveal mask-y">
+            <div class="portfolio-media">
+              <img src="titanium-orb.png" alt="Orbe titane" loading="lazy" />
+            </div>
+            <div class="portfolio-meta">
+              <h2>Orbe titane • Chrome / métal</h2>
+              <p>Visuel inspiré des interfaces métal / chrome Apple &amp; rendu 3D.</p>
             </div>
           </article>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <!-- SABIRGPT – IA PERSO -->
-    <section class="section" id="sabirgpt">
-      <div class="section-inner sabirgpt-grid">
-        <article class="card">
-          <h2>SabirGPT – mon IA perso</h2>
-          <p>
-            Une IA qui connaît mon parcours, mes stages et mes objectifs. Elle peut
-            répondre à des questions sur mon âge, mon Bac Pro CIEL, mes stages
-            (fibre, téléphonie, bâtiment...), mes objectifs (BTS SIO) et plus.
-          </p>
+    <footer class="site-footer">
+      <p>© 2025 Sabir IAZZA — Galerie visuelle nuit titane &amp; néon.</p>
+    </footer>
 
-          <ul class="list">
-            <li>Connaît mon profil (âge, ville, filière, etc.).</li>
-            <li>Peut détailler mes stages et ce que j’y ai appris.</li>
-            <li>Explique mon objectif BTS SIO et la suite.</li>
-            <li>S’adapte au ton de la question (pro, chill, orientation…).</li>
-          </ul>
-        </article>
-
-        <article class="card sabirgpt-ui">
-          <header class="sabirgpt-header">
-            <div class="sabirgpt-title">
-              <span class="status-dot"></span>
-              <span>SabirGPT</span>
-            </div>
-            <div class="sabirgpt-mode">Mode : <strong>Auto</strong></div>
-          </header>
-
-          <div class="sabirgpt-chat" id="sabirgpt-chat">
-            <div class="msg msg-bot">
-              Salut, je suis SabirGPT 🤝 Pose-moi des questions sur Sabir, son Bac Pro
-              CIEL, ses stages ou son orientation.
-            </div>
-          </div>
-
-          <form class="sabirgpt-form" id="sabirgpt-form">
-            <input
-              type="text"
-              id="sabirgpt-input"
-              class="sabirgpt-input"
-              autocomplete="off"
-              placeholder="Ex : « Sabir a quel âge ? », « Quels sont ses stages ? »"
-              required
-            />
-            <button type="submit" class="btn-main sabirgpt-submit">Envoyer</button>
-          </form>
-        </article>
-      </div>
-    </section>
-
-    <!-- PARCOURS / TIMELINE -->
-    <section class="section" id="parcours">
-      <div class="section-inner">
-        <header class="section-header">
-          <h2>Parcours</h2>
-          <p>Les étapes qui construisent mon profil IT.</p>
-        </header>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <h3>Terminale Bac Pro CIEL</h3>
-              <p>Lycée à Toulon – cybersécurité, réseaux, informatique & électronique.</p>
-              <span class="tag">2024 – 2025</span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <h3>Stages en entreprise</h3>
-              <p>Fibre optique, réparation de téléphones, découverte de l’informatique.</p>
-              <span class="tag">2023 – 2024</span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <h3>Objectif : BTS SIO</h3>
-              <p>
-                Continuer en BTS SIO pour aller plus loin en développement et en systèmes / réseaux.
-              </p>
-              <span class="tag">Suite logique</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="section-inner">
-        <div class="card contact-card">
-          <div class="contact-grid">
-            <div>
-              <h2>Contact</h2>
-              <p>Un projet, un stage, une alternance ou une question ? On discute.</p>
-              <p><strong>Mail :</strong> <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></p>
-              <p><strong>Téléphone :</strong> <a href="tel:+33762972626">07 62 97 26 26</a></p>
-              <p><strong>Ville :</strong> Saint-Maximin (83)</p>
-            </div>
-
-            <form class="contact-form">
-              <input type="text" placeholder="Nom" required />
-              <input type="email" placeholder="Email" required />
-              <textarea rows="3" placeholder="Votre message…"></textarea>
-              <button type="submit" class="btn-main">Envoyer</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer-small">
-    © 2025 Sabir IAZZA — Portfolio nuit titanium. Construit avec passion pour l’IT.
-  </footer>
-
-  <script src="script-portfolio.js"></script>
-</body>
+    <script src="script-portfolio.js" defer></script>
+  </body>
 </html>
