@@ -1,116 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0b10" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0b0d12" />
   <title>Sabir IAZZA — Portfolio</title>
 
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦁</text></svg>">
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
-  <!-- Background -->
-  <div class="bg">
-    <div class="mesh"></div>
-    <div class="grid"></div>
-    <div class="orbs">
-      <span class="orb o1"></span>
-      <span class="orb o2"></span>
-      <span class="orb o3"></span>
-      <span class="orb o4"></span>
-    </div>
+  <!-- BACKGROUND (fix: toujours derrière, jamais “bloqué mascotte”) -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg-blobs"></div>
+    <canvas id="bgCanvas"></canvas>
+    <div class="bg-noise"></div>
   </div>
 
-  <!-- Top bar -->
   <header class="topbar">
-    <div class="brand">
-      <span class="dot"></span>
-      <span class="name">SABIR IAZZA</span>
-    </div>
+    <div class="topbar-inner">
+      <a class="brand" href="./index.html">
+        <span class="brand-dot"></span>
+        <span class="brand-text">SABIR IAZZA</span>
+      </a>
 
-    <div class="top-actions">
-      <a class="ghost" href="portfolio.html" aria-label="Entrer dans le portfolio">Entrer dans le portfolio</a>
+      <div class="topbar-actions">
+        <a class="pill-btn" href="portfolio.html">Entrer dans le portfolio</a>
+      </div>
     </div>
   </header>
 
   <main class="wrap">
     <section class="hero">
-      <div class="hero-card glass">
-        <div class="badges">
-          <span class="pill">Portfolio 2025 • Premium</span>
-          <span class="pill pill-cream">Bac Pro CIEL — Toulon</span>
+      <div class="hero-grid">
+        <!-- CARD -->
+        <div class="hero-card glass">
+          <div class="badges">
+            <span class="badge">
+              <span class="badge-dot"></span>
+              Disponible pour projets & opportunités
+            </span>
+            <span class="badge soft">Portfolio 2025 • Premium</span>
+            <span class="badge soft">Bac Pro CIEL — Toulon</span>
+          </div>
+
+          <h1 class="title">
+            Enchanté, je suis <span class="grad">Sabir.</span>
+          </h1>
+
+          <p class="subtitle">
+            Je transforme ma formation <strong>CIEL</strong> en <strong>projets concrets</strong> :
+            réseaux, cybersécurité, web & électronique.
+            <strong>Objectif</strong> : continuer en <strong>BTS SIO</strong>.
+          </p>
+
+          <div class="quick-list">
+            <div class="quick-item">
+              <span class="qi-ico">🎓</span>
+              <div>
+                <div class="qi-title">Terminale CIEL</div>
+                <div class="qi-sub">Réseaux • Cyber • Électronique</div>
+              </div>
+            </div>
+            <div class="quick-item">
+              <span class="qi-ico">🛠️</span>
+              <div>
+                <div class="qi-title">Stages</div>
+                <div class="qi-sub">Fibre • Téléphonie • Support</div>
+              </div>
+            </div>
+            <div class="quick-item">
+              <span class="qi-ico">🌐</span>
+              <div>
+                <div class="qi-title">Projets Web</div>
+                <div class="qi-sub">Portfolio • UI • Mini-apps</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn primary" href="portfolio.html">Voir mes projets <span class="arrow">→</span></a>
+            <a class="btn ghost" href="portfolio.html#contact">Me contacter</a>
+          </div>
+
+          <div class="meta">
+            <a
+              id="cityLink"
+              class="meta-link"
+              href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume"
+              target="_blank"
+              rel="noopener"
+              title="Ouvrir dans Google Maps"
+            >📍 Saint-Maximin (83)</a>
+
+            <span class="meta-sep">•</span>
+
+            <a class="meta-link" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+
+            <span class="meta-sep">•</span>
+
+            <a class="meta-link" href="tel:+33762972626">07 62 97 26 26</a>
+          </div>
         </div>
 
-        <h1 class="title">
-          Enchanté, je suis <span class="grad">Sabir</span>.
-        </h1>
-
-        <p class="subtitle">
-          Je transforme ma formation CIEL en <strong>projets concrets</strong> : réseaux, cybersécurité, web & électronique.
-          <br />
-          Objectif : continuer en <strong>BTS SIO</strong>.
-        </p>
-
-        <div class="mini-grid">
-          <div class="mini">
-            <div class="mini-ico">🎓</div>
-            <div class="mini-txt">
-              <strong>Terminale CIEL</strong>
-              <span>Réseaux • Cyber • Électronique</span>
-            </div>
-          </div>
-          <div class="mini">
-            <div class="mini-ico">🛠️</div>
-            <div class="mini-txt">
-              <strong>Stages</strong>
-              <span>Fibre • Téléphonie • Support</span>
-            </div>
-          </div>
-          <div class="mini">
-            <div class="mini-ico">🌐</div>
-            <div class="mini-txt">
-              <strong>Projets Web</strong>
-              <span>Portfolio • UI • Mini-apps</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="cta">
-          <a class="btn primary" href="portfolio.html">
-            Voir mes projets <span aria-hidden="true">→</span>
+        <!-- MASCOT -->
+        <div class="mascot">
+          <a id="mascotLink" class="mascot-glass" href="portfolio.html" aria-label="Entrer dans le portfolio">
+            <div class="mascot-ring" aria-hidden="true"></div>
+            <img class="mascot-img" src="assets/img/GPTimageLION.png" alt="Mascotte Lion" />
           </a>
-          <a class="btn" href="portfolio.html#contact">Me contacter</a>
-        </div>
-
-        <div class="meta">
-          <a class="meta-item" href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume" target="_blank" rel="noreferrer">
-            📍 Saint-Maximin (83)
-          </a>
-          <a class="meta-item" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
-          <a class="meta-item" href="tel:+33762972626">07 62 97 26 26</a>
-        </div>
-      </div>
-
-      <div class="mascot-area">
-        <button class="mascot glass" id="mascotBtn" aria-label="Entrer dans le portfolio">
-          <div class="mascot-ring"></div>
-          <img src="assets/img/GPTimageLION.png" alt="Mascotte Sabir" loading="eager" />
           <div class="mascot-hint">Clique sur la mascotte pour entrer ✨</div>
-        </button>
-
-        <div class="tiny-time">
-          <span class="clock" id="clock">--:--</span>
-          <span class="sep">•</span>
-          <span class="status">Disponible pour projets & opportunités</span>
         </div>
       </div>
     </section>
+
+    <footer class="foot">
+      <div class="foot-inner">
+        <span>© <span id="year"></span> Sabir IAZZA — Univers nuit • Glass • Neon</span>
+      </div>
+    </footer>
   </main>
 
-  <!-- Transition overlay -->
-  <div class="transition" id="transition" aria-hidden="true"></div>
-
-  <script src="assets/js/script.js"></script>
+  <script defer src="assets/js/script.js"></script>
 </body>
 </html>

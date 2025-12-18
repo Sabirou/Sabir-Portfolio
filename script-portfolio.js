@@ -1,255 +1,297 @@
+/* assets/js/script-portfolio.js (PORTFOLIO) */
 (function () {
-  // Year
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  "use strict";
 
-  // Progress bar
-  const progress = document.getElementById("progress");
-  function updateProgress() {
-    const doc = document.documentElement;
-    const scrollTop = doc.scrollTop || document.body.scrollTop;
-    const height = doc.scrollHeight - doc.clientHeight;
-    const p = height > 0 ? (scrollTop / height) * 100 : 0;
-    if (progress) progress.style.width = `${p}%`;
-  }
-  window.addEventListener("scroll", updateProgress, { passive: true });
-  updateProgress();
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
-  // Mobile menu
-  const burger = document.getElementById("burger");
-  const mobile = document.getElementById("mobile");
-  const closeMobile = document.getElementById("closeMobile");
-
-  function openMenu() {
-    mobile.classList.add("show");
-    mobile.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-  }
-  function closeMenu() {
-    mobile.classList.remove("show");
-    mobile.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+  function setYear() {
+    var y = $("#year");
+    if (y) y.textContent = String(new Date().getFullYear());
   }
 
-  if (burger) burger.addEventListener("click", openMenu);
-  if (closeMobile) closeMobile.addEventListener("click", closeMenu);
-  if (mobile) {
-    mobile.addEventListener("click", (e) => {
-      if (e.target === mobile) closeMenu();
+  function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+
+  // Canvas particles (même moteur que index)
+  function startParticles(canvasId) {
+    var canvas = document.getElementById(canvasId);
+    if (!canvas || !canvas.getContext) return;
+
+    var ctx = canvas.getContext("2d");
+    var dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    var W = 0, H = 0;
+
+    var particles = [];
+    var linksDist = 130;
+
+    function resize() {
+      W = canvas.clientWidth || window.innerWidth;
+      H = canvas.clientHeight || window.innerHeight;
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      makeParticles();
+    }
+
+    function rand(min, max) { return min + Math.random() * (max - min); }
+
+    function makeParticles() {
+      particles = [];
+      var area = window.innerWidth * window.innerHeight;
+      var count = Math.floor(Math.min(95, Math.max(35, area / 26000)));
+
+      for (var i = 0; i < count; i++) {
+        particles.push({
+          x: rand(0, W),
+          y: rand(0, H),
+          r: rand(0.8, 2.2),
+          vx: rand(-0.25, 0.25),
+          vy: rand(-0.20, 0.20),
+          a: rand(0.10, 0.40)
+        });
+      }
+    }
+
+    function step() {
+      ctx.clearRect(0, 0, W, H);
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -20) p.x = W + 20;
+        if (p.x > W + 20) p.x = -20;
+        if (p.y < -20) p.y = H + 20;
+        if (p.y > H + 20) p.y = -20;
+
+        ctx.globalAlpha = p.a;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      for (var a = 0; a < particles.length; a++) {
+        for (var b = a + 1; b < particles.length; b++) {
+          var pa = particles[a], pb = particles[b];
+          var dx = pa.x - pb.x, dy = pa.y - pb.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < linksDist) {
+            ctx.globalAlpha = (linksDist - dist) / linksDist * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(pa.x, pa.y);
+            ctx.lineTo(pb.x, pb.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    ctx.fillStyle = "rgba(255,255,255,1)";
+    ctx.strokeStyle = "rgba(255,255,255,1)";
+
+    resize();
+    step();
+
+    window.addEventListener("resize", function () { resize(); });
+  }
+
+  function setupProgress() {
+    var progress = $(".scroll-progress");
+    if (!progress) return;
+
+    function update() {
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - doc.clientHeight) || 1;
+      var p = (doc.scrollTop / max) * 100;
+      progress.style.width = clamp(p, 0, 100) + "%";
+    }
+
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+
+  function setupNavActive() {
+    var links = $all(".nav-link[href^='#']");
+    if (!links.length) return;
+
+    var sections = links
+      .map(function (a) { return $(a.getAttribute("href")); })
+      .filter(Boolean);
+
+    function setActive() {
+      var pos = window.scrollY + 140;
+      var current = sections[0];
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].offsetTop <= pos) current = sections[i];
+      }
+      links.forEach(function (a) {
+        a.classList.toggle("active", a.getAttribute("href") === "#" + current.id);
+      });
+    }
+
+    window.addEventListener("scroll", setActive, { passive: true });
+    setActive();
+  }
+
+  function setupBurger() {
+    var burger = $("#burger");
+    var menu = $("#mobileMenu");
+    if (!burger || !menu) return;
+
+    function close() {
+      menu.classList.remove("open");
+      document.documentElement.classList.remove("no-scroll");
+      menu.setAttribute("aria-hidden", "true");
+    }
+    function open() {
+      menu.classList.add("open");
+      document.documentElement.classList.add("no-scroll");
+      menu.setAttribute("aria-hidden", "false");
+    }
+
+    burger.addEventListener("click", function () {
+      if (menu.classList.contains("open")) close();
+      else open();
     });
-    mobile.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+
+    menu.addEventListener("click", function (e) {
+      if (e.target === menu) close();
+    });
+
+    $all(".m-link", menu).forEach(function (a) {
+      a.addEventListener("click", function () { close(); });
+    });
   }
 
-  // Active nav links
-  const navLinks = Array.from(document.querySelectorAll(".nav-link"));
-  const sections = Array.from(document.querySelectorAll("section[id]"));
+  function setupSmoothAnchors() {
+    $all('a[href^="#"]').forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var href = a.getAttribute("href");
+        if (!href || href === "#") return;
+        var target = $(href);
+        if (!target) return;
 
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }
+
+  function setupSkillBars() {
+    var bars = $all(".bar-fill");
+    if (!bars.length) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        const id = entry.target.id;
-        navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === `#${id}`));
+        var el = entry.target;
+        var w = el.getAttribute("data-width") || "70";
+        el.style.width = w + "%";
+        io.unobserve(el);
       });
-    },
-    { rootMargin: "-45% 0px -50% 0px", threshold: 0.02 }
-  );
+    }, { threshold: 0.25 });
 
-  sections.forEach((s) => io.observe(s));
-
-  // Reveal on scroll
-  const reveals = Array.from(document.querySelectorAll(".reveal"));
-  const rio = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) e.target.classList.add("on");
-      });
-    },
-    { threshold: 0.12 }
-  );
-  reveals.forEach((el) => rio.observe(el));
-
-  // Particles background (light + stable, no “bg stuck” bug)
-  const canvas = document.getElementById("particles");
-  const ctx = canvas ? canvas.getContext("2d") : null;
-
-  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isMobile = window.matchMedia && window.matchMedia("(max-width: 980px)").matches;
-
-  let w = 0, h = 0, dpr = 1;
-  const particles = [];
-
-  function resize() {
-    if (!canvas || !ctx) return;
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = canvas.clientWidth;
-    h = canvas.clientHeight;
-    canvas.width = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    bars.forEach(function (b) { b.style.width = "0%"; io.observe(b); });
   }
 
-  function rand(min, max) {
-    return Math.random() * (max - min) + min;
-  }
+  // SabirGPT (réponses utiles + fallback intelligent)
+  function setupSabirGPT() {
+    var form = $("#gptForm");
+    var input = $("#gptInput");
+    var chat = $("#gptChat");
+    if (!form || !input || !chat) return;
 
-  function initParticles() {
-    if (!canvas || !ctx) return;
-    particles.length = 0;
+    function add(role, text) {
+      var row = document.createElement("div");
+      row.className = "msg " + role;
 
-    const base = isMobile ? 34 : 52;
-    const count = reduceMotion ? 0 : base;
+      var bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.textContent = text;
 
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: rand(0, w),
-        y: rand(0, h),
-        r: rand(1.0, 2.4),
-        vx: rand(-0.18, 0.18),
-        vy: rand(-0.14, 0.14),
-        a: rand(0.15, 0.55),
-        hue: Math.random() < 0.55 ? "violet" : "cyan",
-      });
-    }
-  }
-
-  function draw() {
-    if (!canvas || !ctx) return;
-    ctx.clearRect(0, 0, w, h);
-
-    // subtle vignette
-    const g = ctx.createRadialGradient(w * 0.5, h * 0.25, 80, w * 0.5, h * 0.35, Math.max(w, h));
-    g.addColorStop(0, "rgba(180,92,255,0.05)");
-    g.addColorStop(0.45, "rgba(47,231,255,0.03)");
-    g.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
-
-    for (const p of particles) {
-      p.x += p.vx;
-      p.y += p.vy;
-
-      if (p.x < -20) p.x = w + 20;
-      if (p.x > w + 20) p.x = -20;
-      if (p.y < -20) p.y = h + 20;
-      if (p.y > h + 20) p.y = -20;
-
-      const color =
-        p.hue === "violet"
-          ? `rgba(180,92,255,${p.a})`
-          : `rgba(47,231,255,${p.a})`;
-
-      ctx.beginPath();
-      ctx.fillStyle = color;
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
+      row.appendChild(bubble);
+      chat.appendChild(row);
+      chat.scrollTop = chat.scrollHeight;
     }
 
-    requestAnimationFrame(draw);
-  }
-
-  if (canvas && ctx && !reduceMotion) {
-    resize();
-    initParticles();
-    draw();
-
-    window.addEventListener("resize", () => {
-      resize();
-      initParticles();
-    });
-  } else if (canvas && ctx) {
-    resize();
-  }
-
-  // SabirGPT (smart local bot)
-  const chatBody = document.getElementById("chatBody");
-  const chatForm = document.getElementById("chatForm");
-  const chatInput = document.getElementById("chatInput");
-
-  function addMsg(text, who = "bot") {
-    if (!chatBody) return;
-    const div = document.createElement("div");
-    div.className = `msg ${who}`;
-    div.innerHTML = text;
-    chatBody.appendChild(div);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  function normalize(s) {
-    return (s || "")
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .trim();
-  }
-
-  function answer(qRaw) {
-    const q = normalize(qRaw);
-
-    const greet = /(salut|yo|bonjour|coucou|hey|wesh)/;
-    const how = /(ca va|cv|comment tu vas|tu vas bien)/;
-    const alt = /(alternance|apprentissage|entreprise|recrute)/;
-    const stage = /(stage|stages|experience|experiences)/;
-    const skills = /(competence|competences|skills|reseau|cyber|web|html|css|javascript)/;
-    const bts = /(bts|sio|slam|sisr)/;
-    const contact = /(contact|mail|email|telephone|tel|appeler|numero)/;
-    const where = /(ou tu habites|localisation|ville|saint|maximin)/;
-    const projects = /(projet|projets|portfolio|site)/;
-
-    if (greet.test(q)) {
-      return "Salut 👋 Tu veux parler de mes <strong>compétences</strong>, de mes <strong>stages</strong>, de mon <strong>objectif BTS SIO</strong> ou du <strong>contact</strong> ?";
-    }
-    if (how.test(q)) {
-      return "Ça va nickel 😄 Merci ! Dis-moi ce que tu veux savoir sur mon profil (stages, compétences, projets, alternance…).";
-    }
-    if (alt.test(q)) {
-      return "Oui, je suis <strong>ouvert aux opportunités</strong> (projets / alternance selon période). Tu peux me contacter via <a href='mailto:amiamisabir@gmail.com'>amiamisabir@gmail.com</a> ou <a href='tel:+33762972626'>07 62 97 26 26</a>.";
-    }
-    if (stage.test(q)) {
-      return "J’ai fait des expériences en <strong>fibre optique</strong>, <strong>réparation smartphone</strong> et <strong>support/diagnostic</strong>. Je peux te détailler ce que j’ai fait sur chaque stage si tu veux.";
-    }
-    if (skills.test(q)) {
-      return "Mes bases fortes : <strong>réseaux (IP/VLAN)</strong>, <strong>cybersécurité (bonnes pratiques)</strong> et <strong>web (HTML/CSS/JS)</strong>. Tu veux plutôt côté réseau ou côté web ?";
-    }
-    if (bts.test(q)) {
-      return "Mon objectif est de continuer en <strong>BTS SIO</strong> pour monter en niveau sur dev + systèmes/réseaux, avec une progression solide et des projets concrets.";
-    }
-    if (projects.test(q)) {
-      return "Projet principal : ce <strong>portfolio premium</strong> (UI/UX + animations). Je peux aussi ajouter une section “projets techniques” si tu veux (réseau, scripts, mini-apps…).";
-    }
-    if (contact.test(q)) {
-      return "Contact : <a href='mailto:amiamisabir@gmail.com'>amiamisabir@gmail.com</a> • <a href='tel:+33762972626'>07 62 97 26 26</a> • <a target='_blank' rel='noreferrer' href='https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume'>Saint-Maximin (83)</a>.";
-    }
-    if (where.test(q)) {
-      return "Je suis basé vers <strong>Saint-Maximin (83)</strong>. Voici le lien Maps : <a target='_blank' rel='noreferrer' href='https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume'>ouvrir Google Maps ↗</a>";
+    function norm(s) {
+      return (s || "")
+        .toLowerCase()
+        .replace(/[’']/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
     }
 
-    // fallback smart
-    return "Je vois 👍 Dis-moi juste si tu veux une info sur : <strong>stages</strong>, <strong>compétences</strong>, <strong>BTS SIO</strong>, <strong>projets</strong> ou <strong>contact</strong>.";
-  }
+    function hasAny(t, arr) {
+      for (var i = 0; i < arr.length; i++) if (t.indexOf(arr[i]) !== -1) return true;
+      return false;
+    }
 
-  if (chatForm && chatInput) {
-    chatForm.addEventListener("submit", (e) => {
+    function reply(text) {
+      var t = norm(text);
+
+      // Salut / small talk
+      if (hasAny(t, ["salut", "bonjour", "yo", "coucou", "cv", "ça va", "ca va"])) {
+        return "Salut 👋 Je suis SabirGPT. Tu veux parler de mes projets, de mes stages, ou de mes compétences ?";
+      }
+
+      // Contact
+      if (hasAny(t, ["contact", "email", "mail", "tel", "téléphone", "telephone", "appeler"])) {
+        return "Tu peux me contacter : amiamisabir@gmail.com • 07 62 97 26 26. Tu préfères email ou appel ?";
+      }
+
+      // Stages / alternance
+      if (hasAny(t, ["stage", "alternance", "entreprise", "recrut", "cv"])) {
+        return "Pour stage/alternance : je peux aider en support IT, réseaux (IP/VLAN bases), et web (HTML/CSS/JS). Tu veux un résumé rapide de mes stages ?";
+      }
+
+      // Réseaux
+      if (hasAny(t, ["reseau", "réseau", "ip", "vlan", "switch", "routeur", "packet tracer", "ping"])) {
+        return "Réseaux : IP, sous-réseaux, notions VLAN, dépannage. Dis-moi ton besoin (ex: config IP, VLAN, ping) et je te guide.";
+      }
+
+      // Cyber
+      if (hasAny(t, ["cyber", "cybersécurité", "cybersecurite", "sécurité", "securite"])) {
+        return "Cybersécurité : bonnes pratiques, hygiène numérique, sensibilisation et progression via projets. Tu veux que je liste mes certifs/compétences ?";
+      }
+
+      // Projets
+      if (hasAny(t, ["projet", "portfolio", "site", "github", "ui", "design"])) {
+        return "Mes projets : Portfolio 2025 (UI glass + responsive) et SabirGPT. Tu veux plutôt voir la partie Showcase ou mes compétences ?";
+      }
+
+      // BTS
+      if (hasAny(t, ["bts", "sio", "slam", "sisr"])) {
+        return "Objectif : BTS SIO (pour monter en dev / systèmes-réseaux). Tu veux que je t’explique mon objectif en 2 phrases pour une candidature ?";
+      }
+
+      // Fallback (pas “cv”)
+      return "Je peux répondre sur : projets, stages, compétences, contact, BTS SIO. Dis-moi ce que tu veux et je réponds clairement.";
+    }
+
+    add("bot", "Salut 👋 Je suis SabirGPT. Pose-moi une question sur mes projets, mes stages, ou mon contact.");
+
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
-      const v = chatInput.value.trim();
-      if (!v) return;
-
-      addMsg(v, "user");
-      chatInput.value = "";
-
-      setTimeout(() => {
-        addMsg(answer(v), "bot");
-      }, 280);
+      var val = (input.value || "").trim();
+      if (!val) return;
+      add("user", val);
+      input.value = "";
+      window.setTimeout(function () { add("bot", reply(val)); }, 160);
     });
   }
 
-  // Quick buttons
-  document.querySelectorAll(".q").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const q = btn.getAttribute("data-q") || "";
-      if (!q) return;
-      addMsg(q, "user");
-      setTimeout(() => addMsg(answer(q), "bot"), 220);
-    });
+  document.addEventListener("DOMContentLoaded", function () {
+    setYear();
+    startParticles("bgCanvas");
+    setupProgress();
+    setupNavActive();
+    setupBurger();
+    setupSmoothAnchors();
+    setupSkillBars();
+    setupSabirGPT();
   });
 })();
