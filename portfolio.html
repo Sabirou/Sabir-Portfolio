@@ -1,117 +1,336 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Sabir IAZZA – Galerie visuelle</title>
-    <meta
-      name="description"
-      content="Galerie visuelle de Sabir IAZZA : interfaces, dashboards, IA SabirGPT, univers nuit titane & néon."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style-portfolio.css" />
-  </head>
-  <body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-    <canvas id="bg-orbit"></canvas>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#070812" />
+  <title>Portfolio — Sabir IAZZA</title>
 
-    <header class="site-header">
-      <div class="nav-inner">
-        <a href="index.html#profil" class="nav-logo">SABIR IAZZA</a>
-        <nav class="nav-main nav-main--portfolio">
-          <a href="index.html#profil" class="nav-link">Retour au profil</a>
-          <a href="index.html#showcase" class="nav-link">Showcase</a>
-        </nav>
-        <div class="nav-actions">
-          <a href="index.html#contact" class="nav-pill nav-pill-main">Me contacter</a>
-        </div>
-        <button class="nav-burger" aria-label="Menu">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style-portfolio.css" />
+</head>
+
+<body data-theme="dark">
+  <!-- BG -->
+  <div class="bg">
+    <div class="mesh"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+  </div>
+
+  <!-- Cursor (PC only) -->
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursorDot" aria-hidden="true"></div>
+
+  <!-- Progress -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a class="logo" href="./index.html" aria-label="Retour accueil">
+        <span class="logo__dot"></span>
+        <span class="logo__text">SABIR IAZZA</span>
+      </a>
+
+      <nav class="nav" aria-label="Navigation">
+        <a class="nav__link active" href="#profil">Profil</a>
+        <a class="nav__link" href="#competences">Compétences</a>
+        <a class="nav__link" href="#projets">Projets</a>
+        <a class="nav__link" href="#showcase">Showcase</a>
+        <a class="nav__link" href="#contact">Contact</a>
+      </nav>
+
+      <div class="header__actions">
+        <button class="iconBtn" id="themeToggle" aria-label="Changer de thème">☾</button>
+        <button class="burger" id="burger" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section class="section portfolio-hero">
-        <div class="section-header reveal fade-up">
-          <h1>Galerie visuelle</h1>
-          <p>
-            Une sélection d’images qui représentent mon univers : nuit néon, dashboards techniques,
-            IA perso et identité visuelle.
+  <!-- Mobile menu -->
+  <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
+    <div class="mobileMenu__panel">
+      <div class="mobileMenu__top">
+        <strong>Menu</strong>
+        <button class="iconBtn" id="closeMenu" aria-label="Fermer">✕</button>
+      </div>
+      <nav class="mobileNav">
+        <a class="mobileNav__link" href="#profil">Profil</a>
+        <a class="mobileNav__link" href="#competences">Compétences</a>
+        <a class="mobileNav__link" href="#projets">Projets</a>
+        <a class="mobileNav__link" href="#showcase">Showcase</a>
+        <a class="mobileNav__link" href="#contact">Contact</a>
+      </nav>
+      <div class="mobileMenu__footer">
+        <a class="pill" href="https://github.com/Sabirou" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero section" id="profil">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <div class="heroBadge">
+            <span class="pulseDot"></span>
+            Recherche alternance / stage — IT • Réseaux • Web
+          </div>
+
+          <h1 class="heroTitle">
+            Je suis <span class="gradText">Sabir</span>,<br />
+            je construis mon avenir entre cybersécurité, réseaux, web et projets concrets.
+          </h1>
+
+          <p class="heroSub">
+            Étudiant en <strong>Bac Pro CIEL — Toulon</strong>.
+            Je transforme les cours, stages et certifications en projets concrets.
+            Objectif : <strong>BTS SIO</strong> puis encore plus loin dans l’IT.
           </p>
+
+          <div class="heroQuick">
+            <div class="q">
+              <span class="q__k">📍</span>
+              <span class="q__v">Saint-Maximin (83)</span>
+            </div>
+            <a class="q" href="mailto:amiamisabir@gmail.com">
+              <span class="q__k">✉️</span>
+              <span class="q__v">amiamisabir@gmail.com</span>
+            </a>
+            <a class="q" href="tel:+33762972626">
+              <span class="q__k">📞</span>
+              <span class="q__v">07 62 97 26 26</span>
+            </a>
+          </div>
+
+          <div class="heroActions">
+            <a class="btn btn--primary" href="#projets">Voir mes projets <span>→</span></a>
+            <a class="btn btn--ghost" href="#contact">Parler d’un stage / alternance</a>
+          </div>
+
+          <div class="heroTags">
+            <span class="tag">Cybersécurité</span>
+            <span class="tag">Systèmes & réseaux</span>
+            <span class="tag">Développement web</span>
+            <span class="tag">Électronique</span>
+            <span class="tag tag--warm">Univers nuit & glass</span>
+          </div>
         </div>
-      </section>
 
-      <section class="section portfolio-grid-section">
-        <div class="portfolio-grid">
-          <article class="portfolio-item reveal mask-y">
-            <div class="portfolio-media">
-              <img src="hero-portrait.png" alt="Portrait stylisé de Sabir" loading="lazy" />
-            </div>
-            <div class="portfolio-meta">
-              <h2>Hero • Nuit &amp; cercle néon</h2>
-              <p>Portrait stylisé dans un univers nuit / coucher de soleil &amp; halo bleu.</p>
+        <div class="hero__card">
+          <div class="deviceCard">
+            <img
+              src="hero-portrait.png"
+              alt="Portrait stylisé"
+              width="1200"
+              height="1200"
+              loading="eager"
+              decoding="async"
+            />
+            <div class="deviceCard__ring" aria-hidden="true"></div>
+            <div class="deviceCard__glow" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETENCES -->
+    <section class="section" id="competences">
+      <div class="container">
+        <header class="sectionHead">
+          <span class="sectionLabel">Skills</span>
+          <h2 class="sectionTitle">Compétences</h2>
+          <p class="sectionSub">Une base solide + progression constante.</p>
+        </header>
+
+        <div class="grid grid--4">
+          <article class="card">
+            <h3>Cybersécurité</h3>
+            <p>Initiation au pentest, bonnes pratiques & sensibilisation.</p>
+            <div class="miniTags">
+              <span class="mini">Cisco Intro Cyber</span>
+              <span class="mini">Hygiène numérique</span>
             </div>
           </article>
 
-          <article class="portfolio-item reveal mask-y">
-            <div class="portfolio-media">
-              <img src="sabirgpt-ui.png" alt="Interface SabirGPT" loading="lazy" />
-            </div>
-            <div class="portfolio-meta">
-              <h2>SabirGPT • Interface IA perso</h2>
-              <p>UI dédiée à mon IA, avec glassmorphism et glow orange / violet.</p>
+          <article class="card">
+            <h3>Réseaux & systèmes</h3>
+            <p>Adressage IP, notions VLAN, routage, switch/router en TP.</p>
+            <div class="miniTags">
+              <span class="mini">IP</span><span class="mini">VLAN</span><span class="mini">LAN</span>
             </div>
           </article>
 
-          <article class="portfolio-item reveal mask-y">
-            <div class="portfolio-media">
-              <img src="network-dashboard.png" alt="Dashboard réseau" loading="lazy" />
-            </div>
-            <div class="portfolio-meta">
-              <h2>Dashboard réseau • Tech / Data</h2>
-              <p>Interface inspirée des dashboards pro : ping, trafic, upload &amp; download.</p>
+          <article class="card">
+            <h3>Développement web</h3>
+            <p>HTML/CSS/JS, UI propre, responsive & projets perso.</p>
+            <div class="miniTags">
+              <span class="mini">HTML</span><span class="mini">CSS</span><span class="mini">JS</span>
             </div>
           </article>
 
-          <article class="portfolio-item reveal mask-y">
-            <div class="portfolio-media">
-              <img src="devices-showcase.png" alt="Showcase appareils" loading="lazy" />
-            </div>
-            <div class="portfolio-meta">
-              <h2>Showcase appareils &amp; réparation</h2>
-              <p>Univers smartphone / écrans, parfait pour illustrer mes stages.</p>
-            </div>
-          </article>
-
-          <article class="portfolio-item reveal mask-y">
-            <div class="portfolio-media">
-              <img src="GPTimageLION.png" alt="Lion titane Sabir" loading="lazy" />
-            </div>
-            <div class="portfolio-meta">
-              <h2>Logo Lion • Univers nuit titane</h2>
-              <p>Référence visuelle forte : lion glowing, symbole d’énergie &amp; détermination.</p>
-            </div>
-          </article>
-
-          <article class="portfolio-item reveal mask-y">
-            <div class="portfolio-media">
-              <img src="titanium-orb.png" alt="Orbe titane" loading="lazy" />
-            </div>
-            <div class="portfolio-meta">
-              <h2>Orbe titane • Chrome / métal</h2>
-              <p>Visuel inspiré des interfaces métal / chrome Apple &amp; rendu 3D.</p>
+          <article class="card">
+            <h3>Électronique</h3>
+            <p>Montage, diagnostic de pannes simples, lien matériel/réseau.</p>
+            <div class="miniTags">
+              <span class="mini">Diag</span><span class="mini">Matériel</span>
             </div>
           </article>
         </div>
-      </section>
-    </main>
 
-    <footer class="site-footer">
-      <p>© 2025 Sabir IAZZA — Galerie visuelle nuit titane &amp; néon.</p>
+        <div class="grid grid--3" style="margin-top:18px;">
+          <article class="card">
+            <h3>Réparation téléphones</h3>
+            <p>Diagnostic, écrans/batteries, tests après intervention.</p>
+            <span class="pill pill--small">Stage — 2024</span>
+          </article>
+          <article class="card">
+            <h3>Stage technicien fibre optique</h3>
+            <p>Raccordement, sécurité terrain, tests de connexion.</p>
+            <span class="pill pill--small">Stage — Toulon 2023</span>
+          </article>
+          <article class="card">
+            <h3>Portfolio & SabirGPT</h3>
+            <p>Un site complet, design “night glass”, + IA perso.</p>
+            <span class="pill pill--small">Projet perso</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section class="section" id="projets">
+      <div class="container">
+        <header class="sectionHead">
+          <span class="sectionLabel">Portfolio</span>
+          <h2 class="sectionTitle">Projets</h2>
+          <p class="sectionSub">Des visuels cohérents + des pages propres.</p>
+        </header>
+
+        <div class="grid grid--3">
+          <article class="card card--media">
+            <div class="media">
+              <img src="devices-showcase.png" alt="Devices showcase" loading="lazy" decoding="async" />
+            </div>
+            <h3>Showcase multi-devices</h3>
+            <p>Design premium + responsive. Focus fluidité.</p>
+            <div class="miniTags">
+              <span class="mini">UI</span><span class="mini">Responsive</span><span class="mini">Perf</span>
+            </div>
+          </article>
+
+          <article class="card card--media">
+            <div class="media">
+              <img src="sabirgpt-ui.png" alt="SabirGPT UI" loading="lazy" decoding="async" />
+            </div>
+            <h3>SabirGPT — UI</h3>
+            <p>Une interface IA “glass” lisible sur mobile.</p>
+            <div class="miniTags">
+              <span class="mini">UX</span><span class="mini">Chat</span><span class="mini">Glass</span>
+            </div>
+          </article>
+
+          <article class="card card--media">
+            <div class="media">
+              <img src="network-dashboard.png" alt="Dashboard technique" loading="lazy" decoding="async" />
+            </div>
+            <h3>Interface technique</h3>
+            <p>Dashboard inspiré pro : monitoring, data & glow néon.</p>
+            <div class="miniTags">
+              <span class="mini">Tech</span><span class="mini">Data</span><span class="mini">Neon</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOWCASE -->
+    <section class="section" id="showcase">
+      <div class="container">
+        <header class="sectionHead">
+          <span class="sectionLabel">Showcase</span>
+          <h2 class="sectionTitle">Aperçus visuels</h2>
+          <p class="sectionSub">Des cartes propres, lisibles, et qui respirent sur mobile.</p>
+        </header>
+
+        <div class="grid grid--3">
+          <article class="card">
+            <span class="pill pill--small">SabirGPT</span>
+            <h3>Interface SabirGPT</h3>
+            <p>IA perso qui répond sur mon profil, mes stages & objectifs.</p>
+          </article>
+
+          <article class="card">
+            <span class="pill pill--small">Réseau</span>
+            <h3>Dashboard réseau</h3>
+            <p>Visu simple d’une topologie, monitoring, ping & trafic.</p>
+          </article>
+
+          <article class="card">
+            <span class="pill pill--small">Réparation</span>
+            <h3>Réparation smartphone</h3>
+            <p>Process & tests techniques autour des interventions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <header class="sectionHead">
+          <span class="sectionLabel">Contact</span>
+          <h2 class="sectionTitle">On en parle ?</h2>
+          <p class="sectionSub">Projet, stage, alternance ou question : je réponds.</p>
+        </header>
+
+        <div class="contactGrid">
+          <div class="card">
+            <h3>Coordonnées</h3>
+            <p><strong>Email :</strong> <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></p>
+            <p><strong>Téléphone :</strong> <a href="tel:+33762972626">07 62 97 26 26</a></p>
+            <p><strong>Ville :</strong> Saint-Maximin (83)</p>
+
+            <div class="ctaRow">
+              <a class="btn btn--primary" href="mailto:amiamisabir@gmail.com">Envoyer un email <span>→</span></a>
+              <a class="btn btn--ghost" href="https://github.com/Sabirou" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Message rapide</h3>
+            <form class="form" onsubmit="return false;">
+              <label>
+                <span>Nom</span>
+                <input type="text" placeholder="Votre nom" autocomplete="name" />
+              </label>
+              <label>
+                <span>Email</span>
+                <input type="email" placeholder="email@exemple.com" autocomplete="email" />
+              </label>
+              <label>
+                <span>Message</span>
+                <textarea rows="4" placeholder="Votre message..."></textarea>
+              </label>
+              <button class="btn btn--primary" type="button" id="fakeSend">Envoyer <span>→</span></button>
+              <p class="tiny">Astuce : le bouton ouvre ton mail (pas d’envoi serveur).</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <span>© <span id="year"></span> Sabir IAZZA — Portfolio night glass.</span>
+        <a href="./index.html" class="footer__link">Accueil</a>
+      </div>
     </footer>
+  </main>
 
-    <script src="script-portfolio.js" defer></script>
-  </body>
+  <script src="script-portfolio.js"></script>
+</body>
 </html>
