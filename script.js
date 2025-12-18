@@ -1,108 +1,113 @@
-(() => {
-  const REPO = "/Sabir-Portfolio";
+(function () {
+  // Safe guard (évite erreur si quelqu’un double-clique le .js sous Windows Script Host)
+  if (typeof window === "undefined" || !window.document) return;
 
-  const $ = (q, root = document) => root.querySelector(q);
+  function qs(sel) { return document.querySelector(sel); }
 
-  // YEAR
-  const year = $("#year");
-  if (year) year.textContent = String(new Date().getFullYear());
+  // Year
+  var y = qs("#year");
+  if (y) y.textContent = String(new Date().getFullYear());
 
-  // MOBILE MENU
-  const burger = $("#burger");
-  const mobile = $("#mobileMenu");
-  const closeBtn = $("#mobileClose");
-
-  function openMenu() {
-    if (!mobile || !burger) return;
-    mobile.classList.add("show");
-    mobile.setAttribute("aria-hidden", "false");
-    burger.setAttribute("aria-expanded", "true");
-  }
-
-  function closeMenu() {
-    if (!mobile || !burger) return;
-    mobile.classList.remove("show");
-    mobile.setAttribute("aria-hidden", "true");
-    burger.setAttribute("aria-expanded", "false");
-  }
-
-  if (burger) burger.addEventListener("click", () => {
-    const isOpen = mobile && mobile.classList.contains("show");
-    isOpen ? closeMenu() : openMenu();
-  });
-
-  if (closeBtn) closeBtn.addEventListener("click", closeMenu);
-
-  if (mobile) mobile.addEventListener("click", (e) => {
-    if (e.target === mobile) closeMenu();
-  });
-
-  // Close menu after click a link
-  document.querySelectorAll(".mobile-link").forEach(a => {
-    a.addEventListener("click", closeMenu);
-  });
-
-  // CONTACT FORM (visual)
-  const form = $("#contactForm");
-  const note = $("#formNote");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (note) note.textContent = "✅ Message prêt — copie/colle et envoie-moi par mail si besoin.";
+  // Mascot click -> portfolio
+  var mascotBtn = qs("#mascotBtn");
+  if (mascotBtn) {
+    mascotBtn.addEventListener("click", function () {
+      window.location.href = "portfolio.html";
     });
   }
 
-  // CANVAS BG (orbs)
-  const canvas = $("#bg-canvas");
+  // Canvas background particles (léger + fluide)
+  var canvas = qs("#bgCanvas");
   if (!canvas) return;
 
-  const ctx = canvas.getContext("2d");
-  const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0;
+  var particles = [];
+  var maxP = 48;
 
   function resize() {
-    canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(window.innerHeight * dpr);
+    W = canvas.width = Math.floor(window.innerWidth * (window.devicePixelRatio || 1));
+    H = canvas.height = Math.floor(window.innerHeight * (window.devicePixelRatio || 1));
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    // scale down for drawing coords in CSS pixels
+    ctx.scale((window.devicePixelRatio || 1), (window.devicePixelRatio || 1));
   }
-  resize();
-  window.addEventListener("resize", resize);
 
-  const W = () => canvas.width;
-  const H = () => canvas.height;
+  function rand(min, max) { return min + Math.random() * (max - min); }
 
-  const orbs = Array.from({ length: 22 }, () => ({
-    r: 60 + Math.random() * 220,
-    a: Math.random() * Math.PI * 2,
-    s: 0.0007 + Math.random() * 0.0018,
-    size: 5 + Math.random() * 16,
-    hue: 260 + Math.random() * 70, // violet -> cyan
-    ox: 0,
-    oy: 0
-  }));
+  function createParticles() {
+    particles = [];
+    var w = window.innerWidth;
+    var h = window.innerHeight;
 
-  function render() {
-    ctx.clearRect(0, 0, W(), H());
+    var count = Math.min(maxP, Math.max(26, Math.floor((w * h) / 42000)));
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: rand(0, w),
+        y: rand(0, h),
+        r: rand(1.2, 3.2),
+        vx: rand(-0.18, 0.18),
+        vy: rand(-0.14, 0.14),
+        a: rand(0.08, 0.22)
+      });
+    }
+  }
 
-    const ox = W() / 2;
-    const oy = H() / 2;
-    orbs.forEach(o => { o.ox = ox; o.oy = oy; });
+  function step() {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
 
-    for (const o of orbs) {
-      o.a += o.s;
+    ctx.clearRect(0, 0, w, h);
 
-      const x = o.ox + Math.cos(o.a) * o.r;
-      const y = o.oy + Math.sin(o.a) * o.r;
+    // draw
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
 
-      const g = ctx.createRadialGradient(x, y, 0, x, y, o.size * 8);
-      g.addColorStop(0, `hsla(${o.hue}, 90%, 65%, 0.22)`);
-      g.addColorStop(1, `hsla(${o.hue}, 90%, 65%, 0)`);
+      p.x += p.vx;
+      p.y += p.vy;
 
-      ctx.fillStyle = g;
+      if (p.x < -10) p.x = w + 10;
+      if (p.x > w + 10) p.x = -10;
+      if (p.y < -10) p.y = h + 10;
+      if (p.y > h + 10) p.y = -10;
+
       ctx.beginPath();
-      ctx.arc(x, y, o.size * 8, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
+      ctx.fillStyle = "rgba(242,231,216," + p.a + ")";
       ctx.fill();
     }
 
-    requestAnimationFrame(render);
+    // subtle links
+    for (var a = 0; a < particles.length; a++) {
+      for (var b = a + 1; b < particles.length; b++) {
+        var pa = particles[a], pb = particles[b];
+        var dx = pa.x - pb.x, dy = pa.y - pb.y;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 110) {
+          var alpha = (110 - d) / 110 * 0.08;
+          ctx.beginPath();
+          ctx.moveTo(pa.x, pa.y);
+          ctx.lineTo(pb.x, pb.y);
+          ctx.strokeStyle = "rgba(47,231,255," + alpha + ")";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+
+    window.requestAnimationFrame(step);
   }
-  render();
+
+  function init() {
+    resize();
+    createParticles();
+    step();
+  }
+
+  window.addEventListener("resize", function () {
+    resize();
+    createParticles();
+  });
+
+  init();
 })();
