@@ -1,83 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#070913" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0b10" />
   <title>Sabir IAZZA — Portfolio</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦁</text></svg>">
-  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+
 <body>
+  <!-- Background -->
   <div class="bg">
     <div class="mesh"></div>
     <div class="grid"></div>
-    <div class="vignette"></div>
+    <div class="orbs">
+      <span class="orb o1"></span>
+      <span class="orb o2"></span>
+      <span class="orb o3"></span>
+      <span class="orb o4"></span>
+    </div>
   </div>
 
+  <!-- Top bar -->
   <header class="topbar">
     <div class="brand">
       <span class="dot"></span>
-      <span class="brand__text">SABIR IAZZA</span>
+      <span class="name">SABIR IAZZA</span>
     </div>
-    <a class="pill" href="portfolio.html">Entrer dans le portfolio</a>
+
+    <div class="top-actions">
+      <a class="ghost" href="portfolio.html" aria-label="Entrer dans le portfolio">Entrer dans le portfolio</a>
+    </div>
   </header>
 
   <main class="wrap">
     <section class="hero">
-      <div class="hero__card glass">
-        <div class="hero__badges">
-          <span class="badge">Univers nuit &amp; 3D</span>
-          <span class="badge">Cybersécurité • Réseaux • Web</span>
+      <div class="hero-card glass">
+        <div class="badges">
+          <span class="pill">Portfolio 2025 • Premium</span>
+          <span class="pill pill-cream">Bac Pro CIEL — Toulon</span>
         </div>
 
-        <h1 class="h1">
-          Enchanté, je suis <span class="grad">Sabir</span>
+        <h1 class="title">
+          Enchanté, je suis <span class="grad">Sabir</span>.
         </h1>
 
-        <p class="lead">
-          Étudiant en <strong>Bac Pro CIEL</strong> à Toulon. Je construis une vitrine solide entre
-          <strong>cybersécurité</strong>, <strong>réseaux</strong> et <strong>développement web</strong> — avec des projets concrets.
+        <p class="subtitle">
+          Je transforme ma formation CIEL en <strong>projets concrets</strong> : réseaux, cybersécurité, web & électronique.
+          <br />
+          Objectif : continuer en <strong>BTS SIO</strong>.
         </p>
 
-        <div class="chips">
-          <span class="chip">Cybersécurité</span>
-          <span class="chip">Systèmes &amp; réseaux</span>
-          <span class="chip">Développement web</span>
-          <span class="chip">Électronique</span>
-          <span class="chip chip--warm">Univers nuit titane</span>
+        <div class="mini-grid">
+          <div class="mini">
+            <div class="mini-ico">🎓</div>
+            <div class="mini-txt">
+              <strong>Terminale CIEL</strong>
+              <span>Réseaux • Cyber • Électronique</span>
+            </div>
+          </div>
+          <div class="mini">
+            <div class="mini-ico">🛠️</div>
+            <div class="mini-txt">
+              <strong>Stages</strong>
+              <span>Fibre • Téléphonie • Support</span>
+            </div>
+          </div>
+          <div class="mini">
+            <div class="mini-ico">🌐</div>
+            <div class="mini-txt">
+              <strong>Projets Web</strong>
+              <span>Portfolio • UI • Mini-apps</span>
+            </div>
+          </div>
         </div>
 
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="portfolio.html">
-            Entrer dans mon portfolio <span aria-hidden="true">→</span>
+        <div class="cta">
+          <a class="btn primary" href="portfolio.html">
+            Voir mes projets <span aria-hidden="true">→</span>
           </a>
-          <a class="btn btn--ghost" href="portfolio.html#contact">Me contacter</a>
+          <a class="btn" href="portfolio.html#contact">Me contacter</a>
         </div>
 
         <div class="meta">
-          <a class="meta__item" target="_blank" rel="noopener"
-             href="https://www.google.com/maps/search/?api=1&query=Saint-Maximin-la-Sainte-Baume%2083400">
-            📍 <span>Saint-Maximin (83)</span>
+          <a class="meta-item" href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume" target="_blank" rel="noreferrer">
+            📍 Saint-Maximin (83)
           </a>
-          <span class="meta__sep">•</span>
-          <a class="meta__item" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
-          <span class="meta__sep">•</span>
-          <a class="meta__item" href="tel:+33762972626">07 62 97 26 26</a>
+          <a class="meta-item" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+          <a class="meta-item" href="tel:+33762972626">07 62 97 26 26</a>
         </div>
       </div>
 
-      <aside class="mascot">
-        <button class="mascot__btn" id="mascotBtn" aria-label="Entrer dans le portfolio">
-          <span class="mascot__ring"></span>
-          <img class="mascot__img" src="GPTimageLION.png" alt="Mascotte lion" loading="eager" />
-          <span class="mascot__glow"></span>
+      <div class="mascot-area">
+        <button class="mascot glass" id="mascotBtn" aria-label="Entrer dans le portfolio">
+          <div class="mascot-ring"></div>
+          <img src="assets/img/GPTimageLION.png" alt="Mascotte Sabir" loading="eager" />
+          <div class="mascot-hint">Clique sur la mascotte pour entrer ✨</div>
         </button>
-        <div class="mascot__hint">Clique sur la mascotte pour entrer 🚀</div>
-      </aside>
+
+        <div class="tiny-time">
+          <span class="clock" id="clock">--:--</span>
+          <span class="sep">•</span>
+          <span class="status">Disponible pour projets & opportunités</span>
+        </div>
+      </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <!-- Transition overlay -->
+  <div class="transition" id="transition" aria-hidden="true"></div>
+
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
