@@ -1,333 +1,330 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#070812" />
+  <meta name="theme-color" content="#070913" />
   <title>Portfolio — Sabir IAZZA</title>
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="style-portfolio.css" />
 </head>
-
-<body data-theme="dark">
-  <!-- BG -->
+<body>
   <div class="bg">
     <div class="mesh"></div>
-    <canvas id="particle-canvas"></canvas>
-    <div class="grain" aria-hidden="true"></div>
+    <div class="grid"></div>
+    <div class="vignette"></div>
   </div>
 
-  <!-- Cursor (PC only) -->
-  <div class="cursor" aria-hidden="true"></div>
-  <div class="cursorDot" aria-hidden="true"></div>
-
-  <!-- Progress -->
-  <div class="scroll-progress" aria-hidden="true"></div>
-
-  <!-- Header -->
   <header class="header" id="header">
-    <div class="header__inner">
-      <a class="logo" href="./index.html" aria-label="Retour accueil">
+    <div class="header__in">
+      <a class="logo" href="#profil">
         <span class="logo__dot"></span>
-        <span class="logo__text">SABIR IAZZA</span>
+        <span class="logo__txt">SABIR IAZZA</span>
       </a>
 
-      <nav class="nav" aria-label="Navigation">
-        <a class="nav__link active" href="#profil">Profil</a>
-        <a class="nav__link" href="#competences">Compétences</a>
-        <a class="nav__link" href="#projets">Projets</a>
-        <a class="nav__link" href="#showcase">Showcase</a>
-        <a class="nav__link" href="#contact">Contact</a>
+      <nav class="nav" id="nav">
+        <a href="#profil" class="nav__link is-active">Profil</a>
+        <a href="#competences" class="nav__link">Compétences</a>
+        <a href="#projets" class="nav__link">Projets</a>
+        <a href="#showcase" class="nav__link">Showcase</a>
+        <a href="#sabirgpt" class="nav__link">SabirGPT</a>
+        <a href="#parcours" class="nav__link">Parcours</a>
+        <a href="#contact" class="nav__link">Contact</a>
       </nav>
 
-      <div class="header__actions">
-        <button class="iconBtn" id="themeToggle" aria-label="Changer de thème">☾</button>
-        <button class="burger" id="burger" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile" id="mobileMenu" aria-hidden="true">
+      <a href="#profil" class="m__link">Profil</a>
+      <a href="#competences" class="m__link">Compétences</a>
+      <a href="#projets" class="m__link">Projets</a>
+      <a href="#showcase" class="m__link">Showcase</a>
+      <a href="#sabirgpt" class="m__link">SabirGPT</a>
+      <a href="#parcours" class="m__link">Parcours</a>
+      <a href="#contact" class="m__link">Contact</a>
+      <div class="m__sep"></div>
+      <a class="m__link" target="_blank" rel="noopener" href="https://github.com/Sabirou">GitHub</a>
     </div>
   </header>
 
-  <!-- Mobile menu -->
-  <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
-    <div class="mobileMenu__panel">
-      <div class="mobileMenu__top">
-        <strong>Menu</strong>
-        <button class="iconBtn" id="closeMenu" aria-label="Fermer">✕</button>
-      </div>
-      <nav class="mobileNav">
-        <a class="mobileNav__link" href="#profil">Profil</a>
-        <a class="mobileNav__link" href="#competences">Compétences</a>
-        <a class="mobileNav__link" href="#projets">Projets</a>
-        <a class="mobileNav__link" href="#showcase">Showcase</a>
-        <a class="mobileNav__link" href="#contact">Contact</a>
-      </nav>
-      <div class="mobileMenu__footer">
-        <a class="pill" href="https://github.com/Sabirou" target="_blank" rel="noreferrer">GitHub</a>
-      </div>
-    </div>
-  </div>
-
-  <main>
-    <!-- HERO -->
-    <section class="hero section" id="profil">
-      <div class="container hero__grid">
-        <div class="hero__text">
-          <div class="heroBadge">
-            <span class="pulseDot"></span>
-            Recherche alternance / stage — IT • Réseaux • Web
+  <main class="wrap">
+    <!-- PROFIL -->
+    <section class="hero" id="profil">
+      <div class="hero__grid">
+        <div class="hero__left glass">
+          <div class="hero__top">
+            <span class="badge"><span class="pulse"></span> Disponible pour projets &amp; opportunités</span>
+            <div class="hero__tags">
+              <span class="tag">Portfolio 2025 • Premium</span>
+              <span class="tag">Bac Pro CIEL — Toulon</span>
+            </div>
           </div>
 
-          <h1 class="heroTitle">
-            Je suis <span class="gradText">Sabir</span>,<br />
-            je construis mon avenir entre cybersécurité, réseaux, web et projets concrets.
+          <h1 class="h1">
+            Enchanté, je suis <span class="grad">Sabir</span>.
           </h1>
-
-          <p class="heroSub">
-            Étudiant en <strong>Bac Pro CIEL — Toulon</strong>.
-            Je transforme les cours, stages et certifications en projets concrets.
-            Objectif : <strong>BTS SIO</strong> puis encore plus loin dans l’IT.
+          <p class="lead">
+            Je transforme ma formation CIEL en <strong>projets concrets</strong> : réseaux, cybersécurité,
+            web et électronique. Objectif : continuer en <strong>BTS SIO</strong>.
           </p>
 
-          <div class="heroQuick">
-            <div class="q">
-              <span class="q__k">📍</span>
-              <span class="q__v">Saint-Maximin (83)</span>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat__k">🎓</div>
+              <div class="stat__v"><strong>Terminale CIEL</strong><span>Réseaux • Cyber • Électronique</span></div>
             </div>
-            <a class="q" href="mailto:amiamisabir@gmail.com">
-              <span class="q__k">✉️</span>
-              <span class="q__v">amiamisabir@gmail.com</span>
-            </a>
-            <a class="q" href="tel:+33762972626">
-              <span class="q__k">📞</span>
-              <span class="q__v">07 62 97 26 26</span>
-            </a>
+            <div class="stat">
+              <div class="stat__k">🛠️</div>
+              <div class="stat__v"><strong>Stages</strong><span>Fibre • Téléphonie • Support</span></div>
+            </div>
+            <div class="stat">
+              <div class="stat__k">🌐</div>
+              <div class="stat__v"><strong>Projets Web</strong><span>Portfolio • UI • Mini-apps</span></div>
+            </div>
           </div>
 
-          <div class="heroActions">
-            <a class="btn btn--primary" href="#projets">Voir mes projets <span>→</span></a>
-            <a class="btn btn--ghost" href="#contact">Parler d’un stage / alternance</a>
+          <div class="actions">
+            <a class="btn btn--primary" href="#projets">Voir mes projets →</a>
+            <a class="btn btn--ghost" href="#contact">Me contacter</a>
           </div>
 
-          <div class="heroTags">
-            <span class="tag">Cybersécurité</span>
-            <span class="tag">Systèmes & réseaux</span>
-            <span class="tag">Développement web</span>
-            <span class="tag">Électronique</span>
-            <span class="tag tag--warm">Univers nuit & glass</span>
+          <div class="meta">
+            <a class="meta__item" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&query=Saint-Maximin-la-Sainte-Baume%2083400">
+              📍 <span>Saint-Maximin (83)</span>
+            </a>
+            <span class="meta__sep">•</span>
+            <a class="meta__item" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+            <span class="meta__sep">•</span>
+            <a class="meta__item" href="tel:+33762972626">07 62 97 26 26</a>
           </div>
         </div>
 
-        <div class="hero__card">
-          <div class="deviceCard">
-            <img
-              src="hero-portrait.png"
-              alt="Portrait stylisé"
-              width="1200"
-              height="1200"
-              loading="eager"
-              decoding="async"
-            />
-            <div class="deviceCard__ring" aria-hidden="true"></div>
-            <div class="deviceCard__glow" aria-hidden="true"></div>
+        <div class="hero__right">
+          <div class="device glass">
+            <img src="hero-portrait.png" alt="Portrait stylisé" loading="lazy">
+            <div class="device__orb">
+              <img src="titanium-orb.png" alt="" aria-hidden="true" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- COMPETENCES -->
+    <!-- COMPÉTENCES -->
     <section class="section" id="competences">
-      <div class="container">
-        <header class="sectionHead">
-          <span class="sectionLabel">Skills</span>
-          <h2 class="sectionTitle">Compétences</h2>
-          <p class="sectionSub">Une base solide + progression constante.</p>
-        </header>
+      <div class="section__head">
+        <span class="kicker">Skills</span>
+        <h2>Mes compétences</h2>
+        <p>Une base solide + progression continue.</p>
+      </div>
 
-        <div class="grid grid--4">
-          <article class="card">
-            <h3>Cybersécurité</h3>
-            <p>Initiation au pentest, bonnes pratiques & sensibilisation.</p>
-            <div class="miniTags">
-              <span class="mini">Cisco Intro Cyber</span>
-              <span class="mini">Hygiène numérique</span>
-            </div>
-          </article>
+      <div class="grid grid--2">
+        <article class="card glass">
+          <h3>Cybersécurité &amp; réseaux</h3>
+          <p class="muted">Adressage IP, VLAN, bases sécurité, diagnostic.</p>
+          <ul class="list">
+            <li>Notions de sécurité (bonnes pratiques, sensibilisation)</li>
+            <li>Réseaux locaux : IP, sous-réseaux, équipements</li>
+            <li>Configuration / tests en TP (Packet Tracer)</li>
+            <li>Dépannage et logique de diagnostic</li>
+          </ul>
+        </article>
 
-          <article class="card">
-            <h3>Réseaux & systèmes</h3>
-            <p>Adressage IP, notions VLAN, routage, switch/router en TP.</p>
-            <div class="miniTags">
-              <span class="mini">IP</span><span class="mini">VLAN</span><span class="mini">LAN</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Développement web</h3>
-            <p>HTML/CSS/JS, UI propre, responsive & projets perso.</p>
-            <div class="miniTags">
-              <span class="mini">HTML</span><span class="mini">CSS</span><span class="mini">JS</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Électronique</h3>
-            <p>Montage, diagnostic de pannes simples, lien matériel/réseau.</p>
-            <div class="miniTags">
-              <span class="mini">Diag</span><span class="mini">Matériel</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="grid grid--3" style="margin-top:18px;">
-          <article class="card">
-            <h3>Réparation téléphones</h3>
-            <p>Diagnostic, écrans/batteries, tests après intervention.</p>
-            <span class="pill pill--small">Stage — 2024</span>
-          </article>
-          <article class="card">
-            <h3>Stage technicien fibre optique</h3>
-            <p>Raccordement, sécurité terrain, tests de connexion.</p>
-            <span class="pill pill--small">Stage — Toulon 2023</span>
-          </article>
-          <article class="card">
-            <h3>Portfolio & SabirGPT</h3>
-            <p>Un site complet, design “night glass”, + IA perso.</p>
-            <span class="pill pill--small">Projet perso</span>
-          </article>
-        </div>
+        <article class="card glass">
+          <h3>Développement web</h3>
+          <p class="muted">HTML / CSS / JavaScript — UI moderne & responsive.</p>
+          <ul class="list">
+            <li>Pages modernes (glassmorphism + animations propres)</li>
+            <li>Responsive mobile (structure, spacing, lisibilité)</li>
+            <li>Optimisation perf (images, animation, scroll)</li>
+            <li>Mini-projets & interfaces</li>
+          </ul>
+        </article>
       </div>
     </section>
 
     <!-- PROJETS -->
     <section class="section" id="projets">
-      <div class="container">
-        <header class="sectionHead">
-          <span class="sectionLabel">Portfolio</span>
-          <h2 class="sectionTitle">Projets</h2>
-          <p class="sectionSub">Des visuels cohérents + des pages propres.</p>
-        </header>
+      <div class="section__head">
+        <span class="kicker">Portfolio</span>
+        <h2>Projets & expériences</h2>
+        <p>Ce que je construis et ce que j’ai appris sur le terrain.</p>
+      </div>
 
-        <div class="grid grid--3">
-          <article class="card card--media">
-            <div class="media">
-              <img src="devices-showcase.png" alt="Devices showcase" loading="lazy" decoding="async" />
-            </div>
-            <h3>Showcase multi-devices</h3>
-            <p>Design premium + responsive. Focus fluidité.</p>
-            <div class="miniTags">
-              <span class="mini">UI</span><span class="mini">Responsive</span><span class="mini">Perf</span>
-            </div>
-          </article>
+      <div class="grid grid--3">
+        <article class="proj glass">
+          <div class="proj__top">
+            <span class="pill">Projet</span>
+            <strong>Portfolio 2025</strong>
+          </div>
+          <p class="muted">Vitrine moderne : design premium, sections, responsive.</p>
+          <div class="proj__tags">
+            <span>HTML</span><span>CSS</span><span>JS</span>
+          </div>
+        </article>
 
-          <article class="card card--media">
-            <div class="media">
-              <img src="sabirgpt-ui.png" alt="SabirGPT UI" loading="lazy" decoding="async" />
-            </div>
-            <h3>SabirGPT — UI</h3>
-            <p>Une interface IA “glass” lisible sur mobile.</p>
-            <div class="miniTags">
-              <span class="mini">UX</span><span class="mini">Chat</span><span class="mini">Glass</span>
-            </div>
-          </article>
+        <article class="proj glass">
+          <div class="proj__top">
+            <span class="pill">Projet</span>
+            <strong>SabirGPT</strong>
+          </div>
+          <p class="muted">Interface IA perso (présentation + UI).</p>
+          <div class="proj__tags">
+            <span>UI</span><span>Chat</span><span>UX</span>
+          </div>
+        </article>
 
-          <article class="card card--media">
-            <div class="media">
-              <img src="network-dashboard.png" alt="Dashboard technique" loading="lazy" decoding="async" />
-            </div>
-            <h3>Interface technique</h3>
-            <p>Dashboard inspiré pro : monitoring, data & glow néon.</p>
-            <div class="miniTags">
-              <span class="mini">Tech</span><span class="mini">Data</span><span class="mini">Neon</span>
-            </div>
-          </article>
-        </div>
+        <article class="proj glass">
+          <div class="proj__top">
+            <span class="pill">Stage</span>
+            <strong>Fibre optique</strong>
+          </div>
+          <p class="muted">Interventions, raccordement, tests, mise en service.</p>
+          <div class="proj__tags">
+            <span>Réseaux</span><span>Terrain</span><span>Tests</span>
+          </div>
+        </article>
       </div>
     </section>
 
     <!-- SHOWCASE -->
     <section class="section" id="showcase">
-      <div class="container">
-        <header class="sectionHead">
-          <span class="sectionLabel">Showcase</span>
-          <h2 class="sectionTitle">Aperçus visuels</h2>
-          <p class="sectionSub">Des cartes propres, lisibles, et qui respirent sur mobile.</p>
-        </header>
+      <div class="section__head">
+        <span class="kicker">Showcase</span>
+        <h2>Interfaces & visuels</h2>
+        <p>Des aperçus propres et cohérents avec ton style.</p>
+      </div>
 
-        <div class="grid grid--3">
-          <article class="card">
-            <span class="pill pill--small">SabirGPT</span>
-            <h3>Interface SabirGPT</h3>
-            <p>IA perso qui répond sur mon profil, mes stages & objectifs.</p>
-          </article>
+      <div class="grid grid--3">
+        <article class="shot glass">
+          <img src="sabirgpt-ui.png" alt="Interface SabirGPT" loading="lazy">
+          <div class="shot__txt">
+            <strong>Interface SabirGPT</strong>
+            <span class="muted">UI moderne + glass + CTA</span>
+          </div>
+        </article>
 
-          <article class="card">
-            <span class="pill pill--small">Réseau</span>
-            <h3>Dashboard réseau</h3>
-            <p>Visu simple d’une topologie, monitoring, ping & trafic.</p>
-          </article>
+        <article class="shot glass">
+          <img src="network-dashboard.png" alt="Dashboard réseau" loading="lazy">
+          <div class="shot__txt">
+            <strong>Interface technique</strong>
+            <span class="muted">Dashboard / data / glow</span>
+          </div>
+        </article>
 
-          <article class="card">
-            <span class="pill pill--small">Réparation</span>
-            <h3>Réparation smartphone</h3>
-            <p>Process & tests techniques autour des interventions.</p>
-          </article>
+        <article class="shot glass">
+          <img src="devices-showcase.png" alt="Showcase devices" loading="lazy">
+          <div class="shot__txt">
+            <strong>Showcase devices</strong>
+            <span class="muted">Vitrine responsive</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SABIRGPT -->
+    <section class="section" id="sabirgpt">
+      <div class="section__head">
+        <span class="kicker">IA</span>
+        <h2>SabirGPT — mon IA perso</h2>
+        <p>Une section simple, propre, sans “bruit”.</p>
+      </div>
+
+      <div class="grid grid--2">
+        <article class="card glass">
+          <h3>À quoi ça sert ?</h3>
+          <ul class="list">
+            <li>Présenter mon profil, mes objectifs, mes compétences</li>
+            <li>Répondre à des questions “recruteur” rapidement</li>
+            <li>Orienter vers contact / GitHub / projets</li>
+          </ul>
+        </article>
+
+        <article class="card glass">
+          <h3>Prochaine étape</h3>
+          <p class="muted">Brancher une vraie logique / API plus tard si tu veux. Là, on garde le design nickel.</p>
+          <a class="btn btn--primary" href="#contact">Me contacter →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- PARCOURS -->
+    <section class="section" id="parcours">
+      <div class="section__head">
+        <span class="kicker">Parcours</span>
+        <h2>Mon évolution</h2>
+      </div>
+
+      <div class="timeline glass">
+        <div class="trow">
+          <span class="tbullet"></span>
+          <div>
+            <strong>Terminale Bac Pro CIEL</strong>
+            <p class="muted">Toulon — cybersécurité, réseaux, informatique & électronique.</p>
+          </div>
+        </div>
+        <div class="trow">
+          <span class="tbullet"></span>
+          <div>
+            <strong>Stages en entreprise</strong>
+            <p class="muted">Fibre optique, réparation téléphones, support / diagnostic.</p>
+          </div>
+        </div>
+        <div class="trow">
+          <span class="tbullet"></span>
+          <div>
+            <strong>Objectif : BTS SIO</strong>
+            <p class="muted">Continuer et passer un cap sur dev + systèmes/réseaux.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section class="section" id="contact">
-      <div class="container">
-        <header class="sectionHead">
-          <span class="sectionLabel">Contact</span>
-          <h2 class="sectionTitle">On en parle ?</h2>
-          <p class="sectionSub">Projet, stage, alternance ou question : je réponds.</p>
-        </header>
+      <div class="section__head">
+        <span class="kicker">Contact</span>
+        <h2>On en parle ?</h2>
+        <p>Projet, stage, alternance ou question : je réponds.</p>
+      </div>
 
-        <div class="contactGrid">
-          <div class="card">
-            <h3>Coordonnées</h3>
-            <p><strong>Email :</strong> <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></p>
-            <p><strong>Téléphone :</strong> <a href="tel:+33762972626">07 62 97 26 26</a></p>
-            <p><strong>Ville :</strong> Saint-Maximin (83)</p>
+      <div class="grid grid--2">
+        <article class="card glass">
+          <h3>Coordonnées</h3>
+          <p class="muted">
+            Email : <a class="link" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a><br/>
+            Téléphone : <a class="link" href="tel:+33762972626">07 62 97 26 26</a><br/>
+            Ville :
+            <a class="link" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&query=Saint-Maximin-la-Sainte-Baume%2083400">
+              Saint-Maximin (83)
+            </a>
+          </p>
 
-            <div class="ctaRow">
-              <a class="btn btn--primary" href="mailto:amiamisabir@gmail.com">Envoyer un email <span>→</span></a>
-              <a class="btn btn--ghost" href="https://github.com/Sabirou" target="_blank" rel="noreferrer">GitHub</a>
-            </div>
+          <div class="actions">
+            <a class="btn btn--primary" href="mailto:amiamisabir@gmail.com">Envoyer un email →</a>
+            <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://github.com/Sabirou">GitHub</a>
           </div>
+        </article>
 
-          <div class="card">
-            <h3>Message rapide</h3>
-            <form class="form" onsubmit="return false;">
-              <label>
-                <span>Nom</span>
-                <input type="text" placeholder="Votre nom" autocomplete="name" />
-              </label>
-              <label>
-                <span>Email</span>
-                <input type="email" placeholder="email@exemple.com" autocomplete="email" />
-              </label>
-              <label>
-                <span>Message</span>
-                <textarea rows="4" placeholder="Votre message..."></textarea>
-              </label>
-              <button class="btn btn--primary" type="button" id="fakeSend">Envoyer <span>→</span></button>
-              <p class="tiny">Astuce : le bouton ouvre ton mail (pas d’envoi serveur).</p>
-            </form>
-          </div>
-        </div>
+        <article class="card glass">
+          <h3>Message rapide</h3>
+          <form class="form" onsubmit="return false;">
+            <input class="inp" placeholder="Nom" autocomplete="name" />
+            <input class="inp" placeholder="Email" autocomplete="email" />
+            <textarea class="inp inp--area" placeholder="Votre message..."></textarea>
+            <button class="btn btn--primary" type="button" id="copyMail">Copier un email prêt →</button>
+            <p class="muted tiny">Le bouton te prépare un message (sans backend). Simple & propre.</p>
+          </form>
+        </article>
       </div>
     </section>
 
     <footer class="footer">
-      <div class="container footer__inner">
-        <span>© <span id="year"></span> Sabir IAZZA — Portfolio night glass.</span>
-        <a href="./index.html" class="footer__link">Accueil</a>
-      </div>
+      © <span id="year"></span> Sabir IAZZA — Portfolio.
     </footer>
   </main>
 

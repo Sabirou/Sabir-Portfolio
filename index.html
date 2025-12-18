@@ -1,99 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#070812" />
+  <meta name="theme-color" content="#070913" />
   <title>Sabir IAZZA — Portfolio</title>
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦁</text></svg>">
   <link rel="stylesheet" href="style.css" />
 </head>
-
-<body class="page page-index" data-theme="dark">
-  <!-- BG -->
+<body>
   <div class="bg">
     <div class="mesh"></div>
-    <canvas id="particles"></canvas>
-    <div class="grain" aria-hidden="true"></div>
+    <div class="grid"></div>
+    <div class="vignette"></div>
   </div>
 
-  <!-- Progress -->
-  <div class="scroll-progress" aria-hidden="true"></div>
-
-  <!-- Header -->
-  <header class="topbar" id="topbar">
-    <div class="topbar__inner">
-      <a class="brand" href="./index.html" aria-label="Accueil">
-        <span class="brand__dot"></span>
-        <span class="brand__name">SABIR IAZZA</span>
-      </a>
-
-      <div class="topbar__actions">
-        <a class="pill pill--ghost" href="./portfolio.html">Entrer dans le portfolio</a>
-      </div>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <span class="brand__text">SABIR IAZZA</span>
     </div>
+    <a class="pill" href="portfolio.html">Entrer dans le portfolio</a>
   </header>
 
-  <!-- Main -->
   <main class="wrap">
     <section class="hero">
-      <div class="hero__content">
-        <div class="chips">
-          <span class="chip">Univers nuit & 3D</span>
-          <span class="chip chip--accent">Cybersécurité • Réseaux • Web</span>
+      <div class="hero__card glass">
+        <div class="hero__badges">
+          <span class="badge">Univers nuit &amp; 3D</span>
+          <span class="badge">Cybersécurité • Réseaux • Web</span>
         </div>
 
         <h1 class="h1">
-          Je suis <span class="accent">Sabir</span>,<br />
-          je construis mon avenir entre cybersécurité, réseaux, web et projets concrets.
+          Enchanté, je suis <span class="grad">Sabir</span>
         </h1>
 
         <p class="lead">
-          Étudiant en <strong>Bac Pro CIEL</strong> (cybersécurité, informatique, réseaux & électronique),
-          je transforme ce que j’apprends en projets et en expériences.
-          Aujourd’hui Bac Pro, demain <strong>BTS SIO</strong>.
+          Étudiant en <strong>Bac Pro CIEL</strong> à Toulon. Je construis une vitrine solide entre
+          <strong>cybersécurité</strong>, <strong>réseaux</strong> et <strong>développement web</strong> — avec des projets concrets.
         </p>
 
-        <div class="tags">
-          <span class="tag">Cybersécurité</span>
-          <span class="tag">Systèmes & réseaux</span>
-          <span class="tag">Développement web</span>
-          <span class="tag">Électronique</span>
-          <span class="tag tag--warm">Univers nuit titane</span>
+        <div class="chips">
+          <span class="chip">Cybersécurité</span>
+          <span class="chip">Systèmes &amp; réseaux</span>
+          <span class="chip">Développement web</span>
+          <span class="chip">Électronique</span>
+          <span class="chip chip--warm">Univers nuit titane</span>
         </div>
 
-        <div class="cta">
-          <a class="btn btn--primary" href="./portfolio.html">
-            Entrer dans mon portfolio
-            <span class="btn__arrow">→</span>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="portfolio.html">
+            Entrer dans mon portfolio <span aria-hidden="true">→</span>
           </a>
-          <a class="btn btn--ghost" href="./portfolio.html#contact">Me contacter</a>
+          <a class="btn btn--ghost" href="portfolio.html#contact">Me contacter</a>
         </div>
 
         <div class="meta">
-          <span class="meta__item">📍 Saint-Maximin (83)</span>
+          <a class="meta__item" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&query=Saint-Maximin-la-Sainte-Baume%2083400">
+            📍 <span>Saint-Maximin (83)</span>
+          </a>
+          <span class="meta__sep">•</span>
           <a class="meta__item" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+          <span class="meta__sep">•</span>
           <a class="meta__item" href="tel:+33762972626">07 62 97 26 26</a>
         </div>
       </div>
 
-      <aside class="hero__visual">
-        <a class="orb" href="./portfolio.html" aria-label="Ouvrir le portfolio">
-          <img
-            src="GPTimageLION.png"
-            alt="Mascotte Sabir"
-            width="520"
-            height="520"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
-          <span class="orb__ring" aria-hidden="true"></span>
-          <span class="orb__glow" aria-hidden="true"></span>
-        </a>
-
-        <p class="hint">Clique sur la mascotte pour entrer 🚀</p>
+      <aside class="mascot">
+        <button class="mascot__btn" id="mascotBtn" aria-label="Entrer dans le portfolio">
+          <span class="mascot__ring"></span>
+          <img class="mascot__img" src="GPTimageLION.png" alt="Mascotte lion" loading="eager" />
+          <span class="mascot__glow"></span>
+        </button>
+        <div class="mascot__hint">Clique sur la mascotte pour entrer 🚀</div>
       </aside>
     </section>
   </main>
