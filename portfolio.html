@@ -1,404 +1,223 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="theme-color" content="#0b0d12" />
-  <title>Sabir IAZZA — Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f1a" />
+  <title>Portfolio — Sabir IAZZA</title>
+  <meta name="description" content="Portfolio de Sabir IAZZA — projets, compétences, parcours, SabirGPT." />
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💼</text></svg>">
-  <link rel="stylesheet" href="assets/css/style-portfolio.css" />
+  <link rel="stylesheet" href="/Sabir-Portfolio/assets/css/style-portfolio.css" />
+  <script defer src="/Sabir-Portfolio/assets/js/script-portfolio.js"></script>
 </head>
 
 <body>
-  <!-- BACKGROUND -->
-  <div class="bg" aria-hidden="true">
-    <div class="bg-blobs"></div>
-    <canvas id="bgCanvas"></canvas>
-    <div class="bg-noise"></div>
+  <div class="bg">
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
   </div>
 
-  <div class="scroll-progress" aria-hidden="true"></div>
+  <header class="p-topbar">
+    <a class="p-back" href="/Sabir-Portfolio/index.html">← Accueil</a>
 
-  <header class="header" id="header">
-    <div class="header-inner">
-      <a class="logo" href="#profil" aria-label="Aller au profil">
-        <span class="logo-dot"></span>
-        <span class="logo-text">SABIR IAZZA</span>
-      </a>
+    <nav class="p-nav" aria-label="Navigation">
+      <a href="#profil" class="p-link">Profil</a>
+      <a href="#competences" class="p-link">Compétences</a>
+      <a href="#projets" class="p-link">Projets</a>
+      <a href="#ia" class="p-link">SabirGPT</a>
+      <a href="#contact" class="p-link">Contact</a>
+    </nav>
 
-      <nav class="nav" aria-label="Navigation principale">
-        <a class="nav-link active" href="#profil">Profil</a>
-        <a class="nav-link" href="#competences">Compétences</a>
-        <a class="nav-link" href="#projets">Projets</a>
-        <a class="nav-link" href="#showcase">Showcase</a>
-        <a class="nav-link" href="#sabirgpt">SabirGPT</a>
-        <a class="nav-link" href="#parcours">Parcours</a>
-        <a class="nav-link" href="#contact">Contact</a>
-      </nav>
-
-      <button class="burger" id="burger" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <a class="p-pill" target="_blank" rel="noreferrer" href="https://github.com/Sabirou">GitHub</a>
   </header>
 
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-panel glass">
-      <div class="mobile-title">Menu</div>
-      <a class="m-link" href="#profil">Profil</a>
-      <a class="m-link" href="#competences">Compétences</a>
-      <a class="m-link" href="#projets">Projets</a>
-      <a class="m-link" href="#showcase">Showcase</a>
-      <a class="m-link" href="#sabirgpt">SabirGPT</a>
-      <a class="m-link" href="#parcours">Parcours</a>
-      <a class="m-link" href="#contact">Contact</a>
-      <div class="mobile-bottom">
-        <a class="pill" href="mailto:amiamisabir@gmail.com">Email</a>
-        <a class="pill" href="https://github.com/Sabirou" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </div>
-  </div>
+  <main class="p-wrap">
+    <!-- HERO -->
+    <section class="p-hero" id="profil">
+      <div class="p-hero-left">
+        <div class="p-badge"><span class="pulse"></span> Portfolio premium — V10</div>
+        <h1 class="p-title">
+          Sabir IAZZA — <span class="grad">CIEL</span> • <span class="grad2">Cyber</span> • <span class="cream">Web</span>
+        </h1>
 
-  <main class="main">
-    <!-- PROFIL -->
-    <section class="section hero" id="profil">
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-card glass">
-            <div class="badges">
-              <span class="badge">
-                <span class="badge-dot"></span>
-                Disponible pour alternance / stages
-              </span>
-              <span class="badge soft">Univers nuit & 3D</span>
-              <span class="badge soft">Cybersécurité • Réseaux • Web</span>
-            </div>
+        <p class="p-sub">
+          Je progresse en cybersécurité et réseaux, et je construis des interfaces modernes.
+          Mon objectif : <strong>BTS SIO</strong> et un profil IT solide.
+        </p>
 
-            <h1 class="h1">
-              Enchanté, je suis <span class="grad">Sabir</span>
-            </h1>
+        <div class="p-actions">
+          <a class="btn primary" href="#projets">Voir mes projets</a>
+          <a class="btn ghost" href="#ia">Tester SabirGPT</a>
+        </div>
 
-            <p class="p">
-              Étudiant en <strong>Bac Pro CIEL</strong>, je construis un profil solide entre
-              <strong>réseaux</strong>, <strong>cybersécurité</strong> et <strong>développement web</strong>.
-              Je veux progresser avec des <strong>projets concrets</strong> et une entreprise qui me fait monter en niveau.
-            </p>
-
-            <div class="mini-grid">
-              <div class="mini glass2">
-                <div class="mini-top">
-                  <span class="mini-ico">🎓</span>
-                  <span class="mini-title">Terminale CIEL</span>
-                </div>
-                <div class="mini-sub">Réseaux • Cyber • Électronique</div>
-              </div>
-
-              <div class="mini glass2">
-                <div class="mini-top">
-                  <span class="mini-ico">🧰</span>
-                  <span class="mini-title">Stages</span>
-                </div>
-                <div class="mini-sub">Fibre • Téléphonie • Support</div>
-              </div>
-
-              <div class="mini glass2">
-                <div class="mini-top">
-                  <span class="mini-ico">🌐</span>
-                  <span class="mini-title">Projets web</span>
-                </div>
-                <div class="mini-sub">UI • Portfolio • Mini-apps</div>
-              </div>
-            </div>
-
-            <div class="cta-row">
-              <a class="btn primary" href="#projets">Voir mes projets <span class="arrow">→</span></a>
-              <a class="btn ghost" href="#contact">Me contacter</a>
-            </div>
-
-            <div class="meta">
-              <a class="meta-link" href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume" target="_blank" rel="noopener">📍 Saint-Maximin (83)</a>
-              <span class="meta-sep">•</span>
-              <a class="meta-link" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
-              <span class="meta-sep">•</span>
-              <a class="meta-link" href="tel:+33762972626">07 62 97 26 26</a>
-            </div>
-          </div>
-
-          <div class="hero-media glass">
-            <div class="media-badge">Portrait</div>
-            <img class="media-img" src="assets/img/hero-portrait.png" alt="Portrait visuel" />
-          </div>
+        <div class="p-meta">
+          📍 <a class="link" target="_blank" rel="noreferrer"
+            href="https://www.google.com/maps/search/?api=1&query=Saint-Maximin+83">Saint-Maximin (83)</a>
+          · 📧 <a class="link" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+          · 📞 <a class="link" href="tel:+33762972626">07 62 97 26 26</a>
         </div>
       </div>
+
+      <aside class="p-hero-right">
+        <div class="p-portrait">
+          <img src="/Sabir-Portfolio/assets/img/hero-portrait.png" alt="Portrait Sabir (IA)" />
+        </div>
+
+        <div class="p-mini">
+          <div class="mini-top">
+            <span class="mini-dot"></span>
+            <span>Highlights</span>
+          </div>
+          <ul>
+            <li>CIEL • Toulon</li>
+            <li>Stages : fibre & téléphone</li>
+            <li>Portfolio + IA locale</li>
+          </ul>
+        </div>
+      </aside>
     </section>
 
-    <!-- COMPÉTENCES -->
-    <section class="section" id="competences">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Skills</span>
-          <h2 class="h2">Mes compétences</h2>
-          <p class="sub">Une base solide + progression continue.</p>
-        </div>
+    <!-- COMPETENCES -->
+    <section class="p-section" id="competences">
+      <header class="p-head">
+        <h2>Compétences</h2>
+        <p>Propre, utile, et orienté terrain.</p>
+      </header>
 
-        <div class="grid-2">
-          <div class="card glass">
-            <div class="card-top">
-              <span class="card-ico">🧠</span>
-              <h3 class="h3">Tech & réseau</h3>
-            </div>
-            <p class="p2">Réseaux, cybersécurité, support et web.</p>
+      <div class="p-grid3">
+        <article class="card card-glow">
+          <h3>Cybersécurité</h3>
+          <p>Bonnes pratiques, sensibilisation, bases sécurité.</p>
+          <div class="tags"><span>hygiène</span><span>risques</span><span>rigueur</span></div>
+        </article>
 
-            <ul class="list">
-              <li>Adressage IP, notions VLAN / LAN</li>
-              <li>Support informatique (diagnostic, dépannage)</li>
-              <li>Bases cybersécurité (bonnes pratiques)</li>
-              <li>HTML / CSS / JS (responsive, UI)</li>
-            </ul>
+        <article class="card card-glow2">
+          <h3>Réseaux</h3>
+          <p>IP, LAN, dépannage, logique réseau.</p>
+          <div class="tags"><span>IP</span><span>LAN</span><span>diagnostic</span></div>
+        </article>
 
-            <div class="bars">
-              <div class="bar">
-                <div class="bar-top"><span>Réseaux</span><span class="pct">80%</span></div>
-                <div class="bar-track"><div class="bar-fill" data-width="80"></div></div>
-              </div>
-              <div class="bar">
-                <div class="bar-top"><span>Cybersécurité</span><span class="pct">75%</span></div>
-                <div class="bar-track"><div class="bar-fill" data-width="75"></div></div>
-              </div>
-              <div class="bar">
-                <div class="bar-top"><span>Web</span><span class="pct">70%</span></div>
-                <div class="bar-track"><div class="bar-fill" data-width="70"></div></div>
-              </div>
-            </div>
-
-            <div class="tags">
-              <span class="tag">CIEL</span><span class="tag">Réseaux</span><span class="tag">Cyber</span><span class="tag">Web</span>
-            </div>
-          </div>
-
-          <div class="card glass">
-            <div class="card-top">
-              <span class="card-ico">⚡</span>
-              <h3 class="h3">Savoir-être</h3>
-            </div>
-            <p class="p2">Fiable, motivé, propre dans le travail.</p>
-
-            <ul class="list">
-              <li>Sérieux et respect des consignes</li>
-              <li>Apprend vite + aime progresser</li>
-              <li>Bonne communication</li>
-              <li>Autonome, esprit d’équipe</li>
-            </ul>
-
-            <div class="tags">
-              <span class="tag">Curieux</span><span class="tag">Motivé</span><span class="tag">Autonome</span><span class="tag">Pro</span>
-            </div>
-          </div>
-        </div>
+        <article class="card card-cream">
+          <h3>Web</h3>
+          <p>HTML/CSS solides, JS en progression, UI/UX.</p>
+          <div class="tags"><span>UI</span><span>HTML</span><span>CSS</span></div>
+        </article>
       </div>
     </section>
 
     <!-- PROJETS -->
-    <section class="section" id="projets">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Portfolio</span>
-          <h2 class="h2">Projets & expériences</h2>
-          <p class="sub">Ce que je construis et ce que j’ai appris sur le terrain.</p>
-        </div>
+    <section class="p-section" id="projets">
+      <header class="p-head">
+        <h2>Projets</h2>
+        <p>Du concret qui donne envie.</p>
+      </header>
 
-        <div class="grid-2">
-          <div class="card glass">
-            <div class="card-top">
-              <span class="card-ico">🌐</span>
-              <h3 class="h3">Portfolio 2025</h3>
-            </div>
-            <p class="p2">Vitrine moderne : UI glass, animations fluides, responsive mobile.</p>
-            <div class="tags">
-              <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span><span class="tag">UI</span>
-            </div>
-          </div>
+      <div class="p-grid2">
+        <article class="card project">
+          <div class="project-head"><span class="tag">Projet</span><span class="tag soft">2025</span></div>
+          <h3>Portfolio V10</h3>
+          <p>Design premium glass + animations + mobile clean + structure claire.</p>
+        </article>
 
-          <div class="card glass">
-            <div class="card-top">
-              <span class="card-ico">🤖</span>
-              <h3 class="h3">SabirGPT</h3>
-            </div>
-            <p class="p2">Mini assistant intégré, réponses utiles (projets, contact, compétences).</p>
-            <div class="tags">
-              <span class="tag">Chat UI</span><span class="tag">JS</span><span class="tag">UX</span>
-            </div>
-          </div>
+        <article class="card project">
+          <div class="project-head"><span class="tag">Projet</span><span class="tag soft">2025</span></div>
+          <h3>SabirGPT (IA locale)</h3>
+          <p>Assistant intégré qui répond de manière cohérente sur mon profil.</p>
+        </article>
 
-          <div class="card glass">
-            <div class="card-top">
-              <span class="card-ico">📡</span>
-              <h3 class="h3">Stage fibre</h3>
-            </div>
-            <p class="p2">Installation, raccordement, tests, intervention client.</p>
-            <div class="tags">
-              <span class="tag">Réseaux</span><span class="tag">Fibre</span><span class="tag">Terrain</span>
-            </div>
-          </div>
+        <article class="card project">
+          <div class="project-head"><span class="tag">Stage</span><span class="tag soft">2024</span></div>
+          <h3>Réparation téléphones</h3>
+          <p>Diagnostic, remplacement, tests et relation client.</p>
+        </article>
 
-          <div class="card glass">
-            <div class="card-top">
-              <span class="card-ico">🛠️</span>
-              <h3 class="h3">Support / Téléphonie</h3>
-            </div>
-            <p class="p2">Diagnostic, réparations, tests, aide utilisateurs.</p>
-            <div class="tags">
-              <span class="tag">Support</span><span class="tag">Diagnostic</span><span class="tag">Client</span>
-            </div>
-          </div>
-        </div>
+        <article class="card project">
+          <div class="project-head"><span class="tag">Stage</span><span class="tag soft">2023</span></div>
+          <h3>Fibre optique</h3>
+          <p>Préparation matériel, raccordement, tests de connexion.</p>
+        </article>
+      </div>
+
+      <div class="p-media">
+        <img src="/Sabir-Portfolio/assets/img/network-dashboard.png" alt="Visuel réseau (optionnel)" />
       </div>
     </section>
 
-    <!-- SHOWCASE -->
-    <section class="section" id="showcase">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Showcase</span>
-          <h2 class="h2">Interfaces & visuels</h2>
-          <p class="sub">Des aperçus propres et cohérents avec mon style.</p>
-        </div>
+    <!-- IA -->
+    <section class="p-section" id="ia">
+      <header class="p-head">
+        <h2>SabirGPT</h2>
+        <p>Pose une question : parcours, stage, objectifs, compétences.</p>
+      </header>
 
-        <div class="grid-2">
-          <figure class="shot glass">
-            <figcaption class="shot-cap">Dashboard réseau (UI)</figcaption>
-            <img class="shot-img" src="assets/img/network-dashboard.png" alt="Dashboard réseau" />
-          </figure>
+      <div class="p-grid2">
+        <article class="card">
+          <h3>Exemples</h3>
+          <div class="list">
+            <div class="li">• “Tu fais quoi en CIEL ?”</div>
+            <div class="li">• “Parle-moi de ton stage fibre.”</div>
+            <div class="li">• “Tu veux faire quoi après le bac ?”</div>
+            <div class="li">• “Quelles sont tes compétences web ?”</div>
+          </div>
+          <div class="ia-ui-img">
+            <img src="/Sabir-Portfolio/assets/img/sabirgpt-ui.webp" alt="UI SabirGPT (optionnel)" />
+          </div>
+        </article>
 
-          <figure class="shot glass">
-            <figcaption class="shot-cap">SabirGPT (UI)</figcaption>
-            <img class="shot-img" src="assets/img/sabirgpt-ui.png" alt="SabirGPT UI" />
-          </figure>
+        <article class="card ia-card">
+          <div class="ia-chat" id="iaChat" aria-live="polite">
+            <div class="msg bot">
+              Salut 👋 Je suis <strong>SabirGPT</strong>. Pose-moi une question sur Sabir !
+            </div>
+          </div>
 
-          <figure class="shot glass">
-            <figcaption class="shot-cap">Devices showcase</figcaption>
-            <img class="shot-img" src="assets/img/devices-showcase.png" alt="Devices showcase" />
-          </figure>
+          <form class="ia-form" id="iaForm">
+            <input class="ia-input" id="iaInput" type="text" placeholder="Ex : “C’est quoi tes projets ?”" autocomplete="off" required />
+            <button class="btn primary" type="submit">Envoyer</button>
+          </form>
 
-          <figure class="shot glass">
-            <figcaption class="shot-cap">Titanium orb</figcaption>
-            <img class="shot-img" src="assets/img/titanium-orb.png" alt="Titanium orb" />
-          </figure>
-        </div>
+          <p class="muted tiny">Réponses locales (sans API) — rapides et cohérentes.</p>
+        </article>
       </div>
     </section>
 
-    <!-- SABIRGPT -->
-    <section class="section" id="sabirgpt">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">IA</span>
-          <h2 class="h2">SabirGPT — mon assistant</h2>
-          <p class="sub">Réponses utiles (pas juste “cv”).</p>
+    <!-- CONTACT -->
+    <section class="p-section" id="contact">
+      <header class="p-head">
+        <h2>Contact</h2>
+        <p>Simple et pro.</p>
+      </header>
+
+      <div class="p-grid2">
+        <div class="card">
+          <h3>Coordonnées</h3>
+          <div class="contact-list">
+            <a class="contact-item" href="mailto:amiamisabir@gmail.com">📧 amiamisabir@gmail.com</a>
+            <a class="contact-item" href="tel:+33762972626">📞 07 62 97 26 26</a>
+            <a class="contact-item" target="_blank" rel="noreferrer"
+              href="https://www.google.com/maps/search/?api=1&query=Saint-Maximin+83">📍 Saint-Maximin (83)</a>
+          </div>
         </div>
 
-        <div class="chat glass">
-          <div class="chat-top">
-            <div class="chat-title">SabirGPT</div>
-            <div class="chat-pill">Online</div>
-          </div>
-
-          <div class="chat-body" id="gptChat" aria-live="polite"></div>
-
-          <form class="chat-form" id="gptForm" autocomplete="off">
-            <input id="gptInput" class="chat-input" type="text" placeholder="Ex: Tu as fait quoi en stage fibre ?" />
-            <button class="chat-send" type="submit">Envoyer</button>
+        <div class="card">
+          <h3>Message</h3>
+          <form class="form" id="contactForm">
+            <input class="input" type="text" placeholder="Nom" required />
+            <input class="input" type="email" placeholder="Email" required />
+            <textarea class="input" rows="4" placeholder="Ton message..." required></textarea>
+            <button class="btn primary" type="submit">Envoyer</button>
+            <p class="muted tiny" id="formNote">Formulaire visuel (pas d’envoi auto).</p>
           </form>
         </div>
       </div>
     </section>
 
-    <!-- PARCOURS -->
-    <section class="section" id="parcours">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Parcours</span>
-          <h2 class="h2">Mon évolution</h2>
-        </div>
-
-        <div class="timeline glass">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-title">Terminale Bac Pro CIEL</div>
-              <div class="tl-sub">Toulon — cybersécurité, réseaux, informatique & électronique.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-title">Stages en entreprise</div>
-              <div class="tl-sub">Fibre optique, réparation téléphones, support / diagnostic.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-title">Objectif : BTS SIO</div>
-              <div class="tl-sub">Continuer et passer un cap sur dev + systèmes/réseaux.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-head">
-          <span class="kicker">Contact</span>
-          <h2 class="h2">On en parle ?</h2>
-          <p class="sub">Projet, stage, alternance ou question : je réponds.</p>
-        </div>
-
-        <div class="grid-2">
-          <div class="card glass">
-            <h3 class="h3">Coordonnées</h3>
-
-            <div class="contact-row">
-              <span class="c-key">Email</span>
-              <a class="c-val" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
-            </div>
-
-            <div class="contact-row">
-              <span class="c-key">Téléphone</span>
-              <a class="c-val" href="tel:+33762972626">07 62 97 26 26</a>
-            </div>
-
-            <div class="contact-row">
-              <span class="c-key">Ville</span>
-              <a class="c-val" href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume" target="_blank" rel="noopener">Saint-Maximin (83)</a>
-            </div>
-
-            <div class="cta-row">
-              <a class="btn primary" href="mailto:amiamisabir@gmail.com">Envoyer un email <span class="arrow">→</span></a>
-              <a class="btn ghost" href="https://github.com/Sabirou" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-
-          <div class="card glass">
-            <h3 class="h3">Mascotte</h3>
-            <p class="p2">Style premium + animation douce.</p>
-            <a class="mascot-mini" href="#profil" aria-label="Remonter en haut">
-              <img src="assets/img/GPTimageLION.png" alt="Lion" />
-              <span>Retour en haut</span>
-            </a>
-          </div>
-        </div>
-
-        <footer class="footer">
-          © <span id="year"></span> Sabir IAZZA — Portfolio.
-        </footer>
-      </div>
-    </section>
+    <footer class="footer">
+      <span>© <span id="year"></span> Sabir IAZZA</span>
+      <span class="sep">·</span>
+      <a class="link" href="/Sabir-Portfolio/index.html">Accueil</a>
+    </footer>
   </main>
-
-  <script defer src="assets/js/script-portfolio.js"></script>
 </body>
 </html>

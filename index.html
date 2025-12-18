@@ -1,127 +1,315 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="theme-color" content="#0b0d12" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f1a" />
   <title>Sabir IAZZA — Portfolio</title>
+  <meta name="description" content="Portfolio de Sabir IAZZA — Bac Pro CIEL (cybersécurité, réseaux, web & électronique)." />
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🦁</text></svg>">
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="/Sabir-Portfolio/assets/css/style.css" />
+  <script defer src="/Sabir-Portfolio/assets/js/script.js"></script>
 </head>
 
 <body>
-  <!-- BACKGROUND (fix: toujours derrière, jamais “bloqué mascotte”) -->
-  <div class="bg" aria-hidden="true">
-    <div class="bg-blobs"></div>
-    <canvas id="bgCanvas"></canvas>
-    <div class="bg-noise"></div>
+  <!-- Background -->
+  <div class="bg">
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
   </div>
 
+  <!-- Header -->
   <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="./index.html">
-        <span class="brand-dot"></span>
-        <span class="brand-text">SABIR IAZZA</span>
-      </a>
+    <a class="brand" href="/Sabir-Portfolio/index.html" aria-label="Retour accueil">
+      <span class="brand-dot"></span>
+      <span class="brand-text">SABIR IAZZA</span>
+    </a>
 
-      <div class="topbar-actions">
-        <a class="pill-btn" href="portfolio.html">Entrer dans le portfolio</a>
-      </div>
+    <nav class="topnav" aria-label="Navigation">
+      <a href="#about" class="navlink">À propos</a>
+      <a href="#skills" class="navlink">Compétences</a>
+      <a href="#projects" class="navlink">Projets</a>
+      <a href="#contact" class="navlink">Contact</a>
+    </nav>
+
+    <div class="topactions">
+      <a class="pill" href="https://github.com/Sabirou" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="pill pill-main" href="/Sabir-Portfolio/portfolio.html">Entrer →</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </div>
   </header>
 
+  <!-- Mobile menu -->
+  <div class="mobile" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-card">
+      <div class="mobile-head">
+        <span class="mobile-title">Menu</span>
+        <button class="mobile-close" id="mobileClose" aria-label="Fermer">✕</button>
+      </div>
+      <nav class="mobile-links">
+        <a href="#about" class="mobile-link">À propos</a>
+        <a href="#skills" class="mobile-link">Compétences</a>
+        <a href="#projects" class="mobile-link">Projets</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <a href="/Sabir-Portfolio/portfolio.html" class="mobile-link strong">Entrer dans le portfolio →</a>
+      </nav>
+    </div>
+  </div>
+
   <main class="wrap">
-    <section class="hero">
-      <div class="hero-grid">
-        <!-- CARD -->
-        <div class="hero-card glass">
-          <div class="badges">
-            <span class="badge">
-              <span class="badge-dot"></span>
-              Disponible pour projets & opportunités
-            </span>
-            <span class="badge soft">Portfolio 2025 • Premium</span>
-            <span class="badge soft">Bac Pro CIEL — Toulon</span>
-          </div>
-
-          <h1 class="title">
-            Enchanté, je suis <span class="grad">Sabir.</span>
-          </h1>
-
-          <p class="subtitle">
-            Je transforme ma formation <strong>CIEL</strong> en <strong>projets concrets</strong> :
-            réseaux, cybersécurité, web & électronique.
-            <strong>Objectif</strong> : continuer en <strong>BTS SIO</strong>.
-          </p>
-
-          <div class="quick-list">
-            <div class="quick-item">
-              <span class="qi-ico">🎓</span>
-              <div>
-                <div class="qi-title">Terminale CIEL</div>
-                <div class="qi-sub">Réseaux • Cyber • Électronique</div>
-              </div>
-            </div>
-            <div class="quick-item">
-              <span class="qi-ico">🛠️</span>
-              <div>
-                <div class="qi-title">Stages</div>
-                <div class="qi-sub">Fibre • Téléphonie • Support</div>
-              </div>
-            </div>
-            <div class="quick-item">
-              <span class="qi-ico">🌐</span>
-              <div>
-                <div class="qi-title">Projets Web</div>
-                <div class="qi-sub">Portfolio • UI • Mini-apps</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cta-row">
-            <a class="btn primary" href="portfolio.html">Voir mes projets <span class="arrow">→</span></a>
-            <a class="btn ghost" href="portfolio.html#contact">Me contacter</a>
-          </div>
-
-          <div class="meta">
-            <a
-              id="cityLink"
-              class="meta-link"
-              href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume"
-              target="_blank"
-              rel="noopener"
-              title="Ouvrir dans Google Maps"
-            >📍 Saint-Maximin (83)</a>
-
-            <span class="meta-sep">•</span>
-
-            <a class="meta-link" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
-
-            <span class="meta-sep">•</span>
-
-            <a class="meta-link" href="tel:+33762972626">07 62 97 26 26</a>
-          </div>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-left">
+        <div class="badge">
+          <span class="pulse"></span>
+          Bac Pro CIEL • Toulon • 2025
         </div>
 
-        <!-- MASCOT -->
-        <div class="mascot">
-          <a id="mascotLink" class="mascot-glass" href="portfolio.html" aria-label="Entrer dans le portfolio">
-            <div class="mascot-ring" aria-hidden="true"></div>
-            <img class="mascot-img" src="assets/img/GPTimageLION.png" alt="Mascotte Lion" />
-          </a>
-          <div class="mascot-hint">Clique sur la mascotte pour entrer ✨</div>
+        <h1 class="title">
+          Je construis un profil <span class="grad">cybersécurité</span> & <span class="grad2">réseaux</span>,
+          avec une touche <span class="cream">web</span>.
+        </h1>
+
+        <p class="subtitle">
+          Étudiant en Bac Pro CIEL (cybersécurité, informatique, réseaux & électronique),
+          je transforme mes cours en <strong>projets concrets</strong>, stages et améliorations continues —
+          objectif <strong>BTS SIO</strong>.
+        </p>
+
+        <div class="hero-ctas">
+          <a class="btn primary" href="/Sabir-Portfolio/portfolio.html">Voir le portfolio</a>
+          <a class="btn ghost" href="#contact">Me contacter</a>
+        </div>
+
+        <div class="meta">
+          <span>📍 <a class="link" target="_blank" rel="noreferrer"
+            href="https://www.google.com/maps/search/?api=1&query=Saint-Maximin+83">Saint-Maximin (83)</a></span>
+          <span>📧 <a class="link" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a></span>
+          <span>📞 <a class="link" href="tel:+33762972626">07 62 97 26 26</a></span>
+        </div>
+
+        <div class="chips">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Réseaux</span>
+          <span class="chip">Cybersécurité</span>
+          <span class="chip chip-cream">Projets perso</span>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <a class="mascot" href="/Sabir-Portfolio/portfolio.html" aria-label="Entrer via la mascotte">
+          <div class="orb" aria-hidden="true"></div>
+          <img class="mascot-img" src="/Sabir-Portfolio/assets/img/GPTimageLION.png" alt="Mascotte Sabir" />
+          <div class="mascot-tip">Clique 🦁 → Portfolio</div>
+        </a>
+
+        <div class="mini-card">
+          <div class="mini-top">
+            <span class="mini-dot"></span>
+            <span>Focus 2025</span>
+          </div>
+          <p>
+            Renforcer : <strong>réseaux</strong>, <strong>sécurité</strong>, et monter en niveau en <strong>web</strong>.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <header class="section-head">
+        <h2>À propos</h2>
+        <p>Une vibe premium, des compétences utiles, et du concret.</p>
+      </header>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Qui je suis</h3>
+          <p>
+            Sabir IAZZA, étudiant en Bac Pro CIEL. Je touche à la cybersécurité, au réseau,
+            au matériel, et je construis un portfolio propre pour viser une alternance / BTS.
+          </p>
+          <div class="list">
+            <div class="li">✅ sérieux & motivé</div>
+            <div class="li">✅ progression constante</div>
+            <div class="li">✅ projets + stages</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Ce que je cherche</h3>
+          <p>
+            Une opportunité où je peux apprendre vite, apporter une vraie aide (support, réseau, web),
+            et évoluer vers un profil IT solide.
+          </p>
+          <div class="list">
+            <div class="li">🎯 Stage / alternance</div>
+            <div class="li">🧠 BTS SIO en ligne de mire</div>
+            <div class="li">🛠️ Projets pro & perso</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <header class="section-head">
+        <h2>Compétences</h2>
+        <p>Un mix CIEL : cyber + réseaux + web + électronique.</p>
+      </header>
+
+      <div class="grid-3">
+        <article class="card card-glow">
+          <h3>Cybersécurité</h3>
+          <p>Hygiène numérique, sensibilisation, bases de sécurité & bonnes pratiques.</p>
+          <div class="bars">
+            <div class="bar">
+              <span>Bonnes pratiques</span>
+              <div class="track"><div class="fill" style="width:78%"></div></div>
+            </div>
+            <div class="bar">
+              <span>Notions</span>
+              <div class="track"><div class="fill" style="width:68%"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-glow2">
+          <h3>Réseaux</h3>
+          <p>Adressage IP, bases VLAN, routage simple, logique & dépannage.</p>
+          <div class="bars">
+            <div class="bar">
+              <span>Réseaux LAN</span>
+              <div class="track"><div class="fill" style="width:82%"></div></div>
+            </div>
+            <div class="bar">
+              <span>Dépannage</span>
+              <div class="track"><div class="fill" style="width:74%"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-cream">
+          <h3>Développement web</h3>
+          <p>HTML/CSS solides, JavaScript en progression, design & intégration.</p>
+          <div class="bars">
+            <div class="bar">
+              <span>UI/UX</span>
+              <div class="track"><div class="fill" style="width:76%"></div></div>
+            </div>
+            <div class="bar">
+              <span>JavaScript</span>
+              <div class="track"><div class="fill" style="width:62%"></div></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <header class="section-head">
+        <h2>Projets & expériences</h2>
+        <p>Ce qui construit mon profil, vraiment.</p>
+      </header>
+
+      <div class="grid-2">
+        <article class="card project">
+          <div class="project-head">
+            <span class="tag">Projet</span>
+            <span class="tag soft">2025</span>
+          </div>
+          <h3>Portfolio premium (V10)</h3>
+          <p>Design glass + animations fluides + structure claire + mobile clean.</p>
+          <div class="tags">
+            <span>HTML</span><span>CSS</span><span>JS</span><span>UI</span>
+          </div>
+        </article>
+
+        <article class="card project">
+          <div class="project-head">
+            <span class="tag">Stage</span>
+            <span class="tag soft">2024</span>
+          </div>
+          <h3>Réparation téléphones</h3>
+          <p>Diagnostic, remplacement pièces, tests & relation client.</p>
+          <div class="tags">
+            <span>Hardware</span><span>Diagnostic</span><span>Support</span>
+          </div>
+        </article>
+
+        <article class="card project">
+          <div class="project-head">
+            <span class="tag">Stage</span>
+            <span class="tag soft">2023</span>
+          </div>
+          <h3>Technicien fibre optique</h3>
+          <p>Préparation matériel, raccordement, sécurité terrain, tests de connexion.</p>
+          <div class="tags">
+            <span>Fibre</span><span>Réseaux</span><span>Terrain</span>
+          </div>
+        </article>
+
+        <article class="card project">
+          <div class="project-head">
+            <span class="tag">Mini</span>
+            <span class="tag soft">2025</span>
+          </div>
+          <h3>SabirGPT (IA locale)</h3>
+          <p>Assistant simple intégré : répond sur mon parcours, objectifs, compétences.</p>
+          <div class="tags">
+            <span>JS</span><span>UX</span><span>Chat UI</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="center">
+        <a class="btn primary" href="/Sabir-Portfolio/portfolio.html">Ouvrir la page portfolio →</a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <header class="section-head">
+        <h2>Contact</h2>
+        <p>On échange, simple et pro.</p>
+      </header>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Infos</h3>
+          <div class="contact-list">
+            <a class="contact-item" href="mailto:amiamisabir@gmail.com">📧 amiamisabir@gmail.com</a>
+            <a class="contact-item" href="tel:+33762972626">📞 07 62 97 26 26</a>
+            <a class="contact-item" target="_blank" rel="noreferrer"
+              href="https://www.google.com/maps/search/?api=1&query=Saint-Maximin+83">📍 Saint-Maximin (83)</a>
+          </div>
+          <p class="muted">Réponse rapide. Je peux aussi envoyer mon CV.</p>
+        </div>
+
+        <div class="card">
+          <h3>Message</h3>
+          <form class="form" id="contactForm">
+            <input class="input" type="text" placeholder="Nom" required />
+            <input class="input" type="email" placeholder="Email" required />
+            <textarea class="input" rows="4" placeholder="Ton message..." required></textarea>
+            <button class="btn primary" type="submit">Envoyer</button>
+            <p class="muted tiny" id="formNote">Le formulaire est visuel (pas d’envoi automatique).</p>
+          </form>
         </div>
       </div>
     </section>
 
-    <footer class="foot">
-      <div class="foot-inner">
-        <span>© <span id="year"></span> Sabir IAZZA — Univers nuit • Glass • Neon</span>
-      </div>
+    <footer class="footer">
+      <span>© <span id="year"></span> Sabir IAZZA</span>
+      <span class="sep">·</span>
+      <a class="link" href="/Sabir-Portfolio/portfolio.html">Portfolio</a>
     </footer>
   </main>
-
-  <script defer src="assets/js/script.js"></script>
 </body>
 </html>
