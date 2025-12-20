@@ -1,1118 +1,380 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0a0a12" />
-  <title>Sabir IAZZA — Accueil</title>
+  <title>Sabir IAZZA — Portfolio</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-:root {
-  --accent1: #B45CFF;
-  --accent2: #2FE7FF;
-  --accent3: #FF6B9D;
-  --cream: #F2E7D8;
-  --bg0: #07070d;
-  --bg1: #0a0a12;
-  --text: #EDEDF7;
-  --muted: rgba(237,237,247,.72);
-  --shadow: 0 24px 80px rgba(0,0,0,.65);
-  --radius: 28px;
-}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
-body {
-  font-family: Inter, -apple-system, system-ui, sans-serif;
-  color: var(--text);
-  background: 
-    radial-gradient(1400px 1000px at 20% 15%, rgba(180,92,255,.28), transparent 65%),
-    radial-gradient(1100px 900px at 85% 75%, rgba(47,231,255,.22), transparent 65%),
-    radial-gradient(800px 700px at 50% 50%, rgba(255,107,157,.14), transparent 70%),
-    linear-gradient(180deg, var(--bg0), var(--bg1));
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-}
-
-/* Background animé ultra-premium */
-.bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.bg__mesh {
-  position: absolute;
-  inset: -30%;
-  background: 
-    radial-gradient(circle at 22% 18%, rgba(180,92,255,.38), transparent 48%),
-    radial-gradient(circle at 78% 42%, rgba(47,231,255,.32), transparent 48%),
-    radial-gradient(circle at 48% 82%, rgba(255,107,157,.22), transparent 52%);
-  filter: blur(50px);
-  animation: meshFloat 20s ease-in-out infinite;
-}
-
-@keyframes meshFloat {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-  33% { 
-    transform: translate3d(4%, -3%, 0) scale(1.08) rotate(3deg);
-  }
-  66% { 
-    transform: translate3d(-3%, 4%, 0) scale(0.96) rotate(-3deg);
-  }
-}
-
-.bg__stars {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    radial-gradient(circle, rgba(255,255,255,.35) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(180,92,255,.25) 1px, transparent 1px);
-  background-size: 140px 140px, 80px 80px;
-  background-position: 0 0, 40px 40px;
-  opacity: .24;
-  animation: starsMove 35s linear infinite;
-}
-
-@keyframes starsMove {
-  from { background-position: 0 0, 40px 40px; }
-  to { background-position: 140px 140px, 180px 180px; }
-}
-
-.bg__orbs {
-  position: absolute;
-  inset: 0;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0;
-  animation: orbFloat 22s ease-in-out infinite;
-  mix-blend-mode: screen;
-}
-
-.orb:nth-child(1) {
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(180,92,255,.45), transparent 70%);
-  top: 8%;
-  left: 12%;
-  animation-delay: 0s;
-}
-
-.orb:nth-child(2) {
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(47,231,255,.4), transparent 70%);
-  top: 58%;
-  right: 8%;
-  animation-delay: 7s;
-}
-
-.orb:nth-child(3) {
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(255,107,157,.35), transparent 70%);
-  bottom: 12%;
-  left: 38%;
-  animation-delay: 14s;
-}
-
-@keyframes orbFloat {
-  0%, 100% { 
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.35;
-  }
-  50% { 
-    transform: translate3d(60px, -100px, 0) scale(1.25);
-    opacity: 0.65;
-  }
-}
-
-#bgCanvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: .65;
-}
-
-/* Topbar premium */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(28px) saturate(180%);
-  background: linear-gradient(180deg, rgba(10,10,18,.88), rgba(10,10,18,.48));
-  border-bottom: 1px solid rgba(255,255,255,.14);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.topbar.scrolled {
-  box-shadow: 0 8px 40px rgba(0,0,0,.5);
-  background: linear-gradient(180deg, rgba(10,10,18,.95), rgba(10,10,18,.80));
-  border-bottom-color: rgba(255,255,255,.2);
-}
-
-.topbar__inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  letter-spacing: 0.15em;
-  font-weight: 900;
-  font-size: 13px;
-  color: var(--cream);
-  padding: 10px 18px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.brand::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(180,92,255,.25), rgba(47,231,255,.2));
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.brand:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(180,92,255,.35);
-  border-color: rgba(255,255,255,.25);
-}
-
-.brand:hover::before {
-  opacity: 1;
-}
-
-.brand__dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent1), var(--accent2));
-  box-shadow: 
-    0 0 22px rgba(180,92,255,.7),
-    0 0 44px rgba(47,231,255,.35),
-    inset 0 0 8px rgba(255,255,255,.3);
-  animation: pulseDot 2.8s ease-in-out infinite;
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes pulseDot {
-  0%, 100% { 
-    transform: scale(1);
-    box-shadow: 0 0 22px rgba(180,92,255,.7), 0 0 44px rgba(47,231,255,.35);
-  }
-  50% { 
-    transform: scale(1.25);
-    box-shadow: 0 0 32px rgba(180,92,255,.9), 0 0 64px rgba(47,231,255,.5);
-  }
-}
-
-.brand__name {
-  opacity: .96;
-  position: relative;
-  z-index: 1;
-}
-
-.topbar__actions {
-  display: flex;
-  gap: 12px;
-}
-
-/* Boutons */
-.btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 22px;
-  border-radius: 16px;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 14px;
-  color: var(--text);
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.08);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255,255,255,.25);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
-}
-
-.btn:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 36px rgba(0,0,0,.35);
-  border-color: rgba(255,255,255,.22);
-}
-
-.btn:active {
-  transform: translateY(-1px) scale(0.98);
-}
-
-.btn--ghost {
-  background: rgba(255,255,255,.06);
-  border-color: rgba(255,255,255,.12);
-}
-
-.btn--ghost:hover {
-  background: rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.2);
-}
-
-/* Layout */
-.wrap {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 32px 24px 80px;
-}
-
-.hero {
-  min-height: calc(100vh - 100px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-.hero__grid {
-  display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 32px;
-  align-items: center;
-}
-
-/* Glass card ultra-premium */
-.glass {
-  background: linear-gradient(135deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.08) 100%);
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: var(--radius);
-  box-shadow: 
-    var(--shadow),
-    inset 0 1px 0 rgba(255,255,255,.25),
-    inset 0 -1px 0 rgba(0,0,0,.1);
-  backdrop-filter: blur(32px) saturate(160%);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.15),
-    transparent
-  );
-  transition: left 0.7s ease;
-}
-
-.glass:hover::before {
-  left: 150%;
-}
-
-.glass:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 36px 110px rgba(0,0,0,.75),
-    inset 0 1px 0 rgba(255,255,255,.35),
-    0 0 60px rgba(180,92,255,.15);
-  border-color: rgba(255,255,255,.28);
-}
-
-/* Hero card */
-.heroCard {
-  padding: 36px;
-  position: relative;
-  animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.95) translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.heroCard::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  background: 
-    radial-gradient(900px 350px at 22% 15%, rgba(180,92,255,.35), transparent 68%),
-    radial-gradient(900px 350px at 88% 78%, rgba(47,231,255,.28), transparent 68%);
-  opacity: 0.95;
-  pointer-events: none;
-  z-index: -1;
-  border-radius: var(--radius);
-  animation: gradientRotate 15s linear infinite;
-}
-
-@keyframes gradientRotate {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-
-.heroCard > * {
-  position: relative;
-  z-index: 1;
-}
-
-.heroCard__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 9px 14px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--cream);
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.12);
-  transition: all 0.3s ease;
-  animation: slideInDown 0.6s ease backwards;
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.chip:nth-child(1) { animation-delay: 0.1s; }
-.chip:nth-child(2) { animation-delay: 0.2s; }
-.chip:nth-child(3) { animation-delay: 0.3s; }
-.chip:nth-child(4) { animation-delay: 0.4s; }
-
-.chip:hover {
-  transform: translateY(-3px);
-  background: rgba(180,92,255,.2);
-  border-color: rgba(180,92,255,.4);
-  box-shadow: 0 6px 18px rgba(180,92,255,.3);
-}
-
-.chip--dark {
-  background: rgba(0,0,0,.28);
-  border-color: rgba(255,255,255,.15);
-}
-
-.chip--right {
-  margin-left: auto;
-}
-
-.heroCard__title {
-  font-size: clamp(38px, 4.2vw, 58px);
-  line-height: 1;
-  margin: 14px 0;
-  letter-spacing: -0.05em;
-  font-weight: 900;
-  animation: fadeInUp 0.8s ease 0.3s backwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.grad {
-  background: linear-gradient(
-    135deg,
-    var(--accent1) 0%,
-    var(--accent2) 50%,
-    var(--accent3) 100%
-  );
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientShift 5s ease infinite;
-  position: relative;
-  display: inline-block;
-  filter: drop-shadow(0 0 30px rgba(180,92,255,.5));
-}
-
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.heroCard__sub {
-  margin: 0 0 22px;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.65;
-  max-width: 68ch;
-  animation: fadeInUp 0.8s ease 0.5s backwards;
-}
-
-.heroCard__sub b {
-  color: var(--cream);
-  font-weight: 800;
-}
-
-.miniRows {
-  display: grid;
-  gap: 12px;
-  margin: 20px 0 24px;
-}
-
-.miniRow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 15px 16px;
-  border-radius: 18px;
-  background: rgba(0,0,0,.28);
-  border: 1px solid rgba(255,255,255,.1);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: fadeInUp 0.6s ease backwards;
-  position: relative;
-  overflow: hidden;
-}
-
-.miniRow:nth-child(1) { animation-delay: 0.6s; }
-.miniRow:nth-child(2) { animation-delay: 0.7s; }
-.miniRow:nth-child(3) { animation-delay: 0.8s; }
-
-.miniRow::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--accent1), var(--accent2));
-  transform: scaleY(0);
-  transition: transform 0.4s ease;
-}
-
-.miniRow:hover {
-  transform: translateX(10px);
-  background: rgba(180,92,255,.15);
-  border-color: rgba(180,92,255,.3);
-  box-shadow: 0 8px 28px rgba(180,92,255,.25);
-}
-
-.miniRow:hover::before {
-  transform: scaleY(1);
-}
-
-.miniRow__icon {
-  font-size: 22px;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,.5));
-}
-
-.miniRow__txt b {
-  display: block;
-  font-size: 15px;
-  margin-bottom: 4px;
-  color: var(--cream);
-  font-weight: 800;
-}
-
-.miniRow__txt span {
-  display: block;
-  font-size: 13px;
-  color: rgba(237,237,247,.72);
-}
-
-.heroCard__cta {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin: 18px 0;
-  animation: fadeInUp 0.8s ease 0.9s backwards;
-}
-
-.btn--primary {
-  background: linear-gradient(135deg, rgba(180,92,255,1), rgba(47,231,255,.98));
-  color: #0b0b12;
-  border: 0;
-  box-shadow: 
-    0 14px 45px rgba(180,92,255,.45),
-    0 0 70px rgba(47,231,255,.25),
-    inset 0 1px 0 rgba(255,255,255,.3);
-  font-weight: 900;
-  position: relative;
-}
-
-.btn--primary::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(135deg, rgba(255,255,255,.3), transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.btn--primary:hover {
-  box-shadow: 
-    0 18px 55px rgba(180,92,255,.55),
-    0 0 90px rgba(47,231,255,.35),
-    inset 0 1px 0 rgba(255,255,255,.4);
-  transform: translateY(-4px) scale(1.03);
-}
-
-.btn--primary:hover::after {
-  opacity: 1;
-}
-
-.btn--soft {
-  background: rgba(242,231,216,.08);
-  border-color: rgba(242,231,216,.2);
-}
-
-.btn--soft:hover {
-  background: rgba(242,231,216,.14);
-  border-color: rgba(242,231,216,.3);
-}
-
-.heroCard__meta {
-  margin-top: 12px;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  animation: fadeInUp 0.8s ease 1s backwards;
-}
-
-.metaLink {
-  color: var(--cream);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 13px;
-  opacity: .94;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.metaLink::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
-  transition: width 0.3s ease;
-}
-
-.metaLink:hover {
-  color: #fff;
-  transform: translateX(3px);
-}
-
-.metaLink:hover::after {
-  width: 100%;
-}
-
-/* Mascotte ultra-premium */
-.mascotWrap {
-  display: flex;
-  justify-content: center;
-  animation: fadeInScale 0.8s ease 0.4s backwards;
-}
-
-.mascot {
-  width: min(420px, 90vw);
-  aspect-ratio: 1;
-  padding: 0;
-  border: 1px solid rgba(255,255,255,.18);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: float 7s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-25px) rotate(3deg);
-  }
-}
-
-.mascot:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 32px 100px rgba(0,0,0,.7),
-    0 0 80px rgba(180,92,255,.4),
-    0 0 120px rgba(47,231,255,.3);
-  border-color: rgba(255,255,255,.3);
-}
-
-.mascot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: saturate(1.12) contrast(1.06) brightness(1.02);
-  transition: all 0.6s ease;
-}
-
-.mascot:hover img {
-  transform: scale(1.06) rotate(2deg);
-  filter: saturate(1.25) contrast(1.1) brightness(1.08);
-}
-
-.mascot__ring {
-  position: absolute;
-  inset: -40%;
-  background: 
-    radial-gradient(circle at 45% 45%, rgba(47,231,255,.28), transparent 58%),
-    radial-gradient(circle at 55% 55%, rgba(180,92,255,.25), transparent 58%);
-  filter: blur(25px);
-  animation: ring 8s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes ring {
-  0%, 100% {
-    transform: translate3d(-3%, 3%, 0) rotate(0deg) scale(1);
-    opacity: .85;
-  }
-  50% {
-    transform: translate3d(3%, -3%, 0) rotate(8deg) scale(1.1);
-    opacity: 1;
-  }
-}
-
-.mascot__hint {
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 18px;
-  padding: 14px 16px;
-  border-radius: 16px;
-  background: rgba(0,0,0,.4);
-  border: 1px solid rgba(255,255,255,.15);
-  color: var(--cream);
-  font-weight: 800;
-  font-size: 14px;
-  text-align: center;
-  backdrop-filter: blur(16px);
-  transition: all 0.4s ease;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.mascot:hover .mascot__hint {
-  background: rgba(180,92,255,.5);
-  border-color: rgba(180,92,255,.6);
-  box-shadow: 0 8px 24px rgba(180,92,255,.4);
-  transform: scale(1.05);
-}
-
-.miniFooter {
-  margin-top: 32px;
-  text-align: center;
-  color: rgba(237,237,247,.6);
-  font-size: 13px;
-  animation: fadeInUp 0.8s ease 1.2s backwards;
-}
-
-/* Responsive */
-@media (max-width: 980px) {
-  .hero__grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .chip--right {
-    margin-left: 0;
-  }
-  
-  .mascotWrap {
-    order: -1;
-  }
-}
-
-@media (max-width: 640px) {
-  .wrap {
-    padding: 24px 16px 60px;
-  }
-  
-  .heroCard {
-    padding: 24px;
-    border-radius: 24px;
-  }
-  
-  .btn {
-    width: 100%;
-  }
-  
-  .heroCard__meta {
-    gap: 12px;
-  }
-  
-  .heroCard__title {
-    font-size: 34px;
-  }
-  
-  .topbar__inner {
-    padding: 14px 16px;
-  }
-}
-  </style>
+  <link rel="stylesheet" href="style-portfolio.css" />
+  <script defer src="script-portfolio.js"></script>
 </head>
+
 <body>
-  <!-- Background ultra-premium -->
-  <div class="bg">
-    <div class="bg__mesh"></div>
-    <div class="bg__stars"></div>
-    <div class="bg__orbs">
-      <div class="orb"></div>
-      <div class="orb"></div>
-      <div class="orb"></div>
-    </div>
-    <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <!-- Background -->
+  <div class="pbg" aria-hidden="true">
+    <div class="pbg__mesh"></div>
+    <div class="pbg__grid"></div>
+    <canvas id="pCanvas"></canvas>
   </div>
 
-  <!-- Topbar -->
-  <header class="topbar" id="topbar">
-    <div class="topbar__inner">
-      <div class="brand">
-        <span class="brand__dot"></span>
-        <span class="brand__name">SABIR IAZZA</span>
-      </div>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a class="logo" href="index.html" aria-label="Retour accueil">
+        <span class="logo__dot" aria-hidden="true"></span>
+        <span class="logo__txt">SABIR IAZZA</span>
+      </a>
 
-      <nav class="topbar__actions">
-        <a class="btn btn--ghost" href="portfolio.html">Entrer dans le portfolio</a>
+      <nav class="nav" aria-label="Sections">
+        <a class="nav__link" href="#about">À propos</a>
+        <a class="nav__link" href="#skills">Compétences</a>
+        <a class="nav__link" href="#projects">Projets</a>
+        <a class="nav__link" href="#contact">Contact</a>
       </nav>
+
+      <div class="header__actions">
+        <button class="iconBtn" id="burger" type="button" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="progress">
+      <div class="progress__bar" id="progressBar"></div>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero__grid">
+  <!-- Mobile Menu -->
+  <div class="mMenu" id="mMenu" aria-hidden="true">
+    <div class="mMenu__panel glass">
+      <div class="mMenu__top">
+        <b>Menu</b>
+        <button class="mMenu__close" id="closeMenu" type="button" aria-label="Fermer">×</button>
+      </div>
 
-        <!-- Left Card -->
-        <article class="glass heroCard">
-          <div class="heroCard__chips">
-            <span class="chip chip--dark">Univers nuit & 3D</span>
-            <span class="chip">Cybersécurité • Réseaux • Web</span>
-            <span class="chip chip--right">Portfolio 2025 • Premium</span>
-            <span class="chip chip--right">Bac Pro CIEL — Toulon</span>
+      <nav class="mNav" aria-label="Menu mobile">
+        <a class="mNav__link" href="#about">À propos</a>
+        <a class="mNav__link" href="#skills">Compétences</a>
+        <a class="mNav__link" href="#projects">Projets</a>
+        <a class="mNav__link" href="#contact">Contact</a>
+      </nav>
+
+      <div class="mMenu__footer">
+        <a class="btn btn--ghost" href="index.html">← Retour accueil</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero__grid">
+        <article class="glass hero__card reveal">
+          <div class="badge">
+            <span class="badge__dot" aria-hidden="true"></span>
+            Disponible pour alternance / stage
           </div>
 
-          <h1 class="heroCard__title">
-            Enchanté, je suis <span class="grad">Sabir</span>.
+          <h1 class="hero__title">
+            Portfolio <span class="grad">CIEL</span> — Réseau, Cyber, Web.
           </h1>
 
-          <p class="heroCard__sub">
-            Je transforme ma formation <b>CIEL</b> en <b>projets concrets</b> : réseaux, cybersécurité, web & électronique.
-            Objectif : continuer en <b>BTS SIO</b> et monter en compétence.
+          <p class="hero__subtitle">
+            Je suis <b>Sabir IAZZA</b>, élève en <b>Terminale Bac Pro CIEL</b>.
+            Ici : mes projets, mes compétences, et mon parcours.
           </p>
 
-          <div class="miniRows" role="list">
-            <div class="miniRow" role="listitem">
-              <span class="miniRow__icon">🎓</span>
-              <div class="miniRow__txt">
-                <b>Terminale CIEL</b>
-                <span>Réseaux • Cyber • Électronique</span>
+          <div class="hero__chips">
+            <span class="chip">Packet Tracer • VLAN</span>
+            <span class="chip">Web • UI</span>
+          </div>
+
+          <div class="hero__tiles">
+            <div class="tile">
+              <span class="tile__icon" aria-hidden="true">🧠</span>
+              <div class="tile__txt">
+                <b>Objectif</b>
+                <span>BTS SIO (SISR) + alternance</span>
               </div>
             </div>
-            <div class="miniRow" role="listitem">
-              <span class="miniRow__icon">🛠️</span>
-              <div class="miniRow__txt">
-                <b>Stages</b>
-                <span>Fibre • Téléphonie • Support</span>
+            <div class="tile">
+              <span class="tile__icon" aria-hidden="true">🧰</span>
+              <div class="tile__txt">
+                <b>Stack</b>
+                <span>HTML/CSS/JS • Linux • Réseau</span>
               </div>
             </div>
-            <div class="miniRow" role="listitem">
-              <span class="miniRow__icon">🌐</span>
-              <div class="miniRow__txt">
-                <b>Projets Web</b>
-                <span>Portfolio • UI • Mini-apps</span>
+            <div class="tile">
+              <span class="tile__icon" aria-hidden="true">🎯</span>
+              <div class="tile__txt">
+                <b>Focus 2026</b>
+                <span>Cybersécurité & projets concrets</span>
               </div>
             </div>
           </div>
 
-          <div class="heroCard__cta">
-            <a class="btn btn--primary" href="portfolio.html">
-              Voir mes projets <span aria-hidden="true">→</span>
-            </a>
-            <a class="btn btn--soft" href="mailto:amiamisabir@gmail.com">
-              Me contacter
-            </a>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#projects">Voir mes projets →</a>
+            <a class="btn btn--soft" href="mailto:amiamisabir@gmail.com">Me contacter</a>
+            <a class="btn btn--ghost" href="index.html">Accueil</a>
           </div>
 
-          <div class="heroCard__meta">
-            <a class="metaLink" target="_blank" rel="noopener"
-               href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume+83">
-              📍 Saint-Maximin (83)
-            </a>
+          <div class="hero__meta">
+            <a class="metaLink" target="_blank" rel="noopener" href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume+83">📍 Saint-Maximin (83)</a>
             <a class="metaLink" href="mailto:amiamisabir@gmail.com">✉️ amiamisabir@gmail.com</a>
             <a class="metaLink" href="tel:+33762972626">📞 07 62 97 26 26</a>
           </div>
         </article>
 
-        <!-- Right Mascot -->
-        <aside class="mascotWrap">
-          <button class="mascot glass" id="mascotBtn" type="button" aria-label="Entrer dans le portfolio">
-            <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(180,92,255,.2),rgba(47,231,255,.15));display:flex;align-items:center;justify-content:center;font-size:120px;">🦁</div>
-            <span class="mascot__ring" aria-hidden="true"></span>
-            <span class="mascot__hint">Clique sur la mascotte pour entrer ✨</span>
-          </button>
-        </aside>
+        <aside class="hero__visual reveal">
+          <div class="visual glass" data-parallax="0.08">
+            <button class="orbBtn" id="orbBtn" type="button" aria-label="Retour accueil">
+              <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25'%3E%3Cstop offset='0%25' stop-color='%232FE7FF'/%3E%3Cstop offset='55%25' stop-color='%23B45CFF'/%3E%3Cstop offset='100%25' stop-color='%230a0a12'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='60' cy='60' r='58' fill='url(%23g)'/%3E%3C/svg%3E" />
+            </button>
 
+            <img alt="Visuel portfolio" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%2307070d'/%3E%3Cstop offset='1' stop-color='%230a0a12'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23bg)'/%3E%3Ctext x='70' y='140' fill='%23F2E7D8' font-size='64' font-family='Arial'%3ESabir IAZZA%3C/text%3E%3Ctext x='70' y='220' fill='%23EDEDF7' opacity='0.75' font-size='32' font-family='Arial'%3EPortfolio • Cyber • Réseau • Web%3C/text%3E%3Ctext x='70' y='310' fill='%232FE7FF' opacity='0.85' font-size='26' font-family='Arial'%3EVLAN • Packet Tracer • Linux • UI%3C/text%3E%3C/svg%3E" />
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section__head reveal">
+        <div class="pill">À propos</div>
+        <h2>Qui je suis</h2>
+        <p>Un profil CIEL orienté projets : réseau, cyber, web, et pratique terrain.</p>
       </div>
 
-      <footer class="miniFooter">
-        <span>© <span id="year">2025</span> Sabir IAZZA — Univers nuit • Glass • Néon</span>
+      <div class="grid grid--2">
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">🧩</div>
+            <div>
+              <h3>Ce que je recherche</h3>
+              <p>Alternance / stage en informatique (réseau, cyber, support, web).</p>
+            </div>
+          </div>
+          <ul class="list">
+            <li>Support / dépannage + rigueur</li>
+            <li>Réseau : VLAN, adressage, routage (bases)</li>
+            <li>Web : HTML/CSS/JS + design premium</li>
+          </ul>
+        </article>
+
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">🏅</div>
+            <div>
+              <h3>Certifications & +</h3>
+              <p>À mettre en avant sur CV + portfolio.</p>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">Pix</span>
+            <span class="tag">Cisco (Intro)</span>
+            <span class="tag">Web (Responsive)</span>
+            <span class="tag">Linux (bases)</span>
+          </div>
+
+          <div class="quote">
+            <b>Style de travail</b>
+            <p>Je préfère apprendre avec des projets réels et documenter ce que je fais.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="section__head reveal">
+        <div class="pill">Compétences</div>
+        <h2>Ce que je sais faire</h2>
+        <p>Des bases solides + une progression rapide avec des labs et des projets.</p>
+      </div>
+
+      <div class="grid grid--2">
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">🖧</div>
+            <div>
+              <h3>Réseau</h3>
+              <p>Packet Tracer, VLAN, adressage IP, diagnostic.</p>
+            </div>
+          </div>
+
+          <div class="bars">
+            <div class="bar" data-val="70">
+              <div class="bar__head"><span>VLAN / Switching</span><span>70%</span></div>
+              <div class="bar__rail"><div class="bar__fill"></div></div>
+            </div>
+            <div class="bar" data-val="62">
+              <div class="bar__head"><span>Adressage / Subnet</span><span>62%</span></div>
+              <div class="bar__rail"><div class="bar__fill"></div></div>
+            </div>
+            <div class="bar" data-val="58">
+              <div class="bar__head"><span>Wireshark (bases)</span><span>58%</span></div>
+              <div class="bar__rail"><div class="bar__fill"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">💻</div>
+            <div>
+              <h3>Web / UI</h3>
+              <p>HTML/CSS/JS, animations, responsive.</p>
+            </div>
+          </div>
+
+          <div class="bars">
+            <div class="bar" data-val="78">
+              <div class="bar__head"><span>HTML/CSS</span><span>78%</span></div>
+              <div class="bar__rail"><div class="bar__fill"></div></div>
+            </div>
+            <div class="bar" data-val="70">
+              <div class="bar__head"><span>JavaScript</span><span>70%</span></div>
+              <div class="bar__rail"><div class="bar__fill"></div></div>
+            </div>
+            <div class="bar" data-val="60">
+              <div class="bar__head"><span>Accessibilité / UX</span><span>60%</span></div>
+              <div class="bar__rail"><div class="bar__fill"></div></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="section__head reveal">
+        <div class="pill">Projets</div>
+        <h2>Mes projets concrets</h2>
+        <p>3 exemples (tu peux remplacer par tes vrais projets + screenshots).</p>
+      </div>
+
+      <div class="grid grid--2">
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">🛡️</div>
+            <div>
+              <h3>Lab Réseau (VLAN)</h3>
+              <p>Topo simple + segmentation + tests.</p>
+            </div>
+          </div>
+          <ul class="list">
+            <li>Plan d’adressage</li>
+            <li>VLAN + trunk</li>
+            <li>Tests ping / connectivité</li>
+          </ul>
+          <div class="rowBtns">
+            <a class="btn btn--ghost" href="#contact">Demander la démo</a>
+          </div>
+        </article>
+
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">🌐</div>
+            <div>
+              <h3>Portfolio Premium</h3>
+              <p>Design glass + canvas particles + animations.</p>
+            </div>
+          </div>
+          <div class="preview">
+            <img alt="Preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='520'%3E%3Crect width='1200' height='520' fill='%230a0a12'/%3E%3Ctext x='60' y='140' fill='%23F2E7D8' font-size='52' font-family='Arial'%3EPremium UI%3C/text%3E%3Ctext x='60' y='210' fill='%23EDEDF7' opacity='0.75' font-size='28' font-family='Arial'%3EAnimations • Glass • Néon%3C/text%3E%3C/svg%3E" />
+          </div>
+        </article>
+
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">🤖</div>
+            <div>
+              <h3>SabirGPT (démo)</h3>
+              <p>Mini chat local pour présenter des idées.</p>
+            </div>
+          </div>
+
+          <div class="chat">
+            <div class="chat__log" id="chatLog"></div>
+            <form class="chat__form" id="chatForm">
+              <textarea class="chat__input" id="chatInput" rows="1" placeholder="Ex: Donne-moi 3 idées de projets réseau..."></textarea>
+              <button class="chat__send" type="submit">Envoyer</button>
+            </form>
+          </div>
+        </article>
+
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">🧭</div>
+            <div>
+              <h3>Parcours</h3>
+              <p>Timeline mini (à personnaliser).</p>
+            </div>
+          </div>
+
+          <div class="timelineMini">
+            <div class="tItem">
+              <b>2024–2025</b><span>Bac Pro CIEL — Toulon</span>
+            </div>
+            <div class="tItem">
+              <b>Stages</b><span>Fibre • Téléphonie • Support</span>
+            </div>
+            <div class="tItem">
+              <b>2026</b><span>Objectif BTS SIO</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section__head reveal">
+        <div class="pill">Contact</div>
+        <h2>On échange ?</h2>
+        <p>Je réponds rapidement pour stage / alternance.</p>
+      </div>
+
+      <div class="grid grid--2">
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">✉️</div>
+            <div>
+              <h3>Email</h3>
+              <p>Le plus simple : un message + ton besoin.</p>
+            </div>
+          </div>
+          <a class="link" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+        </article>
+
+        <article class="glass card reveal">
+          <div class="card__top">
+            <div class="card__icon" aria-hidden="true">📞</div>
+            <div>
+              <h3>Téléphone</h3>
+              <p>Appel / SMS (pro).</p>
+            </div>
+          </div>
+          <a class="link" href="tel:+33762972626">07 62 97 26 26</a>
+        </article>
+      </div>
+
+      <footer class="footer">
+        <span>© <span id="pYear">2025</span> Sabir IAZZA — Portfolio</span>
       </footer>
     </section>
   </main>
 
-  <script>
-(function() {
-  if (typeof window === "undefined" || !window.document) return;
-
-  // Year
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // Topbar scroll effect
-  const topbar = document.getElementById("topbar");
-  let lastScroll = 0;
-
-  function handleScroll() {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 50) {
-      topbar.classList.add("scrolled");
-    } else {
-      topbar.classList.remove("scrolled");
-    }
-    
-    lastScroll = currentScroll;
-  }
-
-  window.addEventListener("scroll", handleScroll, { passive: true });
-
-  // Mascot button
-  const mascotBtn = document.getElementById("mascotBtn");
-  if (mascotBtn) {
-    mascotBtn.addEventListener("click", () => {
-      window.location.href = "portfolio.html";
-    });
-  }
-
-  // Canvas particles ultra-premium
-  const canvas = document.getElementById("bgCanvas");
-  if (!canvas) return;
-
-  const ctx = canvas.getContext("2d");
-  let particles = [];
-  const maxParticles = 60;
-  let animationId;
-
-  function resize() {
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight + "px";
-    ctx.scale(dpr, dpr);
-  }
-
-  function random(min, max) {
-    return min + Math.random() * (max - min);
-  }
-
-  function createParticles() {
-    particles = [];
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const count = Math.min(maxParticles, Math.max(30, Math.floor((w * h) / 38000)));
-
-    for (let i = 0; i < count; i++) {
-      particles.push({
-        x: random(0, w),
-        y: random(0, h),
-        r: random(1.5, 3.8),
-        vx: random(-0.2, 0.2),
-        vy: random(-0.15, 0.15),
-        alpha: random(0.1, 0.3),
-        phase: random(0, Math.PI * 2),
-        frequency: random(0.01, 0.03)
-      });
-    }
-  }
-
-  function drawParticles() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-
-    ctx.clearRect(0, 0, w, h);
-
-    // Update and draw particles
-    particles.forEach(p => {
-      p.phase += p.frequency;
-      p.x += p.vx + Math.sin(p.phase) * 0.08;
-      p.y += p.vy + Math.cos(p.phase) * 0.08;
-
-      // Wrap around
-      if (p.x < -10) p.x = w + 10;
-      if (p.x > w + 10) p.x = -10;
-      if (p.y < -10) p.y = h + 10;
-      if (p.y > h + 10) p.y = -10;
-
-      // Draw particle with glow
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      
-      const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
-      gradient.addColorStop(0, `rgba(242, 231, 216, ${p.alpha})`);
-      gradient.addColorStop(0.5, `rgba(242, 231, 216, ${p.alpha * 0.5})`);
-      gradient.addColorStop(1, 'rgba(242, 231, 216, 0)');
-      
-      ctx.fillStyle = gradient;
-      ctx.fill();
-    });
-
-    // Draw connections
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const pa = particles[i];
-        const pb = particles[j];
-        const dx = pa.x - pb.x;
-        const dy = pa.y - pb.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 130) {
-          const alpha = (130 - distance) / 130 * 0.12;
-          
-          const gradient = ctx.createLinearGradient(pa.x, pa.y, pb.x, pb.y);
-          gradient.addColorStop(0, `rgba(180, 92, 255, ${alpha})`);
-          gradient.addColorStop(0.5, `rgba(47, 231, 255, ${alpha * 1.2})`);
-          gradient.addColorStop(1, `rgba(255, 107, 157, ${alpha * 0.8})`);
-          
-          ctx.beginPath();
-          ctx.moveTo(pa.x, pa.y);
-          ctx.lineTo(pb.x, pb.y);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = 1.2;
-          ctx.stroke();
-        }
-      }
-    }
-
-    animationId = requestAnimationFrame(drawParticles);
-  }
-
-  function init() {
-    resize();
-    createParticles();
-    drawParticles();
-  }
-
-  window.addEventListener("resize", () => {
-    resize();
-    createParticles();
-  });
-
-  // Intersection Observer for animations
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll(".miniRow, .chip").forEach(el => {
-      observer.observe(el);
-    });
-  }
-
-  init();
-})();
-  </script>
+  <noscript>
+    <div style="padding:16px;text-align:center;color:#fff;background:#111;border-top:1px solid rgba(255,255,255,.1)">
+      Active JavaScript pour les animations + barres.
+    </div>
+  </noscript>
 </body>
 </html>
