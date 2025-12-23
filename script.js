@@ -1,175 +1,249 @@
+/* ============================================
+   SABIR IAZZA - AWARD-WINNING EDITION
+   script.js - JavaScript principal
+   ============================================ */
+
 (() => {
   "use strict";
-  if (!window?.document) return;
 
   // Year
   const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Topbar scroll effect
-  const topbar = document.getElementById("topbar");
-  const onScroll = () => {
-    if (!topbar) return;
-    if (window.scrollY > 50) topbar.classList.add("scrolled");
-    else topbar.classList.remove("scrolled");
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  // ============================================
+  // CUSTOM CURSOR
+  // ============================================
+  const cursor = document.querySelector('.cursor');
+  const cursorGlow = document.querySelector('.cursor-glow');
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+  let glowX = 0, glowY = 0;
 
-  // Mascot click -> portfolio
-  const mascotBtn = document.getElementById("mascotBtn");
-  if (mascotBtn) {
-    mascotBtn.addEventListener("click", () => {
-      document.body.style.transition = "opacity 0.35s ease";
-      document.body.style.opacity = "0";
-      setTimeout(() => (window.location.href = "portfolio.html"), 350);
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.2;
+    cursorY += (mouseY - cursorY) * 0.2;
+    glowX += (mouseX - glowX) * 0.1;
+    glowY += (mouseY - glowY) * 0.1;
+
+    if (cursor) {
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+    }
+
+    if (cursorGlow) {
+      cursorGlow.style.left = (glowX - 150) + 'px';
+      cursorGlow.style.top = (glowY - 150) + 'px';
+    }
+
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Hover effect
+  document.querySelectorAll('a, button, .chip, .tile, .brand').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor && cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('hover'));
+  });
+
+  // ============================================
+  // TOPBAR SCROLL
+  // ============================================
+  const topbar = document.getElementById('topbar');
+  window.addEventListener('scroll', () => {
+    if (topbar) {
+      topbar.classList.toggle('scrolled', window.scrollY > 50);
+    }
+  }, { passive: true });
+
+  // ============================================
+  // GLASS CARD MOUSE TRACKING
+  // ============================================
+  const glassCard = document.getElementById('glassCard');
+  if (glassCard) {
+    glassCard.addEventListener('mousemove', (e) => {
+      const rect = glassCard.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      glassCard.style.setProperty('--mouse-x', x + '%');
+      glassCard.style.setProperty('--mouse-y', y + '%');
     });
   }
 
-  // Ripple animation css (once)
-  if (!document.getElementById("ripple-style")) {
-    const style = document.createElement("style");
-    style.id = "ripple-style";
-    style.textContent = `
-      @keyframes ripple { to { transform: scale(4); opacity: 0; } }
-    `;
-    document.head.appendChild(style);
-  }
+  // ============================================
+  // MAGNETIC BUTTONS
+  // ============================================
+  document.querySelectorAll('.btn-magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+    });
 
-  // Ripple on buttons
-  document.querySelectorAll(".btn, #mascotBtn").forEach((el) => {
-    el.addEventListener("pointerdown", (e) => {
-      const target = e.currentTarget;
-      if (!(target instanceof HTMLElement)) return;
-      const rect = target.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      const x = e.clientX - rect.left - size / 2;
-      const y = e.clientY - rect.top - size / 2;
-
-      const ripple = document.createElement("span");
-      ripple.style.cssText = `
-        position:absolute;
-        width:${size}px;
-        height:${size}px;
-        border-radius:50%;
-        background:rgba(255,255,255,0.35);
-        left:${x}px;
-        top:${y}px;
-        pointer-events:none;
-        transform:scale(0);
-        animation:ripple 0.6s ease-out;
-        z-index:5;
-      `;
-      target.style.position = target.style.position || "relative";
-      target.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 650);
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
     });
   });
 
-  // Canvas particles (clean, no template bugs)
-  const canvas = document.getElementById("bgCanvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d", { alpha: true });
-  if (!ctx) return;
+  // ============================================
+  // BACKGROUND PARTICLES
+  // ============================================
+  const bgCanvas = document.getElementById('bgCanvas');
+  if (!bgCanvas) return;
 
-  const random = (min, max) => min + Math.random() * (max - min);
-  let particles = [];
-  let raf = 0;
+  const bgCtx = bgCanvas.getContext('2d');
+  
+  function resizeBg() {
+    bgCanvas.width = window.innerWidth;
+    bgCanvas.height = window.innerHeight;
+  }
+  resizeBg();
 
-  function resizeCanvas() {
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(window.innerHeight * dpr);
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // IMPORTANT: reset+scale
+  const particles = [];
+  for (let i = 0; i < 50; i++) {
+    particles.push({
+      x: Math.random() * bgCanvas.width,
+      y: Math.random() * bgCanvas.height,
+      r: Math.random() * 2 + 1,
+      vx: Math.random() * 0.5 - 0.25,
+      vy: Math.random() * 0.5 - 0.25,
+      alpha: Math.random() * 0.3 + 0.1
+    });
   }
 
-  function createParticles() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const count = Math.min(70, Math.max(30, Math.floor((w * h) / 38000)));
-    particles = Array.from({ length: count }, () => ({
-      x: random(0, w),
-      y: random(0, h),
-      r: random(1.5, 3.8),
-      vx: random(-0.22, 0.22),
-      vy: random(-0.16, 0.16),
-      a: random(0.10, 0.30),
-      phase: random(0, Math.PI * 2),
-      freq: random(0.01, 0.03),
-    }));
+  function drawBg() {
+    bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+    
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      
+      if (p.x < 0 || p.x > bgCanvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > bgCanvas.height) p.vy *= -1;
+      
+      bgCtx.beginPath();
+      bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      bgCtx.fillStyle = `rgba(180, 92, 255, ${p.alpha})`;
+      bgCtx.fill();
+    });
+    
+    requestAnimationFrame(drawBg);
+  }
+  drawBg();
+
+  window.addEventListener('resize', () => {
+    resizeBg();
+  });
+
+  // ============================================
+  // THREE.JS 3D ORB
+  // ============================================
+  const canvas = document.getElementById('three-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  
+  renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  camera.position.z = 5;
+
+  // Main orb
+  const geometry = new THREE.IcosahedronGeometry(1.5, 1);
+  const material = new THREE.MeshPhongMaterial({
+    color: 0xB45CFF,
+    emissive: 0x2FE7FF,
+    emissiveIntensity: 0.5,
+    shininess: 100,
+    wireframe: false
+  });
+  const orb = new THREE.Mesh(geometry, material);
+  scene.add(orb);
+
+  // Wireframe overlay
+  const wireframeGeo = new THREE.IcosahedronGeometry(1.52, 1);
+  const wireframeMat = new THREE.MeshBasicMaterial({
+    color: 0x2FE7FF,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.3
+  });
+  const wireframe = new THREE.Mesh(wireframeGeo, wireframeMat);
+  scene.add(wireframe);
+
+  // Particles around orb
+  const particlesGeo = new THREE.BufferGeometry();
+  const particlesCount = 1000;
+  const positions = new Float32Array(particlesCount * 3);
+
+  for (let i = 0; i < particlesCount * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 10;
   }
 
-  function draw() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    ctx.clearRect(0, 0, w, h);
+  particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const particlesMat = new THREE.PointsMaterial({
+    color: 0x2FE7FF,
+    size: 0.02,
+    transparent: true,
+    opacity: 0.6
+  });
+  const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+  scene.add(particlesMesh);
 
-    // particles
-    for (const p of particles) {
-      p.phase += p.freq;
-      p.x += p.vx + Math.sin(p.phase) * 0.10;
-      p.y += p.vy + Math.cos(p.phase) * 0.10;
+  // Lights
+  const light1 = new THREE.PointLight(0xB45CFF, 2, 100);
+  light1.position.set(5, 5, 5);
+  scene.add(light1);
 
-      if (p.x < -10) p.x = w + 10;
-      if (p.x > w + 10) p.x = -10;
-      if (p.y < -10) p.y = h + 10;
-      if (p.y > h + 10) p.y = -10;
+  const light2 = new THREE.PointLight(0x2FE7FF, 2, 100);
+  light2.position.set(-5, -5, 5);
+  scene.add(light2);
 
-      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3.4);
-      grad.addColorStop(0, `rgba(242,231,216,${p.a})`);
-      grad.addColorStop(0.5, `rgba(242,231,216,${p.a * 0.45})`);
-      grad.addColorStop(1, "rgba(242,231,216,0)");
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambientLight);
 
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 3.4, 0, Math.PI * 2);
-      ctx.fillStyle = grad;
-      ctx.fill();
-    }
+  // Mouse interaction
+  let targetX = 0;
+  let targetY = 0;
 
-    // connections
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const a = particles[i];
-        const b = particles[j];
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        const d = Math.sqrt(dx * dx + dy * dy);
-        const maxD = 130;
-        if (d < maxD) {
-          const alpha = ((maxD - d) / maxD) * 0.12;
-          const g = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-          g.addColorStop(0, `rgba(180,92,255,${alpha})`);
-          g.addColorStop(0.5, `rgba(47,231,255,${alpha * 1.2})`);
-          g.addColorStop(1, `rgba(255,107,157,${alpha * 0.8})`);
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    targetY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  });
 
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = g;
-          ctx.lineWidth = 1.2;
-          ctx.stroke();
-        }
-      }
-    }
-
-    raf = requestAnimationFrame(draw);
+  // Animation
+  function animate() {
+    requestAnimationFrame(animate);
+    
+    // Smooth rotation
+    orb.rotation.y += (targetX * 0.5 - orb.rotation.y) * 0.05;
+    orb.rotation.x += (targetY * 0.5 - orb.rotation.x) * 0.05;
+    orb.rotation.z += 0.002;
+    
+    wireframe.rotation.y = orb.rotation.y;
+    wireframe.rotation.x = orb.rotation.x;
+    wireframe.rotation.z = -orb.rotation.z;
+    
+    particlesMesh.rotation.y += 0.0005;
+    particlesMesh.rotation.x += 0.0003;
+    
+    renderer.render(scene, camera);
   }
+  animate();
 
-  // init
-  resizeCanvas();
-  createParticles();
-  draw();
+  // Resize
+  window.addEventListener('resize', () => {
+    camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+  });
 
-  let resizeTimer = 0;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => {
-      cancelAnimationFrame(raf);
-      resizeCanvas();
-      createParticles();
-      draw();
-    }, 200);
-  }, { passive: true });
+  console.log('🚀 Sabir IAZZA - Award-Winning Portfolio loaded!');
 })();

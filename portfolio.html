@@ -1,19 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a0a12" />
   <title>Sabir IAZZA — Portfolio</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style-portfolio.css" />
-  <script defer src="script-portfolio.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-portfolio.css">
 </head>
-
 <body>
   <!-- Background -->
   <div class="pbg" aria-hidden="true">
@@ -25,12 +21,12 @@
   <!-- Header -->
   <header class="header" id="header">
     <div class="header__inner">
-      <a class="logo" href="index.html" aria-label="Retour accueil">
-        <span class="logo__dot" aria-hidden="true"></span>
-        <span class="logo__txt">SABIR IAZZA</span>
+      <a class="logo" href="index.html" aria-label="Retour à l'accueil">
+        <span class="logo__dot"></span>
+        <span class="logo__txt">Sabir IAZZA</span>
       </a>
 
-      <nav class="nav" aria-label="Sections">
+      <nav class="nav" aria-label="Navigation portfolio">
         <a class="nav__link" href="#about">À propos</a>
         <a class="nav__link" href="#skills">Compétences</a>
         <a class="nav__link" href="#projects">Projets</a>
@@ -44,149 +40,86 @@
       </div>
     </div>
 
-    <div class="progress">
+    <div class="progress" aria-hidden="true">
       <div class="progress__bar" id="progressBar"></div>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
+  <!-- Mobile menu -->
   <div class="mMenu" id="mMenu" aria-hidden="true">
     <div class="mMenu__panel glass">
       <div class="mMenu__top">
         <b>Menu</b>
-        <button class="mMenu__close" id="closeMenu" type="button" aria-label="Fermer">×</button>
+        <button class="mMenu__close" id="closeMenu" type="button" aria-label="Fermer">✕</button>
       </div>
-
-      <nav class="mNav" aria-label="Menu mobile">
+      <div class="mNav">
         <a class="mNav__link" href="#about">À propos</a>
         <a class="mNav__link" href="#skills">Compétences</a>
         <a class="mNav__link" href="#projects">Projets</a>
         <a class="mNav__link" href="#contact">Contact</a>
-      </nav>
-
+      </div>
       <div class="mMenu__footer">
-        <a class="btn btn--ghost" href="index.html">← Retour accueil</a>
+        <a class="btn btn--ghost" href="index.html">← Retour Accueil</a>
       </div>
     </div>
   </div>
 
   <main class="container">
     <!-- HERO -->
-    <section class="hero" id="top">
+    <section class="hero" id="about">
       <div class="hero__grid">
         <article class="glass hero__card reveal">
-          <div class="badge">
-            <span class="badge__dot" aria-hidden="true"></span>
-            Disponible pour alternance / stage
-          </div>
-
-          <h1 class="hero__title">
-            Portfolio <span class="grad">CIEL</span> — Réseau, Cyber, Web.
-          </h1>
-
-          <p class="hero__subtitle">
-            Je suis <b>Sabir IAZZA</b>, élève en <b>Terminale Bac Pro CIEL</b>.
-            Ici : mes projets, mes compétences, et mon parcours.
-          </p>
+          <div class="badge"><span class="badge__dot"></span> Disponible pour alternance / stage</div>
 
           <div class="hero__chips">
-            <span class="chip">Packet Tracer • VLAN</span>
-            <span class="chip">Web • UI</span>
+            <span class="chip">CIEL • Réseaux • Cyber</span>
+            <span class="chip">UI • Web • Mini-apps</span>
           </div>
+
+          <h1 class="hero__title">Portfolio <span class="grad">Sabir</span></h1>
+
+          <p class="hero__subtitle">
+            Étudiant en <b>Terminale Bac Pro CIEL</b>. J'aime construire des projets concrets (réseau/cyber/web),
+            et je vise <b>BTS SIO</b> (SISR).
+          </p>
 
           <div class="hero__tiles">
             <div class="tile">
-              <span class="tile__icon" aria-hidden="true">🧠</span>
-              <div class="tile__txt">
-                <b>Objectif</b>
-                <span>BTS SIO (SISR) + alternance</span>
-              </div>
+              <span class="tile__icon">🧠</span>
+              <div class="tile__txt"><b>Objectif</b><span>Alternance + montée en compétences</span></div>
             </div>
             <div class="tile">
-              <span class="tile__icon" aria-hidden="true">🧰</span>
-              <div class="tile__txt">
-                <b>Stack</b>
-                <span>HTML/CSS/JS • Linux • Réseau</span>
-              </div>
+              <span class="tile__icon">🕸️</span>
+              <div class="tile__txt"><b>Focus</b><span>Réseaux, cybersécurité, web</span></div>
             </div>
             <div class="tile">
-              <span class="tile__icon" aria-hidden="true">🎯</span>
-              <div class="tile__txt">
-                <b>Focus 2026</b>
-                <span>Cybersécurité & projets concrets</span>
-              </div>
+              <span class="tile__icon">⚡</span>
+              <div class="tile__txt"><b>Style</b><span>Design premium + projets clean</span></div>
             </div>
           </div>
 
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#projects">Voir mes projets →</a>
+            <a class="btn btn--primary" href="#projects">Voir projets →</a>
             <a class="btn btn--soft" href="mailto:amiamisabir@gmail.com">Me contacter</a>
-            <a class="btn btn--ghost" href="index.html">Accueil</a>
+            <a class="btn btn--ghost" href="index.html">Retour accueil</a>
           </div>
 
           <div class="hero__meta">
-            <a class="metaLink" target="_blank" rel="noopener" href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume+83">📍 Saint-Maximin (83)</a>
             <a class="metaLink" href="mailto:amiamisabir@gmail.com">✉️ amiamisabir@gmail.com</a>
             <a class="metaLink" href="tel:+33762972626">📞 07 62 97 26 26</a>
+            <a class="metaLink" target="_blank" rel="noopener"
+               href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume+83">📍 Saint-Maximin</a>
           </div>
         </article>
 
         <aside class="hero__visual reveal">
-          <div class="visual glass" data-parallax="0.08">
+          <div class="visual glass" data-parallax="0.12">
             <button class="orbBtn" id="orbBtn" type="button" aria-label="Retour accueil">
-              <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25'%3E%3Cstop offset='0%25' stop-color='%232FE7FF'/%3E%3Cstop offset='55%25' stop-color='%23B45CFF'/%3E%3Cstop offset='100%25' stop-color='%230a0a12'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='60' cy='60' r='58' fill='url(%23g)'/%3E%3C/svg%3E" />
+              <span style="font-size: 48px;">🦁</span>
             </button>
-
-            <img alt="Visuel portfolio" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%2307070d'/%3E%3Cstop offset='1' stop-color='%230a0a12'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23bg)'/%3E%3Ctext x='70' y='140' fill='%23F2E7D8' font-size='64' font-family='Arial'%3ESabir IAZZA%3C/text%3E%3Ctext x='70' y='220' fill='%23EDEDF7' opacity='0.75' font-size='32' font-family='Arial'%3EPortfolio • Cyber • Réseau • Web%3C/text%3E%3Ctext x='70' y='310' fill='%232FE7FF' opacity='0.85' font-size='26' font-family='Arial'%3EVLAN • Packet Tracer • Linux • UI%3C/text%3E%3C/svg%3E" />
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(180,92,255,.15),rgba(47,231,255,.1));display:flex;align-items:center;justify-content:center;font-size:120px;">🎯</div>
           </div>
         </aside>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <div class="section__head reveal">
-        <div class="pill">À propos</div>
-        <h2>Qui je suis</h2>
-        <p>Un profil CIEL orienté projets : réseau, cyber, web, et pratique terrain.</p>
-      </div>
-
-      <div class="grid grid--2">
-        <article class="glass card reveal">
-          <div class="card__top">
-            <div class="card__icon" aria-hidden="true">🧩</div>
-            <div>
-              <h3>Ce que je recherche</h3>
-              <p>Alternance / stage en informatique (réseau, cyber, support, web).</p>
-            </div>
-          </div>
-          <ul class="list">
-            <li>Support / dépannage + rigueur</li>
-            <li>Réseau : VLAN, adressage, routage (bases)</li>
-            <li>Web : HTML/CSS/JS + design premium</li>
-          </ul>
-        </article>
-
-        <article class="glass card reveal">
-          <div class="card__top">
-            <div class="card__icon" aria-hidden="true">🏅</div>
-            <div>
-              <h3>Certifications & +</h3>
-              <p>À mettre en avant sur CV + portfolio.</p>
-            </div>
-          </div>
-          <div class="tags">
-            <span class="tag">Pix</span>
-            <span class="tag">Cisco (Intro)</span>
-            <span class="tag">Web (Responsive)</span>
-            <span class="tag">Linux (bases)</span>
-          </div>
-
-          <div class="quote">
-            <b>Style de travail</b>
-            <p>Je préfère apprendre avec des projets réels et documenter ce que je fais.</p>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -194,58 +127,62 @@
     <section class="section" id="skills">
       <div class="section__head reveal">
         <div class="pill">Compétences</div>
-        <h2>Ce que je sais faire</h2>
-        <p>Des bases solides + une progression rapide avec des labs et des projets.</p>
+        <h2>Ce que je maîtrise / ce que je travaille</h2>
+        <p>Réseau, cyber, web — version concrète.</p>
       </div>
 
       <div class="grid grid--2">
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon" aria-hidden="true">🖧</div>
+            <div class="card__icon">🛡️</div>
             <div>
-              <h3>Réseau</h3>
-              <p>Packet Tracer, VLAN, adressage IP, diagnostic.</p>
+              <h3>Cybersécurité</h3>
+              <p>Hygiène, bases, analyse, bonnes pratiques.</p>
             </div>
           </div>
 
           <div class="bars">
-            <div class="bar" data-val="70">
-              <div class="bar__head"><span>VLAN / Switching</span><span>70%</span></div>
+            <div class="bar" data-val="72">
+              <div class="bar__head"><span>Wireshark / analyse</span><span>72%</span></div>
               <div class="bar__rail"><div class="bar__fill"></div></div>
             </div>
-            <div class="bar" data-val="62">
-              <div class="bar__head"><span>Adressage / Subnet</span><span>62%</span></div>
+            <div class="bar" data-val="65">
+              <div class="bar__head"><span>Durcissement / bonnes pratiques</span><span>65%</span></div>
               <div class="bar__rail"><div class="bar__fill"></div></div>
             </div>
-            <div class="bar" data-val="58">
-              <div class="bar__head"><span>Wireshark (bases)</span><span>58%</span></div>
-              <div class="bar__rail"><div class="bar__fill"></div></div>
-            </div>
+          </div>
+
+          <div class="tags">
+            <span class="tag">Wireshark</span>
+            <span class="tag">Sécurité</span>
+            <span class="tag">Analyse</span>
           </div>
         </article>
 
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon" aria-hidden="true">💻</div>
+            <div class="card__icon">🌐</div>
             <div>
-              <h3>Web / UI</h3>
-              <p>HTML/CSS/JS, animations, responsive.</p>
+              <h3>Réseaux</h3>
+              <p>VLAN, adressage, config, Packet Tracer.</p>
             </div>
           </div>
 
           <div class="bars">
             <div class="bar" data-val="78">
-              <div class="bar__head"><span>HTML/CSS</span><span>78%</span></div>
+              <div class="bar__head"><span>Packet Tracer / Cisco</span><span>78%</span></div>
               <div class="bar__rail"><div class="bar__fill"></div></div>
             </div>
             <div class="bar" data-val="70">
-              <div class="bar__head"><span>JavaScript</span><span>70%</span></div>
+              <div class="bar__head"><span>IP / subnetting</span><span>70%</span></div>
               <div class="bar__rail"><div class="bar__fill"></div></div>
             </div>
-            <div class="bar" data-val="60">
-              <div class="bar__head"><span>Accessibilité / UX</span><span>60%</span></div>
-              <div class="bar__rail"><div class="bar__fill"></div></div>
-            </div>
+          </div>
+
+          <div class="tags">
+            <span class="tag">Cisco</span>
+            <span class="tag">VLAN</span>
+            <span class="tag">Routage</span>
           </div>
         </article>
       </div>
@@ -255,79 +192,49 @@
     <section class="section" id="projects">
       <div class="section__head reveal">
         <div class="pill">Projets</div>
-        <h2>Mes projets concrets</h2>
-        <p>3 exemples (tu peux remplacer par tes vrais projets + screenshots).</p>
+        <h2>Quelques projets récents</h2>
+        <p>Ajoute tes screenshots et liens GitHub.</p>
       </div>
 
       <div class="grid grid--2">
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon" aria-hidden="true">🛡️</div>
+            <div class="card__icon">🧩</div>
             <div>
-              <h3>Lab Réseau (VLAN)</h3>
-              <p>Topo simple + segmentation + tests.</p>
+              <h3>Portfolio Premium</h3>
+              <p>UI/UX, glassmorphism, animations, canvas.</p>
             </div>
           </div>
           <ul class="list">
-            <li>Plan d’adressage</li>
-            <li>VLAN + trunk</li>
-            <li>Tests ping / connectivité</li>
+            <li>Landing + page portfolio</li>
+            <li>Animations 3D Three.js</li>
+            <li>Optimisé mobile</li>
           </ul>
-          <div class="rowBtns">
-            <a class="btn btn--ghost" href="#contact">Demander la démo</a>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JS</span>
+            <span class="tag">Three.js</span>
           </div>
         </article>
 
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon" aria-hidden="true">🌐</div>
+            <div class="card__icon">🛰️</div>
             <div>
-              <h3>Portfolio Premium</h3>
-              <p>Design glass + canvas particles + animations.</p>
+              <h3>Lab Réseau</h3>
+              <p>VLAN + routage + règles + doc.</p>
             </div>
           </div>
-          <div class="preview">
-            <img alt="Preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='520'%3E%3Crect width='1200' height='520' fill='%230a0a12'/%3E%3Ctext x='60' y='140' fill='%23F2E7D8' font-size='52' font-family='Arial'%3EPremium UI%3C/text%3E%3Ctext x='60' y='210' fill='%23EDEDF7' opacity='0.75' font-size='28' font-family='Arial'%3EAnimations • Glass • Néon%3C/text%3E%3C/svg%3E" />
-          </div>
-        </article>
-
-        <article class="glass card reveal">
-          <div class="card__top">
-            <div class="card__icon" aria-hidden="true">🤖</div>
-            <div>
-              <h3>SabirGPT (démo)</h3>
-              <p>Mini chat local pour présenter des idées.</p>
-            </div>
-          </div>
-
-          <div class="chat">
-            <div class="chat__log" id="chatLog"></div>
-            <form class="chat__form" id="chatForm">
-              <textarea class="chat__input" id="chatInput" rows="1" placeholder="Ex: Donne-moi 3 idées de projets réseau..."></textarea>
-              <button class="chat__send" type="submit">Envoyer</button>
-            </form>
-          </div>
-        </article>
-
-        <article class="glass card reveal">
-          <div class="card__top">
-            <div class="card__icon" aria-hidden="true">🧭</div>
-            <div>
-              <h3>Parcours</h3>
-              <p>Timeline mini (à personnaliser).</p>
-            </div>
-          </div>
-
-          <div class="timelineMini">
-            <div class="tItem">
-              <b>2024–2025</b><span>Bac Pro CIEL — Toulon</span>
-            </div>
-            <div class="tItem">
-              <b>Stages</b><span>Fibre • Téléphonie • Support</span>
-            </div>
-            <div class="tItem">
-              <b>2026</b><span>Objectif BTS SIO</span>
-            </div>
+          <ul class="list">
+            <li>Topologie claire</li>
+            <li>Config + preuves</li>
+            <li>Compte rendu</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Cisco</span>
+            <span class="tag">VLAN</span>
+            <span class="tag">Packet Tracer</span>
           </div>
         </article>
       </div>
@@ -337,44 +244,52 @@
     <section class="section" id="contact">
       <div class="section__head reveal">
         <div class="pill">Contact</div>
-        <h2>On échange ?</h2>
-        <p>Je réponds rapidement pour stage / alternance.</p>
+        <h2>On discute ?</h2>
+        <p>Je réponds vite.</p>
       </div>
 
       <div class="grid grid--2">
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon" aria-hidden="true">✉️</div>
+            <div class="card__icon">💬</div>
             <div>
-              <h3>Email</h3>
-              <p>Le plus simple : un message + ton besoin.</p>
+              <h3>SabirGPT (démo)</h3>
+              <p>Mini chat local (juste pour le style).</p>
             </div>
           </div>
-          <a class="link" href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+
+          <div class="chat">
+            <div class="chat__log" id="chatLog"></div>
+            <form class="chat__form" id="chatForm">
+              <textarea class="chat__input" id="chatInput" rows="1" placeholder="Écris ici..."></textarea>
+              <button class="chat__send" type="submit">Envoyer</button>
+            </form>
+          </div>
         </article>
 
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon" aria-hidden="true">📞</div>
+            <div class="card__icon">📩</div>
             <div>
-              <h3>Téléphone</h3>
-              <p>Appel / SMS (pro).</p>
+              <h3>Coordonnées</h3>
+              <p>Mail / téléphone.</p>
             </div>
           </div>
-          <a class="link" href="tel:+33762972626">07 62 97 26 26</a>
+
+          <div class="timelineMini">
+            <div class="tItem"><b>Email</b><span>amiamisabir@gmail.com</span></div>
+            <div class="tItem"><b>Téléphone</b><span>07 62 97 26 26</span></div>
+            <div class="tItem"><b>Ville</b><span>Saint-Maximin (83)</span></div>
+          </div>
         </article>
       </div>
 
       <footer class="footer">
-        <span>© <span id="pYear">2025</span> Sabir IAZZA — Portfolio</span>
+        © <span id="pYear">2025</span> Sabir IAZZA — Portfolio Premium
       </footer>
     </section>
   </main>
 
-  <noscript>
-    <div style="padding:16px;text-align:center;color:#fff;background:#111;border-top:1px solid rgba(255,255,255,.1)">
-      Active JavaScript pour les animations + barres.
-    </div>
-  </noscript>
+  <script src="script-portfolio.js"></script>
 </body>
 </html>
