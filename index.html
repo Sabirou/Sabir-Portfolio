@@ -4,487 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a0a12" />
+  <meta name="description" content="Portfolio de Sabir IAZZA - Étudiant en Terminale CIEL, spécialisé en réseaux, cybersécurité et développement web." />
   <title>Sabir IAZZA — Portfolio Award-Winning</title>
+  
+  <!-- Preload pour les performances -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-:root {
-  --accent1: #B45CFF;
-  --accent2: #2FE7FF;
-  --accent3: #FF6B9D;
-  --cream: #F2E7D8;
-  --bg0: #07070d;
-  --bg1: #0a0a12;
-  --text: #EDEDF7;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  overflow-x: hidden;
-}
-
-body {
-  font-family: Inter, -apple-system, system-ui, sans-serif;
-  color: var(--text);
-  background: linear-gradient(180deg, var(--bg0), var(--bg1));
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  cursor: none;
-}
-
-/* Custom Cursor */
-.cursor {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--accent2);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 10000;
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-  mix-blend-mode: difference;
-}
-
-.cursor-glow {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(180,92,255,0.15), transparent 70%);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: screen;
-}
-
-.cursor.hover {
-  width: 50px;
-  height: 50px;
-  border-color: var(--accent1);
-}
-
-/* Background */
-.bg-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
-
-/* Topbar */
-.topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  backdrop-filter: blur(20px) saturate(180%);
-  background: linear-gradient(180deg, rgba(10,10,18,0.9), rgba(10,10,18,0.5));
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.topbar.scrolled {
-  background: linear-gradient(180deg, rgba(10,10,18,0.95), rgba(10,10,18,0.8));
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-
-.topbar__inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 16px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 900;
-  font-size: 14px;
-  color: var(--cream);
-  padding: 10px 20px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.brand::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(180,92,255,0.3), rgba(47,231,255,0.2));
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.brand:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255,255,255,0.3);
-}
-
-.brand:hover::before {
-  opacity: 1;
-}
-
-.brand__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent1), var(--accent2));
-  box-shadow: 0 0 20px rgba(180,92,255,0.8);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
-}
-
-.btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  border-radius: 16px;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 14px;
-  color: var(--text);
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.btn:hover::before {
-  opacity: 1;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
-}
-
-.btn--primary {
-  background: linear-gradient(135deg, var(--accent1), var(--accent2));
-  color: #0b0b12;
-  border: 0;
-  font-weight: 900;
-}
-
-/* Container */
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 100px 32px 80px;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.hero {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 60px;
-  align-items: center;
-}
-
-/* Glass Card avec Liquid Effect */
-.glass-card {
-  position: relative;
-  padding: 48px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
-  border: 1px solid rgba(255,255,255,0.2);
-  backdrop-filter: blur(30px) saturate(150%);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
-
-.glass-card::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-    rgba(180,92,255,0.3), 
-    rgba(47,231,255,0.2), 
-    transparent 40%);
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  z-index: -1;
-  border-radius: 32px;
-}
-
-.glass-card:hover::before {
-  opacity: 1;
-}
-
-.glass-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 32px 100px rgba(0,0,0,0.7);
-  border-color: rgba(255,255,255,0.3);
-}
-
-/* Chips */
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-.chip {
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--cream);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.chip:hover {
-  transform: translateY(-4px) scale(1.05);
-  background: rgba(180,92,255,0.25);
-  border-color: rgba(180,92,255,0.5);
-  box-shadow: 0 8px 24px rgba(180,92,255,0.4);
-}
-
-/* Title */
-.title {
-  font-size: clamp(42px, 5vw, 64px);
-  font-weight: 900;
-  line-height: 1.1;
-  margin: 16px 0;
-  letter-spacing: -0.04em;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientFlow 5s ease infinite;
-  filter: drop-shadow(0 0 30px rgba(180,92,255,0.6));
-}
-
-@keyframes gradientFlow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.subtitle {
-  font-size: 17px;
-  line-height: 1.7;
-  color: rgba(237,237,247,0.75);
-  margin-bottom: 32px;
-  max-width: 65ch;
-}
-
-.subtitle b {
-  color: var(--cream);
-  font-weight: 800;
-}
-
-/* Tiles avec Physics */
-.tiles {
-  display: grid;
-  gap: 16px;
-  margin: 32px 0;
-}
-
-.tile {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 20px;
-  border-radius: 20px;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.12);
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  position: relative;
-  overflow: hidden;
-}
-
-.tile::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--accent1), var(--accent2));
-  transform: scaleY(0);
-  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.tile:hover {
-  transform: translateX(16px) scale(1.02);
-  background: rgba(180,92,255,0.15);
-  border-color: rgba(180,92,255,0.4);
-  box-shadow: 0 12px 32px rgba(180,92,255,0.3);
-}
-
-.tile:hover::before {
-  transform: scaleY(1);
-}
-
-.tile__icon {
-  font-size: 28px;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
-}
-
-.tile__text h4 {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--cream);
-  margin-bottom: 4px;
-}
-
-.tile__text p {
-  font-size: 13px;
-  color: rgba(237,237,247,0.7);
-}
-
-/* Magnetic Buttons */
-.btn-group {
-  display: flex;
-  gap: 16px;
-  margin: 32px 0;
-}
-
-.btn-magnetic {
-  position: relative;
-  transition: transform 0.15s ease-out;
-}
-
-.btn-magnetic:hover {
-  transform: scale(1.05);
-}
-
-/* 3D Scene Container */
-.scene-3d {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  border-radius: 32px;
-  overflow: hidden;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-}
-
-#three-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.scene-hint {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 24px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: var(--cream);
-  font-weight: 800;
-  font-size: 13px;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-10px); }
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
   
-  .scene-3d {
-    height: 400px;
-  }
-}
-
-@media (max-width: 640px) {
-  .container {
-    padding: 80px 20px 60px;
-  }
+  <!-- Favicon (ajoute le tien) -->
+  <link rel="icon" type="image/png" href="favicon.png" />
   
-  .glass-card {
-    padding: 32px;
-  }
-  
-  .btn-group {
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Custom Cursor -->
-  <div class="cursor"></div>
-  <div class="cursor-glow"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
 
   <!-- Background Canvas -->
-  <canvas class="bg-canvas" id="bgCanvas"></canvas>
+  <canvas class="bg-canvas" id="bgCanvas" aria-hidden="true"></canvas>
 
   <!-- Topbar -->
   <header class="topbar" id="topbar">
     <div class="topbar__inner">
-      <div class="brand">
-        <span class="brand__dot"></span>
+      <a href="index.html" class="brand" aria-label="Accueil">
+        <span class="brand__dot" aria-hidden="true"></span>
         <span>SABIR IAZZA</span>
-      </div>
-      <a class="btn btn--primary" href="portfolio.html">Entrer dans le portfolio</a>
+      </a>
+      <a class="btn btn--primary" href="portfolio.html">
+        Entrer dans le portfolio
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
   </header>
 
   <!-- Main -->
-  <div class="container">
+  <main class="container">
     <div class="hero">
       <!-- Left Card -->
-      <div class="glass-card" id="glassCard">
+      <article class="glass-card" id="glassCard">
         <div class="chips">
           <span class="chip">Univers nuit & 3D</span>
           <span class="chip">Cybersécurité • Réseaux</span>
@@ -502,23 +61,23 @@ body {
 
         <div class="tiles">
           <div class="tile">
-            <span class="tile__icon">🎓</span>
+            <span class="tile__icon" aria-hidden="true">🎓</span>
             <div class="tile__text">
-              <h4>Terminale CIEL</h4>
+              <h2>Terminale CIEL</h2>
               <p>Réseaux • Cyber • Électronique</p>
             </div>
           </div>
           <div class="tile">
-            <span class="tile__icon">🛠️</span>
+            <span class="tile__icon" aria-hidden="true">🛠️</span>
             <div class="tile__text">
-              <h4>Stages</h4>
+              <h2>Stages</h2>
               <p>Fibre • Téléphonie • Support</p>
             </div>
           </div>
           <div class="tile">
-            <span class="tile__icon">🌐</span>
+            <span class="tile__icon" aria-hidden="true">🌐</span>
             <div class="tile__text">
-              <h4>Projets Web</h4>
+              <h2>Projets Web</h2>
               <p>Portfolio • UI • Mini-apps</p>
             </div>
           </div>
@@ -526,230 +85,35 @@ body {
 
         <div class="btn-group">
           <a class="btn btn--primary btn-magnetic" href="portfolio.html">
-            Voir mes projets →
+            Voir mes projets <span aria-hidden="true">→</span>
           </a>
           <a class="btn btn-magnetic" href="mailto:amiamisabir@gmail.com">
             Me contacter
           </a>
         </div>
-      </div>
+        
+        <!-- Meta links ajoutés -->
+        <div class="meta-links">
+          <a href="mailto:amiamisabir@gmail.com">✉️ amiamisabir@gmail.com</a>
+          <a href="tel:+33762972626">📞 07 62 97 26 26</a>
+        </div>
+      </article>
 
       <!-- Right 3D Scene -->
-      <div class="scene-3d">
+      <aside class="scene-3d" aria-label="Animation 3D interactive">
         <canvas id="three-canvas"></canvas>
-        <div class="scene-hint">Déplace ta souris pour interagir ✨</div>
-      </div>
+        <div class="scene-hint" aria-hidden="true">Déplace ta souris pour interagir ✨</div>
+      </aside>
     </div>
-  </div>
+  </main>
 
+  <!-- Footer -->
+  <footer class="footer">
+    © <span id="year">2025</span> Sabir IAZZA — Tous droits réservés
+  </footer>
+
+  <!-- Scripts externes -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-// Custom Cursor
-const cursor = document.querySelector('.cursor');
-const cursorGlow = document.querySelector('.cursor-glow');
-let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
-let glowX = 0, glowY = 0;
-
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
-
-function animateCursor() {
-  cursorX += (mouseX - cursorX) * 0.2;
-  cursorY += (mouseY - cursorY) * 0.2;
-  glowX += (mouseX - glowX) * 0.1;
-  glowY += (mouseY - glowY) * 0.1;
-
-  cursor.style.left = cursorX + 'px';
-  cursor.style.top = cursorY + 'px';
-  cursorGlow.style.left = glowX - 150 + 'px';
-  cursorGlow.style.top = glowY - 150 + 'px';
-
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-// Hover effect
-document.querySelectorAll('a, button, .chip, .tile').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-});
-
-// Topbar scroll
-const topbar = document.getElementById('topbar');
-window.addEventListener('scroll', () => {
-  topbar.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// Glass card mouse tracking
-const glassCard = document.getElementById('glassCard');
-glassCard.addEventListener('mousemove', (e) => {
-  const rect = glassCard.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width) * 100;
-  const y = ((e.clientY - rect.top) / rect.height) * 100;
-  glassCard.style.setProperty('--mouse-x', x + '%');
-  glassCard.style.setProperty('--mouse-y', y + '%');
-});
-
-// Magnetic buttons
-document.querySelectorAll('.btn-magnetic').forEach(btn => {
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
-  });
-
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-  });
-});
-
-// Background particles
-const bgCanvas = document.getElementById('bgCanvas');
-const bgCtx = bgCanvas.getContext('2d');
-bgCanvas.width = window.innerWidth;
-bgCanvas.height = window.innerHeight;
-
-const particles = [];
-for (let i = 0; i < 50; i++) {
-  particles.push({
-    x: Math.random() * bgCanvas.width,
-    y: Math.random() * bgCanvas.height,
-    r: Math.random() * 2 + 1,
-    vx: Math.random() * 0.5 - 0.25,
-    vy: Math.random() * 0.5 - 0.25,
-    alpha: Math.random() * 0.3 + 0.1
-  });
-}
-
-function drawBg() {
-  bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-  
-  particles.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
-    
-    if (p.x < 0 || p.x > bgCanvas.width) p.vx *= -1;
-    if (p.y < 0 || p.y > bgCanvas.height) p.vy *= -1;
-    
-    bgCtx.beginPath();
-    bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    bgCtx.fillStyle = `rgba(180, 92, 255, ${p.alpha})`;
-    bgCtx.fill();
-  });
-  
-  requestAnimationFrame(drawBg);
-}
-drawBg();
-
-window.addEventListener('resize', () => {
-  bgCanvas.width = window.innerWidth;
-  bgCanvas.height = window.innerHeight;
-});
-
-// THREE.JS 3D ORB
-const canvas = document.getElementById('three-canvas');
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-camera.position.z = 5;
-
-// Main orb
-const geometry = new THREE.IcosahedronGeometry(1.5, 1);
-const material = new THREE.MeshPhongMaterial({
-  color: 0xB45CFF,
-  emissive: 0x2FE7FF,
-  emissiveIntensity: 0.5,
-  shininess: 100,
-  wireframe: false
-});
-const orb = new THREE.Mesh(geometry, material);
-scene.add(orb);
-
-// Wireframe overlay
-const wireframeGeo = new THREE.IcosahedronGeometry(1.52, 1);
-const wireframeMat = new THREE.MeshBasicMaterial({
-  color: 0x2FE7FF,
-  wireframe: true,
-  transparent: true,
-  opacity: 0.3
-});
-const wireframe = new THREE.Mesh(wireframeGeo, wireframeMat);
-scene.add(wireframe);
-
-// Particles around orb
-const particlesGeo = new THREE.BufferGeometry();
-const particlesCount = 1000;
-const positions = new Float32Array(particlesCount * 3);
-
-for (let i = 0; i < particlesCount * 3; i++) {
-  positions[i] = (Math.random() - 0.5) * 10;
-}
-
-particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-const particlesMat = new THREE.PointsMaterial({
-  color: 0x2FE7FF,
-  size: 0.02,
-  transparent: true,
-  opacity: 0.6
-});
-const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-scene.add(particlesMesh);
-
-// Lights
-const light1 = new THREE.PointLight(0xB45CFF, 2, 100);
-light1.position.set(5, 5, 5);
-scene.add(light1);
-
-const light2 = new THREE.PointLight(0x2FE7FF, 2, 100);
-light2.position.set(-5, -5, 5);
-scene.add(light2);
-
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-
-// Mouse interaction
-let targetX = 0;
-let targetY = 0;
-
-canvas.addEventListener('mousemove', (e) => {
-  const rect = canvas.getBoundingClientRect();
-  targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-  targetY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-});
-
-// Animation
-function animate() {
-  requestAnimationFrame(animate);
-  
-  // Smooth rotation
-  orb.rotation.y += (targetX * 0.5 - orb.rotation.y) * 0.05;
-  orb.rotation.x += (targetY * 0.5 - orb.rotation.x) * 0.05;
-  orb.rotation.z += 0.002;
-  
-  wireframe.rotation.y = orb.rotation.y;
-  wireframe.rotation.x = orb.rotation.x;
-  wireframe.rotation.z = -orb.rotation.z;
-  
-  particlesMesh.rotation.y += 0.0005;
-  particlesMesh.rotation.x += 0.0003;
-  
-  renderer.render(scene, camera);
-}
-animate();
-
-// Resize
-window.addEventListener('resize', () => {
-  camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
-});
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

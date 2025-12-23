@@ -1,5 +1,6 @@
 /* ============================================
    SABIR IAZZA - AWARD-WINNING EDITION
+   style.css - Styles principaux
    ============================================ */
 
 :root {
@@ -10,9 +11,23 @@
   --bg0: #07070d;
   --bg1: #0a0a12;
   --text: #EDEDF7;
+  --text-muted: rgba(237, 237, 247, 0.75);
+  
+  /* Shadows */
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 24px 80px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 32px 100px rgba(0, 0, 0, 0.7);
+  
+  /* Transitions */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-* {
+/* Reset */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -29,38 +44,79 @@ body {
   background: linear-gradient(180deg, var(--bg0), var(--bg1));
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  cursor: none;
+  line-height: 1.6;
 }
 
-/* Custom Cursor */
-.cursor {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--accent2);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 10000;
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-  mix-blend-mode: difference;
+/* Custom cursor - Desktop only */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  
+  .cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent2);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-glow {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(180, 92, 255, 0.15), transparent 70%);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor.hover {
+    width: 50px;
+    height: 50px;
+    border-color: var(--accent1);
+  }
 }
 
-.cursor-glow {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(180,92,255,0.15), transparent 70%);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: screen;
+/* Hide cursor on mobile */
+@media (hover: none) {
+  .cursor,
+  .cursor-glow {
+    display: none;
+  }
 }
 
-.cursor.hover {
-  width: 50px;
-  height: 50px;
-  border-color: var(--accent1);
+/* Selection */
+::selection {
+  background: rgba(180, 92, 255, 0.4);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent1), var(--accent2));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent2), var(--accent3));
 }
 
 /* Background */
@@ -70,7 +126,9 @@ body {
   z-index: -1;
 }
 
-/* Topbar */
+/* ============================================
+   TOPBAR
+   ============================================ */
 .topbar {
   position: fixed;
   top: 0;
@@ -78,14 +136,15 @@ body {
   right: 0;
   z-index: 100;
   backdrop-filter: blur(20px) saturate(180%);
-  background: linear-gradient(180deg, rgba(10,10,18,0.9), rgba(10,10,18,0.5));
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: linear-gradient(180deg, rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.5));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s var(--ease-out);
 }
 
 .topbar.scrolled {
-  background: linear-gradient(180deg, rgba(10,10,18,0.95), rgba(10,10,18,0.8));
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  background: linear-gradient(180deg, rgba(10, 10, 18, 0.95), rgba(10, 10, 18, 0.8));
+  box-shadow: var(--shadow-md);
 }
 
 .topbar__inner {
@@ -95,8 +154,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
+/* Brand */
 .brand {
   display: flex;
   align-items: center;
@@ -106,26 +167,26 @@ body {
   color: var(--cream);
   padding: 10px 20px;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s var(--ease-out);
 }
 
 .brand::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(180,92,255,0.3), rgba(47,231,255,0.2));
+  background: linear-gradient(135deg, rgba(180, 92, 255, 0.3), rgba(47, 231, 255, 0.2));
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
 .brand:hover {
   transform: translateY(-3px);
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .brand:hover::before {
@@ -137,19 +198,31 @@ body {
   height: 10px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent1), var(--accent2));
-  box-shadow: 0 0 20px rgba(180,92,255,0.8);
+  box-shadow: 0 0 20px rgba(180, 92, 255, 0.8);
   animation: pulse 2s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+  50% { 
+    transform: scale(1.3); 
+    opacity: 0.7; 
+  }
 }
 
+/* ============================================
+   BUTTONS
+   ============================================ */
 .btn {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 12px 24px;
   border-radius: 16px;
@@ -157,9 +230,9 @@ body {
   font-weight: 800;
   font-size: 14px;
   color: var(--text);
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.4s var(--ease-out);
   cursor: pointer;
   overflow: hidden;
 }
@@ -168,7 +241,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent 70%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent 70%);
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -179,7 +252,11 @@ body {
 
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translateY(-1px);
 }
 
 .btn--primary {
@@ -189,7 +266,18 @@ body {
   font-weight: 900;
 }
 
-/* Container */
+.btn--primary:hover {
+  box-shadow: 0 12px 32px rgba(180, 92, 255, 0.4);
+}
+
+/* Magnetic effect */
+.btn-magnetic {
+  transition: transform 0.15s ease-out;
+}
+
+/* ============================================
+   CONTAINER & HERO
+   ============================================ */
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -207,16 +295,19 @@ body {
   align-items: center;
 }
 
-/* Glass Card avec Liquid Effect */
+/* ============================================
+   GLASS CARD
+   ============================================ */
 .glass-card {
   position: relative;
   padding: 48px;
   border-radius: 32px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
-  border: 1px solid rgba(255,255,255,0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(30px) saturate(150%);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  box-shadow: var(--shadow-lg);
+  transition: all 0.6s var(--ease-out);
   overflow: hidden;
 }
 
@@ -224,10 +315,12 @@ body {
   content: '';
   position: absolute;
   inset: -2px;
-  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-    rgba(180,92,255,0.3), 
-    rgba(47,231,255,0.2), 
-    transparent 40%);
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(180, 92, 255, 0.3), 
+    rgba(47, 231, 255, 0.2), 
+    transparent 40%
+  );
   opacity: 0;
   transition: opacity 0.6s ease;
   z-index: -1;
@@ -240,11 +333,13 @@ body {
 
 .glass-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 32px 100px rgba(0,0,0,0.7);
-  border-color: rgba(255,255,255,0.3);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Chips */
+/* ============================================
+   CHIPS
+   ============================================ */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -258,19 +353,22 @@ body {
   font-size: 12px;
   font-weight: 800;
   color: var(--cream);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.4s var(--ease-bounce);
+  cursor: default;
 }
 
 .chip:hover {
   transform: translateY(-4px) scale(1.05);
-  background: rgba(180,92,255,0.25);
-  border-color: rgba(180,92,255,0.5);
-  box-shadow: 0 8px 24px rgba(180,92,255,0.4);
+  background: rgba(180, 92, 255, 0.25);
+  border-color: rgba(180, 92, 255, 0.5);
+  box-shadow: 0 8px 24px rgba(180, 92, 255, 0.4);
 }
 
-/* Title */
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
 .title {
   font-size: clamp(42px, 5vw, 64px);
   font-weight: 900;
@@ -286,7 +384,7 @@ body {
   background-clip: text;
   color: transparent;
   animation: gradientFlow 5s ease infinite;
-  filter: drop-shadow(0 0 30px rgba(180,92,255,0.6));
+  filter: drop-shadow(0 0 30px rgba(180, 92, 255, 0.6));
 }
 
 @keyframes gradientFlow {
@@ -297,7 +395,7 @@ body {
 .subtitle {
   font-size: 17px;
   line-height: 1.7;
-  color: rgba(237,237,247,0.75);
+  color: var(--text-muted);
   margin-bottom: 32px;
   max-width: 65ch;
 }
@@ -307,7 +405,9 @@ body {
   font-weight: 800;
 }
 
-/* Tiles avec Physics */
+/* ============================================
+   TILES
+   ============================================ */
 .tiles {
   display: grid;
   gap: 16px;
@@ -320,9 +420,9 @@ body {
   gap: 16px;
   padding: 20px;
   border-radius: 20px;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.12);
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.5s var(--ease-bounce);
   position: relative;
   overflow: hidden;
 }
@@ -336,14 +436,15 @@ body {
   height: 100%;
   background: linear-gradient(180deg, var(--accent1), var(--accent2));
   transform: scaleY(0);
-  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: bottom;
+  transition: transform 0.5s var(--ease-bounce);
 }
 
 .tile:hover {
   transform: translateX(16px) scale(1.02);
-  background: rgba(180,92,255,0.15);
-  border-color: rgba(180,92,255,0.4);
-  box-shadow: 0 12px 32px rgba(180,92,255,0.3);
+  background: rgba(180, 92, 255, 0.15);
+  border-color: rgba(180, 92, 255, 0.4);
+  box-shadow: 0 12px 32px rgba(180, 92, 255, 0.3);
 }
 
 .tile:hover::before {
@@ -352,10 +453,10 @@ body {
 
 .tile__icon {
   font-size: 28px;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
 }
 
-.tile__text h4 {
+.tile__text h2 {
   font-size: 16px;
   font-weight: 800;
   color: var(--cream);
@@ -364,10 +465,12 @@ body {
 
 .tile__text p {
   font-size: 13px;
-  color: rgba(237,237,247,0.7);
+  color: var(--text-muted);
 }
 
-/* Magnetic Buttons */
+/* ============================================
+   BUTTON GROUP
+   ============================================ */
 .btn-group {
   display: flex;
   gap: 16px;
@@ -375,16 +478,9 @@ body {
   flex-wrap: wrap;
 }
 
-.btn-magnetic {
-  position: relative;
-  transition: transform 0.15s ease-out;
-}
-
-.btn-magnetic:hover {
-  transform: scale(1.05);
-}
-
-/* Meta links */
+/* ============================================
+   META LINKS
+   ============================================ */
 .meta-links {
   display: flex;
   gap: 20px;
@@ -407,17 +503,20 @@ body {
   color: var(--accent2);
 }
 
-/* 3D Scene Container */
+/* ============================================
+   3D SCENE
+   ============================================ */
 .scene-3d {
   position: relative;
   width: 100%;
   height: 500px;
   border-radius: 32px;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.15);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-lg);
 }
 
 #three-canvas {
@@ -433,13 +532,15 @@ body {
   transform: translateX(-50%);
   padding: 12px 24px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--cream);
   font-weight: 800;
   font-size: 13px;
   animation: bounce 2s ease-in-out infinite;
+  white-space: nowrap;
 }
 
 @keyframes bounce {
@@ -447,15 +548,19 @@ body {
   50% { transform: translateX(-50%) translateY(-10px); }
 }
 
-/* Footer */
+/* ============================================
+   FOOTER
+   ============================================ */
 .footer {
   text-align: center;
   padding: 40px 20px;
-  color: rgba(237,237,247,0.6);
+  color: rgba(237, 237, 247, 0.6);
   font-size: 13px;
 }
 
-/* Responsive */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
@@ -464,6 +569,7 @@ body {
   
   .scene-3d {
     height: 400px;
+    order: -1; /* Scene en premier sur tablette */
   }
 }
 
@@ -473,7 +579,7 @@ body {
   }
   
   .glass-card {
-    padding: 32px;
+    padding: 28px 24px;
   }
   
   .btn-group {
@@ -482,15 +588,43 @@ body {
   
   .btn {
     width: 100%;
-    justify-content: center;
   }
   
   .topbar__inner {
-    padding: 16px 20px;
+    padding: 12px 16px;
   }
   
   .brand {
     font-size: 12px;
-    padding: 8px 16px;
+    padding: 8px 14px;
+  }
+  
+  .brand span:last-child {
+    display: none; /* Cache le nom sur mobile */
+  }
+  
+  .scene-3d {
+    height: 300px;
+  }
+  
+  .scene-hint {
+    font-size: 11px;
+    padding: 10px 16px;
+  }
+  
+  .meta-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

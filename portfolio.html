@@ -4,10 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a0a12" />
+  <meta name="description" content="Portfolio de Sabir IAZZA - Projets en réseaux, cybersécurité et développement web." />
   <title>Sabir IAZZA — Portfolio</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="stylesheet" href="style-portfolio.css">
 </head>
 <body>
@@ -22,11 +25,11 @@
   <header class="header" id="header">
     <div class="header__inner">
       <a class="logo" href="index.html" aria-label="Retour à l'accueil">
-        <span class="logo__dot"></span>
+        <span class="logo__dot" aria-hidden="true"></span>
         <span class="logo__txt">Sabir IAZZA</span>
       </a>
 
-      <nav class="nav" aria-label="Navigation portfolio">
+      <nav class="nav" aria-label="Navigation principale">
         <a class="nav__link" href="#about">À propos</a>
         <a class="nav__link" href="#skills">Compétences</a>
         <a class="nav__link" href="#projects">Projets</a>
@@ -34,7 +37,7 @@
       </nav>
 
       <div class="header__actions">
-        <button class="iconBtn" id="burger" type="button" aria-label="Ouvrir le menu">
+        <button class="iconBtn" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -46,18 +49,18 @@
   </header>
 
   <!-- Mobile menu -->
-  <div class="mMenu" id="mMenu" aria-hidden="true">
+  <div class="mMenu" id="mMenu" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="mMenu__panel glass">
       <div class="mMenu__top">
         <b>Menu</b>
-        <button class="mMenu__close" id="closeMenu" type="button" aria-label="Fermer">✕</button>
+        <button class="mMenu__close" id="closeMenu" type="button" aria-label="Fermer le menu">✕</button>
       </div>
-      <div class="mNav">
+      <nav class="mNav" aria-label="Navigation mobile">
         <a class="mNav__link" href="#about">À propos</a>
         <a class="mNav__link" href="#skills">Compétences</a>
         <a class="mNav__link" href="#projects">Projets</a>
         <a class="mNav__link" href="#contact">Contact</a>
-      </div>
+      </nav>
       <div class="mMenu__footer">
         <a class="btn btn--ghost" href="index.html">← Retour Accueil</a>
       </div>
@@ -65,11 +68,14 @@
   </div>
 
   <main class="container">
-    <!-- HERO -->
+    <!-- HERO / ABOUT -->
     <section class="hero" id="about">
       <div class="hero__grid">
         <article class="glass hero__card reveal">
-          <div class="badge"><span class="badge__dot"></span> Disponible pour alternance / stage</div>
+          <div class="badge">
+            <span class="badge__dot" aria-hidden="true"></span>
+            Disponible pour alternance / stage
+          </div>
 
           <div class="hero__chips">
             <span class="chip">CIEL • Réseaux • Cyber</span>
@@ -85,16 +91,25 @@
 
           <div class="hero__tiles">
             <div class="tile">
-              <span class="tile__icon">🧠</span>
-              <div class="tile__txt"><b>Objectif</b><span>Alternance + montée en compétences</span></div>
+              <span class="tile__icon" aria-hidden="true">🧠</span>
+              <div class="tile__txt">
+                <b>Objectif</b>
+                <span>Alternance + montée en compétences</span>
+              </div>
             </div>
             <div class="tile">
-              <span class="tile__icon">🕸️</span>
-              <div class="tile__txt"><b>Focus</b><span>Réseaux, cybersécurité, web</span></div>
+              <span class="tile__icon" aria-hidden="true">🕸️</span>
+              <div class="tile__txt">
+                <b>Focus</b>
+                <span>Réseaux, cybersécurité, web</span>
+              </div>
             </div>
             <div class="tile">
-              <span class="tile__icon">⚡</span>
-              <div class="tile__txt"><b>Style</b><span>Design premium + projets clean</span></div>
+              <span class="tile__icon" aria-hidden="true">⚡</span>
+              <div class="tile__txt">
+                <b>Style</b>
+                <span>Design premium + projets clean</span>
+              </div>
             </div>
           </div>
 
@@ -104,20 +119,20 @@
             <a class="btn btn--ghost" href="index.html">Retour accueil</a>
           </div>
 
-          <div class="hero__meta">
+          <address class="hero__meta">
             <a class="metaLink" href="mailto:amiamisabir@gmail.com">✉️ amiamisabir@gmail.com</a>
             <a class="metaLink" href="tel:+33762972626">📞 07 62 97 26 26</a>
-            <a class="metaLink" target="_blank" rel="noopener"
+            <a class="metaLink" target="_blank" rel="noopener noreferrer"
                href="https://www.google.com/maps?q=Saint-Maximin-la-Sainte-Baume+83">📍 Saint-Maximin</a>
-          </div>
+          </address>
         </article>
 
         <aside class="hero__visual reveal">
           <div class="visual glass" data-parallax="0.12">
-            <button class="orbBtn" id="orbBtn" type="button" aria-label="Retour accueil">
-              <span style="font-size: 48px;">🦁</span>
+            <button class="orbBtn" id="orbBtn" type="button" aria-label="Retour à l'accueil">
+              <span aria-hidden="true" style="font-size: 48px;">🦁</span>
             </button>
-            <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(180,92,255,.15),rgba(47,231,255,.1));display:flex;align-items:center;justify-content:center;font-size:120px;">🎯</div>
+            <div class="visual__bg" aria-hidden="true">🎯</div>
           </div>
         </aside>
       </div>
@@ -126,7 +141,7 @@
     <!-- SKILLS -->
     <section class="section" id="skills">
       <div class="section__head reveal">
-        <div class="pill">Compétences</div>
+        <span class="pill">Compétences</span>
         <h2>Ce que je maîtrise / ce que je travaille</h2>
         <p>Réseau, cyber, web — version concrète.</p>
       </div>
@@ -134,7 +149,7 @@
       <div class="grid grid--2">
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon">🛡️</div>
+            <span class="card__icon" aria-hidden="true">🛡️</span>
             <div>
               <h3>Cybersécurité</h3>
               <p>Hygiène, bases, analyse, bonnes pratiques.</p>
@@ -143,11 +158,17 @@
 
           <div class="bars">
             <div class="bar" data-val="72">
-              <div class="bar__head"><span>Wireshark / analyse</span><span>72%</span></div>
+              <div class="bar__head">
+                <span>Wireshark / analyse</span>
+                <span>72%</span>
+              </div>
               <div class="bar__rail"><div class="bar__fill"></div></div>
             </div>
             <div class="bar" data-val="65">
-              <div class="bar__head"><span>Durcissement / bonnes pratiques</span><span>65%</span></div>
+              <div class="bar__head">
+                <span>Durcissement / bonnes pratiques</span>
+                <span>65%</span>
+              </div>
               <div class="bar__rail"><div class="bar__fill"></div></div>
             </div>
           </div>
@@ -161,7 +182,7 @@
 
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon">🌐</div>
+            <span class="card__icon" aria-hidden="true">🌐</span>
             <div>
               <h3>Réseaux</h3>
               <p>VLAN, adressage, config, Packet Tracer.</p>
@@ -170,11 +191,17 @@
 
           <div class="bars">
             <div class="bar" data-val="78">
-              <div class="bar__head"><span>Packet Tracer / Cisco</span><span>78%</span></div>
+              <div class="bar__head">
+                <span>Packet Tracer / Cisco</span>
+                <span>78%</span>
+              </div>
               <div class="bar__rail"><div class="bar__fill"></div></div>
             </div>
             <div class="bar" data-val="70">
-              <div class="bar__head"><span>IP / subnetting</span><span>70%</span></div>
+              <div class="bar__head">
+                <span>IP / subnetting</span>
+                <span>70%</span>
+              </div>
               <div class="bar__rail"><div class="bar__fill"></div></div>
             </div>
           </div>
@@ -191,15 +218,15 @@
     <!-- PROJECTS -->
     <section class="section" id="projects">
       <div class="section__head reveal">
-        <div class="pill">Projets</div>
+        <span class="pill">Projets</span>
         <h2>Quelques projets récents</h2>
-        <p>Ajoute tes screenshots et liens GitHub.</p>
+        <p>Mes réalisations concrètes.</p>
       </div>
 
       <div class="grid grid--2">
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon">🧩</div>
+            <span class="card__icon" aria-hidden="true">🧩</span>
             <div>
               <h3>Portfolio Premium</h3>
               <p>UI/UX, glassmorphism, animations, canvas.</p>
@@ -220,7 +247,7 @@
 
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon">🛰️</div>
+            <span class="card__icon" aria-hidden="true">🛰️</span>
             <div>
               <h3>Lab Réseau</h3>
               <p>VLAN + routage + règles + doc.</p>
@@ -243,7 +270,7 @@
     <!-- CONTACT -->
     <section class="section" id="contact">
       <div class="section__head reveal">
-        <div class="pill">Contact</div>
+        <span class="pill">Contact</span>
         <h2>On discute ?</h2>
         <p>Je réponds vite.</p>
       </div>
@@ -251,17 +278,24 @@
       <div class="grid grid--2">
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon">💬</div>
+            <span class="card__icon" aria-hidden="true">💬</span>
             <div>
               <h3>SabirGPT (démo)</h3>
-              <p>Mini chat local (juste pour le style).</p>
+              <p>Mini chat local pour le fun.</p>
             </div>
           </div>
 
           <div class="chat">
-            <div class="chat__log" id="chatLog"></div>
+            <div class="chat__log" id="chatLog" role="log" aria-live="polite"></div>
             <form class="chat__form" id="chatForm">
-              <textarea class="chat__input" id="chatInput" rows="1" placeholder="Écris ici..."></textarea>
+              <label for="chatInput" class="visually-hidden">Votre message</label>
+              <textarea 
+                class="chat__input" 
+                id="chatInput" 
+                rows="1" 
+                placeholder="Écris ici..."
+                aria-label="Votre message"
+              ></textarea>
               <button class="chat__send" type="submit">Envoyer</button>
             </form>
           </div>
@@ -269,23 +303,32 @@
 
         <article class="glass card reveal">
           <div class="card__top">
-            <div class="card__icon">📩</div>
+            <span class="card__icon" aria-hidden="true">📩</span>
             <div>
               <h3>Coordonnées</h3>
-              <p>Mail / téléphone.</p>
+              <p>Pour me contacter directement.</p>
             </div>
           </div>
 
-          <div class="timelineMini">
-            <div class="tItem"><b>Email</b><span>amiamisabir@gmail.com</span></div>
-            <div class="tItem"><b>Téléphone</b><span>07 62 97 26 26</span></div>
-            <div class="tItem"><b>Ville</b><span>Saint-Maximin (83)</span></div>
-          </div>
+          <address class="timelineMini">
+            <div class="tItem">
+              <b>Email</b>
+              <a href="mailto:amiamisabir@gmail.com">amiamisabir@gmail.com</a>
+            </div>
+            <div class="tItem">
+              <b>Téléphone</b>
+              <a href="tel:+33762972626">07 62 97 26 26</a>
+            </div>
+            <div class="tItem">
+              <b>Ville</b>
+              <span>Saint-Maximin (83)</span>
+            </div>
+          </address>
         </article>
       </div>
 
       <footer class="footer">
-        © <span id="pYear">2025</span> Sabir IAZZA — Portfolio Premium
+        <p>© <span id="pYear">2025</span> Sabir IAZZA — Portfolio Premium</p>
       </footer>
     </section>
   </main>
