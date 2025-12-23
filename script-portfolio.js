@@ -1,26 +1,20 @@
 /* ============================================
-   SABIR IAZZA - PORTFOLIO PREMIUM
-   script-portfolio.js
+   SABIR IAZZA - SCRIPT PORTFOLIO
    ============================================ */
 
 (() => {
   "use strict";
 
-  // ============================================
-  // UTILITIES
-  // ============================================
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const rand = (a, b) => a + Math.random() * (b - a);
 
-  // ============================================
-  // YEAR
-  // ============================================
+  // Year
   const yearEl = $("#pYear");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // ============================================
-  // ORB BUTTON -> INDEX
+  // ORB BUTTON
   // ============================================
   const orbBtn = $("#orbBtn");
   if (orbBtn) {
@@ -46,7 +40,6 @@
       mMenu.classList.add("is-open");
       mMenu.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
-      if (burger) burger.setAttribute("aria-expanded", "true");
     }
   }
 
@@ -55,16 +48,12 @@
       mMenu.classList.remove("is-open");
       mMenu.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
-      if (burger) burger.setAttribute("aria-expanded", "false");
     }
   }
 
   if (burger) burger.addEventListener("click", openMenu);
   if (closeMenu) closeMenu.addEventListener("click", closeMenuFn);
-
-  mMenuLinks.forEach(link => {
-    link.addEventListener("click", closeMenuFn);
-  });
+  mMenuLinks.forEach(link => link.addEventListener("click", closeMenuFn));
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && mMenu?.classList.contains("is-open")) {
@@ -96,29 +85,28 @@
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      progressBar.style.width = `${scrollPercent}%`;
+      const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = `${percent}%`;
     }, { passive: true });
   }
 
   // ============================================
-  // ACTIVE NAV LINK
+  // ACTIVE NAV
   // ============================================
   const sections = $$("section[id]");
   const navLinks = $$(".nav__link");
 
   function updateActiveNav() {
     const scrollY = window.scrollY + 150;
-
     sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute("id");
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      const id = section.getAttribute("id");
 
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+      if (scrollY >= top && scrollY < top + height) {
         navLinks.forEach(link => {
           link.classList.remove("is-active");
-          if (link.getAttribute("href") === `#${sectionId}`) {
+          if (link.getAttribute("href") === `#${id}`) {
             link.classList.add("is-active");
           }
         });
@@ -141,10 +129,8 @@
       if (targetEl) {
         e.preventDefault();
         const headerHeight = header?.offsetHeight || 80;
-        const targetPosition = targetEl.offsetTop - headerHeight - 20;
-        
         window.scrollTo({
-          top: targetPosition,
+          top: targetEl.offsetTop - headerHeight - 20,
           behavior: "smooth"
         });
       }
@@ -156,27 +142,32 @@
   // ============================================
   const revealElements = $$(".reveal");
 
-  if (revealElements.length > 0 && "IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-in");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
-    );
+  if (revealElements.length > 0) {
+    if ("IntersectionObserver" in window) {
+      // Add class to enable JS-based reveal
+      document.documentElement.classList.add("js-enabled");
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-in");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      );
 
-    revealElements.forEach((el) => revealObserver.observe(el));
-  } else {
-    // Fallback
-    revealElements.forEach((el) => el.classList.add("is-in"));
+      revealElements.forEach((el) => observer.observe(el));
+    } else {
+      // Fallback: show all immediately
+      revealElements.forEach((el) => el.classList.add("is-in"));
+    }
   }
 
   // ============================================
-  // SKILL BARS ANIMATION
+  // SKILL BARS
   // ============================================
   const bars = $$(".bar");
 
@@ -188,7 +179,6 @@
             const bar = entry.target;
             const value = bar.dataset.val || 0;
             const fill = $(".bar__fill", bar);
-            
             if (fill) {
               setTimeout(() => {
                 fill.style.width = `${value}%`;
@@ -205,7 +195,7 @@
   }
 
   // ============================================
-  // CHAT DEMO
+  // CHAT
   // ============================================
   const chatForm = $("#chatForm");
   const chatInput = $("#chatInput");
@@ -215,9 +205,8 @@
     default: [
       "Merci pour ton message ! 😊",
       "Je suis une démo, mais Sabir te répondra vite !",
-      "Tu peux me contacter par email : amiamisabir@gmail.com",
-      "N'hésite pas à explorer le portfolio !",
-      "Belle question ! Sabir saura y répondre."
+      "Tu peux me contacter : amiamisabir@gmail.com",
+      "N'hésite pas à explorer le portfolio !"
     ],
     greetings: [
       "Salut ! Comment puis-je t'aider ? 👋",
@@ -226,7 +215,7 @@
     ],
     skills: [
       "Sabir maîtrise : Réseaux, Cybersécurité, Web, Cisco...",
-      "Compétences clés : Packet Tracer, Wireshark, HTML/CSS/JS"
+      "Compétences : Packet Tracer, Wireshark, HTML/CSS/JS"
     ],
     contact: [
       "Email : amiamisabir@gmail.com 📧",
@@ -234,16 +223,15 @@
     ]
   };
 
-  function getResponse(message) {
-    const msg = message.toLowerCase();
-    
-    if (msg.match(/salut|hello|bonjour|hey|coucou/)) {
+  function getResponse(msg) {
+    const m = msg.toLowerCase();
+    if (m.match(/salut|hello|bonjour|hey|coucou/)) {
       return responses.greetings[Math.floor(Math.random() * responses.greetings.length)];
     }
-    if (msg.match(/compétence|skill|sait faire|maîtrise/)) {
+    if (m.match(/compétence|skill|sait faire|maîtrise/)) {
       return responses.skills[Math.floor(Math.random() * responses.skills.length)];
     }
-    if (msg.match(/contact|email|téléphone|joindre/)) {
+    if (m.match(/contact|email|téléphone|joindre/)) {
       return responses.contact[Math.floor(Math.random() * responses.contact.length)];
     }
     return responses.default[Math.floor(Math.random() * responses.default.length)];
@@ -288,14 +276,14 @@
   if (pCanvas) {
     const ctx = pCanvas.getContext("2d");
     let particles = [];
-    let animationId;
+    let animId;
 
-    function resizeCanvas() {
+    function resize() {
       pCanvas.width = window.innerWidth;
       pCanvas.height = window.innerHeight;
     }
 
-    function initParticles() {
+    function init() {
       particles = [];
       const count = Math.min(40, Math.floor((pCanvas.width * pCanvas.height) / 40000));
       
@@ -311,7 +299,7 @@
       }
     }
 
-    function drawParticles() {
+    function draw() {
       ctx.clearRect(0, 0, pCanvas.width, pCanvas.height);
       
       particles.forEach((p) => {
@@ -329,34 +317,31 @@
         ctx.fill();
       });
       
-      animationId = requestAnimationFrame(drawParticles);
+      animId = requestAnimationFrame(draw);
     }
 
-    resizeCanvas();
-    initParticles();
-    drawParticles();
+    resize();
+    init();
+    draw();
 
-    let resizeTimeout;
+    let resizeTimer;
     window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        resizeCanvas();
-        initParticles();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resize();
+        init();
       }, 250);
     }, { passive: true });
 
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        cancelAnimationFrame(animationId);
+        cancelAnimationFrame(animId);
       } else {
-        drawParticles();
+        draw();
       }
     });
   }
 
-  // ============================================
-  // CONSOLE
-  // ============================================
-  console.log("%c🎯 Portfolio Sabir IAZZA chargé !", "color: #B45CFF; font-size: 14px; font-weight: bold;");
+  console.log("%c🎯 Portfolio Sabir chargé !", "color: #B45CFF; font-size: 14px; font-weight: bold;");
 
 })();

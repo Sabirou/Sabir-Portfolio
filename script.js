@@ -1,28 +1,22 @@
 /* ============================================
-   SABIR IAZZA - AWARD-WINNING EDITION
-   script.js - JavaScript principal
+   SABIR IAZZA - SCRIPT INDEX
    ============================================ */
 
 (() => {
   "use strict";
 
-  // ============================================
-  // UTILITY FUNCTIONS
-  // ============================================
-  const $ = (selector, context = document) => context.querySelector(selector);
-  const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
-  
-  // Check if device supports hover (desktop)
-  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
 
-  // ============================================
-  // YEAR UPDATE
-  // ============================================
+  // Year
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Check desktop
+  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
   // ============================================
-  // CUSTOM CURSOR (Desktop only)
+  // CUSTOM CURSOR
   // ============================================
   if (isDesktop) {
     const cursor = $('.cursor');
@@ -39,7 +33,6 @@
       }, { passive: true });
 
       function animateCursor() {
-        // Smooth interpolation
         cursorX += (mouseX - cursorX) * 0.2;
         cursorY += (mouseY - cursorY) * 0.2;
         glowX += (mouseX - glowX) * 0.08;
@@ -54,9 +47,7 @@
       }
       animateCursor();
 
-      // Hover effect on interactive elements
-      const interactiveElements = $$('a, button, .chip, .tile, .brand, [role="button"]');
-      interactiveElements.forEach(el => {
+      $$('a, button, .chip, .tile, .brand').forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
       });
@@ -64,23 +55,12 @@
   }
 
   // ============================================
-  // TOPBAR SCROLL EFFECT
+  // TOPBAR SCROLL
   // ============================================
   const topbar = $('#topbar');
   if (topbar) {
-    let lastScroll = 0;
-    let ticking = false;
-
     window.addEventListener('scroll', () => {
-      lastScroll = window.scrollY;
-      
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          topbar.classList.toggle('scrolled', lastScroll > 50);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      topbar.classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
   }
 
@@ -99,7 +79,7 @@
   }
 
   // ============================================
-  // MAGNETIC BUTTONS (Desktop only)
+  // MAGNETIC BUTTONS
   // ============================================
   if (isDesktop) {
     $$('.btn-magnetic').forEach(btn => {
@@ -121,16 +101,16 @@
   // ============================================
   const bgCanvas = $('#bgCanvas');
   if (bgCanvas) {
-    const bgCtx = bgCanvas.getContext('2d');
+    const ctx = bgCanvas.getContext('2d');
     let particles = [];
-    let animationId;
+    let animId;
 
-    function resizeBgCanvas() {
+    function resize() {
       bgCanvas.width = window.innerWidth;
       bgCanvas.height = window.innerHeight;
     }
 
-    function initParticles() {
+    function init() {
       particles = [];
       const count = Math.min(50, Math.floor((bgCanvas.width * bgCanvas.height) / 30000));
       
@@ -146,48 +126,45 @@
       }
     }
 
-    function drawParticles() {
-      bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+    function draw() {
+      ctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
       
       particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
         
-        // Wrap around edges
         if (p.x < 0) p.x = bgCanvas.width;
         if (p.x > bgCanvas.width) p.x = 0;
         if (p.y < 0) p.y = bgCanvas.height;
         if (p.y > bgCanvas.height) p.y = 0;
         
-        bgCtx.beginPath();
-        bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        bgCtx.fillStyle = `rgba(180, 92, 255, ${p.alpha})`;
-        bgCtx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(180, 92, 255, ${p.alpha})`;
+        ctx.fill();
       });
       
-      animationId = requestAnimationFrame(drawParticles);
+      animId = requestAnimationFrame(draw);
     }
 
-    resizeBgCanvas();
-    initParticles();
-    drawParticles();
+    resize();
+    init();
+    draw();
 
-    // Debounced resize
-    let resizeTimeout;
+    let resizeTimer;
     window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        resizeBgCanvas();
-        initParticles();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resize();
+        init();
       }, 250);
     }, { passive: true });
 
-    // Pause animation when tab is not visible
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        cancelAnimationFrame(animationId);
+        cancelAnimationFrame(animId);
       } else {
-        drawParticles();
+        draw();
       }
     });
   }
@@ -200,39 +177,26 @@
   if (threeCanvas && typeof THREE !== 'undefined') {
     const container = threeCanvas.parentElement;
     
-    // Scene setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75, 
-      container.offsetWidth / container.offsetHeight, 
-      0.1, 
-      1000
-    );
-    
-    const renderer = new THREE.WebGLRenderer({ 
-      canvas: threeCanvas, 
-      alpha: true, 
-      antialias: true,
-      powerPreference: 'high-performance'
-    });
+    const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: threeCanvas, alpha: true, antialias: true });
     
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     camera.position.z = 5;
 
-    // Main orb
+    // Orb
     const geometry = new THREE.IcosahedronGeometry(1.5, 1);
     const material = new THREE.MeshPhongMaterial({
       color: 0xB45CFF,
       emissive: 0x2FE7FF,
       emissiveIntensity: 0.5,
-      shininess: 100,
-      wireframe: false
+      shininess: 100
     });
     const orb = new THREE.Mesh(geometry, material);
     scene.add(orb);
 
-    // Wireframe overlay
+    // Wireframe
     const wireframeGeo = new THREE.IcosahedronGeometry(1.52, 1);
     const wireframeMat = new THREE.MeshBasicMaterial({
       color: 0x2FE7FF,
@@ -243,15 +207,12 @@
     const wireframe = new THREE.Mesh(wireframeGeo, wireframeMat);
     scene.add(wireframe);
 
-    // Particles around orb
+    // Particles
     const particlesGeo = new THREE.BufferGeometry();
-    const particlesCount = 800;
-    const positions = new Float32Array(particlesCount * 3);
-
-    for (let i = 0; i < particlesCount * 3; i++) {
+    const positions = new Float32Array(800 * 3);
+    for (let i = 0; i < 800 * 3; i++) {
       positions[i] = (Math.random() - 0.5) * 10;
     }
-
     particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const particlesMat = new THREE.PointsMaterial({
       color: 0x2FE7FF,
@@ -271,12 +232,10 @@
     light2.position.set(-5, -5, 5);
     scene.add(light2);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
-    // Mouse interaction
-    let targetX = 0;
-    let targetY = 0;
+    // Mouse
+    let targetX = 0, targetY = 0;
 
     threeCanvas.addEventListener('mousemove', (e) => {
       const rect = threeCanvas.getBoundingClientRect();
@@ -284,7 +243,6 @@
       targetY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     }, { passive: true });
 
-    // Touch support
     threeCanvas.addEventListener('touchmove', (e) => {
       if (e.touches.length > 0) {
         const rect = threeCanvas.getBoundingClientRect();
@@ -294,13 +252,10 @@
       }
     }, { passive: true });
 
-    // Animation
-    let threeAnimationId;
-    
+    let threeAnimId;
     function animate() {
-      threeAnimationId = requestAnimationFrame(animate);
+      threeAnimId = requestAnimationFrame(animate);
       
-      // Smooth rotation
       orb.rotation.y += (targetX * 0.5 - orb.rotation.y) * 0.05;
       orb.rotation.x += (targetY * 0.5 - orb.rotation.x) * 0.05;
       orb.rotation.z += 0.002;
@@ -316,36 +271,25 @@
     }
     animate();
 
-    // Resize handler
-    let threeResizeTimeout;
+    let threeResizeTimer;
     window.addEventListener('resize', () => {
-      clearTimeout(threeResizeTimeout);
-      threeResizeTimeout = setTimeout(() => {
-        const width = container.offsetWidth;
-        const height = container.offsetHeight;
-        
-        camera.aspect = width / height;
+      clearTimeout(threeResizeTimer);
+      threeResizeTimer = setTimeout(() => {
+        camera.aspect = container.offsetWidth / container.offsetHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
       }, 250);
     }, { passive: true });
 
-    // Pause when not visible
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        cancelAnimationFrame(threeAnimationId);
+        cancelAnimationFrame(threeAnimId);
       } else {
         animate();
       }
     });
   }
 
-  // ============================================
-  // CONSOLE MESSAGE
-  // ============================================
-  console.log('%c🚀 Sabir IAZZA - Award-Winning Portfolio', 
-    'color: #B45CFF; font-size: 16px; font-weight: bold;');
-  console.log('%cDéveloppé avec passion ✨', 
-    'color: #2FE7FF; font-size: 12px;');
+  console.log('%c🚀 Sabir IAZZA Portfolio', 'color: #B45CFF; font-size: 16px; font-weight: bold;');
 
 })();
