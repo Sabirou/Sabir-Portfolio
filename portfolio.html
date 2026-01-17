@@ -4,26 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0a0a0f" />
-  <meta name="description" content="Portfolio de Sabir IAZZA - Projets en réseaux, cybersécurité et développement web." />
+  <meta name="description" content="Portfolio de Sabir IAZZA - Projets, compétences et contact" />
+  
   <title>Sabir IAZZA | Portfolio</title>
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style-portfolio.css" />
   
+  <!-- Lottie -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="style-portfolio.css" />
 </head>
 <body>
 
   <!-- Loading Screen -->
   <div class="loader" id="loader">
-    <div class="loader-content">
-      <div class="loader-logo">PORTFOLIO</div>
-      <div class="loader-bar">
-        <div class="loader-progress"></div>
-      </div>
-      <p class="loader-text">Chargement...</p>
+    <div class="loader-orb"></div>
+    <div class="loader-text">Chargement</div>
+    <div class="loader-bar">
+      <div class="loader-progress"></div>
     </div>
   </div>
 
@@ -31,25 +37,37 @@
   <div class="bg-effects">
     <div class="bg-gradient"></div>
     <div class="bg-grid"></div>
-    <canvas id="particleCanvas"></canvas>
+    <div class="bg-stars" id="bgStars"></div>
   </div>
 
-  <!-- Mascotte Observateur -->
-  <div class="mascot-watcher" id="mascotWatcher">
-    <div class="mascot-container">
-      <div class="mascot-glow"></div>
-      <canvas class="mascot-canvas" id="mascotCanvas" width="100" height="100"></canvas>
+  <!-- Orbe Observateur -->
+  <div class="orb-watcher" id="orbWatcher">
+    <div class="orb-container">
+      <div class="orb-glow"></div>
+      <div class="orb-ring"></div>
+      <div class="orb-inner-ring"></div>
+      <div class="orb-core"></div>
+      <div class="orb-eye" id="orbEye">
+        <div class="orb-eye-pupil"></div>
+      </div>
+      <div class="orb-particles">
+        <div class="orb-particle"></div>
+        <div class="orb-particle"></div>
+        <div class="orb-particle"></div>
+        <div class="orb-particle"></div>
+      </div>
     </div>
-    <div class="mascot-speech" id="mascotSpeech">👀 Je surveille !</div>
+    <div class="orb-speech" id="orbSpeech">👁️ Je t'observe...</div>
   </div>
 
-  <!-- Navigation -->
+  <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="navbar-inner">
       <a href="index.html" class="logo">
-        <div class="logo-dot"></div>
+        <div class="logo-orb"></div>
         <span class="logo-text">SABIR IAZZA</span>
       </a>
+
       <div class="nav-links">
         <a href="index.html" class="nav-link">Accueil</a>
         <a href="#about" class="nav-link active">À propos</a>
@@ -57,42 +75,66 @@
         <a href="#projects" class="nav-link">Projets</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
-      <a href="index.html" class="nav-cta">
-        <span>← Retour</span>
-      </a>
+
+      <a href="#contact" class="nav-cta">Me contacter</a>
+
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
+
     <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+      <div class="progress-fill" id="progressBar"></div>
     </div>
   </nav>
 
-  <main class="main-content">
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <a href="index.html" class="mobile-link">Accueil</a>
+      <a href="#about" class="mobile-link">À propos</a>
+      <a href="#skills" class="mobile-link">Compétences</a>
+      <a href="#projects" class="mobile-link">Projets</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+  </div>
 
-    <!-- Hero / About Section -->
-    <section class="section hero-section" id="about">
+  <!-- Main Content -->
+  <main>
+
+    <!-- About Section -->
+    <section class="section section-hero" id="about">
       <div class="section-container">
         <div class="section-header reveal">
           <div class="section-pill">À propos</div>
           <h1 class="section-title">Portfolio <span class="gradient-text">Sabir</span></h1>
           <p class="section-subtitle">
-            Étudiant passionné, je construis des projets concrets en réseaux, cybersécurité et web.
+            Étudiant passionné, je crée des projets concrets en réseaux, cybersécurité et web.
           </p>
         </div>
 
         <div class="about-grid">
-          <article class="glass-card about-card reveal">
-            <h3 class="card-title">Mon parcours</h3>
-            <p class="card-text">
+          <article class="about-card reveal">
+            <div class="about-badge">
+              <span class="badge-dot"></span>
+              Disponible pour alternance / stage
+            </div>
+
+            <h2 class="about-title">Mon parcours</h2>
+            
+            <p class="about-text">
               Passionné d'informatique depuis le collège, j'ai choisi la formation <strong>CIEL</strong> 
-              pour me spécialiser dans les réseaux et la cybersécurité.
+              (Cybersécurité, Informatique et Électronique) pour me spécialiser dans les réseaux et la sécurité.
             </p>
-            <p class="card-text">
-              Curieux et autodidacte, j'aime expérimenter de nouvelles technologies et créer des interfaces modernes.
+            
+            <p class="about-text">
+              Curieux et autodidacte, j'aime expérimenter de nouvelles technologies, 
+              créer des interfaces modernes et configurer des infrastructures réseau.
             </p>
-            <div class="features-list">
+
+            <div class="about-features">
               <div class="feature-item">
                 <span class="feature-icon">🎯</span>
                 <div class="feature-content">
@@ -115,10 +157,22 @@
                 </div>
               </div>
             </div>
+
+            <div class="about-actions">
+              <a href="#projects" class="btn btn-primary">Voir projets →</a>
+              <a href="mailto:amiamisabir@gmail.com" class="btn btn-secondary">Me contacter</a>
+              <a href="index.html" class="btn btn-ghost">← Retour accueil</a>
+            </div>
+
+            <div class="about-meta">
+              <a href="mailto:amiamisabir@gmail.com" class="meta-link">✉️ amiamisabir@gmail.com</a>
+              <a href="tel:+33762972626" class="meta-link">📞 07 62 97 26 26</a>
+              <span class="meta-link">📍 Saint-Maximin (83)</span>
+            </div>
           </article>
 
           <aside class="about-visual reveal">
-            <a href="index.html" class="back-button" title="Retour à l'accueil">🏠</a>
+            <button class="visual-back-btn" id="backHome" title="Retour accueil">🏠</button>
             <lottie-player 
               src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json"
               background="transparent"
@@ -141,127 +195,183 @@
         </div>
 
         <div class="skills-grid">
-          <article class="glass-card skill-card reveal">
+          <article class="skill-card reveal">
             <div class="skill-header">
-              <div class="skill-icon">🛡️</div>
+              <div class="skill-icon-wrapper">🛡️</div>
               <div class="skill-info">
                 <h3>Cybersécurité</h3>
                 <p>Analyse et protection</p>
               </div>
             </div>
             <div class="skill-bars">
-              <div class="skill-bar" data-value="78">
-                <div class="bar-header">
-                  <span>Wireshark / Analyse</span>
-                  <span>78%</span>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Wireshark / Analyse</span>
+                  <span class="skill-bar-percent">78%</span>
                 </div>
-                <div class="bar-track"><div class="bar-fill"></div></div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="78"></div>
+                </div>
               </div>
-              <div class="skill-bar" data-value="72">
-                <div class="bar-header">
-                  <span>Sécurité système</span>
-                  <span>72%</span>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Sécurité système</span>
+                  <span class="skill-bar-percent">72%</span>
                 </div>
-                <div class="bar-track"><div class="bar-fill"></div></div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="72"></div>
+                </div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Sécurité web</span>
+                  <span class="skill-bar-percent">68%</span>
+                </div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="68"></div>
+                </div>
               </div>
             </div>
             <div class="skill-tags">
-              <span class="tag">Wireshark</span>
-              <span class="tag">Nmap</span>
-              <span class="tag">Firewall</span>
+              <span class="skill-tag">Wireshark</span>
+              <span class="skill-tag">Nmap</span>
+              <span class="skill-tag">Firewall</span>
+              <span class="skill-tag">VPN</span>
             </div>
           </article>
 
-          <article class="glass-card skill-card reveal">
+          <article class="skill-card reveal">
             <div class="skill-header">
-              <div class="skill-icon">🌐</div>
+              <div class="skill-icon-wrapper">🌐</div>
               <div class="skill-info">
                 <h3>Réseaux</h3>
                 <p>Infrastructure & config</p>
               </div>
             </div>
             <div class="skill-bars">
-              <div class="skill-bar" data-value="85">
-                <div class="bar-header">
-                  <span>Cisco / Packet Tracer</span>
-                  <span>85%</span>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Cisco / Packet Tracer</span>
+                  <span class="skill-bar-percent">85%</span>
                 </div>
-                <div class="bar-track"><div class="bar-fill"></div></div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="85"></div>
+                </div>
               </div>
-              <div class="skill-bar" data-value="80">
-                <div class="bar-header">
-                  <span>VLAN / Routage</span>
-                  <span>80%</span>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">VLAN / Routage</span>
+                  <span class="skill-bar-percent">80%</span>
                 </div>
-                <div class="bar-track"><div class="bar-fill"></div></div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="80"></div>
+                </div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">IP / Subnetting</span>
+                  <span class="skill-bar-percent">75%</span>
+                </div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="75"></div>
+                </div>
               </div>
             </div>
             <div class="skill-tags">
-              <span class="tag">Cisco</span>
-              <span class="tag">VLAN</span>
-              <span class="tag">TCP/IP</span>
+              <span class="skill-tag">Cisco</span>
+              <span class="skill-tag">VLAN</span>
+              <span class="skill-tag">TCP/IP</span>
+              <span class="skill-tag">DNS</span>
             </div>
           </article>
 
-          <article class="glass-card skill-card reveal">
+          <article class="skill-card reveal">
             <div class="skill-header">
-              <div class="skill-icon">💻</div>
+              <div class="skill-icon-wrapper">💻</div>
               <div class="skill-info">
                 <h3>Développement Web</h3>
                 <p>Frontend moderne</p>
               </div>
             </div>
             <div class="skill-bars">
-              <div class="skill-bar" data-value="82">
-                <div class="bar-header">
-                  <span>HTML / CSS / JS</span>
-                  <span>82%</span>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">HTML / CSS / JS</span>
+                  <span class="skill-bar-percent">82%</span>
                 </div>
-                <div class="bar-track"><div class="bar-fill"></div></div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="82"></div>
+                </div>
               </div>
-              <div class="skill-bar" data-value="75">
-                <div class="bar-header">
-                  <span>Canvas / Animations</span>
-                  <span>75%</span>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Canvas / Animations</span>
+                  <span class="skill-bar-percent">75%</span>
                 </div>
-                <div class="bar-track"><div class="bar-fill"></div></div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="75"></div>
+                </div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Design UI/UX</span>
+                  <span class="skill-bar-percent">70%</span>
+                </div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="70"></div>
+                </div>
               </div>
             </div>
             <div class="skill-tags">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Canvas</span>
             </div>
           </article>
 
-          <article class="glass-card skill-card reveal">
+          <article class="skill-card reveal">
             <div class="skill-header">
-              <div class="skill-icon">🔧</div>
+              <div class="skill-icon-wrapper">🔧</div>
               <div class="skill-info">
                 <h3>Système</h3>
-                <p>Admin & hardware</p>
+                <p>Administration</p>
               </div>
             </div>
             <div class="skill-bars">
-              <div class="skill-bar" data-value="75">
-                <div class="bar-header">
-                  <span>Windows / Linux</span>
-                  <span>75%</span>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Windows / Linux</span>
+                  <span class="skill-bar-percent">75%</span>
                 </div>
-                <div class="bar-track"><div class="bar-fill"></div></div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="75"></div>
+                </div>
               </div>
-              <div class="skill-bar" data-value="80">
-                <div class="bar-header">
-                  <span>Maintenance PC</span>
-                  <span>80%</span>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Maintenance PC</span>
+                  <span class="skill-bar-percent">80%</span>
                 </div>
-                <div class="bar-track"><div class="bar-fill"></div></div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="80"></div>
+                </div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header">
+                  <span class="skill-bar-name">Virtualisation</span>
+                  <span class="skill-bar-percent">65%</span>
+                </div>
+                <div class="skill-bar-track">
+                  <div class="skill-bar-fill" data-width="65"></div>
+                </div>
               </div>
             </div>
             <div class="skill-tags">
-              <span class="tag">Windows</span>
-              <span class="tag">Linux</span>
-              <span class="tag">Docker</span>
+              <span class="skill-tag">Windows</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">VMware</span>
+              <span class="skill-tag">Docker</span>
             </div>
           </article>
         </div>
@@ -274,74 +384,77 @@
         <div class="section-header reveal">
           <div class="section-pill">Projets</div>
           <h2 class="section-title">Mes réalisations</h2>
-          <p class="section-subtitle">Découvrez mes projets en réseaux, cyber et développement.</p>
+          <p class="section-subtitle">Projets concrets en réseaux, cyber et développement.</p>
         </div>
 
         <div class="projects-grid">
-          <article class="glass-card project-card reveal">
+          <article class="project-card reveal">
             <div class="project-header">
               <div class="project-icon">🧩</div>
               <div class="project-info">
                 <h3>Portfolio Premium</h3>
-                <p>Design moderne avec mascotte IA et animations fluides.</p>
+                <p>Design moderne avec orbe 3D et animations fluides.</p>
               </div>
             </div>
             <ul class="project-list">
               <li>Design responsive premium</li>
-              <li>Mascotte IA observatrice</li>
-              <li>Animations Lottie</li>
-              <li>Chatbot intelligent</li>
+              <li>Orbe holographique interactif</li>
+              <li>Animations Lottie intégrées</li>
+              <li>Chatbot IA intégré</li>
             </ul>
             <div class="skill-tags">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Canvas</span>
             </div>
           </article>
 
-          <article class="glass-card project-card reveal">
+          <article class="project-card reveal">
             <div class="project-header">
               <div class="project-icon">🛰️</div>
               <div class="project-info">
-                <h3>Lab Réseau</h3>
-                <p>Infrastructure avec VLANs, routage et documentation.</p>
+                <h3>Lab Réseau Avancé</h3>
+                <p>Infrastructure avec VLANs et routage inter-VLAN.</p>
               </div>
             </div>
             <ul class="project-list">
               <li>Topologie Packet Tracer</li>
-              <li>Config switches & routeurs</li>
-              <li>Règles firewall</li>
+              <li>Configuration switches & routeurs</li>
+              <li>Règles de sécurité firewall</li>
               <li>Documentation technique</li>
             </ul>
             <div class="skill-tags">
-              <span class="tag">Cisco</span>
-              <span class="tag">VLAN</span>
-              <span class="tag">Routing</span>
+              <span class="skill-tag">Cisco</span>
+              <span class="skill-tag">VLAN</span>
+              <span class="skill-tag">Routing</span>
+              <span class="skill-tag">ACL</span>
             </div>
           </article>
 
-          <article class="glass-card project-card reveal">
+          <article class="project-card reveal">
             <div class="project-header">
               <div class="project-icon">🔐</div>
               <div class="project-info">
-                <h3>Analyse Sécurité</h3>
+                <h3>Analyse de Sécurité</h3>
                 <p>Audits et analyses de vulnérabilités.</p>
               </div>
             </div>
             <ul class="project-list">
-              <li>Analyse Wireshark</li>
+              <li>Analyse trafic Wireshark</li>
               <li>Scan de ports Nmap</li>
               <li>Rapport vulnérabilités</li>
-              <li>Recommandations</li>
+              <li>Recommandations sécurité</li>
             </ul>
             <div class="skill-tags">
-              <span class="tag">Wireshark</span>
-              <span class="tag">Nmap</span>
-              <span class="tag">Linux</span>
+              <span class="skill-tag">Wireshark</span>
+              <span class="skill-tag">Nmap</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">Security</span>
             </div>
           </article>
 
-          <article class="glass-card project-card reveal">
+          <article class="project-card reveal">
             <div class="project-header">
               <div class="project-icon">🎨</div>
               <div class="project-info">
@@ -350,15 +463,16 @@
               </div>
             </div>
             <ul class="project-list">
-              <li>Design systems</li>
-              <li>Animations CSS</li>
+              <li>Design systems modernes</li>
+              <li>Animations CSS avancées</li>
               <li>Prototypes interactifs</li>
-              <li>Wireframes</li>
+              <li>Wireframes & mockups</li>
             </ul>
             <div class="skill-tags">
-              <span class="tag">Figma</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">Design</span>
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">Animation</span>
+              <span class="skill-tag">Design</span>
             </div>
           </article>
         </div>
@@ -371,21 +485,21 @@
         <div class="section-header reveal">
           <div class="section-pill">Contact</div>
           <h2 class="section-title">Parlons-en !</h2>
-          <p class="section-subtitle">Une question ? Un projet ? Contactez-moi.</p>
+          <p class="section-subtitle">Une question ? Un projet ? N'hésitez pas.</p>
         </div>
 
         <div class="contact-grid">
-          <article class="glass-card contact-card reveal">
+          <article class="contact-card reveal">
             <div class="contact-header">
               <div class="contact-icon">🤖</div>
               <div>
-                <h3>SabirAI</h3>
-                <p>Assistant virtuel</p>
+                <h3 class="contact-title">SabirAI</h3>
+                <p class="contact-subtitle">Assistant virtuel</p>
               </div>
             </div>
             <div class="chat-container">
               <div class="chat-messages" id="chatMessages">
-                <div class="chat-msg bot">👋 Salut ! Je suis l'assistant de Sabir. Pose-moi une question !</div>
+                <div class="chat-msg bot">👋 Salut ! Je suis l'assistant de Sabir. Pose-moi une question sur ses compétences, projets ou contact !</div>
               </div>
               <div class="chat-input-wrapper">
                 <input type="text" class="chat-input" id="chatInput" placeholder="Écris ta question..." autocomplete="off">
@@ -394,32 +508,48 @@
             </div>
           </article>
 
-          <article class="glass-card contact-card reveal">
+          <article class="contact-card reveal">
             <div class="contact-header">
               <div class="contact-icon">📬</div>
               <div>
-                <h3>Coordonnées</h3>
-                <p>Me contacter directement</p>
+                <h3 class="contact-title">Coordonnées</h3>
+                <p class="contact-subtitle">Me contacter directement</p>
               </div>
             </div>
             <div class="contact-list">
+              <a href="mailto:amiamisabir@gmail.com" class="contact-item">
+                <span class="contact-item-label">Email</span>
+                <span class="contact-item-value">amiamisabir@gmail.com</span>
+              </a>
+              <a href="tel:+33762972626" class="contact-item">
+                <span class="contact-item-label">Téléphone</span>
+                <span class="contact-item-value">07 62 97 26 26</span>
+              </a>
               <div class="contact-item">
-                <span class="contact-label">Email</span>
-                <a href="mailto:amiamisabir@gmail.com" class="contact-value">amiamisabir@gmail.com</a>
+                <span class="contact-item-label">Localisation</span>
+                <span class="contact-item-value">Saint-Maximin (83)</span>
               </div>
               <div class="contact-item">
-                <span class="contact-label">Téléphone</span>
-                <a href="tel:+33762972626" class="contact-value">07 62 97 26 26</a>
-              </div>
-              <div class="contact-item">
-                <span class="contact-label">Localisation</span>
-                <span class="contact-value">Saint-Maximin (83)</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-label">Statut</span>
-                <span class="contact-value status-available">✓ Disponible</span>
+                <span class="contact-item-label">Statut</span>
+                <span class="contact-item-value status-available">✓ Disponible</span>
               </div>
             </div>
+
+            <!-- Bouton CV -->
+            <a href="CV_Sabir_IAZZA.pdf" download class="btn-cv">
+              <div class="btn-cv-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="12" y1="18" x2="12" y2="12"/>
+                  <polyline points="9 15 12 18 15 15"/>
+                </svg>
+              </div>
+              <div class="btn-cv-content">
+                <span class="btn-cv-title">Télécharger CV</span>
+                <span class="btn-cv-subtitle">PDF • 2025</span>
+              </div>
+            </a>
           </article>
         </div>
       </div>
@@ -429,9 +559,10 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <p>© <span id="year">2025</span> <span class="footer-highlight">Sabir IAZZA</span> — Portfolio Premium</p>
+    <p class="footer-text">© <span id="year">2025</span> <span>Sabir IAZZA</span> — Portfolio Premium</p>
   </footer>
 
+  <!-- Scripts -->
   <script src="script-portfolio.js"></script>
 </body>
 </html>

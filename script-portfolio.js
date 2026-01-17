@@ -1,5 +1,5 @@
 /* ============================================
-   SABIR IAZZA - PORTFOLIO PREMIUM V2
+   SABIR IAZZA - SCRIPT PORTFOLIO PAGE
    script-portfolio.js
    ============================================ */
 
@@ -22,48 +22,70 @@
   const yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ==================== LOADING SCREEN ====================
+  // ==================== LOADER ====================
   const loader = $('#loader');
   
-  if (loader) {
-    const hideLoader = () => {
+  const hideLoader = () => {
+    if (loader) {
       loader.classList.add('hidden');
       document.body.style.overflow = '';
-    };
-
-    // Hide loader when page is fully loaded
-    if (document.readyState === 'complete') {
-      setTimeout(hideLoader, 1500);
-    } else {
-      window.addEventListener('load', () => {
-        setTimeout(hideLoader, 2000);
-      });
     }
+  };
 
-    // Fallback: hide after 5 seconds max
-    setTimeout(hideLoader, 5000);
+  if (document.readyState === 'complete') {
+    setTimeout(hideLoader, 1200);
+  } else {
+    window.addEventListener('load', () => setTimeout(hideLoader, 1500));
+  }
+  
+  setTimeout(hideLoader, 4000);
+
+  // ==================== STARS BACKGROUND ====================
+  const bgStars = $('#bgStars');
+  
+  if (bgStars && !prefersReducedMotion) {
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.cssText = `
+        left: ${random(0, 100)}%;
+        top: ${random(0, 100)}%;
+        animation-delay: ${random(0, 3)}s;
+        opacity: ${random(0.2, 0.6)};
+      `;
+      bgStars.appendChild(star);
+    }
   }
 
   // ==================== NAVBAR ====================
   const navbar = $('#navbar');
-  const navLinks = $$('.nav-link');
   const navToggle = $('#navToggle');
+  const mobileMenu = $('#mobileMenu');
+  const progressBar = $('#progressBar');
+  const navLinks = $$('.nav-link');
   const sections = $$('section[id]');
-
-  // Scroll effect
+  
   let lastScrollY = 0;
   let ticking = false;
 
-  const handleNavbarScroll = () => {
+  const handleScroll = () => {
     const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     
+    // Navbar background
     if (navbar) {
       navbar.classList.toggle('scrolled', scrollY > 50);
     }
-
-    // Update active nav link
+    
+    // Progress bar
+    if (progressBar && docHeight > 0) {
+      const progress = (scrollY / docHeight) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+    
+    // Active nav link
     const scrollPosition = scrollY + 200;
-
+    
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
@@ -78,19 +100,34 @@
         });
       }
     });
-
+    
     lastScrollY = scrollY;
     ticking = false;
   };
 
   window.addEventListener('scroll', () => {
     if (!ticking) {
-      requestAnimationFrame(handleNavbarScroll);
+      requestAnimationFrame(handleScroll);
       ticking = true;
     }
   }, { passive: true });
 
-  // Smooth scroll for anchor links
+  // Mobile menu
+  if (navToggle && mobileMenu) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    $$('.mobile-link', mobileMenu).forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      });
+    });
+  }
+
+  // Smooth scroll
   $$('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
@@ -99,345 +136,111 @@
       const target = $(href);
       if (target) {
         e.preventDefault();
-        const navbarHeight = navbar?.offsetHeight || 80;
-        const targetPosition = target.offsetTop - navbarHeight - 20;
+        const navHeight = navbar?.offsetHeight || 80;
+        const targetPos = target.offsetTop - navHeight - 20;
 
         window.scrollTo({
-          top: targetPosition,
+          top: targetPos,
           behavior: prefersReducedMotion ? 'auto' : 'smooth'
         });
 
-        // Close mobile menu if open
-        if (navToggle?.classList.contains('active')) {
-          navToggle.classList.remove('active');
+        // Close mobile menu
+        if (mobileMenu?.classList.contains('active')) {
+          navToggle?.classList.remove('active');
+          mobileMenu.classList.remove('active');
         }
       }
     });
   });
 
-  // Mobile menu toggle
-  if (navToggle) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
+  // ==================== BACK HOME BUTTON ====================
+  const backHome = $('#backHome');
+  if (backHome) {
+    backHome.addEventListener('click', () => {
+      window.location.href = 'index.html';
     });
   }
 
-  // ==================== MASCOTTE OBSERVATEUR ====================
-  const mascotCanvas = $('#mascotCanvas');
-  const mascotSpeech = $('#mascotSpeech');
-  const mascotWatcher = $('#mascotWatcher');
+  // ==================== ORB OBSERVATEUR ====================
+  const orbEye = $('#orbEye');
+  const orbSpeech = $('#orbSpeech');
+  const orbWatcher = $('#orbWatcher');
 
-  if (mascotCanvas && isDesktop && !prefersReducedMotion) {
-    const ctx = mascotCanvas.getContext('2d');
-    const width = mascotCanvas.width;
-    const height = mascotCanvas.height;
-    const centerX = width / 2;
-    const centerY = height / 2;
-
-    // Mascot state
-    const mascot = {
-      eyeX: 0,
-      eyeY: 0,
-      targetEyeX: 0,
-      targetEyeY: 0,
-      bobOffset: 0,
-      blinkTimer: 0,
-      isBlinking: false,
-      messageTimer: 0,
-      lastMessageTime: 0
-    };
-
-    // Mouse position
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-
-    // Messages
+  if (orbEye && isDesktop && !prefersReducedMotion) {
+    let lastMessageTime = 0;
     const messages = [
-      "👀 Je te surveille...",
+      "👁️ Je t'observe...",
       "🔍 Intéressant...",
-      "🤔 Tu cherches quoi ?",
       "💡 Besoin d'aide ?",
-      "🎯 Continue comme ça !",
       "✨ Joli scroll !",
+      "🎯 Continue !",
       "🚀 Tu explores bien !",
-      "🧠 Je note tout...",
-      "😎 T'es curieux toi !",
-      "🔥 Ce portfolio est cool non ?",
-      "💬 Parle-moi dans le chat !",
-      "📧 Contacte Sabir !"
+      "📧 Contacte Sabir !",
+      "💼 CV disponible !"
     ];
 
-    let currentMessageIndex = 0;
-
-    // Track mouse
     document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    }, { passive: true });
+      const orbRect = orbWatcher.getBoundingClientRect();
+      const orbCenterX = orbRect.left + orbRect.width / 2;
+      const orbCenterY = orbRect.top + orbRect.height / 2;
 
-    // Calculate eye direction
-    const updateEyeDirection = () => {
-      const mascotRect = mascotCanvas.getBoundingClientRect();
-      const mascotCenterX = mascotRect.left + mascotRect.width / 2;
-      const mascotCenterY = mascotRect.top + mascotRect.height / 2;
-
-      const dx = mouseX - mascotCenterX;
-      const dy = mouseY - mascotCenterY;
+      const dx = e.clientX - orbCenterX;
+      const dy = e.clientY - orbCenterY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      const maxOffset = 6;
-      mascot.targetEyeX = clamp((dx / Math.max(distance, 100)) * maxOffset, -maxOffset, maxOffset);
-      mascot.targetEyeY = clamp((dy / Math.max(distance, 100)) * maxOffset, -maxOffset, maxOffset);
+      const maxOffset = 8;
+      const eyeX = clamp((dx / Math.max(distance, 100)) * maxOffset, -maxOffset, maxOffset);
+      const eyeY = clamp((dy / Math.max(distance, 100)) * maxOffset, -maxOffset, maxOffset);
 
-      // Smooth interpolation
-      mascot.eyeX = lerp(mascot.eyeX, mascot.targetEyeX, 0.12);
-      mascot.eyeY = lerp(mascot.eyeY, mascot.targetEyeY, 0.12);
-    };
+      orbEye.style.transform = `translate(calc(-50% + ${eyeX}px), calc(-50% + ${eyeY}px))`;
+    }, { passive: true });
 
-    // Draw mascot
-    const drawMascot = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      const bob = Math.sin(mascot.bobOffset) * 3;
-      const cy = centerY + bob;
-
-      // Glow effect
-      const glowGradient = ctx.createRadialGradient(centerX, cy, 30, centerX, cy, 60);
-      glowGradient.addColorStop(0, 'rgba(99, 102, 241, 0.3)');
-      glowGradient.addColorStop(1, 'transparent');
-      ctx.beginPath();
-      ctx.arc(centerX, cy, 55, 0, Math.PI * 2);
-      ctx.fillStyle = glowGradient;
-      ctx.fill();
-
-      // Main body
-      const bodyGradient = ctx.createRadialGradient(centerX, cy - 10, 0, centerX, cy, 40);
-      bodyGradient.addColorStop(0, '#a5b4fc');
-      bodyGradient.addColorStop(0.5, '#6366f1');
-      bodyGradient.addColorStop(1, '#4338ca');
-
-      ctx.beginPath();
-      ctx.arc(centerX, cy, 35, 0, Math.PI * 2);
-      ctx.fillStyle = bodyGradient;
-      ctx.fill();
-
-      // Outer ring
-      ctx.strokeStyle = 'rgba(34, 211, 238, 0.6)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // Inner ring
-      ctx.beginPath();
-      ctx.arc(centerX, cy, 30, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      // Eyes
-      const eyeY = cy - 5;
-      const eyeSpacing = 12;
-
-      if (!mascot.isBlinking) {
-        // Left eye white
-        ctx.beginPath();
-        ctx.ellipse(centerX - eyeSpacing + mascot.eyeX * 0.5, eyeY + mascot.eyeY * 0.5, 9, 10, 0, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
-
-        // Left pupil
-        ctx.beginPath();
-        ctx.arc(centerX - eyeSpacing + mascot.eyeX, eyeY + mascot.eyeY, 5, 0, Math.PI * 2);
-        ctx.fillStyle = '#1e1b4b';
-        ctx.fill();
-
-        // Left highlight
-        ctx.beginPath();
-        ctx.arc(centerX - eyeSpacing + mascot.eyeX - 2, eyeY + mascot.eyeY - 3, 2, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
-
-        // Right eye white
-        ctx.beginPath();
-        ctx.ellipse(centerX + eyeSpacing + mascot.eyeX * 0.5, eyeY + mascot.eyeY * 0.5, 9, 10, 0, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
-
-        // Right pupil
-        ctx.beginPath();
-        ctx.arc(centerX + eyeSpacing + mascot.eyeX, eyeY + mascot.eyeY, 5, 0, Math.PI * 2);
-        ctx.fillStyle = '#1e1b4b';
-        ctx.fill();
-
-        // Right highlight
-        ctx.beginPath();
-        ctx.arc(centerX + eyeSpacing + mascot.eyeX - 2, eyeY + mascot.eyeY - 3, 2, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
-      } else {
-        // Closed eyes (happy expression)
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 3;
-        ctx.lineCap = 'round';
-
-        ctx.beginPath();
-        ctx.arc(centerX - eyeSpacing, eyeY, 6, 0.8 * Math.PI, 0.2 * Math.PI, true);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(centerX + eyeSpacing, eyeY, 6, 0.8 * Math.PI, 0.2 * Math.PI, true);
-        ctx.stroke();
-      }
-
-      // Mouth
-      ctx.beginPath();
-      ctx.arc(centerX, cy + 10, 10, 0.15 * Math.PI, 0.85 * Math.PI);
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2.5;
-      ctx.lineCap = 'round';
-      ctx.stroke();
-
-      // Antennae
-      const antennaWave1 = Math.sin(mascot.bobOffset * 1.5) * 4;
-      const antennaWave2 = Math.sin(mascot.bobOffset * 1.5 + 0.5) * 4;
-
-      ctx.strokeStyle = '#22d3ee';
-      ctx.lineWidth = 2.5;
-      ctx.lineCap = 'round';
-
-      // Left antenna
-      ctx.beginPath();
-      ctx.moveTo(centerX - 18, cy - 30);
-      ctx.quadraticCurveTo(centerX - 28 + antennaWave1, cy - 48, centerX - 20, cy - 55);
-      ctx.stroke();
-
-      // Left antenna ball
-      const ballGradient1 = ctx.createRadialGradient(centerX - 20, cy - 55, 0, centerX - 20, cy - 55, 5);
-      ballGradient1.addColorStop(0, '#f9a8d4');
-      ballGradient1.addColorStop(1, '#ec4899');
-      ctx.beginPath();
-      ctx.arc(centerX - 20, cy - 55, 5, 0, Math.PI * 2);
-      ctx.fillStyle = ballGradient1;
-      ctx.fill();
-
-      // Right antenna
-      ctx.beginPath();
-      ctx.moveTo(centerX + 18, cy - 30);
-      ctx.quadraticCurveTo(centerX + 28 + antennaWave2, cy - 48, centerX + 20, cy - 55);
-      ctx.stroke();
-
-      // Right antenna ball
-      const ballGradient2 = ctx.createRadialGradient(centerX + 20, cy - 55, 0, centerX + 20, cy - 55, 5);
-      ballGradient2.addColorStop(0, '#f9a8d4');
-      ballGradient2.addColorStop(1, '#ec4899');
-      ctx.beginPath();
-      ctx.arc(centerX + 20, cy - 55, 5, 0, Math.PI * 2);
-      ctx.fillStyle = ballGradient2;
-      ctx.fill();
-
-      // Sparkles around mascot
-      const sparkleCount = 4;
-      for (let i = 0; i < sparkleCount; i++) {
-        const angle = (mascot.bobOffset * 0.5 + i * (Math.PI * 2 / sparkleCount)) % (Math.PI * 2);
-        const sparkleRadius = 48 + Math.sin(mascot.bobOffset * 2 + i) * 5;
-        const sparkleX = centerX + Math.cos(angle) * sparkleRadius;
-        const sparkleY = cy + Math.sin(angle) * sparkleRadius;
-        const sparkleSize = 2 + Math.sin(mascot.bobOffset * 3 + i) * 1;
-        const sparkleAlpha = 0.3 + Math.sin(mascot.bobOffset * 2 + i) * 0.3;
-
-        ctx.beginPath();
-        ctx.arc(sparkleX, sparkleY, sparkleSize, 0, Math.PI * 2);
-        ctx.fillStyle = i % 2 === 0 
-          ? `rgba(99, 102, 241, ${sparkleAlpha})` 
-          : `rgba(34, 211, 238, ${sparkleAlpha})`;
-        ctx.fill();
-      }
-    };
-
-    // Show message
     const showMessage = (msg) => {
-      if (mascotSpeech) {
-        mascotSpeech.textContent = msg;
-        mascotSpeech.classList.add('visible');
-
-        setTimeout(() => {
-          mascotSpeech.classList.remove('visible');
-        }, 3500);
+      if (orbSpeech) {
+        orbSpeech.textContent = msg;
+        orbSpeech.classList.add('visible');
+        setTimeout(() => orbSpeech.classList.remove('visible'), 3500);
       }
     };
 
-    // Animation loop
-    let animationId;
-    const animate = () => {
-      mascot.bobOffset += 0.035;
-
-      // Blinking
-      mascot.blinkTimer++;
-      if (mascot.blinkTimer > 200 && Math.random() < 0.015) {
-        mascot.isBlinking = true;
-        setTimeout(() => {
-          mascot.isBlinking = false;
-        }, 150);
-        mascot.blinkTimer = 0;
-      }
-
-      // Random messages every 10-15 seconds
+    setInterval(() => {
       const now = Date.now();
-      if (now - mascot.lastMessageTime > 12000 && Math.random() < 0.008) {
-        showMessage(messages[currentMessageIndex]);
-        currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-        mascot.lastMessageTime = now;
+      if (now - lastMessageTime > 15000 && Math.random() < 0.25) {
+        showMessage(messages[Math.floor(Math.random() * messages.length)]);
+        lastMessageTime = now;
       }
+    }, 4000);
 
-      updateEyeDirection();
-      drawMascot();
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    // Start animation
-    animate();
-
-    // Initial message
     setTimeout(() => {
-      showMessage("👀 Je te surveille...");
-      mascot.lastMessageTime = Date.now();
-    }, 3000);
+      showMessage("👁️ Je t'observe...");
+      lastMessageTime = Date.now();
+    }, 2500);
 
-    // Pause when tab is hidden
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cancelAnimationFrame(animationId);
-      } else {
-        animate();
-      }
-    });
-
-    // Message on scroll milestones
-    let lastScrollMilestone = 0;
+    // Scroll milestones
+    let lastMilestone = 0;
     window.addEventListener('scroll', () => {
       const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-      const milestone = Math.floor(scrollPercent * 4); // 0, 25%, 50%, 75%, 100%
+      const milestone = Math.floor(scrollPercent * 4);
 
-      if (milestone !== lastScrollMilestone && milestone > 0) {
+      if (milestone !== lastMilestone && milestone > 0) {
         const scrollMessages = [
           "📜 Tu descends bien !",
-          "👀 Encore plus bas...",
+          "👀 Encore plus...",
           "🎯 Presque à la fin !",
           "🏆 Tu as tout vu !"
         ];
         if (scrollMessages[milestone - 1]) {
           showMessage(scrollMessages[milestone - 1]);
         }
-        lastScrollMilestone = milestone;
+        lastMilestone = milestone;
       }
     }, { passive: true });
 
-  } else if (mascotWatcher && (isMobile || !isDesktop)) {
-    // Hide mascot on mobile
-    mascotWatcher.style.display = 'none';
+  } else if (orbWatcher && (isMobile || !isDesktop)) {
+    orbWatcher.style.display = 'none';
   }
 
-  // ==================== SCROLL REVEAL ANIMATIONS ====================
+  // ==================== SCROLL REVEAL ====================
   const revealElements = $$('.reveal');
 
   if (revealElements.length > 0 && !prefersReducedMotion) {
@@ -446,46 +249,40 @@
         (entries) => {
           entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-              // Staggered animation
               setTimeout(() => {
                 entry.target.classList.add('active');
-              }, index * 100);
+              }, index * 80);
               revealObserver.unobserve(entry.target);
             }
           });
         },
-        {
-          threshold: 0.1,
-          rootMargin: '0px 0px -80px 0px'
-        }
+        { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
       );
 
-      revealElements.forEach((el) => revealObserver.observe(el));
+      revealElements.forEach(el => revealObserver.observe(el));
     } else {
-      // Fallback: show all elements
-      revealElements.forEach((el) => el.classList.add('active'));
+      revealElements.forEach(el => el.classList.add('active'));
     }
   } else {
-    // Reduced motion or no reveal elements
-    revealElements.forEach((el) => el.classList.add('active'));
+    revealElements.forEach(el => el.classList.add('active'));
   }
 
-  // ==================== SKILL BARS ANIMATION ====================
-  const skillBars = $$('.skill-bar-fill, .bar-fill');
+  // ==================== SKILL BARS ====================
+  const skillBars = $$('.skill-bar-fill');
 
   if (skillBars.length > 0) {
     if ('IntersectionObserver' in window) {
       const barObserver = new IntersectionObserver(
         (entries) => {
-          entries.forEach((entry) => {
+          entries.forEach(entry => {
             if (entry.isIntersecting) {
               const bar = entry.target;
-              const width = bar.dataset.width || bar.dataset.val;
+              const width = bar.dataset.width;
               
               if (width) {
                 setTimeout(() => {
                   bar.style.width = `${width}%`;
-                }, 300);
+                }, 250);
               }
               
               barObserver.unobserve(bar);
@@ -495,11 +292,10 @@
         { threshold: 0.5 }
       );
 
-      skillBars.forEach((bar) => barObserver.observe(bar));
+      skillBars.forEach(bar => barObserver.observe(bar));
     } else {
-      // Fallback
-      skillBars.forEach((bar) => {
-        const width = bar.dataset.width || bar.dataset.val;
+      skillBars.forEach(bar => {
+        const width = bar.dataset.width;
         if (width) bar.style.width = `${width}%`;
       });
     }
@@ -511,21 +307,19 @@
   const chatMessages = $('#chatMessages');
 
   if (chatInput && chatSend && chatMessages) {
-    // Knowledge base
     const knowledge = {
       greetings: ['salut', 'bonjour', 'hello', 'hey', 'coucou', 'yo', 'hi', 'bonsoir'],
       thanks: ['merci', 'thanks', 'thx', 'cool', 'super', 'génial', 'parfait', 'top'],
-      skills: ['compétence', 'skill', 'sait', 'maîtrise', 'connais', 'technologie', 'outil', 'langage'],
+      skills: ['compétence', 'skill', 'sait', 'maîtrise', 'connais', 'technologie', 'outil'],
       projects: ['projet', 'portfolio', 'réalisation', 'travail', 'création', 'fait'],
-      contact: ['contact', 'email', 'mail', 'téléphone', 'phone', 'appeler', 'joindre', 'écrire'],
+      contact: ['contact', 'email', 'mail', 'téléphone', 'phone', 'appeler', 'joindre'],
       location: ['où', 'ville', 'habite', 'localisation', 'région', 'adresse'],
       education: ['étude', 'formation', 'école', 'lycée', 'bac', 'diplôme', 'bts', 'ciel'],
       network: ['réseau', 'cisco', 'vlan', 'routeur', 'switch', 'ip', 'tcp', 'packet'],
-      cyber: ['cyber', 'sécurité', 'security', 'wireshark', 'hack', 'firewall', 'virus'],
+      cyber: ['cyber', 'sécurité', 'security', 'wireshark', 'hack', 'firewall'],
       web: ['web', 'site', 'html', 'css', 'javascript', 'js', 'frontend', 'design'],
-      availability: ['disponible', 'alternance', 'stage', 'embauche', 'recrute', 'travail'],
-      mascot: ['mascotte', 'robot', 'ia', 'bot', 'assistant', 'yeux', 'surveille'],
-      who: ['qui', 'toi', 'sabir', 'présente', 'âge', 'ans']
+      cv: ['cv', 'curriculum', 'télécharger', 'pdf', 'resume'],
+      availability: ['disponible', 'alternance', 'stage', 'embauche', 'recrute']
     };
 
     const responses = {
@@ -540,55 +334,49 @@
         "Content que ça te plaise ! 🎉"
       ],
       skills: [
-        "🛠️ <b>Compétences de Sabir :</b><br>• Réseaux : Cisco, VLAN, TCP/IP (85%)<br>• Cyber : Wireshark, Firewall (78%)<br>• Web : HTML/CSS/JS, Canvas (82%)<br>• Système : Windows, Linux (75%)"
+        "🛠️ <b>Compétences :</b><br>• Réseaux : Cisco, VLAN, TCP/IP (85%)<br>• Cyber : Wireshark, Firewall (78%)<br>• Web : HTML/CSS/JS (82%)<br>• Système : Windows, Linux (75%)"
       ],
       projects: [
-        "📂 <b>Projets réalisés :</b><br>• Portfolio Premium avec mascotte IA<br>• Lab Réseau Cisco (VLAN, routage)<br>• Analyses de sécurité Wireshark<br>• Interfaces UI/UX modernes"
+        "📂 <b>Projets :</b><br>• Portfolio Premium avec orbe 3D<br>• Lab Réseau Cisco<br>• Analyses de sécurité<br>• Interfaces UI/UX"
       ],
       contact: [
         "📧 <b>Contact :</b><br>Email : amiamisabir@gmail.com<br>Tél : 07 62 97 26 26<br>📍 Saint-Maximin (83)"
       ],
       location: [
-        "📍 Sabir est basé à <b>Saint-Maximin (83)</b> dans le Var, entre Marseille et Nice !"
+        "📍 Sabir est basé à <b>Saint-Maximin (83)</b> dans le Var !"
       ],
       education: [
-        "🎓 <b>Formation :</b><br>Actuellement en Terminale CIEL (Cybersécurité, Informatique et Électronique).<br>Objectif : BTS SIO SISR en alternance !"
+        "🎓 <b>Formation :</b><br>Terminale CIEL (Cybersécurité, Informatique et Électronique).<br>Objectif : BTS SIO SISR en alternance !"
       ],
       network: [
-        "🌐 <b>Réseaux :</b><br>• Cisco Packet Tracer (85%)<br>• Configuration VLAN et routage<br>• Adressage IP et subnetting<br>• Protocoles TCP/IP, DNS, DHCP"
+        "🌐 <b>Réseaux :</b><br>• Cisco Packet Tracer (85%)<br>• Configuration VLAN<br>• Routage, TCP/IP, DNS"
       ],
       cyber: [
-        "🛡️ <b>Cybersécurité :</b><br>• Analyse de trafic Wireshark<br>• Scans avec Nmap<br>• Configuration Firewall<br>• Bonnes pratiques sécurité"
+        "🛡️ <b>Cybersécurité :</b><br>• Wireshark (78%)<br>• Nmap, Firewall<br>• Bonnes pratiques"
       ],
       web: [
-        "💻 <b>Développement Web :</b><br>• HTML5, CSS3, JavaScript (82%)<br>• Animations Canvas<br>• Design responsive<br>• Ce portfolio est 100% fait main !"
+        "💻 <b>Web :</b><br>• HTML5, CSS3, JavaScript (82%)<br>• Animations Canvas<br>• Design responsive"
+      ],
+      cv: [
+        "📄 Tu peux télécharger le CV de Sabir en cliquant sur le bouton 'Télécharger CV' dans la section Contact ! ⬇️"
       ],
       availability: [
-        "✅ <b>Disponibilité :</b><br>Sabir recherche activement une alternance en BTS SIO SISR !<br>📧 Contact : amiamisabir@gmail.com"
-      ],
-      mascot: [
-        "🤖 Je suis la mascotte IA de ce portfolio ! Mes yeux suivent ta souris et je te surveille... 👀 Pas de panique, je suis gentil ! 😄"
-      ],
-      who: [
-        "👤 <b>Sabir IAZZA</b><br>Étudiant en Terminale CIEL, passionné par les réseaux, la cybersécurité et le développement web. Curieux, autodidacte et toujours prêt à apprendre !"
+        "✅ Sabir recherche une alternance en BTS SIO SISR !<br>📧 Contact : amiamisabir@gmail.com"
       ],
       default: [
-        "🤔 Bonne question ! Tu peux me demander des infos sur les compétences, projets, ou le contact de Sabir.",
-        "Hmm, je ne suis pas sûr de comprendre. Essaie : 'compétences', 'projets' ou 'contact' !",
+        "🤔 Bonne question ! Essaie : 'compétences', 'projets' ou 'contact'.",
         "📧 Pour plus d'infos, contacte Sabir : amiamisabir@gmail.com"
       ]
     };
 
-    // Get response based on message
     const getResponse = (message) => {
       const msg = message.toLowerCase().trim();
       let bestMatch = 'default';
       let maxScore = 0;
 
-      // Check each category
       for (const [category, keywords] of Object.entries(knowledge)) {
         let score = 0;
-        keywords.forEach((keyword) => {
+        keywords.forEach(keyword => {
           if (msg.includes(keyword)) score++;
         });
 
@@ -598,12 +386,10 @@
         }
       }
 
-      // Get random response from category
       const categoryResponses = responses[bestMatch] || responses.default;
       return categoryResponses[Math.floor(Math.random() * categoryResponses.length)];
     };
 
-    // Add message to chat
     const addMessage = (text, type) => {
       const msg = document.createElement('div');
       msg.className = `chat-msg ${type}`;
@@ -611,22 +397,18 @@
       chatMessages.appendChild(msg);
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      // Limit messages (keep last 20)
       while (chatMessages.children.length > 20) {
         chatMessages.removeChild(chatMessages.firstChild);
       }
     };
 
-    // Send message
     const sendMessage = () => {
       const text = chatInput.value.trim();
       if (!text) return;
 
-      // Add user message
       addMessage(text, 'user');
       chatInput.value = '';
 
-      // Show typing indicator
       const typingId = 'typing-' + Date.now();
       const typingEl = document.createElement('div');
       typingEl.className = 'chat-msg bot';
@@ -635,15 +417,13 @@
       chatMessages.appendChild(typingEl);
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      // Respond after delay
       setTimeout(() => {
         const typing = document.getElementById(typingId);
         if (typing) typing.remove();
         addMessage(getResponse(text), 'bot');
-      }, 600 + Math.random() * 800);
+      }, 500 + Math.random() * 700);
     };
 
-    // Event listeners
     chatSend.addEventListener('click', sendMessage);
     
     chatInput.addEventListener('keydown', (e) => {
@@ -652,106 +432,36 @@
         sendMessage();
       }
     });
-
-    // Auto-resize textarea if it's a textarea
-    if (chatInput.tagName === 'TEXTAREA') {
-      chatInput.addEventListener('input', () => {
-        chatInput.style.height = 'auto';
-        chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
-      });
-    }
   }
 
-  // ==================== GLASS CARD MOUSE TRACKING ====================
-  if (isDesktop && !prefersReducedMotion) {
-    $$('.glass-card, .about-card, .skill-card, .project-card').forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.style.setProperty('--mouse-x', `${x}%`);
-        card.style.setProperty('--mouse-y', `${y}%`);
-      }, { passive: true });
-    });
-  }
-
-  // ==================== PARALLAX ELEMENTS ====================
-  if (isDesktop && !prefersReducedMotion) {
-    const parallaxElements = $$('[data-parallax]');
-
-    if (parallaxElements.length > 0) {
-      window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-
-        parallaxElements.forEach((el) => {
-          const speed = parseFloat(el.dataset.parallax) || 0.1;
-          const yOffset = scrollY * speed;
-          el.style.transform = `translateY(${yOffset}px)`;
-        });
-      }, { passive: true });
-    }
-  }
-
-  // ==================== KEYBOARD NAVIGATION ====================
-  document.addEventListener('keydown', (e) => {
-    // Press 'H' to go home
-    if (e.key === 'h' && !e.ctrlKey && !e.altKey && !e.metaKey) {
-      const activeElement = document.activeElement;
-      if (activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-
-    // Escape to close any open modals/menus
-    if (e.key === 'Escape') {
-      if (navToggle?.classList.contains('active')) {
-        navToggle.classList.remove('active');
-      }
-    }
-  });
-
-  // ==================== PERFORMANCE: PAUSE ANIMATIONS WHEN HIDDEN ====================
-  let isPageVisible = true;
-
-  document.addEventListener('visibilitychange', () => {
-    isPageVisible = !document.hidden;
-  });
-
-  // ==================== COPY EMAIL TO CLIPBOARD ====================
-  $$('a[href^="mailto:"]').forEach((link) => {
+  // ==================== COPY EMAIL ====================
+  $$('a[href^="mailto:"]').forEach(link => {
     link.addEventListener('click', () => {
       const email = link.href.replace('mailto:', '');
-
+      
       if (navigator.clipboard) {
-        navigator.clipboard.writeText(email).then(() => {
-          // Show brief notification
-          const originalText = link.textContent;
-          link.textContent = '✓ Copié !';
-          setTimeout(() => {
-            link.textContent = originalText;
-          }, 2000);
-        }).catch(() => {
-          // Fallback: just let the mailto work
-        });
+        navigator.clipboard.writeText(email).catch(() => {});
       }
     });
   });
 
-  // ==================== CONSOLE BRANDING ====================
+  // ==================== PAUSE ON HIDDEN ====================
+  document.addEventListener('visibilitychange', () => {
+    // Can be used to pause animations
+  });
+
+  // ==================== CONSOLE ====================
   console.log(
-    '%c🚀 Sabir IAZZA - Portfolio Premium V2',
-    'color: #6366f1; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 0 #22d3ee;'
+    '%c🎯 Sabir IAZZA - Portfolio Premium',
+    'color: #6366f1; font-size: 20px; font-weight: bold;'
   );
   console.log(
-    '%c✨ Design by Sabir | Powered by passion',
+    '%c✨ Merci de visiter !',
     'color: #22d3ee; font-size: 14px;'
   );
   console.log(
     '%c📧 Contact: amiamisabir@gmail.com',
     'color: #f472b6; font-size: 12px;'
   );
-
-  // ==================== INIT COMPLETE ====================
-  console.log('✅ Portfolio script loaded successfully!');
 
 })();
