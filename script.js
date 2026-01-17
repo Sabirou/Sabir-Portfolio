@@ -1,151 +1,126 @@
 /* ============================================
-   SABIR IAZZA - SCRIPT INDEX
+   SABIR IAZZA - INDEX SCRIPT
    ============================================ */
 
-(() => {
-  "use strict";
+"use strict";
 
+(() => {
+  // ==================== UTILITIES ====================
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => [...document.querySelectorAll(s)];
+  const rand = (min, max) => Math.random() * (max - min) + min;
 
-  // Year
-  const yearEl = $("#year");
+  // Set year
+  const yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Check desktop
-  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  // ==================== LOADING SCREEN ====================
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      $('#loader').classList.add('hidden');
+    }, 2200);
+  });
 
-  // ============================================
-  // CUSTOM CURSOR
-  // ============================================
-  if (isDesktop) {
-    const cursor = $('.cursor');
-    const cursorGlow = $('.cursor-glow');
-    
-    if (cursor && cursorGlow) {
-      let mouseX = 0, mouseY = 0;
-      let cursorX = 0, cursorY = 0;
-      let glowX = 0, glowY = 0;
+  // ==================== NAVBAR SCROLL ====================
+  const navbar = $('#navbar');
+  
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
 
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      }, { passive: true });
-
-      function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
-        glowX += (mouseX - glowX) * 0.08;
-        glowY += (mouseY - glowY) * 0.08;
-
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
-        cursorGlow.style.left = `${glowX}px`;
-        cursorGlow.style.top = `${glowY}px`;
-
-        requestAnimationFrame(animateCursor);
-      }
-      animateCursor();
-
-      $$('a, button, .chip, .tile, .brand').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-      });
-    }
-  }
-
-  // ============================================
-  // TOPBAR SCROLL
-  // ============================================
-  const topbar = $('#topbar');
-  if (topbar) {
-    window.addEventListener('scroll', () => {
-      topbar.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
-  }
-
-  // ============================================
-  // GLASS CARD MOUSE TRACKING
-  // ============================================
-  const glassCard = $('#glassCard');
-  if (glassCard && isDesktop) {
-    glassCard.addEventListener('mousemove', (e) => {
-      const rect = glassCard.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      glassCard.style.setProperty('--mouse-x', `${x}%`);
-      glassCard.style.setProperty('--mouse-y', `${y}%`);
-    }, { passive: true });
-  }
-
-  // ============================================
-  // MAGNETIC BUTTONS
-  // ============================================
-  if (isDesktop) {
-    $$('.btn-magnetic').forEach(btn => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
-      }, { passive: true });
-
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-      });
-    });
-  }
-
-  // ============================================
-  // BACKGROUND PARTICLES
-  // ============================================
-  const bgCanvas = $('#bgCanvas');
-  if (bgCanvas) {
-    const ctx = bgCanvas.getContext('2d');
+  // ==================== PARTICLE BACKGROUND ====================
+  const particleCanvas = $('#particleCanvas');
+  
+  if (particleCanvas) {
+    const ctx = particleCanvas.getContext('2d');
     let particles = [];
+    let mouse = { x: null, y: null };
     let animId;
 
     function resize() {
-      bgCanvas.width = window.innerWidth;
-      bgCanvas.height = window.innerHeight;
+      particleCanvas.width = window.innerWidth;
+      particleCanvas.height = window.innerHeight;
     }
 
     function init() {
       particles = [];
-      const count = Math.min(50, Math.floor((bgCanvas.width * bgCanvas.height) / 30000));
+      const count = Math.min(80, Math.floor((particleCanvas.width * particleCanvas.height) / 18000));
       
       for (let i = 0; i < count; i++) {
         particles.push({
-          x: Math.random() * bgCanvas.width,
-          y: Math.random() * bgCanvas.height,
-          r: Math.random() * 2 + 1,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          alpha: Math.random() * 0.3 + 0.1
+          x: rand(0, particleCanvas.width),
+          y: rand(0, particleCanvas.height),
+          vx: rand(-0.4, 0.4),
+          vy: rand(-0.4, 0.4),
+          size: rand(1, 2.5),
+          alpha: rand(0.2, 0.6),
+          color: Math.random() > 0.5 ? '#6366f1' : '#22d3ee'
         });
       }
     }
 
     function draw() {
-      ctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+      ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
       
-      particles.forEach(p => {
+      particles.forEach((p, i) => {
         p.x += p.vx;
         p.y += p.vy;
-        
-        if (p.x < 0) p.x = bgCanvas.width;
-        if (p.x > bgCanvas.width) p.x = 0;
-        if (p.y < 0) p.y = bgCanvas.height;
-        if (p.y > bgCanvas.height) p.y = 0;
-        
+
+        // Wrap around
+        if (p.x < 0) p.x = particleCanvas.width;
+        if (p.x > particleCanvas.width) p.x = 0;
+        if (p.y < 0) p.y = particleCanvas.height;
+        if (p.y > particleCanvas.height) p.y = 0;
+
+        // Mouse interaction
+        if (mouse.x !== null) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            const force = (150 - dist) / 150;
+            p.x -= dx * force * 0.02;
+            p.y -= dy * force * 0.02;
+          }
+        }
+
+        // Draw particle
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(180, 92, 255, ${p.alpha})`;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
         ctx.fill();
+
+        // Draw connections
+        particles.slice(i + 1).forEach(p2 => {
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = p.color;
+            ctx.globalAlpha = (1 - dist / 100) * 0.15;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        });
       });
-      
+
+      ctx.globalAlpha = 1;
       animId = requestAnimationFrame(draw);
     }
+
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
 
     resize();
     init();
@@ -160,6 +135,7 @@
       }, 250);
     }, { passive: true });
 
+    // Pause when hidden
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         cancelAnimationFrame(animId);
@@ -169,127 +145,212 @@
     });
   }
 
-  // ============================================
-  // THREE.JS 3D ORB
-  // ============================================
-  const threeCanvas = $('#three-canvas');
-  
-  if (threeCanvas && typeof THREE !== 'undefined') {
-    const container = threeCanvas.parentElement;
+  // ==================== MASCOTTE OBSERVATEUR ====================
+  const mascotCanvas = $('#mascotCanvas');
+  const mascotSpeech = $('#mascotSpeech');
+
+  if (mascotCanvas) {
+    const ctx = mascotCanvas.getContext('2d');
+    const width = 120;
+    const height = 120;
+    const centerX = width / 2;
+    const centerY = height / 2;
     
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: threeCanvas, alpha: true, antialias: true });
-    
-    renderer.setSize(container.offsetWidth, container.offsetHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    camera.position.z = 5;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let eyeTargetX = 0;
+    let eyeTargetY = 0;
+    let eyeX = 0;
+    let eyeY = 0;
+    let blinkTimer = 0;
+    let isBlinking = false;
+    let bobOffset = 0;
+    let lastMessageTime = 0;
 
-    // Orb
-    const geometry = new THREE.IcosahedronGeometry(1.5, 1);
-    const material = new THREE.MeshPhongMaterial({
-      color: 0xB45CFF,
-      emissive: 0x2FE7FF,
-      emissiveIntensity: 0.5,
-      shininess: 100
-    });
-    const orb = new THREE.Mesh(geometry, material);
-    scene.add(orb);
+    const messages = [
+      "👀 Je te surveille...",
+      "🔍 Intéressant...",
+      "🤔 Tu cherches quoi ?",
+      "💡 Clique pour entrer !",
+      "🎯 Explore le portfolio !",
+      "✨ Design de ouf non ?",
+      "🚀 Vas-y, clique !",
+      "🧠 Je note tout..."
+    ];
 
-    // Wireframe
-    const wireframeGeo = new THREE.IcosahedronGeometry(1.52, 1);
-    const wireframeMat = new THREE.MeshBasicMaterial({
-      color: 0x2FE7FF,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.3
-    });
-    const wireframe = new THREE.Mesh(wireframeGeo, wireframeMat);
-    scene.add(wireframe);
+    // Mouse tracking
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }, { passive: true });
 
-    // Particles
-    const particlesGeo = new THREE.BufferGeometry();
-    const positions = new Float32Array(800 * 3);
-    for (let i = 0; i < 800 * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 10;
+    function updateEyes() {
+      const mascotRect = mascotCanvas.getBoundingClientRect();
+      const mascotCenterX = mascotRect.left + mascotRect.width / 2;
+      const mascotCenterY = mascotRect.top + mascotRect.height / 2;
+
+      const dx = mouseX - mascotCenterX;
+      const dy = mouseY - mascotCenterY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      const maxOffset = 6;
+      eyeTargetX = (dx / Math.max(distance, 100)) * maxOffset;
+      eyeTargetY = (dy / Math.max(distance, 100)) * maxOffset;
+
+      eyeX += (eyeTargetX - eyeX) * 0.15;
+      eyeY += (eyeTargetY - eyeY) * 0.15;
     }
-    particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particlesMat = new THREE.PointsMaterial({
-      color: 0x2FE7FF,
-      size: 0.02,
-      transparent: true,
-      opacity: 0.6
-    });
-    const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-    scene.add(particlesMesh);
 
-    // Lights
-    const light1 = new THREE.PointLight(0xB45CFF, 2, 100);
-    light1.position.set(5, 5, 5);
-    scene.add(light1);
+    function drawMascot() {
+      ctx.clearRect(0, 0, width, height);
 
-    const light2 = new THREE.PointLight(0x2FE7FF, 2, 100);
-    light2.position.set(-5, -5, 5);
-    scene.add(light2);
+      const bob = Math.sin(bobOffset) * 3;
+      const cy = centerY + bob;
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+      // Body gradient
+      const gradient = ctx.createRadialGradient(centerX, cy, 0, centerX, cy, 40);
+      gradient.addColorStop(0, '#818cf8');
+      gradient.addColorStop(0.6, '#6366f1');
+      gradient.addColorStop(1, '#4f46e5');
 
-    // Mouse
-    let targetX = 0, targetY = 0;
+      ctx.beginPath();
+      ctx.arc(centerX, cy, 35, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
 
-    threeCanvas.addEventListener('mousemove', (e) => {
-      const rect = threeCanvas.getBoundingClientRect();
-      targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      targetY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-    }, { passive: true });
+      // Glow ring
+      ctx.strokeStyle = 'rgba(34, 211, 238, 0.5)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
 
-    threeCanvas.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) {
-        const rect = threeCanvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        targetX = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
-        targetY = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
-      }
-    }, { passive: true });
+      // Eyes
+      if (!isBlinking) {
+        // Left eye
+        ctx.beginPath();
+        ctx.arc(centerX - 12 + eyeX, cy - 5 + eyeY, 8, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(centerX - 10 + eyeX * 1.5, cy - 5 + eyeY * 1.5, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#1e1b4b';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(centerX - 8 + eyeX, cy - 7 + eyeY, 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
 
-    let threeAnimId;
-    function animate() {
-      threeAnimId = requestAnimationFrame(animate);
-      
-      orb.rotation.y += (targetX * 0.5 - orb.rotation.y) * 0.05;
-      orb.rotation.x += (targetY * 0.5 - orb.rotation.x) * 0.05;
-      orb.rotation.z += 0.002;
-      
-      wireframe.rotation.y = orb.rotation.y;
-      wireframe.rotation.x = orb.rotation.x;
-      wireframe.rotation.z = -orb.rotation.z;
-      
-      particlesMesh.rotation.y += 0.0005;
-      particlesMesh.rotation.x += 0.0003;
-      
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    let threeResizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(threeResizeTimer);
-      threeResizeTimer = setTimeout(() => {
-        camera.aspect = container.offsetWidth / container.offsetHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.offsetWidth, container.offsetHeight);
-      }, 250);
-    }, { passive: true });
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cancelAnimationFrame(threeAnimId);
+        // Right eye
+        ctx.beginPath();
+        ctx.arc(centerX + 12 + eyeX, cy - 5 + eyeY, 8, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(centerX + 14 + eyeX * 1.5, cy - 5 + eyeY * 1.5, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#1e1b4b';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(centerX + 16 + eyeX, cy - 7 + eyeY, 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
       } else {
-        animate();
+        // Closed eyes
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(centerX - 18, cy - 5);
+        ctx.lineTo(centerX - 6, cy - 5);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(centerX + 6, cy - 5);
+        ctx.lineTo(centerX + 18, cy - 5);
+        ctx.stroke();
       }
+
+      // Mouth
+      ctx.beginPath();
+      ctx.arc(centerX, cy + 8, 8, 0.1 * Math.PI, 0.9 * Math.PI);
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Antennae
+      const antennaWave = Math.sin(bobOffset * 2) * 3;
+      
+      ctx.strokeStyle = '#22d3ee';
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      
+      // Left antenna
+      ctx.beginPath();
+      ctx.moveTo(centerX - 20, cy - 28);
+      ctx.quadraticCurveTo(centerX - 28 + antennaWave, cy - 42, centerX - 22, cy - 50);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(centerX - 22, cy - 50, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#f472b6';
+      ctx.fill();
+
+      // Right antenna
+      ctx.beginPath();
+      ctx.moveTo(centerX + 20, cy - 28);
+      ctx.quadraticCurveTo(centerX + 28 - antennaWave, cy - 42, centerX + 22, cy - 50);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(centerX + 22, cy - 50, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#f472b6';
+      ctx.fill();
+    }
+
+    function animateMascot() {
+      bobOffset += 0.03;
+      
+      // Blinking
+      blinkTimer++;
+      if (blinkTimer > 180 && Math.random() < 0.02) {
+        isBlinking = true;
+        setTimeout(() => { isBlinking = false; }, 120);
+        blinkTimer = 0;
+      }
+
+      // Random messages
+      const now = Date.now();
+      if (now - lastMessageTime > 8000 && Math.random() < 0.015) {
+        const msg = messages[Math.floor(Math.random() * messages.length)];
+        mascotSpeech.textContent = msg;
+        mascotSpeech.classList.add('visible');
+        setTimeout(() => {
+          mascotSpeech.classList.remove('visible');
+        }, 3000);
+        lastMessageTime = now;
+      }
+
+      updateEyes();
+      drawMascot();
+      requestAnimationFrame(animateMascot);
+    }
+
+    animateMascot();
+
+    // Initial message
+    setTimeout(() => {
+      mascotSpeech.classList.add('visible');
+      setTimeout(() => {
+        mascotSpeech.classList.remove('visible');
+      }, 3000);
+    }, 3000);
+  }
+
+  // ==================== VISUAL CARD CLICK ====================
+  const visualCard = $('.visual-card');
+  if (visualCard) {
+    visualCard.addEventListener('click', () => {
+      window.location.href = 'portfolio.html';
     });
   }
 
-  console.log('%c🚀 Sabir IAZZA Portfolio', 'color: #B45CFF; font-size: 16px; font-weight: bold;');
+  // ==================== CONSOLE ====================
+  console.log('%c🚀 Sabir IAZZA Portfolio', 'color: #6366f1; font-size: 24px; font-weight: bold;');
+  console.log('%c✨ Bienvenue !', 'color: #22d3ee; font-size: 14px;');
 
 })();
