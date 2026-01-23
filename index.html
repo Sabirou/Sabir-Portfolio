@@ -3,52 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#030014" />
   <title>Sabir IAZZA | Portfolio Premium</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- LOADER -->
-  <div class="loader">
-    <div class="loader-content">
-      <div class="loader-text">SABIR</div>
-      <div class="loader-bar"><div class="loader-progress"></div></div>
-    </div>
+  <div class="loader" id="loader">
+    <div class="loader-logo">SABIR</div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
   </div>
 
-  <!-- BACKGROUND 3D -->
-  <canvas id="webgl-canvas"></canvas>
-  <div class="noise-overlay"></div>
+  <!-- BACKGROUND HYBRIDE (CSS Orbs + Three.js Stars) -->
+  <div class="bg-container">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-orbs">
+      <div class="bg-orb bg-orb-1"></div>
+      <div class="bg-orb bg-orb-2"></div>
+    </div>
+    <canvas id="webgl-canvas"></canvas> <!-- Ajout 3D -->
+  </div>
 
-  <!-- CURSOR -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-outline"></div>
+  <!-- MASCOTTE OBSERVATEUR (Style Néon) -->
+  <div class="orb-watcher" id="orbWatcher">
+    <div class="orb-container">
+      <div class="orb-glow"></div>
+      <div class="orb-ring"></div>
+      <div class="orb-core"></div>
+      <div class="orb-eye" id="orbEye"><div class="orb-pupil"></div></div>
+    </div>
+    <div class="orb-speech" id="orbSpeech">Je surveille le réseau... 👁️</div>
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <div class="logo">SABIR.</div>
-    <a href="portfolio.html" class="nav-btn">Entrer →</a>
+    <div class="navbar-inner">
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <span class="logo-text">SABIR IAZZA</span>
+      </div>
+      <a href="portfolio.html" class="nav-cta">Entrer dans le Portfolio</a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <main class="hero">
     <div class="hero-content">
-      <div class="badge">Disponible pour Alternance</div>
-      <h1>
-        <span class="reveal-text">Network</span>
-        <span class="reveal-text gradient-text">Security</span>
-        <span class="reveal-text">& Web.</span>
-      </h1>
-      <p class="reveal-delay">Étudiant Terminale CIEL. Futur Expert SIO SISR.</p>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span> Disponible pour alternance
+      </div>
       
-      <div class="btn-group reveal-delay">
-        <a href="portfolio.html" class="btn primary">Découvrir mes projets</a>
-        <a href="CV_Sabir_IAZZA.pdf" download class="btn secondary">CV PDF</a>
+      <h1 class="hero-title">
+        Expert <span class="gradient-text">Réseaux</span> <br>
+        & <span class="gradient-text-2">Cybersécurité</span>
+      </h1>
+      
+      <p class="hero-text">
+        Étudiant en <strong>Terminale CIEL</strong>. Je transforme des infrastructures complexes en systèmes sécurisés. Objectif : <strong>BTS SIO SISR</strong>.
+      </p>
+      
+      <div class="hero-buttons">
+        <a href="portfolio.html" class="btn btn-primary">Voir mes travaux</a>
+        <a href="CV_Sabir_IAZZA.pdf" download class="btn btn-secondary">CV PDF</a>
       </div>
     </div>
   </main>
