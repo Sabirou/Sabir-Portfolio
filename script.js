@@ -1,205 +1,98 @@
-/* ============================================
-   SABIR IAZZA - SCRIPT LANDING PAGE
-   script.js
-   ============================================ */
-
-(() => {
-  "use strict";
-
-  // ==================== UTILITIES ====================
-  const $ = (selector, context = document) => context.querySelector(selector);
-  const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
-  const random = (min, max) => Math.random() * (max - min) + min;
-
-  // Device detection
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ==================== YEAR ====================
-  const yearEl = $('#year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // ==================== LOADER ====================
-  const loader = $('#loader');
+// 1. LOADER
+window.addEventListener('load', () => {
+  const loader = document.querySelector('.loader');
+  const progress = document.querySelector('.loader-progress');
   
-  const hideLoader = () => {
-    if (loader) {
-      loader.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-  };
-
-  if (document.readyState === 'complete') {
-    setTimeout(hideLoader, 1200);
-  } else {
-    window.addEventListener('load', () => setTimeout(hideLoader, 1500));
-  }
+  progress.style.width = '100%';
   
-  // Fallback
-  setTimeout(hideLoader, 4000);
+  setTimeout(() => {
+    loader.classList.add('hidden');
+  }, 1000);
+});
 
-  // ==================== STARS BACKGROUND ====================
-  const bgStars = $('#bgStars');
+// 2. SMOOTH SCROLL (LENIS)
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+});
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// 3. CUSTOM CURSOR
+const dot = document.querySelector('.cursor-dot');
+const outline = document.querySelector('.cursor-outline');
+
+window.addEventListener('mousemove', (e) => {
+  const posX = e.clientX;
+  const posY = e.clientY;
+
+  dot.style.left = `${posX}px`;
+  dot.style.top = `${posY}px`;
+
+  // Petit délai pour l'outline (effet fluide)
+  outline.animate({
+    left: `${posX}px`,
+    top: `${posY}px`
+  }, { duration: 500, fill: "forwards" });
+});
+
+// 4. THREE.JS PARTICLES BACKGROUND
+const canvas = document.getElementById('webgl-canvas');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.z = 5;
+
+// Création des particules
+const particlesGeo = new THREE.BufferGeometry();
+const particlesCount = 700;
+const posArray = new Float32Array(particlesCount * 3);
+
+for(let i = 0; i < particlesCount * 3; i++) {
+  posArray[i] = (Math.random() - 0.5) * 15;
+}
+
+particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+const particlesMat = new THREE.PointsMaterial({
+  size: 0.02,
+  color: 0xa855f7, // Couleur Primary
+  transparent: true,
+  opacity: 0.8
+});
+
+const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+scene.add(particlesMesh);
+
+// Animation
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener('mousemove', (event) => {
+  mouseX = event.clientX / window.innerWidth - 0.5;
+  mouseY = event.clientY / window.innerHeight - 0.5;
+});
+
+const clock = new THREE.Clock();
+
+function animate() {
+  const elapsedTime = clock.getElapsedTime();
   
-  if (bgStars && !prefersReducedMotion) {
-    for (let i = 0; i < 50; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.cssText = `
-        left: ${random(0, 100)}%;
-        top: ${random(0, 100)}%;
-        animation-delay: ${random(0, 3)}s;
-        opacity: ${random(0.2, 0.6)};
-      `;
-      bgStars.appendChild(star);
-    }
-  }
+  particlesMesh.rotation.y = elapsedTime * 0.05; // Rotation automatique
+  particlesMesh.rotation.x = mouseY * 0.5; // Interaction souris
+  particlesMesh.rotation.y += mouseX * 0.5;
 
-  // ==================== NAVBAR ====================
-  const navbar = $('#navbar');
-  const navToggle = $('#navToggle');
-  const mobileMenu = $('#mobileMenu');
-  
-  // Scroll effect
-  let lastScrollY = 0;
-  let ticking = false;
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+animate();
 
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-    
-    if (navbar) {
-      navbar.classList.toggle('scrolled', scrollY > 50);
-    }
-    
-    lastScrollY = scrollY;
-    ticking = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(handleScroll);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  // Mobile menu toggle
-  if (navToggle && mobileMenu) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
-
-    // Close on link click
-    $$('.mobile-link', mobileMenu).forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      });
-    });
-  }
-
-  // Smooth scroll
-  $$('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const href = anchor.getAttribute('href');
-      if (href === '#') return;
-
-      const target = $(href);
-      if (target) {
-        e.preventDefault();
-        const navHeight = navbar?.offsetHeight || 80;
-        const targetPos = target.offsetTop - navHeight - 20;
-
-        window.scrollTo({
-          top: targetPos,
-          behavior: prefersReducedMotion ? 'auto' : 'smooth'
-        });
-      }
-    });
-  });
-
-  // ==================== ORB OBSERVATEUR ====================
-  const orbEye = $('#orbEye');
-  const orbSpeech = $('#orbSpeech');
-  const orbWatcher = $('#orbWatcher');
-
-  if (orbEye && isDesktop && !prefersReducedMotion) {
-    let lastMessageTime = 0;
-    const messages = [
-      "👁️ Je t'observe...",
-      "🔍 Intéressant...",
-      "💡 Besoin d'aide ?",
-      "✨ Joli scroll !",
-      "🎯 Continue !",
-      "🚀 Explore le portfolio !"
-    ];
-
-    // Eye tracking
-    document.addEventListener('mousemove', (e) => {
-      const orbRect = orbWatcher.getBoundingClientRect();
-      const orbCenterX = orbRect.left + orbRect.width / 2;
-      const orbCenterY = orbRect.top + orbRect.height / 2;
-
-      const dx = e.clientX - orbCenterX;
-      const dy = e.clientY - orbCenterY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      const maxOffset = 8;
-      const eyeX = Math.min(Math.max((dx / Math.max(distance, 100)) * maxOffset, -maxOffset), maxOffset);
-      const eyeY = Math.min(Math.max((dy / Math.max(distance, 100)) * maxOffset, -maxOffset), maxOffset);
-
-      orbEye.style.transform = `translate(calc(-50% + ${eyeX}px), calc(-50% + ${eyeY}px))`;
-    }, { passive: true });
-
-    // Random messages
-    const showMessage = (msg) => {
-      if (orbSpeech) {
-        orbSpeech.textContent = msg;
-        orbSpeech.classList.add('visible');
-        setTimeout(() => orbSpeech.classList.remove('visible'), 3000);
-      }
-    };
-
-    setInterval(() => {
-      const now = Date.now();
-      if (now - lastMessageTime > 12000 && Math.random() < 0.3) {
-        const msg = messages[Math.floor(Math.random() * messages.length)];
-        showMessage(msg);
-        lastMessageTime = now;
-      }
-    }, 3000);
-
-    // Initial message
-    setTimeout(() => {
-      showMessage("👁️ Je t'observe...");
-      lastMessageTime = Date.now();
-    }, 2500);
-  } else if (orbWatcher && (isMobile || !isDesktop)) {
-    orbWatcher.style.display = 'none';
-  }
-
-  // ==================== HERO ORB INTERACTION ====================
-  const heroOrb = $('#heroOrb');
-  
-  if (heroOrb && isDesktop) {
-    heroOrb.addEventListener('mouseenter', () => {
-      heroOrb.style.animationPlayState = 'paused';
-    });
-
-    heroOrb.addEventListener('mouseleave', () => {
-      heroOrb.style.animationPlayState = 'running';
-    });
-  }
-
-  // ==================== CONSOLE BRANDING ====================
-  console.log(
-    '%c🚀 Sabir IAZZA - Portfolio',
-    'color: #6366f1; font-size: 20px; font-weight: bold;'
-  );
-  console.log(
-    '%c✨ Bienvenue sur mon portfolio !',
-    'color: #22d3ee; font-size: 14px;'
-  );
-
-})();
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});

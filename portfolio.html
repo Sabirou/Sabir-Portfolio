@@ -3,566 +3,146 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0a0f" />
-  <meta name="description" content="Portfolio de Sabir IAZZA - Projets, compétences et contact" />
+  <title>Portfolio | Projets & Compétences</title>
   
-  <title>Sabir IAZZA | Portfolio</title>
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
-  
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   
-  <!-- Lottie -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  
-  <!-- Styles -->
   <link rel="stylesheet" href="style-portfolio.css" />
 </head>
 <body>
 
-  <!-- Loading Screen -->
-  <div class="loader" id="loader">
-    <div class="loader-orb"></div>
-    <div class="loader-text">Chargement</div>
-    <div class="loader-bar">
-      <div class="loader-progress"></div>
-    </div>
-  </div>
+  <!-- BACKGROUND -->
+  <div class="bg-gradient"></div>
+  <div class="noise-overlay"></div>
 
-  <!-- Background Effects -->
-  <div class="bg-effects">
-    <div class="bg-gradient"></div>
-    <div class="bg-grid"></div>
-    <div class="bg-stars" id="bgStars"></div>
-  </div>
+  <!-- CURSOR -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
 
-  <!-- Orbe Observateur -->
-  <div class="orb-watcher" id="orbWatcher">
-    <div class="orb-container">
-      <div class="orb-glow"></div>
-      <div class="orb-ring"></div>
-      <div class="orb-inner-ring"></div>
-      <div class="orb-core"></div>
-      <div class="orb-eye" id="orbEye">
-        <div class="orb-eye-pupil"></div>
-      </div>
-      <div class="orb-particles">
-        <div class="orb-particle"></div>
-        <div class="orb-particle"></div>
-        <div class="orb-particle"></div>
-        <div class="orb-particle"></div>
-      </div>
-    </div>
-    <div class="orb-speech" id="orbSpeech">👁️ Je t'observe...</div>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <div class="navbar-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-orb"></div>
-        <span class="logo-text">SABIR IAZZA</span>
-      </a>
-
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Accueil</a>
-        <a href="#about" class="nav-link active">À propos</a>
-        <a href="#skills" class="nav-link">Compétences</a>
-        <a href="#projects" class="nav-link">Projets</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
-
-      <a href="#contact" class="nav-cta">Me contacter</a>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressBar"></div>
-    </div>
+  <!-- NAV -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">SABIR.</a>
+    <ul class="nav-links">
+      <li><a href="#about">À Propos</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-content">
-      <a href="index.html" class="mobile-link">Accueil</a>
-      <a href="#about" class="mobile-link">À propos</a>
-      <a href="#skills" class="mobile-link">Compétences</a>
-      <a href="#projects" class="mobile-link">Projets</a>
-      <a href="#contact" class="mobile-link">Contact</a>
-    </div>
-  </div>
-
-  <!-- Main Content -->
   <main>
-
-    <!-- About Section -->
-    <section class="section section-hero" id="about">
-      <div class="section-container">
-        <div class="section-header reveal">
-          <div class="section-pill">À propos</div>
-          <h1 class="section-title">Portfolio <span class="gradient-text">Sabir</span></h1>
-          <p class="section-subtitle">
-            Étudiant passionné, je crée des projets concrets en réseaux, cybersécurité et web.
-          </p>
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section">
+      <div class="container grid-2">
+        <div class="text-content reveal">
+          <div class="pill">À Propos</div>
+          <h2>Architecte Réseau & <br><span class="gradient-text">Développeur Web</span></h2>
+          <p>Je transforme des concepts complexes en infrastructures sécurisées et interfaces fluides. Étudiant passionné, je cherche à repousser les limites du web.</p>
+          <div class="stats">
+            <div><h3>CIEL</h3><p>Formation</p></div>
+            <div><h3>SIO</h3><p>Objectif</p></div>
+            <div><h3>100%</h3><p>Motivé</p></div>
+          </div>
         </div>
-
-        <div class="about-grid">
-          <article class="about-card reveal">
-            <div class="about-badge">
-              <span class="badge-dot"></span>
-              Disponible pour alternance / stage
-            </div>
-
-            <h2 class="about-title">Mon parcours</h2>
-            
-            <p class="about-text">
-              Passionné d'informatique depuis le collège, j'ai choisi la formation <strong>CIEL</strong> 
-              (Cybersécurité, Informatique et Électronique) pour me spécialiser dans les réseaux et la sécurité.
-            </p>
-            
-            <p class="about-text">
-              Curieux et autodidacte, j'aime expérimenter de nouvelles technologies, 
-              créer des interfaces modernes et configurer des infrastructures réseau.
-            </p>
-
-            <div class="about-features">
-              <div class="feature-item">
-                <span class="feature-icon">🎯</span>
-                <div class="feature-content">
-                  <h4>Objectif</h4>
-                  <p>BTS SIO SISR en alternance</p>
-                </div>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">🧠</span>
-                <div class="feature-content">
-                  <h4>Focus</h4>
-                  <p>Réseaux, cybersécurité, web</p>
-                </div>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">⚡</span>
-                <div class="feature-content">
-                  <h4>Style</h4>
-                  <p>Design premium & projets clean</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="about-actions">
-              <a href="#projects" class="btn btn-primary">Voir projets →</a>
-              <a href="mailto:amiamisabir@gmail.com" class="btn btn-secondary">Me contacter</a>
-              <a href="index.html" class="btn btn-ghost">← Retour accueil</a>
-            </div>
-
-            <div class="about-meta">
-              <a href="mailto:amiamisabir@gmail.com" class="meta-link">✉️ amiamisabir@gmail.com</a>
-              <a href="tel:+33762972626" class="meta-link">📞 07 62 97 26 26</a>
-              <span class="meta-link">📍 Saint-Maximin (83)</span>
-            </div>
-          </article>
-
-          <aside class="about-visual reveal">
-            <button class="visual-back-btn" id="backHome" title="Retour accueil">🏠</button>
-            <lottie-player 
-              src="https://assets2.lottiefiles.com/packages/lf20_w51pcehl.json"
-              background="transparent"
-              speed="1"
-              loop
-              autoplay>
-            </lottie-player>
-          </aside>
+        <!-- ORBE 3D CSS -->
+        <div class="visual reveal">
+          <div class="orb-container">
+            <div class="orb"></div>
+            <div class="orb-ring"></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section -->
-    <section class="section" id="skills">
-      <div class="section-container">
-        <div class="section-header reveal">
-          <div class="section-pill">Compétences</div>
-          <h2 class="section-title">Ce que je maîtrise</h2>
-          <p class="section-subtitle">Technologies et outils que j'utilise au quotidien.</p>
-        </div>
-
-        <div class="skills-grid">
-          <article class="skill-card reveal">
-            <div class="skill-header">
-              <div class="skill-icon-wrapper">🛡️</div>
-              <div class="skill-info">
-                <h3>Cybersécurité</h3>
-                <p>Analyse et protection</p>
-              </div>
-            </div>
-            <div class="skill-bars">
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Wireshark / Analyse</span>
-                  <span class="skill-bar-percent">78%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="78"></div>
-                </div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Sécurité système</span>
-                  <span class="skill-bar-percent">72%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="72"></div>
-                </div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Sécurité web</span>
-                  <span class="skill-bar-percent">68%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="68"></div>
-                </div>
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Wireshark</span>
-              <span class="skill-tag">Nmap</span>
-              <span class="skill-tag">Firewall</span>
-              <span class="skill-tag">VPN</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-header">
-              <div class="skill-icon-wrapper">🌐</div>
-              <div class="skill-info">
-                <h3>Réseaux</h3>
-                <p>Infrastructure & config</p>
-              </div>
-            </div>
-            <div class="skill-bars">
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Cisco / Packet Tracer</span>
-                  <span class="skill-bar-percent">85%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="85"></div>
-                </div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">VLAN / Routage</span>
-                  <span class="skill-bar-percent">80%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="80"></div>
-                </div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">IP / Subnetting</span>
-                  <span class="skill-bar-percent">75%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="75"></div>
-                </div>
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Cisco</span>
-              <span class="skill-tag">VLAN</span>
-              <span class="skill-tag">TCP/IP</span>
-              <span class="skill-tag">DNS</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-header">
-              <div class="skill-icon-wrapper">💻</div>
-              <div class="skill-info">
-                <h3>Développement Web</h3>
-                <p>Frontend moderne</p>
-              </div>
-            </div>
-            <div class="skill-bars">
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">HTML / CSS / JS</span>
-                  <span class="skill-bar-percent">82%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="82"></div>
-                </div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Canvas / Animations</span>
-                  <span class="skill-bar-percent">75%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="75"></div>
-                </div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Design UI/UX</span>
-                  <span class="skill-bar-percent">70%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="70"></div>
-                </div>
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">HTML5</span>
-              <span class="skill-tag">CSS3</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">Canvas</span>
-            </div>
-          </article>
-
-          <article class="skill-card reveal">
-            <div class="skill-header">
-              <div class="skill-icon-wrapper">🔧</div>
-              <div class="skill-info">
-                <h3>Système</h3>
-                <p>Administration</p>
-              </div>
-            </div>
-            <div class="skill-bars">
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Windows / Linux</span>
-                  <span class="skill-bar-percent">75%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="75"></div>
-                </div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Maintenance PC</span>
-                  <span class="skill-bar-percent">80%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="80"></div>
-                </div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-header">
-                  <span class="skill-bar-name">Virtualisation</span>
-                  <span class="skill-bar-percent">65%</span>
-                </div>
-                <div class="skill-bar-track">
-                  <div class="skill-bar-fill" data-width="65"></div>
-                </div>
-              </div>
-            </div>
-            <div class="skill-tags">
-              <span class="skill-tag">Windows</span>
-              <span class="skill-tag">Linux</span>
-              <span class="skill-tag">VMware</span>
-              <span class="skill-tag">Docker</span>
-            </div>
-          </article>
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Mon Arsenal</h2>
+        <div class="grid-3">
+          <div class="card reveal" data-tilt>
+            <div class="icon">🛡️</div>
+            <h3>Cybersécurité</h3>
+            <div class="skill-bar"><div class="fill" style="width:80%"></div></div>
+            <p>Wireshark, Nmap, Firewalling</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <div class="icon">🌐</div>
+            <h3>Réseaux</h3>
+            <div class="skill-bar"><div class="fill" style="width:85%"></div></div>
+            <p>Cisco, VLAN, TCP/IP, Routage</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <div class="icon">💻</div>
+            <h3>Web Dev</h3>
+            <div class="skill-bar"><div class="fill" style="width:90%"></div></div>
+            <p>HTML, CSS, JS, Three.js</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="section" id="projects">
-      <div class="section-container">
-        <div class="section-header reveal">
-          <div class="section-pill">Projets</div>
-          <h2 class="section-title">Mes réalisations</h2>
-          <p class="section-subtitle">Projets concrets en réseaux, cyber et développement.</p>
-        </div>
-
-        <div class="projects-grid">
-          <article class="project-card reveal">
-            <div class="project-header">
-              <div class="project-icon">🧩</div>
-              <div class="project-info">
-                <h3>Portfolio Premium</h3>
-                <p>Design moderne avec orbe 3D et animations fluides.</p>
-              </div>
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Projets Récents</h2>
+        <div class="grid-2">
+          <div class="project-card reveal" data-tilt>
+            <div class="project-image" style="background: linear-gradient(45deg, #111, #222);">
+              <span style="font-size: 50px;">🛰️</span>
             </div>
-            <ul class="project-list">
-              <li>Design responsive premium</li>
-              <li>Orbe holographique interactif</li>
-              <li>Animations Lottie intégrées</li>
-              <li>Chatbot IA intégré</li>
-            </ul>
-            <div class="skill-tags">
-              <span class="skill-tag">HTML5</span>
-              <span class="skill-tag">CSS3</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">Canvas</span>
+            <div class="project-info">
+              <h3>Lab Infrastructure</h3>
+              <p>Simulation réseau complexe sous Packet Tracer.</p>
+              <div class="tags"><span>Cisco</span><span>Réseau</span></div>
             </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-header">
-              <div class="project-icon">🛰️</div>
-              <div class="project-info">
-                <h3>Lab Réseau Avancé</h3>
-                <p>Infrastructure avec VLANs et routage inter-VLAN.</p>
-              </div>
+          </div>
+          <div class="project-card reveal" data-tilt>
+            <div class="project-image" style="background: linear-gradient(45deg, #111, #222);">
+              <span style="font-size: 50px;">🔮</span>
             </div>
-            <ul class="project-list">
-              <li>Topologie Packet Tracer</li>
-              <li>Configuration switches & routeurs</li>
-              <li>Règles de sécurité firewall</li>
-              <li>Documentation technique</li>
-            </ul>
-            <div class="skill-tags">
-              <span class="skill-tag">Cisco</span>
-              <span class="skill-tag">VLAN</span>
-              <span class="skill-tag">Routing</span>
-              <span class="skill-tag">ACL</span>
+            <div class="project-info">
+              <h3>Portfolio V4</h3>
+              <p>Site web immersif avec 3D et Smooth Scroll.</p>
+              <div class="tags"><span>Web</span><span>3D</span></div>
             </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-header">
-              <div class="project-icon">🔐</div>
-              <div class="project-info">
-                <h3>Analyse de Sécurité</h3>
-                <p>Audits et analyses de vulnérabilités.</p>
-              </div>
-            </div>
-            <ul class="project-list">
-              <li>Analyse trafic Wireshark</li>
-              <li>Scan de ports Nmap</li>
-              <li>Rapport vulnérabilités</li>
-              <li>Recommandations sécurité</li>
-            </ul>
-            <div class="skill-tags">
-              <span class="skill-tag">Wireshark</span>
-              <span class="skill-tag">Nmap</span>
-              <span class="skill-tag">Linux</span>
-              <span class="skill-tag">Security</span>
-            </div>
-          </article>
-
-          <article class="project-card reveal">
-            <div class="project-header">
-              <div class="project-icon">🎨</div>
-              <div class="project-info">
-                <h3>Projets UI/UX</h3>
-                <p>Interfaces modernes et interactives.</p>
-              </div>
-            </div>
-            <ul class="project-list">
-              <li>Design systems modernes</li>
-              <li>Animations CSS avancées</li>
-              <li>Prototypes interactifs</li>
-              <li>Wireframes & mockups</li>
-            </ul>
-            <div class="skill-tags">
-              <span class="skill-tag">Figma</span>
-              <span class="skill-tag">CSS3</span>
-              <span class="skill-tag">Animation</span>
-              <span class="skill-tag">Design</span>
-            </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-      <div class="section-container">
-        <div class="section-header reveal">
-          <div class="section-pill">Contact</div>
-          <h2 class="section-title">Parlons-en !</h2>
-          <p class="section-subtitle">Une question ? Un projet ? N'hésitez pas.</p>
+    <!-- CONTACT & CHAT -->
+    <section id="contact" class="section">
+      <div class="container grid-2">
+        <div class="contact-info reveal">
+          <h2>On discute ?</h2>
+          <p>Prêt à rejoindre votre équipe en alternance.</p>
+          <a href="mailto:amiamisabir@gmail.com" class="email-link">amiamisabir@gmail.com</a>
         </div>
-
-        <div class="contact-grid">
-          <article class="contact-card reveal">
-            <div class="contact-header">
-              <div class="contact-icon">🤖</div>
-              <div>
-                <h3 class="contact-title">SabirAI</h3>
-                <p class="contact-subtitle">Assistant virtuel</p>
-              </div>
-            </div>
-            <div class="chat-container">
-              <div class="chat-messages" id="chatMessages">
-                <div class="chat-msg bot">👋 Salut ! Je suis l'assistant de Sabir. Pose-moi une question sur ses compétences, projets ou contact !</div>
-              </div>
-              <div class="chat-input-wrapper">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Écris ta question..." autocomplete="off">
-                <button class="chat-send" id="chatSend">Envoyer</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="contact-card reveal">
-            <div class="contact-header">
-              <div class="contact-icon">📬</div>
-              <div>
-                <h3 class="contact-title">Coordonnées</h3>
-                <p class="contact-subtitle">Me contacter directement</p>
-              </div>
-            </div>
-            <div class="contact-list">
-              <a href="mailto:amiamisabir@gmail.com" class="contact-item">
-                <span class="contact-item-label">Email</span>
-                <span class="contact-item-value">amiamisabir@gmail.com</span>
-              </a>
-              <a href="tel:+33762972626" class="contact-item">
-                <span class="contact-item-label">Téléphone</span>
-                <span class="contact-item-value">07 62 97 26 26</span>
-              </a>
-              <div class="contact-item">
-                <span class="contact-item-label">Localisation</span>
-                <span class="contact-item-value">Saint-Maximin (83)</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-item-label">Statut</span>
-                <span class="contact-item-value status-available">✓ Disponible</span>
-              </div>
-            </div>
-
-            <!-- Bouton CV -->
-            <a href="CV_Sabir_IAZZA.pdf" download class="btn-cv">
-              <div class="btn-cv-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="12" y1="18" x2="12" y2="12"/>
-                  <polyline points="9 15 12 18 15 15"/>
-                </svg>
-              </div>
-              <div class="btn-cv-content">
-                <span class="btn-cv-title">Télécharger CV</span>
-                <span class="btn-cv-subtitle">PDF • 2025</span>
-              </div>
-            </a>
-          </article>
+        
+        <!-- CHATBOT -->
+        <div class="chat-interface reveal">
+          <div class="chat-header">
+            <div class="bot-status"></div> SabirAI
+          </div>
+          <div class="chat-body" id="chatBody">
+            <div class="msg bot">Bonjour ! Je suis l'assistant virtuel. Une question ?</div>
+          </div>
+          <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Écrivez ici...">
+            <button id="chatSend">➤</button>
+          </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
-    <p class="footer-text">© <span id="year">2025</span> <span>Sabir IAZZA</span> — Portfolio Premium</p>
+    <p>© 2025 Sabir IAZZA. Tous droits réservés.</p>
   </footer>
 
-  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
   <script src="script-portfolio.js"></script>
 </body>
 </html>

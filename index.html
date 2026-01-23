@@ -3,183 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0a0f" />
-  <meta name="description" content="Portfolio de Sabir IAZZA - Étudiant Terminale CIEL | Réseaux | Cybersécurité | Web" />
-  <meta name="author" content="Sabir IAZZA" />
-  <meta name="keywords" content="portfolio, sabir, iazza, ciel, réseaux, cybersécurité, web, bts sio" />
+  <title>Sabir IAZZA | Portfolio Premium</title>
   
-  <title>Sabir IAZZA | Portfolio</title>
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-  
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Loading Screen -->
-  <div class="loader" id="loader">
-    <div class="loader-orb"></div>
-    <div class="loader-text">Chargement</div>
-    <div class="loader-bar">
-      <div class="loader-progress"></div>
+  <!-- LOADER -->
+  <div class="loader">
+    <div class="loader-content">
+      <div class="loader-text">SABIR</div>
+      <div class="loader-bar"><div class="loader-progress"></div></div>
     </div>
   </div>
 
-  <!-- Background Effects -->
-  <div class="bg-effects">
-    <div class="bg-gradient"></div>
-    <div class="bg-grid"></div>
-    <div class="bg-stars" id="bgStars"></div>
-  </div>
+  <!-- BACKGROUND 3D -->
+  <canvas id="webgl-canvas"></canvas>
+  <div class="noise-overlay"></div>
 
-  <!-- Orbe Observateur -->
-  <div class="orb-watcher" id="orbWatcher">
-    <div class="orb-container">
-      <div class="orb-glow"></div>
-      <div class="orb-ring"></div>
-      <div class="orb-inner-ring"></div>
-      <div class="orb-core"></div>
-      <div class="orb-eye" id="orbEye">
-        <div class="orb-eye-pupil"></div>
-      </div>
-      <div class="orb-particles">
-        <div class="orb-particle"></div>
-        <div class="orb-particle"></div>
-        <div class="orb-particle"></div>
-        <div class="orb-particle"></div>
-      </div>
-    </div>
-    <div class="orb-speech" id="orbSpeech">👁️ Je t'observe...</div>
-  </div>
+  <!-- CURSOR -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
 
-  <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <div class="navbar-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-orb"></div>
-        <span class="logo-text">SABIR IAZZA</span>
-      </a>
-
-      <div class="nav-links">
-        <a href="#hero" class="nav-link active">Accueil</a>
-        <a href="portfolio.html" class="nav-link">Portfolio</a>
-      </div>
-
-      <a href="portfolio.html" class="nav-cta">Voir le portfolio →</a>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">SABIR.</div>
+    <a href="portfolio.html" class="nav-btn">Entrer →</a>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-content">
-      <a href="#hero" class="mobile-link">Accueil</a>
-      <a href="portfolio.html" class="mobile-link">Portfolio</a>
-      <a href="mailto:amiamisabir@gmail.com" class="mobile-link">Contact</a>
-    </div>
-  </div>
-
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="hero-container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <div class="hero-badge-dot"></div>
-          <span>Disponible pour alternance</span>
-        </div>
-
-        <h1 class="hero-title">
-          Salut, je suis<br>
-          <span class="hero-gradient">Sabir IAZZA</span>
-        </h1>
-
-        <p class="hero-subtitle">
-          Étudiant en <strong>Terminale CIEL</strong> passionné par les réseaux, 
-          la cybersécurité et le développement web. Je vise un <strong>BTS SIO SISR</strong> 
-          pour devenir expert en infrastructure.
-        </p>
-
-        <div class="hero-stats">
-          <div class="stat-card">
-            <div class="stat-icon">🎓</div>
-            <div class="stat-title">Formation CIEL</div>
-            <div class="stat-desc">Réseaux • Cyber • Dev</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">🛠️</div>
-            <div class="stat-title">Stages Pro</div>
-            <div class="stat-desc">Fibre • Téléphonie</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">🚀</div>
-            <div class="stat-title">Projets</div>
-            <div class="stat-desc">Web • Réseau • UI</div>
-          </div>
-        </div>
-
-        <div class="hero-buttons">
-          <a href="portfolio.html" class="btn btn-primary">
-            <span>Voir mes projets</span>
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a href="mailto:amiamisabir@gmail.com" class="btn btn-secondary">
-            <span>Me contacter</span>
-          </a>
-        </div>
-
-        <div class="hero-meta">
-          <a href="mailto:amiamisabir@gmail.com" class="meta-link">✉️ amiamisabir@gmail.com</a>
-          <a href="tel:+33762972626" class="meta-link">📞 07 62 97 26 26</a>
-          <span class="meta-link">📍 Saint-Maximin (83)</span>
-        </div>
-      </div>
-
-      <!-- Hero Visual - Orbe 3D -->
-      <div class="hero-visual">
-        <div class="visual-container">
-          <div class="visual-orb-wrapper">
-            <div class="visual-orb" id="heroOrb">
-              <div class="visual-orb-glow"></div>
-              <div class="visual-ring visual-ring-1"></div>
-              <div class="visual-ring visual-ring-2"></div>
-              <div class="visual-ring visual-ring-3"></div>
-              <div class="visual-orb-core"></div>
-            </div>
-          </div>
-          <div class="visual-particles">
-            <div class="visual-particle"></div>
-            <div class="visual-particle"></div>
-            <div class="visual-particle"></div>
-            <div class="visual-particle"></div>
-            <div class="visual-particle"></div>
-            <div class="visual-particle"></div>
-          </div>
-          <div class="visual-hint">✨ Portfolio interactif</div>
-        </div>
+  <!-- HERO -->
+  <main class="hero">
+    <div class="hero-content">
+      <div class="badge">Disponible pour Alternance</div>
+      <h1>
+        <span class="reveal-text">Network</span>
+        <span class="reveal-text gradient-text">Security</span>
+        <span class="reveal-text">& Web.</span>
+      </h1>
+      <p class="reveal-delay">Étudiant Terminale CIEL. Futur Expert SIO SISR.</p>
+      
+      <div class="btn-group reveal-delay">
+        <a href="portfolio.html" class="btn primary">Découvrir mes projets</a>
+        <a href="CV_Sabir_IAZZA.pdf" download class="btn secondary">CV PDF</a>
       </div>
     </div>
-  </section>
+  </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p class="footer-text">© <span id="year">2025</span> <span>Sabir IAZZA</span> — Tous droits réservés</p>
-  </footer>
-
-  <!-- Scripts -->
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
