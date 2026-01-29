@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio | Sabir IAZZA</title>
+  
+  <!-- SEO Amélioré -->
+  <title>Portfolio | Sabir IAZZA - Projets Réseaux & Cybersécurité</title>
+  <meta name="description" content="Découvrez mes projets en réseaux et cybersécurité : simulations Cisco, configurations VLAN, analyses Wireshark et développement web." />
+  <meta name="keywords" content="projets réseaux, cybersécurité, Cisco Packet Tracer, VLAN, portfolio technique" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Portfolio de Sabir IAZZA" />
+  <meta property="og:description" content="Projets techniques en réseaux et cybersécurité" />
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style-portfolio.css" />
@@ -28,16 +37,63 @@
       </a>
       <div class="nav-links">
         <a href="index.html" class="nav-link">Accueil</a>
+        <a href="#apropos" class="nav-link">À Propos</a>
         <a href="#competences" class="nav-link">Compétences</a>
         <a href="#projets" class="nav-link">Projets</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
-      <button class="nav-toggle">☰</button>
+      <button class="nav-toggle" aria-label="Menu de navigation">☰</button>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </nav>
 
   <main>
+    <!-- Section À Propos (NOUVELLE) -->
+    <section class="section" id="apropos">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-tag"><span class="section-tag-dot"></span>À Propos</div>
+          <h2 class="section-title">Qui suis-je <span class="gradient-text">?</span></h2>
+        </div>
+        <div class="about-content reveal">
+          <div class="about-text">
+            <p class="about-intro">
+              Passionné par les <strong>réseaux informatiques</strong> et la <strong>cybersécurité</strong>, je suis actuellement en Terminale CIEL (Cybersécurité, Informatique et réseaux, ÉLectronique) où je développe mes compétences techniques en infrastructure réseau et sécurité des systèmes.
+            </p>
+            <p class="about-description">
+              Mon parcours m'a permis de maîtriser des outils professionnels comme <strong>Cisco Packet Tracer</strong> pour la simulation de réseaux complexes, <strong>Wireshark</strong> pour l'analyse de trafic et la détection d'anomalies, ainsi que les systèmes <strong>Linux</strong> pour l'administration serveur. Je conçois et déploie des architectures réseau sécurisées incluant VLANs, routage inter-VLAN, DHCP et pare-feu.
+            </p>
+            <p class="about-goal">
+              Mon objectif est d'intégrer un <strong>BTS SIO option SISR</strong> (Solutions d'Infrastructure, Systèmes et Réseaux) en alternance pour approfondir mes connaissances et acquérir une expérience professionnelle concrète. Je recherche une entreprise qui me permettra de contribuer à la sécurisation et l'optimisation de ses infrastructures réseau tout en continuant à apprendre auprès de professionnels expérimentés.
+            </p>
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <span class="highlight-icon">🎓</span>
+                <div>
+                  <strong>Formation actuelle</strong>
+                  <p>Terminale CIEL - Spécialité Réseaux & Cybersécurité</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-icon">🎯</span>
+                <div>
+                  <strong>Objectif</strong>
+                  <p>BTS SIO SISR en alternance (rentrée 2025)</p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-icon">💼</span>
+                <div>
+                  <strong>Recherche</strong>
+                  <p>Alternance en infrastructure réseau et cybersécurité</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Skills -->
     <section class="section" id="competences">
       <div class="container">
@@ -109,7 +165,7 @@
       </div>
     </section>
 
-    <!-- Projects -->
+    <!-- Projects (ENRICHI) -->
     <section class="section" id="projets">
       <div class="container">
         <div class="section-header reveal">
@@ -117,29 +173,127 @@
           <h2 class="section-title">Réalisations <span class="gradient-text">Concrètes</span></h2>
         </div>
         <div class="projects-grid">
+          <!-- Projet 1 : Portfolio Premium -->
           <article class="card project-card reveal" data-tilt>
-            <div class="project-header">
-              <div class="project-icon">🎨</div>
-              <div class="project-info">
-                <h3>Portfolio Premium</h3>
-                <p>Site web moderne avec animations 3D et Chatbot.</p>
+            <div class="project-image-container">
+              <img src="hero-portrait.png" alt="Portfolio Premium avec animations 3D" class="project-image" />
+              <div class="project-overlay">
+                <span class="project-status">✓ Terminé</span>
               </div>
             </div>
-            <div class="project-tags">
-              <span>HTML</span><span>CSS</span><span>JS</span>
+            <div class="project-content">
+              <div class="project-header">
+                <div class="project-icon">🎨</div>
+                <div class="project-info">
+                  <h3>Portfolio Premium</h3>
+                  <p>Site web moderne avec animations 3D (Three.js), chatbot interactif et design responsive. Interface utilisateur soignée avec effets de parallaxe et transitions fluides.</p>
+                </div>
+              </div>
+              <div class="project-details">
+                <strong>Fonctionnalités :</strong>
+                <ul>
+                  <li>Animation de particules 3D avec Three.js</li>
+                  <li>Chatbot intelligent pour interaction visiteur</li>
+                  <li>Design responsive optimisé mobile</li>
+                  <li>Smooth scrolling et animations reveal</li>
+                </ul>
+              </div>
+              <div class="project-tags">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Three.js</span>
+              </div>
             </div>
           </article>
 
+          <!-- Projet 2 : Lab Infrastructure -->
           <article class="card project-card reveal" data-tilt>
-            <div class="project-header">
-              <div class="project-icon">🛰️</div>
-              <div class="project-info">
-                <h3>Lab Infrastructure</h3>
-                <p>Simulation réseau complexe : VLANs, Routage, DHCP.</p>
+            <div class="project-image-container">
+              <img src="network-dashboard.png" alt="Simulation réseau Cisco" class="project-image" />
+              <div class="project-overlay">
+                <span class="project-status">✓ Terminé</span>
               </div>
             </div>
-            <div class="project-tags">
-              <span>Cisco</span><span>Réseau</span>
+            <div class="project-content">
+              <div class="project-header">
+                <div class="project-icon">🛰️</div>
+                <div class="project-info">
+                  <h3>Lab Infrastructure Réseau</h3>
+                  <p>Simulation complète d'une infrastructure réseau d'entreprise avec segmentation VLAN, routage inter-VLAN, serveur DHCP et configuration de sécurité avancée.</p>
+                </div>
+              </div>
+              <div class="project-details">
+                <strong>Configuration technique :</strong>
+                <ul>
+                  <li>3 VLANs (Administration, Utilisateurs, Invités)</li>
+                  <li>Routage inter-VLAN avec routeur Cisco</li>
+                  <li>Serveur DHCP pour attribution automatique d'IP</li>
+                  <li>ACL (Access Control Lists) pour sécurisation</li>
+                </ul>
+              </div>
+              <div class="project-tags">
+                <span>Cisco</span><span>Packet Tracer</span><span>VLAN</span><span>Routage</span><span>DHCP</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Projet 3 : Analyse Wireshark (NOUVEAU) -->
+          <article class="card project-card reveal" data-tilt>
+            <div class="project-image-container">
+              <img src="devices-showcase.png" alt="Analyse de trafic réseau" class="project-image" />
+              <div class="project-overlay">
+                <span class="project-status">✓ Terminé</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-header">
+                <div class="project-icon">🔍</div>
+                <div class="project-info">
+                  <h3>Analyse de Trafic Réseau</h3>
+                  <p>Projet d'analyse et de détection d'anomalies réseau utilisant Wireshark. Identification de tentatives d'intrusion, analyse de protocoles et optimisation de la bande passante.</p>
+                </div>
+              </div>
+              <div class="project-details">
+                <strong>Compétences développées :</strong>
+                <ul>
+                  <li>Capture et filtrage de paquets réseau</li>
+                  <li>Analyse des protocoles TCP/IP, HTTP, DNS</li>
+                  <li>Détection d'anomalies et tentatives d'intrusion</li>
+                  <li>Rédaction de rapports d'analyse technique</li>
+                </ul>
+              </div>
+              <div class="project-tags">
+                <span>Wireshark</span><span>TCP/IP</span><span>Sécurité</span><span>Analyse</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Projet 4 : Serveur Linux (NOUVEAU) -->
+          <article class="card project-card reveal" data-tilt>
+            <div class="project-image-container">
+              <img src="titanium-orb.png" alt="Configuration serveur Linux" class="project-image" />
+              <div class="project-overlay">
+                <span class="project-status">✓ Terminé</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <div class="project-header">
+                <div class="project-icon">🐧</div>
+                <div class="project-info">
+                  <h3>Configuration Serveur Linux</h3>
+                  <p>Installation et configuration d'un serveur Linux (Ubuntu Server) avec services web, FTP et sécurisation par pare-feu. Automatisation des tâches avec scripts Bash.</p>
+                </div>
+              </div>
+              <div class="project-details">
+                <strong>Services configurés :</strong>
+                <ul>
+                  <li>Apache2 pour hébergement web</li>
+                  <li>vsftpd pour transfert de fichiers sécurisé</li>
+                  <li>UFW (Uncomplicated Firewall) pour sécurité</li>
+                  <li>Scripts Bash pour maintenance automatisée</li>
+                </ul>
+              </div>
+              <div class="project-tags">
+                <span>Linux</span><span>Ubuntu</span><span>Apache</span><span>Bash</span><span>Sécurité</span>
+              </div>
             </div>
           </article>
         </div>
@@ -149,19 +303,24 @@
     <!-- Contact -->
     <section class="section" id="contact">
       <div class="container">
+        <div class="section-header reveal">
+          <div class="section-tag"><span class="section-tag-dot"></span>Contact</div>
+          <h2 class="section-title">Restons en <span class="gradient-text">Contact</span></h2>
+        </div>
         <div class="contact-grid">
           <article class="card contact-card reveal">
             <div class="contact-header">
               <div class="contact-icon">🤖</div>
               <h3>SabirAI</h3>
+              <p class="contact-subtitle">Posez-moi vos questions !</p>
             </div>
             <div class="chat-box">
               <div class="chat-messages" id="chatMessages">
-                <div class="chat-msg bot">👋 Salut ! Pose-moi une question !</div>
+                <div class="chat-msg bot">👋 Salut ! Pose-moi une question sur mon parcours, mes compétences ou mes projets !</div>
               </div>
               <div class="chat-input-box">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Écrivez...">
-                <button class="chat-send" id="chatSend">➤</button>
+                <input type="text" class="chat-input" id="chatInput" placeholder="Écrivez votre question..." aria-label="Message pour le chatbot">
+                <button class="chat-send" id="chatSend" aria-label="Envoyer le message">➤</button>
               </div>
             </div>
           </article>
@@ -170,9 +329,10 @@
             <div class="contact-header">
               <div class="contact-icon">📬</div>
               <h3>Coordonnées</h3>
+              <p class="contact-subtitle">N'hésitez pas à me contacter</p>
             </div>
             <div class="contact-list">
-              <a href="mailto:amiamisabir@gmail.com" class="contact-item">
+              <a href="mailto:amiamisabir@gmail.com" class="contact-item" rel="noopener noreferrer">
                 <span>Email</span>
                 <span class="value">amiamisabir@gmail.com</span>
               </a>
@@ -184,8 +344,12 @@
                 <span>Lieu</span>
                 <span class="value">Saint-Maximin (83)</span>
               </div>
+              <div class="contact-item">
+                <span>Disponibilité</span>
+                <span class="value">Alternance dès septembre 2025</span>
+              </div>
             </div>
-            <a href="CV_Sabir_IAZZA.pdf" download class="cv-button">Télécharger CV</a>
+            <a href="CV_Sabir_IAZZA.pdf" download class="cv-button">📄 Télécharger mon CV</a>
           </article>
         </div>
       </div>
