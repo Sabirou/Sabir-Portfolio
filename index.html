@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Sabir IAZZA - Étudiant en Terminale CIEL spécialisé en Cybersécurité et Réseaux. Expertise en infrastructure réseau, sécurité informatique et développement.">
+    <meta name="keywords" content="cybersécurité, réseaux, infrastructure, Cisco, Wireshark, Linux, alternance, BTS SIO SISR, Sabir IAZZA">
+    <meta name="author" content="Sabir IAZZA">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sabir IAZZA - Expert Réseaux & Cybersécurité">
+    <meta property="og:description" content="Portfolio professionnel d'un étudiant en cybersécurité et réseaux. Spécialisé en infrastructure sécurisée et analyse forensique.">
+    <meta property="og:image" content="https://your-portfolio-url.com/preview.jpg">
+    <meta property="og:url" content="https://your-portfolio-url.com">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Sabir IAZZA - Expert Réseaux & Cybersécurité">
+    <meta property="twitter:description" content="Portfolio professionnel d'un étudiant en cybersécurité et réseaux.">
+    
+    <title>Sabir IAZZA - Expert Réseaux & Cybersécurité</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icon-192x192.png">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#a855f7',
+                        secondary: '#06b6d4',
+                        accent: '#f472b6',
+                        success: '#10b981',
+                        'bg-primary': '#030014',
+                        'bg-card': 'rgba(255, 255, 255, 0.03)',
+                        'text-primary': '#ffffff',
+                        'text-secondary': 'rgba(255, 255, 255, 0.7)',
+                        'text-muted': 'rgba(255, 255, 255, 0.6)',
+                        border: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    borderRadius: {
+                        'custom': '20px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030014;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="rgba(168,85,247,0.3)" stroke="rgba(168,85,247,0.8)" stroke-width="2"/></svg>') 12 12, auto;
+        }
+
+        a, button, .card {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(6,182,212,0.4)" stroke="rgba(6,182,212,1)" stroke-width="2"/></svg>') 12 12, pointer;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7, #f472b6, #06b6d4);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 5s ease infinite;
+        }
+
+        .gradient-text-2 {
+            background: linear-gradient(135deg, #06b6d4, #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 5s ease infinite 0.5s;
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #f472b6;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #06b6d4, 2px 2px #a855f7;
+            animation: glitch-anim2 1s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); transform: skew(0.85deg); }
+            20% { clip: rect(70px, 9999px, 71px, 0); transform: skew(0.51deg); }
+            40% { clip: rect(29px, 9999px, 83px, 0); transform: skew(0.53deg); }
+            60% { clip: rect(67px, 9999px, 26px, 0); transform: skew(0.3deg); }
+            80% { clip: rect(10px, 9999px, 90px, 0); transform: skew(0.1deg); }
+            100% { clip: rect(65px, 9999px, 100px, 0); transform: skew(0.1deg); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); transform: skew(0.1deg); }
+            23% { clip: rect(25px, 9999px, 10px, 0); transform: skew(0.1deg); }
+            50% { clip: rect(10px, 9999px, 90px, 0); transform: skew(0.1deg); }
+            75% { clip: rect(67px, 9999px, 26px, 0); transform: skew(0.3deg); }
+            100% { clip: rect(31px, 9999px, 94px, 0); transform: skew(0.85deg); }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #030014;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #a855f7, #06b6d4);
+            border-radius: 10px;
+        }
+
+        /* Background grid animation */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(168, 85, 247, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -1;
+            animation: gridMove 30s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        /* Floating orb animation */
+        @keyforms float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #a855f7, #f472b6);
+            top: -10%;
+            left: -10%;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #06b6d4, #a855f7);
+            bottom: 10%;
+            right: -5%;
+            animation-delay: -5s;
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: #030014;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo {
+            font-family: 'Space Grotesk';
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a855f7, #06b6d4, #f472b6);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: logoGlow 3s ease infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
+            }
+            50% { 
+                background-position: 100% 50%;
+                filter: drop-shadow(0 0 40px rgba(6, 182, 212, 0.8));
+            }
+        }
+
+        .loader-bar {
+            width: 250px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7, #06b6d4, #f472b6);
+            background-size: 200% 100%;
+            transition: width 1s ease;
+            animation: shimmer 2s ease infinite;
+            box-shadow: 0 0 20px #a855f7;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Scanline effect */
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(168, 85, 247, 0.5) 50%, 
+                transparent 100%);
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.25), rgba(150, 100, 255, 0.25));
+            border: 2px solid rgba(100, 200, 255, 0.5);
+            border-radius: 50%;
+            color: #64c8ff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+
+        .back-to-top:hover {
+            background: linear-gradient(135deg, rgba(100, 200, 255, 0.4), rgba(150, 100, 255, 0.4));
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 40px rgba(100, 200, 255, 0.5);
+        }
+
+        /* Chat styling */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #a855f7, #06b6d4);
+            border-radius: 10px;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Typewriter cursor */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+            color: #a855f7;
+            font-weight: bold;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #a855f7, #06b6d4, #f472b6);
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px #a855f7;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            
+            .section-title {
+                font-size: 2rem !important;
+            }
+            
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ===== MASCOTTE ORB PREMIUM ===== */
+        .orb-watcher { 
+            position: fixed; 
+            top: 100px; 
+            right: 40px; 
+            z-index: 900; 
+            pointer-events: none;
+            animation: orbFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .orb-container { 
+            width: 90px; 
+            height: 90px; 
+            position: relative; 
+        }
+
+        .orb-glow { 
+            position: absolute; 
+            inset: -25px; 
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.5), transparent 70%); 
+            animation: pulse 3s ease-in-out infinite;
+            filter: blur(20px);
+        }
+
+        .orb-ring { 
+            position: absolute; 
+            inset: 0; 
+            border: 3px solid rgba(6, 182, 212, 0.6); 
+            border-radius: 50%; 
+            border-top-color: transparent; 
+            animation: spin 4s linear infinite;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+
+        @keyframes spin { 
+            to { transform: rotate(360deg); } 
+        }
+
+        @keyanimations pulse { 
+            0%, 100% { opacity: 0.5; transform: scale(1); } 
+            50% { opacity: 1; transform: scale(1.1); } 
+        }
+
+        .orb-core { 
+            position: absolute; 
+            inset: 12px; 
+            background: rgba(0,0,0,0.6); 
+            border-radius: 50%; 
+            border: 2px solid #a855f7; 
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+
+        .orb-eye { 
+            position: absolute; 
+            inset: 28px; 
+            background: white; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .orb-pupil { 
+            width: 14px; 
+            height: 14px; 
+            background: radial-gradient(circle, #000 40%, #333 100%); 
+            border-radius: 50%; 
+            transition: transform 0.1s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .orb-speech { 
+            position: absolute; 
+            top: 100px; 
+            right: 0; 
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85)); 
+            color: #030014; 
+            padding: 10px 14px; 
+            border-radius: 12px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            opacity: 0; 
+            transition: all 0.3s ease; 
+            white-space: nowrap; 
+            transform: translateY(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .orb-speech::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid rgba(255,255,255,0.95);
+        }
+
+        .orb-speech.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .orb-watcher {
+            pointer-events: all !important;
+            cursor: pointer;
+        }
+
+        /* Spotlight effect */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            z-index: 1;
+        }
+
+        /* Hacker mode */
+        .hacker-mode {
+            background: #000 !important;
+            color: #0f0 !important;
+        }
+
+        .hacker-mode .hero-badge,
+        .hacker-mode .section-tag,
+        .hacker-mode .tech-tag,
+        .hacker-mode .card,
+        .hacker-mode .timeline-content,
+        .hacker-mode .contact-item,
+        .hacker-mode .cv-button {
+            background: rgba(0, 255, 0, 0.1) !important;
+            border: 1px solid #0f0 !important;
+            color: #0f0 !important;
+        }
+
+        .hacker-mode .gradient-text,
+        .hacker-mode .gradient-text-2 {
+            background: linear-gradient(135deg, #0f0, #0ff, #0f0) !important;
+            color: transparent !important;
+        }
+
+        .hacker-mode .nav-cta,
+        .hacker-mode .btn-primary {
+            background: linear-gradient(135deg, #0f0, #0ff) !important;
+            color: #000 !important;
+        }
+
+        .hacker-mode .chat-box {
+            background: #000 !important;
+            border: 1px solid #0f0 !important;
+        }
+
+        .hacker-mode .chat-msg.bot {
+            color: #0f0 !important;
+            background: transparent !important;
+        }
+
+        .hacker-mode .chat-msg.user {
+            color: #fff !important;
+            background: rgba(0, 255, 0, 0.2) !important;
+        }
+
+        .hacker-mode .chat-input {
+            background: #000 !important;
+            border: 1px solid #0f0 !important;
+            color: #0f0 !important;
+        }
+
+        /* Certifications badges */
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cert-badge:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: #a855f7;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .cert-badge.cisco { border-left: 4px solid #ff6b00; }
+        .cert-badge.linux { border-left: 4px solid #f8c500; }
+        .cert-badge.cyber { border-left: 4px solid #06b6d4; }
+
+        /* Project modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 0, 20, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(168, 85, 247, 0.3);
+            transform: rotate(90deg);
+        }
+
+        /* Network visualization */
+        .network-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.3;
+        }
+
+        /* Accessibility focus styles */
+        a:focus, button:focus, input:focus {
+            outline: 3px solid rgba(100, 200, 255, 0.8);
+            outline-offset: 3px;
+            box-shadow: 0 0 20px rgba(100, 200, 255, 0.4);
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Manifest for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(console.error);
+            });
+        }
+    </script>
+
+    <!-- Spotlight effect -->
+    <div class="spotlight"></div>
+
+    <!-- Network visualization canvas -->
+    <canvas class="network-canvas" id="networkCanvas"></canvas>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-logo">SABIR</div>
+        <div class="loader-bar">
+            <div class="loader-progress" id="loaderProgress"></div>
+        </div>
+    </div>
+
+    <!-- Background Grid -->
+    <div class="bg-grid"></div>
+    
+    <!-- Floating Orbs -->
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+
+    <!-- Premium Orb Mascot -->
+    <div class="orb-watcher" id="orbWatcher">
+        <div class="orb-container">
+            <div class="orb-glow"></div>
+            <div class="orb-ring"></div>
+            <div class="orb-core"></div>
+            <div class="orb-eye" id="orbEye">
+                <div class="orb-pupil" id="orbPupil"></div>
+            </div>
+        </div>
+        <div class="orb-speech" id="orbSpeech">Je surveille le réseau... 👁️</div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full px-10 py-6 z-50 backdrop-blur-xl bg-black/80 border-b border-white/10 transition-all duration-400" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 font-bold text-white no-underline hover:scale-105 transition-transform">
+                <div class="w-2.5 h-2.5 bg-primary rounded-full shadow-lg shadow-primary animate-pulse"></div>
+                <span class="font-space-grotesk font-bold tracking-tight text-lg">SABIR IAZZA</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#timeline" class="text-white/70 hover:text-white transition-colors font-medium">Parcours</a>
+                <a href="#competences" class="text-white/70 hover:text-white transition-colors font-medium">Arsenal</a>
+                <a href="#projets" class="text-white/70 hover:text-white transition-colors font-medium">Projets</a>
+                <a href="#certifications" class="text-white/70 hover:text-white transition-colors font-medium">Certifs</a>
+                <a href="#contact" class="px-6 py-2 bg-gradient-to-r from-primary to-secondary rounded-full font-semibold text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/50">
+                    Contact
+                </a>
+            </div>
+            <button class="md:hidden text-white/70 hover:text-white text-2xl" id="mobileMenuBtn">☰</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="fixed top-0 right-0 h-full w-64 bg-black/95 backdrop-blur-xl border-l border-white/10 transform translate-x-full transition-transform duration-300 z-40" id="mobileMenu">
+        <div class="p-6">
+            <button class="text-white text-2xl mb-6" id="closeMobileMenu">✕</button>
+            <div class="flex flex-col gap-4">
+                <a href="#timeline" class="text-white/70 hover:text-white transition-colors py-2">Parcours</a>
+                <a href="#competences" class="text-white/70 hover:text-white transition-colors py-2">Arsenal</a>
+                <a href="#projets" class="text-white/70 hover:text-white transition-colors py-2">Projets</a>
+                <a href="#certifications" class="text-white/70 hover:text-white transition-colors py-2">Certifications</a>
+                <a href="#contact" class="text-white/70 hover:text-white transition-colors py-2">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="min-h-screen flex items-center justify-center px-4 relative pt-20">
+            <div class="max-w-4xl mx-auto text-center z-10">
+                <div class="inline-flex items-center gap-2 px-6 py-2.5 bg-green-500/15 border border-green-500/40 rounded-full text-green-400 text-sm font-semibold mb-8 backdrop-blur-sm animate-bounce">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400"></div>
+                    <span>Disponible pour alternance</span>
+                </div>
+                
+                <h1 class="font-space-grotesk text-5xl md:text-7xl font-extrabold leading-tight mb-6 glitch" data-text="Expert Réseaux & Cybersécurité">
+                    Expert <span class="gradient-text">Réseaux</span><br>
+                    & <span class="gradient-text-2">Cybersécurité</span>
+                </h1>
+                
+                <p class="text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed" id="typewriterText">
+                    <span id="displayText"></span><span class="cursor-blink">|</span>
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#contact" class="px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-xl font-bold text-white transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/50">
+                        Me contacter pour une alternance
+                    </a>
+                    <a href="#" class="px-8 py-4 bg-white/5 border border-white/8 rounded-xl font-bold text-white transition-all hover:scale-105 hover:bg-white/10 hover:shadow-lg">
+                        Télécharger mon CV
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Marquee -->
+        <div class="py-12 bg-white/5 reveal">
+            <div class="overflow-hidden">
+                <div class="flex animate-marquee whitespace-nowrap">
+                    <div class="flex items-center gap-8 mx-8">
+                        <span class="tech-tag">CISCO</span>
+                        <span class="tech-tag">WIRESHARK</span>
+                        <span class="tech-tag">LINUX</span>
+                        <span class="tech-tag">VLAN</span>
+                        <span class="tech-tag">DHCP</span>
+                        <span class="tech-tag">BASH</span>
+                        <span class="tech-tag">JAVASCRIPT</span>
+                        <span class="tech-tag">PYTHON</span>
+                        <span class="tech-tag">FIREWALL</span>
+                        <span class="tech-tag">ROUTAGE</span>
+                    </div>
+                    <div class="flex items-center gap-8 mx-8">
+                        <span class="tech-tag">CISCO</span>
+                        <span class="tech-tag">WIRESHARK</span>
+                        <span class="tech-tag">LINUX</span>
+                        <span class="tech-tag">VLAN</span>
+                        <span class="tech-tag">DHCP</span>
+                        <span class="tech-tag">BASH</span>
+                        <span class="tech-tag">JAVASCRIPT</span>
+                        <span class="tech-tag">PYTHON</span>
+                        <span class="tech-tag">FIREWALL</span>
+                        <span class="tech-tag">ROUTAGE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            @keyframes marquee {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+                animation: marquee 20s linear infinite;
+            }
+            .tech-tag {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 10px 25px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 50px;
+                font-family: 'Space Grotesk';
+                font-weight: 600;
+                color: rgba(255, 255, 255, 0.7);
+                transition: all 0.3s ease;
+            }
+            .tech-tag:hover {
+                background: rgba(168, 85, 247, 0.1);
+                border-color: #a855f7;
+                color: white;
+            }
+        </style>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="py-20 px-4 relative section">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-semibold mb-6 backdrop-blur-sm">
+                        <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                        <span>Parcours</span>
+                    </div>
+                    <h2 class="text-4xl font-bold font-space-grotesk">
+                        Ma <span class="gradient-text">Timeline</span>
+                    </h2>
+                </div>
+                
+                <div class="relative max-w-4xl mx-auto">
+                    <!-- Timeline line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-transparent via-primary to-secondary"></div>
+                    
+                    <!-- Timeline items -->
+                    <div class="space-y-12">
+                        <!-- Item 1 -->
+                        <div class="relative flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <div class="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 hover:border-primary/50 transition-all hover:scale-105">
+                                    <span class="text-primary font-bold block mb-2">2024 - Présent</span>
+                                    <h3 class="text-xl font-bold mb-2">Terminale CIEL</h3>
+                                    <p class="text-white/70">Spécialité Cybersécurité et Réseaux au Lycée.</p>
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-bg-primary shadow-lg z-10"></div>
+                            <div class="w-1/2 pl-8"></div>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div class="relative flex items-center">
+                            <div class="w-1/2 pr-8"></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-bg-primary shadow-lg z-10"></div>
+                            <div class="w-1/2 pl-8">
+                                <div class="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 hover:border-secondary/50 transition-all hover:scale-105">
+                                    <span class="text-secondary font-bold block mb-2">Sept 2025 (Objectif)</span>
+                                    <h3 class="text-xl font-bold mb-2">BTS SIO SISR</h3>
+                                    <p class="text-white/70">Solutions d'Infrastructure, Systèmes et Réseaux en Alternance.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 3 -->
+                        <div class="relative flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <div class="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 hover:border-accent/50 transition-all hover:scale-105">
+                                    <span class="text-accent font-bold block mb-2">Projets 2024</span>
+                                    <h3 class="text-xl font-bold mb-2">Lab Infrastructure</h3>
+                                    <p class="text-white/70">Conception de réseaux d'entreprise sur Cisco Packet Tracer.</p>
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-bg-primary shadow-lg z-10"></div>
+                            <div class="w-1/2 pl-8"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competences Section -->
+        <section id="competences" class="py-20 px-4 bg-white/5 relative section">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-semibold mb-6 backdrop-blur-sm">
+                        <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                        <span>Arsenal</span>
+                    </div>
+                    <h2 class="text-4xl font-bold font-space-grotesk">
+                        Compétences <span class="gradient-text">Offensives & Défensives</span>
+                    </h2>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Skill 1 -->
+                    <div class="bg-white/5 rounded-2xl p-8 backdrop-blur-sm border border-white/10 hover:border-primary/50 transition-all hover:scale-105 reveal">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center text-2xl">🛡️</div>
+                            <h3 class="text-xl font-bold">Cybersécurité</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Wireshark</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Secu Système</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-secondary to-primary h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 2 -->
+                    <div class="bg-white/5 rounded-2xl p-8 backdrop-blur-sm border border-white/10 hover:border-secondary/50 transition-all hover:scale-105 reveal">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-xl flex items-center justify-center text-2xl">🌐</div>
+                            <h3 class="text-xl font-bold">Réseaux</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Cisco IOS</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-secondary to-primary h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>VLAN / TCP</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-primary to-secondary h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 3 -->
+                    <div class="bg-white/5 rounded-2xl p-8 backdrop-blur-sm border border-white/10 hover:border-accent/50 transition-all hover:scale-105 reveal">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-r from-accent/20 to-primary/20 rounded-xl flex items-center justify-center text-2xl">🐧</div>
+                            <h3 class="text-xl font-bold">Systèmes</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Linux / Ubuntu</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-accent to-primary h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Bash Script</span>
+                                    <span>70%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-primary to-accent h-2 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-20 px-4 relative section">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-semibold mb-6 backdrop-blur-sm">
+                        <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                        <span>Certifications</span>
+                    </div>
+                    <h2 class="text-4xl font-bold font-space-grotesk">
+                        Badges <span class="gradient-text">Techniques</span>
+                    </h2>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 reveal">
+                    <div class="cert-badge cisco">Cisco Networking Academy</div>
+                    <div class="cert-badge linux">Linux Foundation Certified</div>
+                    <div class="cert-badge cyber">Cybersecurity Essentials</div>
+                    <div class="cert-badge">Packet Tracer Expert</div>
+                    <div class="cert-badge">Network Security Fundamentals</div>
+                    <div class="cert-badge">Ethical Hacking Basics</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projets Section -->
+        <section id="projets" class="py-20 px-4 relative section">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-semibold mb-6 backdrop-blur-sm">
+                        <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                        <span>Réalisations</span>
+                    </div>
+                    <h2 class="text-4xl font-bold font-space-grotesk">
+                        Missions <span class="gradient-text">Accomplies</span>
+                    </h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="bg-white/5 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10 hover:border-primary/50 transition-all hover:scale-105 reveal project-card" data-project="1">
+                        <div class="h-48 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center text-4xl relative">
+                            <span>🛰️</span>
+                            <div class="absolute top-4 right-4 px-3 py-1 bg-success/20 border border-success/40 rounded-full text-success text-xs font-semibold">
+                                DEPLOYED
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Lab Infra Réseau</h3>
+                            <p class="text-white/70 mb-4 text-sm">Segmentation réseau d'entreprise complète.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-primary/10 text-primary rounded text-xs">Cisco</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded text-xs">VLAN</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="bg-white/5 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10 hover:border-secondary/50 transition-all hover:scale-105 reveal project-card" data-project="2">
+                        <div class="h-48 bg-gradient-to-r from-secondary/20 to-accent/20 flex items-center justify-center text-4xl relative">
+                            <span>🔍</span>
+                            <div class="absolute top-4 right-4 px-3 py-1 bg-success/20 border border-success/40 rounded-full text-success text-xs font-semibold">
+                                DEPLOYED
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Analyse Forensique</h3>
+                            <p class="text-white/70 mb-4 text-sm">Détection d'anomalies et d'intrusions.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded text-xs">Wireshark</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="bg-white/5 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10 hover:border-accent/50 transition-all hover:scale-105 reveal project-card" data-project="3">
+                        <div class="h-48 bg-gradient-to-r from-accent/20 to-primary/20 flex items-center justify-center text-4xl relative">
+                            <span>🐧</span>
+                            <div class="absolute top-4 right-4 px-3 py-1 bg-success/20 border border-success/40 rounded-full text-success text-xs font-semibold">
+                                DEPLOYED
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Serveur Sécurisé</h3>
+                            <p class="text-white/70 mb-4 text-sm">Hébergement Web & FTP sous Debian.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-accent/10 text-accent rounded text-xs">Linux</span>
+                                <span class="px-2 py-1 bg-primary/10 text-primary rounded text-xs">UFW</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="bg-white/5 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10 hover:border-primary/50 transition-all hover:scale-105 reveal project-card" data-project="4">
+                        <div class="h-48 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center text-4xl relative">
+                            <span>🎨</span>
+                            <div class="absolute top-4 right-4 px-3 py-1 bg-success/20 border border-success/40 rounded-full text-success text-xs font-semibold">
+                                DEPLOYED
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Portfolio Next.js</h3>
+                            <p class="text-white/70 mb-4 text-sm">Ce site même, optimisé et animé.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-primary/10 text-primary rounded text-xs">React</span>
+                                <span class="px-2 py-1 bg-secondary/10 text-secondary rounded text-xs">3D</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-4 bg-white/5 relative section">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-semibold mb-6 backdrop-blur-sm">
+                        <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                        <span>Communication</span>
+                    </div>
+                    <h2 class="text-4xl font-bold font-space-grotesk">
+                        Entrer en <span class="gradient-text">Contact</span>
+                    </h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Chat Bot -->
+                    <div class="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 reveal">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold">Terminal SabirAI</h3>
+                            <button id="hackModeBtn" class="px-3 py-1 bg-green-500/20 border border-green-500/40 rounded text-green-400 text-xs font-semibold">HACK</button>
+                        </div>
+                        <div class="h-80 bg-black rounded-lg p-4 mb-4">
+                            <div class="chat-messages h-64 overflow-y-auto space-y-3 mb-3" id="chatMessages">
+                                <div class="text-green-400 text-sm">
+                                    System Booting... [OK]<br>
+                                    Initializing SabirAI... [OK]<br>
+                                    Welcome, guest. Type 'help' for available commands.
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="text" id="chatInput" class="flex-1 bg-gray-900 text-green-400 border border-gray-700 rounded px-3 py-2 text-sm font-mono focus:outline-none focus:border-green-500" placeholder="root@sabir:~$ " autocomplete="off">
+                                <button id="chatSend" class="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded font-bold hover:scale-105 transition-transform">
+                                    ENTER
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-xs text-white/50 mt-2">
+                            Available commands: help, ls, cd, cat, skills, projects, contact, clear, hack, sudo, matrix
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Info -->
+                    <div class="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 reveal">
+                        <h3 class="text-xl font-bold mb-4">Coordonnées</h3>
+                        <div class="space-y-4 mb-6">
+                            <a href="mailto:amiamisabir@gmail.com" class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/10 hover:border-primary/50 transition-all hover:scale-105">
+                                <span>Email</span>
+                                <span class="text-primary">amiamisabir@gmail.com</span>
+                            </a>
+                            <a href="tel:0762972626" class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/10 hover:border-primary/50 transition-all hover:scale-105">
+                                <span>Tel</span>
+                                <span class="text-primary">07 62 97 26 26</span>
+                            </a>
+                        </div>
+                        <a href="#" class="block w-full text-center py-3 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg font-bold text-white hover:scale-105 transition-all hover:shadow-lg">
+                            DOWNLOAD_CV.sh
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 px-4 border-t border-white/10">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-white/50">© 2025 Sabir IAZZA | Secure connection established.</p>
+            <p class="text-white/30 text-sm mt-2">This site is installable as a PWA. Look for the install prompt in your browser!</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Service Worker for PWA
+        const manifest = {
+            "name": "Sabir IAZZA Portfolio",
+            "short_name": "Sabir Portfolio",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#030014",
+            "theme_color": "#a855f7",
+            "icons": [
+                {
+                    "src": "/icon-192x192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "/icon-512x512.png",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
+
+        // Create manifest.json dynamically
+        fetch('/manifest.json')
+            .catch(() => {
+                // Create it if it doesn't exist
+                const link = document.createElement('link');
+                link.rel = 'manifest';
+                link.href = 'data:application/json;base64,' + btoa(JSON.stringify(manifest));
+                document.head.appendChild(link);
+            });
+
+        // Network Visualization
+        function initNetworkVisualization() {
+            const canvas = document.getElementById('networkCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            const nodes = [];
+            const connections = [];
+            
+            // Create nodes
+            for (let i = 0; i < 50; i++) {
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1
+                });
+            }
+            
+            // Create connections
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        connections.push({
+                            from: i,
+                            to: j,
+                            distance: distance
+                        });
+                    }
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Update nodes
+                nodes.forEach(node => {
+                    node.x += node.vx;
+                    node.y += node.vy;
+                    
+                    if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                    if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                });
+                
+                // Draw connections
+                connections.forEach(conn => {
+                    const from = nodes[conn.from];
+                    const to = nodes[conn.to];
+                    const alpha = 1 - (conn.distance / 100);
+                    
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(168, 85, 247, ${alpha * 0.3})`;
+                    ctx.lineWidth = 1;
+                    ctx.moveTo(from.x, from.y);
+                    ctx.lineTo(to.x, to.y);
+                    ctx.stroke();
+                });
+                
+                // Draw nodes
+                nodes.forEach(node => {
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(168, 85, 247, 0.8)';
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // Loader
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize network visualization
+            initNetworkVisualization();
+            
+            const loader = document.getElementById('loader');
+            const loaderProgress = document.getElementById('loaderProgress');
+            
+            // Simulate loading
+            setTimeout(() => {
+                loaderProgress.style.width = '100%';
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                }, 500);
+            }, 1000);
+
+            // Typewriter effect
+            const fullText = "Étudiant en Terminale CIEL. Je transforme des infrastructures complexes en systèmes sécurisés. Objectif : BTS SIO SISR.";
+            const displayText = document.getElementById('displayText');
+            let i = 0;
+            
+            const typeInterval = setInterval(() => {
+                displayText.textContent = fullText.slice(0, i);
+                i++;
+                if (i > fullText.length) {
+                    clearInterval(typeInterval);
+                }
+            }, 40);
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+            
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+
+            // Scroll progress bar
+            const progressFill = document.getElementById('progressFill');
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (docHeight > 0) {
+                    progressFill.style.width = `${(scrollY / docHeight) * 100}%`;
+                }
+                
+                // Navbar scroll effect
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-3', 'bg-black/90');
+                } else {
+                    navbar.classList.remove('py-3', 'bg-black/90');
+                }
+                
+                // Back to top button
+                const backToTop = document.getElementById('backToTop');
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            // Back to top functionality
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Reveal animations on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Advanced Chat bot functionality
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const chatSend = document.getElementById('chatSend');
+            const hackModeBtn = document.getElementById('hackModeBtn');
+            
+            let commandHistory = [];
+            let historyIndex = -1;
+            
+            const responses = {
+                hello: "Salut ! 👋 Je suis SabirAI. Tu peux me poser des questions sur mon parcours, mes compétences ou mes projets !",
+                help: "Commandes disponibles:<br>- ls → Liste les sections<br>- cd [section] → Navigue vers une section<br>- cat [file] → Affiche des informations<br>- skills → Mes compétences détaillées<br>- projects → Mes projets réalisés<br>- contact → Mes coordonnées<br>- clear → Efface l'historique<br>- hack → Active le mode hacker<br>- sudo → 😏<br>- matrix → Message secret",
+                ls: "Sections disponibles:<br>📁 timeline/<br>📁 competences/<br>📁 projets/<br>📁 certifications/<br>📁 contact/",
+                cd_timeline: "Navigation vers la section Timeline... ✅<br>Utilisez 'cat timeline' pour plus d'infos.",
+                cd_competences: "Navigation vers la section Compétences... ✅<br>Utilisez 'cat competences' pour plus d'infos.",
+                cd_projets: "Navigation vers la section Projets... ✅<br>Utilisez 'cat projets' pour plus d'infos.",
+                cd_certifications: "Navigation vers la section Certifications... ✅<br>Utilisez 'cat certifications' pour plus d'infos.",
+                cd_contact: "Navigation vers la section Contact... ✅<br>Utilisez 'cat contact' pour plus d'infos.",
+                cat_cv: "📄 CV_Sabir_IAZZA.pdf<br>Format: PDF<br>Taille: 2.4 MB<br>Status: ✅ À jour",
+                cat_timeline: "📅 Timeline:<br>- 2024-Present: Terminale CIEL<br>- Sept 2025: BTS SIO SISR (objectif)<br>- Projets 2024: Lab Infrastructure",
+                cat_competences: "🛡️ Compétences:<br>- Cyber: Wireshark (85%), Secu Système (75%)<br>- Réseaux: Cisco IOS (90%), VLAN/TCP (85%)<br>- Systèmes: Linux/Ubuntu (80%), Bash Script (70%)",
+                cat_projets: "🚀 Projets:<br>- Lab Infra Réseau (Cisco, VLAN)<br>- Analyse Forensique (Wireshark)<br>- Serveur Sécurisé (Linux, UFW)<br>- Portfolio Next.js (React, 3D)",
+                cat_certifications: "🏆 Certifications:<br>- Cisco Networking Academy<br>- Linux Foundation Certified<br>- Cybersecurity Essentials<br>- Packet Tracer Expert",
+                cat_contact: "📧 Contact:<br>- Email: amiamisabir@gmail.com<br>- Tel: 07 62 97 26 26<br>- Disponible pour alternance à partir de Septembre 2025",
+                skills: "🛡️ <strong>Cyber</strong>: Wireshark, Secu Système<br>🌐 <strong>Réseaux</strong>: Cisco, VLAN, TCP/IP<br>💻 <strong>Dev</strong>: JS, Linux, Bash",
+                projects: "Mes projets incluent:<br>- Lab Infra Réseau (Cisco)<br>- Analyse Forensique (Wireshark)<br>- Serveur Sécurisé (Linux)<br>- Ce portfolio (React/3D)",
+                contact: "📧 amiamisabir@gmail.com<br>📱 07 62 97 26 26<br>📍 Disponible pour alternance BTS SIO SISR",
+                alternance: "Je recherche une alternance en <strong>Infrastructure Réseau</strong> pour Septembre 2025.",
+                clear: "clear",
+                hack: "hack",
+                sudo: "sudo: effective uid is not 0. Are you root?",
+                matrix: "Follow the white rabbit... 🐰",
+                default: "Commande non reconnue. Tapez 'help' pour la liste des commandes disponibles."
+            };
+            
+            function findBestResponse(text) {
+                const lowerText = text.toLowerCase().trim();
+                
+                // Navigation commands
+                if (lowerText === 'ls') return responses.ls;
+                if (lowerText === 'help') return responses.help;
+                if (lowerText === 'clear') return responses.clear;
+                if (lowerText === 'hack') return responses.hack;
+                if (lowerText === 'sudo') return responses.sudo;
+                if (lowerText === 'matrix') return responses.matrix;
+                if (lowerText === 'skills') return responses.skills;
+                if (lowerText === 'projects') return responses.projects;
+                if (lowerText === 'contact') return responses.contact;
+                
+                // CD commands
+                if (lowerText === 'cd timeline') return responses.cd_timeline;
+                if (lowerText === 'cd competences') return responses.cd_competences;
+                if (lowerText === 'cd projets') return responses.cd_projets;
+                if (lowerText === 'cd certifications') return responses.cd_certifications;
+                if (lowerText === 'cd contact') return responses.cd_contact;
+                
+                // CAT commands
+                if (lowerText === 'cat cv') return responses.cat_cv;
+                if (lowerText === 'cat timeline') return responses.cat_timeline;
+                if (lowerText === 'cat competences') return responses.cat_competences;
+                if (lowerText === 'cat projets') return responses.cat_projets;
+                if (lowerText === 'cat certifications') return responses.cat_certifications;
+                if (lowerText === 'cat contact') return responses.cat_contact;
+                
+                // General responses
+                if (lowerText.match(/\b(salut|hello|hi|bonjour)\b/)) return responses.hello;
+                if (lowerText.match(/\b(parcours|etude|formation|timeline)\b/)) return responses.cat_timeline;
+                if (lowerText.match(/\b(competence|skill|arsenal)\b/)) return responses.skills;
+                if (lowerText.match(/\b(projet|realisation|mission)\b/)) return responses.projects;
+                if (lowerText.match(/\b(contact|mail|tel|email)\b/)) return responses.contact;
+                if (lowerText.match(/\b(alternance|stage|job|emploi)\b/)) return responses.alternance;
+                
+                return responses.default;
+            }
+            
+            function addMessage(text, isUser = false, isTyping = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `text-${isUser ? 'white' : 'green-400'} text-sm animate-message-slide`;
+                
+                if (isTyping) {
+                    messageDiv.innerHTML = '<span class="typing">SabirAI is typing...</span>';
+                } else {
+                    messageDiv.innerHTML = text;
+                }
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                return messageDiv;
+            }
+            
+            function simulateTyping(callback, delay = 1000) {
+                const typingEl = addMessage('', false, true);
+                setTimeout(() => {
+                    typingEl.remove();
+                    callback();
+                }, delay);
+            }
+            
+            function handleChat() {
+                const text = chatInput.value.trim();
+                if (!text) return;
+                
+                // Add to command history
+                commandHistory.push(text);
+                historyIndex = commandHistory.length;
+                
+                addMessage(text, true);
+                chatInput.value = '';
+                
+                simulateTyping(() => {
+                    const reply = findBestResponse(text);
+                    
+                    if (reply === 'clear') {
+                        chatMessages.innerHTML = '';
+                        addMessage("System cleared. Ready for new commands.", false);
+                    } else if (reply === 'hack') {
+                        document.body.classList.add('hacker-mode');
+                        addMessage("🔓 Mode HACKER activé! Terminal style cyberpunk engaged.", false);
+                    } else {
+                        addMessage(reply, false);
+                    }
+                });
+            }
+            
+            // Command history with arrow keys
+            chatInput.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (historyIndex > 0) {
+                        historyIndex--;
+                        chatInput.value = commandHistory[historyIndex] || '';
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (historyIndex < commandHistory.length - 1) {
+                        historyIndex++;
+                        chatInput.value = commandHistory[historyIndex] || '';
+                    } else {
+                        historyIndex = commandHistory.length;
+                        chatInput.value = '';
+                    }
+                }
+            });
+            
+            chatSend.addEventListener('click', handleChat);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleChat();
+                }
+            });
+            
+            // Hack mode toggle
+            hackModeBtn.addEventListener('click', () => {
+                document.body.classList.toggle('hacker-mode');
+                const isActive = document.body.classList.contains('hacker-mode');
+                hackModeBtn.textContent = isActive ? 'NORMAL' : 'HACK';
+                hackModeBtn.className = isActive ? 
+                    'px-3 py-1 bg-red-500/20 border border-red-500/40 rounded text-red-400 text-xs font-semibold' : 
+                    'px-3 py-1 bg-green-500/20 border border-green-500/40 rounded text-green-400 text-xs font-semibold';
+            });
+
+            // Add message slide animation
+            const style = document.createElement('style');
+            style.textContent = `
+                .animate-message-slide {
+                    animation: messageSlide 0.3s ease;
+                }
+                @keyframes messageSlide {
+                    from {
+                        opacity: 0;
+                        transform: translateY(10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                .typing {
+                    opacity: 0.7;
+                }
+                .typing::after {
+                    content: '█';
+                    animation: blink 1s infinite;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Orb mascot eye tracking
+            const orbEye = document.getElementById('orbEye');
+            const orbPupil = document.getElementById('orbPupil');
+            const orbSpeech = document.getElementById('orbSpeech');
+            const orbWatcher = document.getElementById('orbWatcher');
+
+            if (orbEye && orbPupil) {
+                document.addEventListener('mousemove', (e) => {
+                    // Update spotlight
+                    document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+                    document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+                    
+                    const rect = orbEye.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    
+                    const dx = e.clientX - centerX;
+                    const dy = e.clientY - centerY;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    const maxDist = 12;
+                    
+                    const moveX = (dx / (dist || 1)) * Math.min(dist, maxDist);
+                    const moveY = (dy / (dist || 1)) * Math.min(dist, maxDist);
+                    
+                    orbPupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            }
+
+            // Random orb speech messages
+            setInterval(() => {
+                if (Math.random() > 0.7 && orbSpeech) {
+                    const msgs = ["👀 Je surveille le port 80...", "✨ Système stable", "📂 Accéder aux logs", "📧 Packet reçu !", "🔒 Firewall actif", "🚀 Prêt pour l'alternance", "📡 Scan réseau en cours...", "💾 Backup effectué"];
+                    orbSpeech.innerText = msgs[Math.floor(Math.random() * msgs.length)];
+                    orbSpeech.classList.add('visible');
+                    setTimeout(() => orbSpeech.classList.remove('visible'), 3000);
+                }
+            }, 6000);
+
+            // Orb click interaction
+            if (orbWatcher) {
+                orbWatcher.addEventListener('click', () => {
+                    const scanMessages = ["ANALYZING SECURITY...", "DETECTING VULNERABILITIES...", "ENCRYPTING CONNECTION..."];
+                    let step = 0;
+                    
+                    const scanInterval = setInterval(() => {
+                        if (step < scanMessages.length) {
+                            if (orbSpeech) {
+                                orbSpeech.innerText = scanMessages[step];
+                                orbSpeech.classList.add('visible');
+                            }
+                            step++;
+                        } else {
+                            clearInterval(scanInterval);
+                            if (orbSpeech) {
+                                orbSpeech.innerText = "✅ Système 100% Sécurisé !";
+                                setTimeout(() => orbSpeech.classList.remove('visible'), 3000);
+                            }
+                        }
+                    }, 1000);
+                });
+            }
+
+            // Project modals
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const projectId = card.dataset.project;
+                    const projectData = {
+                        1: {
+                            title: "Lab Infra Réseau",
+                            description: "Conception et implémentation d'une infrastructure réseau d'entreprise complète utilisant Cisco Packet Tracer. Inclut la segmentation en VLANs, configuration DHCP, routage inter-VLAN, et sécurisation des accès.",
+                            details: [
+                                "Architecture réseau en étoile avec switchs de distribution",
+                                "Segmentation en 4 VLANs (Admin, Users, Servers, IoT)",
+                                "Configuration DHCP pour chaque VLAN",
+                                "Routage inter-VLAN avec routeur Cisco",
+                                "Sécurisation des ports switch (Port Security)",
+                                "Tests de connectivité et performance"
+                            ],
+                            technologies: ["Cisco IOS", "VLAN", "DHCP", "Routing", "Switch Security"],
+                            status: "DEPLOYED"
+                        },
+                        2: {
+                            title: "Analyse Forensique",
+                            description: "Analyse approfondie de captures réseau pour détecter des anomalies, intrusions, et comportements suspects. Utilisation de Wireshark pour l'analyse protocolaire et la reconstruction de sessions.",
+                            details: [
+                                "Capture et analyse de trafic réseau suspect",
+                                "Identification de patterns d'attaque (scans, exploits)",
+                                "Reconstruction de sessions TCP/HTTP",
+                                "Détection d'exfiltration de données",
+                                "Analyse de malware network activity",
+                                "Rapport d'incidents et recommandations"
+                            ],
+                            technologies: ["Wireshark", "TCP Analysis", "Protocol Decoding", "Network Forensics"],
+                            status: "DEPLOYED"
+                        },
+                        3: {
+                            title: "Serveur Sécurisé",
+                            description: "Configuration d'un serveur Linux Debian sécurisé pour l'hébergement web et FTP. Implémentation de pare-feu, durcissement du système, et gestion des utilisateurs.",
+                            details: [
+                                "Installation et configuration Debian minimal",
+                                "Durcissement du système (SSH, users, permissions)",
+                                "Configuration Apache/Nginx pour hébergement web",
+                                "Mise en place de VSFTPD sécurisé",
+                                "Configuration UFW (Uncomplicated Firewall)",
+                                "Monitoring et logging des accès"
+                            ],
+                            technologies: ["Debian", "Apache/Nginx", "VSFTPD", "UFW", "System Hardening"],
+                            status: "DEPLOYED"
+                        },
+                        4: {
+                            title: "Portfolio Next.js",
+                            description: "Développement de ce portfolio personnel avec React, Next.js, et intégration 3D. Optimisation SEO, PWA, et expérience utilisateur premium.",
+                            details: [
+                                "Architecture Next.js avec SSR",
+                                "Intégration Three.js pour effets 3D",
+                                "Design responsive et accessible",
+                                "Optimisation SEO complète",
+                                "Conversion en PWA installable",
+                                "Animations avancées et interactions"
+                            ],
+                            technologies: ["React", "Next.js", "Three.js", "Tailwind CSS", "PWA", "SEO"],
+                            status: "DEPLOYED"
+                        }
+                    };
+                    
+                    const project = projectData[projectId];
+                    const modalContent = document.getElementById('modalContent');
+                    modalContent.innerHTML = `
+                        <h2 class="text-2xl font-bold mb-4">${project.title}</h2>
+                        <div class="mb-4">
+                            <span class="px-3 py-1 bg-green-500/20 border border-green-500/40 rounded-full text-green-400 text-xs font-semibold">
+                                ${project.status}
+                            </span>
+                        </div>
+                        <p class="text-white/80 mb-6">${project.description}</p>
+                        <h3 class="text-lg font-bold mb-3">Détails techniques:</h3>
+                        <ul class="space-y-2 mb-6">
+                            ${project.details.map(detail => `<li class="flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                <span>${detail}</span>
+                            </li>`).join('')}
+                        </ul>
+                        <h3 class="text-lg font-bold mb-3">Technologies utilisées:</h3>
+                        <div class="flex flex-wrap gap-2">
+                            ${project.technologies.map(tech => `<span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">${tech}</span>`).join('')}
+                        </div>
+                    `;
+                    
+                    document.getElementById('projectModal').classList.add('active');
+                });
+            });
+            
+            // Close modal
+            document.getElementById('modalClose').addEventListener('click', () => {
+                document.getElementById('projectModal').classList.remove('active');
+            });
+            
+            // Close modal when clicking outside
+            document.getElementById('projectModal').addEventListener('click', (e) => {
+                if (e.target.id === 'projectModal') {
+                    document.getElementById('projectModal').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
